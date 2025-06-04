@@ -100,8 +100,9 @@ void glrhi::shader::use(){
 }
 
 GLint glrhi::shader::m_getLocation(const char* name) {
-    if (m_cache.find(name) != m_cache.end())
+    if (m_cache.find(name) != m_cache.end()) {
         return m_cache[name];
+    }
     GLint location = glGetUniformLocation(m_ID, name);
     m_cache[name] = location;
     return location;
