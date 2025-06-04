@@ -14,11 +14,14 @@ add_subdirectory("vendor/glfw")
 add_subdirectory("vendor/glm")
 
 file(GLOB_RECURSE "SOURCES" CONFIGURE_DEPENDS "src/*.cpp")
-add_executable("Renderer" "${SOURCES}")
+add_library("glrhi" "${SOURCES}")
 
-target_compile_definitions("Renderer" PUBLIC "GLFW_INCLUDE_NONE=1") 
+target_compile_definitions("glrhi" PUBLIC "GLFW_INCLUDE_NONE=1") 
 
-target_include_directories("Renderer" PUBLIC ${PROJECT_SOURCE_DIR}/include)
-target_include_directories("Renderer" PRIVATE  ${PROJECT_SOURCE_DIR}/vendor/include)
+target_include_directories("glrhi" PUBLIC ${PROJECT_SOURCE_DIR}/include)
+target_include_directories("glrhi" PRIVATE  ${PROJECT_SOURCE_DIR}/vendor/include)
 
-target_link_libraries("Renderer" glad glfw glm)
+target_link_libraries("glrhi" glad glfw glm)
+
+add_executable("square" "examples/square/src/main.cpp")
+target_link_libraries("square" glrhi)
