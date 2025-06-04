@@ -4,6 +4,7 @@
 #include "window.hpp"
 #include "shader.hpp"
 #include "vbo.hpp"
+#include "ebo.hpp"
 
 int main()
 {
@@ -22,17 +23,15 @@ int main()
         0, 1, 3,  // first Triangle
         1, 2, 3   // second Triangle
     };
-    unsigned int VAO, EBO;
+    unsigned int VAO;
 
     glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &EBO);
 
     glBindVertexArray(VAO);
 
     glrhi::vbo VBO(vertices, sizeof(vertices));
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    glrhi::ebo EBO(indices, sizeof(indices));
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -52,7 +51,6 @@ int main()
     }
 
     glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &EBO);
 
     glfwTerminate();
     return 0;
