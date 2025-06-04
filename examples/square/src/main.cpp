@@ -3,8 +3,7 @@
 
 #include "window.hpp"
 #include "shader.hpp"
-
-#include <iostream>
+#include "vbo.hpp"
 
 int main()
 {
@@ -23,16 +22,14 @@ int main()
         0, 1, 3,  // first Triangle
         1, 2, 3   // second Triangle
     };
-    unsigned int VBO, VAO, EBO;
+    unsigned int VAO, EBO;
 
     glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
 
     glBindVertexArray(VAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glrhi::vbo VBO(vertices, sizeof(vertices));
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
@@ -55,7 +52,6 @@ int main()
     }
 
     glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
 
     glfwTerminate();
