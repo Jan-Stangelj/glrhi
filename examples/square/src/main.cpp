@@ -5,6 +5,7 @@
 #include "shader.hpp"
 #include "vbo.hpp"
 #include "ebo.hpp"
+#include "vao.hpp"
 
 int main()
 {
@@ -23,20 +24,14 @@ int main()
         0, 1, 3,  // first Triangle
         1, 2, 3   // second Triangle
     };
-    unsigned int VAO;
-
-    glGenVertexArrays(1, &VAO);
-
-    glBindVertexArray(VAO);
+    
+    glrhi::vao VAO;
+    VAO.bind();
 
     glrhi::vbo VBO(vertices, sizeof(vertices));
-
     glrhi::ebo EBO(indices, sizeof(indices));
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    VAO.addAttribute(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
     while (!window.shouldClose())
     {
@@ -44,13 +39,11 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT);
 
         shader.use();
-        glBindVertexArray(VAO);
+        VAO.bind();
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
  
         window.swapBuffers();
     }
-
-    glDeleteVertexArrays(1, &VAO);
 
     glfwTerminate();
     return 0;
