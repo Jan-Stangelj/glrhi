@@ -5,3 +5,7 @@
 #include "glrhi/vao.hpp"
 #include "glrhi/vbo.hpp"
 #include "glrhi/window.hpp"
+#include "glrhi/texture.hpp"
+
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image.h>

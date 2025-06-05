@@ -19,9 +19,12 @@ add_library("glrhi" "${SOURCES}")
 target_compile_definitions("glrhi" PUBLIC "GLFW_INCLUDE_NONE=1") 
 
 target_include_directories("glrhi" PUBLIC ${PROJECT_SOURCE_DIR}/include)
-target_include_directories("glrhi" PRIVATE  ${PROJECT_SOURCE_DIR}/vendor/include)
+target_include_directories("glrhi" PUBLIC  ${PROJECT_SOURCE_DIR}/vendor/include)
 
 target_link_libraries("glrhi" PUBLIC glad glfw glm)
 
-add_executable("square" "examples/square/src/main.cpp")
-target_link_libraries("square" PRIVATE glrhi)
+add_executable("triangle" "examples/triangle/src/main.cpp")
+target_link_libraries("triangle" PRIVATE glrhi)
+
+add_executable("texture" "examples/texture/src/main.cpp")
+target_link_libraries("texture" PRIVATE glrhi)

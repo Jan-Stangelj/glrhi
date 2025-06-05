@@ -86,8 +86,6 @@ glrhi::shader::shader(const char* vertexPath, const char* fragmentPath){
     // delete shaders; they’re linked into our program and no longer necessary
     glDeleteShader(vertex);
     glDeleteShader(fragment);
-
-    glUseProgram(m_ID);
     
 }
 
