@@ -22,14 +22,14 @@ void glrhi::texture::loadData(unsigned int width, unsigned int height, GLenum in
 	glTextureSubImage2D(m_ID, 0, 0, 0, width, height, dataFormat, type, data);  
 }
 
-void glrhi::texture::loadFile(const char* path, GLenum type, GLenum internalFormat) const {
+void glrhi::texture::loadFile(const char* path, GLenum internalFormat) const {
 	int widthImg, heightImg, numColCh;
 	stbi_set_flip_vertically_on_load(true);
 	unsigned char* bytes = stbi_load(path, &widthImg, &heightImg, &numColCh, 0);
     
     GLenum lookup[5] = {0, GL_RED, GL_RG, GL_RGB, GL_RGBA}; 
 
-	loadData(widthImg, heightImg, internalFormat, lookup[numColCh], type, bytes);
+	loadData(widthImg, heightImg, internalFormat, lookup[numColCh], GL_UNSIGNED_BYTE, bytes);
 
 	stbi_image_free(bytes);   
 }

@@ -29,7 +29,7 @@ int main()
     VAO.init(VBO, EBO, 5*sizeof(float));
 
     glrhi::texture txt;
-    txt.loadFile("../examples/texture/red_brick.jpg", GL_UNSIGNED_BYTE, GL_RGB8);
+    txt.loadFile("../examples/texture/red_brick.jpg", GL_RGB8);
 
     shader.use();
     txt.bind(0, shader, "txt");
