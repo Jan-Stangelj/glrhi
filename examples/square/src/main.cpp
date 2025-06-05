@@ -41,6 +41,5 @@ int main()
         window.swapBuffers();
     }
 
-    glfwTerminate();
     return 0;
 }
