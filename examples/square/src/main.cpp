@@ -29,6 +29,7 @@ int main()
     VAO.bind();
 
     glrhi::vbo VBO(vertices, sizeof(vertices));
+    VBO.bind();
     glrhi::ebo EBO(indices, sizeof(indices));
 
     VAO.addAttribute(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
