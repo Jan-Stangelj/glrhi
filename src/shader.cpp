@@ -95,7 +95,7 @@ glrhi::shader::~shader() {
     glDeleteProgram(m_ID);
 }
 
-void glrhi::shader::use(){
+void glrhi::shader::use() const {
     glUseProgram(m_ID);
 }
 

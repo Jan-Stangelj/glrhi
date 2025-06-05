@@ -12,7 +12,7 @@ namespace glrhi{
         shader(const char* vertexPath, const char* fragmentPath);
         ~shader();
 
-        void use();
+        void use() const;
 
         void setBool(const char* name, bool value);
         void setInt(const char* name, int value);

@@ -9,8 +9,8 @@ namespace glrhi {
         ebo(const void* data, unsigned int size);
         ~ebo();
 
-        void bind();
-        void unbind();
+        void bind() const;
+        void unbind() const;
 
         GLuint getID() const { return m_ID; }
 

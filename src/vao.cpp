@@ -15,15 +15,15 @@ void glrhi::vao::addAttribute(GLint size, GLenum type, GLboolean normalized, GLu
     m_attributeCounter++;
 }
 
-void glrhi::vao::init(const glrhi::vbo& VBO, const glrhi::ebo& EBO, GLsizei stride) {
+void glrhi::vao::init(const glrhi::vbo& VBO, const glrhi::ebo& EBO, GLsizei stride) const {
     glVertexArrayVertexBuffer(m_ID, 0, VBO.getID(), 0, stride);
     glVertexArrayElementBuffer(m_ID, EBO.getID());
 }
 
-void glrhi::vao::bind() {
+void glrhi::vao::bind() const {
     glBindVertexArray(m_ID);
 }
 
-void glrhi::vao::unbind() {
+void glrhi::vao::unbind() const {
     glBindVertexArray(0);
 }

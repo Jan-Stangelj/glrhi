@@ -8,9 +8,9 @@ glrhi::vbo::~vbo() {
 	glDeleteBuffers(1, &m_ID);
 }
 
-void glrhi::vbo::bind() {
+void glrhi::vbo::bind() const {
 	glBindBuffer(GL_ARRAY_BUFFER, m_ID);
 }
-void glrhi::vbo::unbind() {
+void glrhi::vbo::unbind() const {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }

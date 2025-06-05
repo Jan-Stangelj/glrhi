@@ -89,15 +89,15 @@ glrhi::window::~window(){
     glfwTerminate();
 }
 
-bool glrhi::window::shouldClose(){
+bool glrhi::window::shouldClose() const {
     return glfwWindowShouldClose(m_window);
 }
 
-void glrhi::window::swapBuffers(){
+void glrhi::window::swapBuffers() const {
     glfwPollEvents();
     glfwSwapBuffers(m_window);
 }
 
-GLFWwindow* glrhi::window::getGlfwWindow(){
+GLFWwindow* glrhi::window::getGlfwWindow() const{
     return m_window;
 }

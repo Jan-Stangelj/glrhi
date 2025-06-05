@@ -14,11 +14,11 @@ namespace glrhi {
         window(unsigned int width, unsigned int height, const char* title);
         ~window();
 
-        bool shouldClose();
+        bool shouldClose() const;
 
-        void swapBuffers();
+        void swapBuffers() const;
 
-        GLFWwindow* getGlfwWindow();
+        GLFWwindow* getGlfwWindow() const;
 
     private:
 

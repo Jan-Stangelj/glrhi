@@ -15,10 +15,10 @@ namespace glrhi {
         ~vao();
 
         void addAttribute(GLint size, GLenum type, GLboolean normalized, GLuint pointer);
-        void init(const glrhi::vbo& VBO, const glrhi::ebo& EBO, GLsizei stride);
+        void init(const glrhi::vbo& VBO, const glrhi::ebo& EBO, GLsizei stride) const;
 
-        void bind();
-        void unbind();
+        void bind() const;
+        void unbind() const;
 
         GLuint getID() const { return m_ID; }
 

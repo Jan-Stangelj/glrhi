@@ -8,9 +8,9 @@ glrhi::ebo::~ebo() {
 	glDeleteBuffers(1, &m_ID);
 }
 
-void glrhi::ebo::bind() {
+void glrhi::ebo::bind() const {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ID);
 }
-void glrhi::ebo::unbind() {
+void glrhi::ebo::unbind() const {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
