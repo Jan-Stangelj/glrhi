@@ -1,9 +1,9 @@
 #pragma once
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
-#include "vbo.hpp"
-#include "ebo.hpp"
+#include "glrhi/vbo.hpp"
+#include "glrhi/ebo.hpp"
 
 #include <vector>
 

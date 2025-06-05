@@ -1,4 +1,4 @@
-#include "vao.hpp"
+#include "glrhi/vao.hpp"
 
 glrhi::vao::vao() {
     glCreateVertexArrays(1, &m_ID);

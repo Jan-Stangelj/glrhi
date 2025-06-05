@@ -1,4 +1,4 @@
-#include "vbo.hpp"
+#include "glrhi/vbo.hpp"
 
 glrhi::vbo::vbo(const void* data, unsigned int size) {
 	glCreateBuffers(1, &m_ID);

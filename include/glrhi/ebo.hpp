@@ -1,13 +1,13 @@
 #pragma once
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 namespace glrhi {
-    class vbo {
+    class ebo {
     public:
 
-        vbo(const void* data, unsigned int size);
-        ~vbo();
+        ebo(const void* data, unsigned int size);
+        ~ebo();
 
         void bind();
         void unbind();
