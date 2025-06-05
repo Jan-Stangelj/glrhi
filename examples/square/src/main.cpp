@@ -26,15 +26,12 @@ int main()
     };
     
     glrhi::vao VAO;
-    VAO.bind();
 
     glrhi::vbo VBO(vertices, sizeof(vertices));
-    VBO.bind();
-
     glrhi::ebo EBO(indices, sizeof(indices));
-    EBO.bind();
 
-    VAO.addAttribute(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    VAO.addAttribute(3, GL_FLOAT, GL_FALSE, 0);
+    VAO.init(VBO, EBO, 3*sizeof(float));
 
     while (!window.shouldClose())
     {

@@ -12,6 +12,8 @@ namespace glrhi {
         void bind();
         void unbind();
 
+        GLuint getID() const { return m_ID; }
+
     private:
 
         GLuint m_ID;

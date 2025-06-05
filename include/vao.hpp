@@ -2,6 +2,9 @@
 
 #include "glad/glad.h"
 
+#include "vbo.hpp"
+#include "ebo.hpp"
+
 #include <vector>
 
 namespace glrhi {
@@ -11,11 +14,13 @@ namespace glrhi {
         vao();
         ~vao();
 
-        //                       index         size        type            normalized          stride        (void*)0
-        void addAttribute(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, void* pointer);
+        void addAttribute(GLint size, GLenum type, GLboolean normalized, GLuint pointer);
+        void init(const glrhi::vbo& VBO, const glrhi::ebo& EBO, GLsizei stride);
 
         void bind();
         void unbind();
+
+        GLuint getID() const { return m_ID; }
 
     private:
 
