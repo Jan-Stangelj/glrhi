@@ -8,5 +8,7 @@ uniform sampler2D txt;
 
 void main()
 {
-    FragColor = pow(texture(txt, texCoord), vec4(1.0 / 2.2));
+    vec3 txtColor = pow(texture(txt, texCoord).xyz, vec3(2.2));
+
+    FragColor = pow(vec4(txtColor, 1.0), vec4(1.0 / 2.2));
 }
