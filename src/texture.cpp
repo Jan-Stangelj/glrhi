@@ -25,11 +25,11 @@ void glrhi::texture::loadData(unsigned int width, unsigned int height, GLenum in
 void glrhi::texture::loadFile(const char* path, GLenum internalFormat) const {
 	int widthImg, heightImg, numColCh;
 	stbi_set_flip_vertically_on_load(true);
-	unsigned char* bytes = stbi_load(path, &widthImg, &heightImg, &numColCh, 0);
+	float* bytes = stbi_loadf(path, &widthImg, &heightImg, &numColCh, 0);
     
     GLenum lookup[5] = {0, GL_RED, GL_RG, GL_RGB, GL_RGBA}; 
 
-	loadData(widthImg, heightImg, internalFormat, lookup[numColCh], GL_UNSIGNED_BYTE, bytes);
+	loadData(widthImg, heightImg, internalFormat, lookup[numColCh], GL_FLOAT, bytes);
 
 	stbi_image_free(bytes);   
 }
