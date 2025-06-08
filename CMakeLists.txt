@@ -24,7 +24,10 @@ target_include_directories("glrhi" PUBLIC  ${PROJECT_SOURCE_DIR}/vendor/include)
 target_link_libraries("glrhi" PUBLIC glad glfw glm)
 
 add_executable("triangle" "examples/triangle/src/main.cpp")
-target_link_libraries("triangle" PRIVATE glrhi)
+target_link_libraries("triangle" glrhi)
 
 add_executable("texture" "examples/texture/src/main.cpp")
-target_link_libraries("texture" PRIVATE glrhi)
+target_link_libraries("texture" glrhi)
+
+add_executable("framebuffer" "examples/framebuffer/src/main.cpp")
+target_link_libraries("framebuffer" glrhi)

@@ -107,29 +107,29 @@ GLint glrhi::shader::m_getLocation(const char* name) {
 }
 
 void glrhi::shader::setBool(const char* name, bool value) {
-    glUniform1i(m_getLocation(name), (int)value); 
+    glProgramUniform1i(m_ID, m_getLocation(name), (int)value); 
 }
 void glrhi::shader::setInt(const char* name, int value){ 
-    glUniform1i(m_getLocation(name), value); 
+    glProgramUniform1i(m_ID, m_getLocation(name), value); 
 }
 void glrhi::shader::setFloat(const char* name, float value) { 
-    glUniform1f(m_getLocation(name), value); 
+    glProgramUniform1f(m_ID, m_getLocation(name), value); 
 }
 void glrhi::shader::setVec2(const char* name, const glm::vec2 &value) { 
-    glUniform2fv(m_getLocation(name), 1, &value[0]); 
+    glProgramUniform2fv(m_ID, m_getLocation(name), 1, &value[0]); 
 }
 void glrhi::shader::setVec3(const char* name, const glm::vec3 &value) { 
-    glUniform3fv(m_getLocation(name), 1, &value[0]); 
+    glProgramUniform3fv(m_ID, m_getLocation(name), 1, &value[0]); 
 }
 void glrhi::shader::setVec4(const char* name, const glm::vec4 &value) { 
-    glUniform4fv(m_getLocation(name), 1, &value[0]); 
+    glProgramUniform4fv(m_ID, m_getLocation(name), 1, &value[0]); 
 }
 void glrhi::shader::setMat2(const char* name, const glm::mat2 &mat) {
-    glUniformMatrix2fv(m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
+    glProgramUniformMatrix2fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
 }
 void glrhi::shader::setMat3(const char* name, const glm::mat3 &mat) {
-    glUniformMatrix3fv(m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
+    glProgramUniformMatrix3fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
 }
 void glrhi::shader::setMat4(const char* name, const glm::mat4 &mat) {
-    glUniformMatrix4fv(m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
+    glProgramUniformMatrix4fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
 }
