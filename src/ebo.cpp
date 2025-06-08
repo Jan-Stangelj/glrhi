@@ -1,4 +1,4 @@
-#include "glrhi/ebo.hpp"
+#include "glrhi/core/ebo.hpp"
 
 glrhi::ebo::ebo(const void* data, unsigned int size) {
     glCreateBuffers(1, &m_ID);

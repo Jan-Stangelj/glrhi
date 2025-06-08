@@ -1,0 +1,9 @@
+"filename", "language", "C++", "comment", "blank", "total"
+"/home/jan/dev/glrhi/include/glrhi/ebo.hpp", "C++", 14, 0, 8, 22
+"/home/jan/dev/glrhi/include/glrhi/glrhi.hpp", "C++", 9, 0, 2, 11
+"/home/jan/dev/glrhi/include/glrhi/shader.hpp", "C++", 26, 0, 7, 33
+"/home/jan/dev/glrhi/include/glrhi/texture.hpp", "C++", 19, 0, 8, 27
+"/home/jan/dev/glrhi/include/glrhi/vao.hpp", "C++", 20, 0, 12, 32
+"/home/jan/dev/glrhi/include/glrhi/vbo.hpp", "C++", 14, 0, 8, 22
+"/home/jan/dev/glrhi/include/glrhi/window.hpp", "C++", 17, 0, 11, 28
+"Total", "-", 119, 0, 56, 175

@@ -1,4 +1,4 @@
-#include "glrhi/shader.hpp"
+#include "glrhi/core/shader.hpp"
 
 #include <fstream>
 #include <sstream>

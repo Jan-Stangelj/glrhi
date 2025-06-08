@@ -28,7 +28,7 @@ int main()
 
     VAO.init(VBO, EBO, 5*sizeof(float));
 
-    glrhi::texture txt;
+    glrhi::texture2D txt;
     txt.loadFile("../examples/texture/red_brick.jpg", GL_RGB8);
 
     shader.use();

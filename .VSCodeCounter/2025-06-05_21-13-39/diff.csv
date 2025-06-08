@@ -1,0 +1,15 @@
+"filename", "language", "C++", "GLSL", "comment", "blank", "total"
+"/home/jan/dev/glrhi/examples/texture/shaders/basic.frag", "GLSL", 0, 9, 0, 5, 14
+"/home/jan/dev/glrhi/examples/texture/shaders/basic.vert", "GLSL", 0, 8, 0, 3, 11
+"/home/jan/dev/glrhi/examples/texture/src/main.cpp", "C++", 35, 0, 0, 14, 49
+"/home/jan/dev/glrhi/examples/triangle/shaders/basic.frag", "GLSL", 0, 8, 0, 3, 11
+"/home/jan/dev/glrhi/examples/triangle/shaders/basic.vert", "GLSL", 0, 5, 0, 2, 7
+"/home/jan/dev/glrhi/examples/triangle/src/main.cpp", "C++", 32, 0, 0, 11, 43
+"/home/jan/dev/glrhi/include/glrhi/ebo.hpp", "C++", -14, 0, 0, -8, -22
+"/home/jan/dev/glrhi/include/glrhi/glrhi.hpp", "C++", -9, 0, 0, -2, -11
+"/home/jan/dev/glrhi/include/glrhi/shader.hpp", "C++", -26, 0, 0, -7, -33
+"/home/jan/dev/glrhi/include/glrhi/texture.hpp", "C++", -19, 0, 0, -8, -27
+"/home/jan/dev/glrhi/include/glrhi/vao.hpp", "C++", -20, 0, 0, -12, -32
+"/home/jan/dev/glrhi/include/glrhi/vbo.hpp", "C++", -14, 0, 0, -8, -22
+"/home/jan/dev/glrhi/include/glrhi/window.hpp", "C++", -17, 0, 0, -11, -28
+"Total", "-", -52, 30, 0, -18, -40

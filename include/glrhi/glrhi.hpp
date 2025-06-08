@@ -1,11 +1,11 @@
 #pragma once
 
-#include "glrhi/ebo.hpp"
-#include "glrhi/shader.hpp"
-#include "glrhi/vao.hpp"
-#include "glrhi/vbo.hpp"
-#include "glrhi/window.hpp"
-#include "glrhi/texture.hpp"
+#include "glrhi/core/ebo.hpp"
+#include "glrhi/core/shader.hpp"
+#include "glrhi/core/vao.hpp"
+#include "glrhi/core/vbo.hpp"
+#include "glrhi/core/window.hpp"
+#include "glrhi/core/texture2D.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>

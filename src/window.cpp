@@ -1,4 +1,4 @@
-#include "glrhi/window.hpp"
+#include "glrhi/core/window.hpp"
 
 #include <iostream>
 
