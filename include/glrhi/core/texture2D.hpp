@@ -9,7 +9,7 @@ namespace glrhi {
     class texture2D {
     public:
 
-        texture2D();
+        texture2D(bool mipmap = true);
         ~texture2D();
 
         void loadEmpty(unsigned int width, unsigned int height, GLenum internalFormat) const;
@@ -20,8 +20,12 @@ namespace glrhi {
         void bind(GLuint textureUnit, glrhi::shader& shader, const char* textureUniform) const;
         void unbind() const;
 
+        GLuint getID() const { return m_ID; };
+
     private:
 
-        GLuint m_ID; 
+        GLuint m_ID;
+
+        bool m_mipmap = true;
     };
 }

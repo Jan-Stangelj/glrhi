@@ -9,6 +9,7 @@
 namespace glrhi{
     class shader{
     public:
+
         shader(const char* vertexPath, const char* fragmentPath);
         ~shader();
 
@@ -25,9 +26,11 @@ namespace glrhi{
         void setMat4(const char* name, const glm::mat4& mat);
 
     private:
+
         GLuint m_ID;
         std::unordered_map<std::string_view, GLint> m_cache;
 
         GLint m_getLocation(const char* name);
+        
     };
 }

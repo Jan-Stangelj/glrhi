@@ -1,12 +1,18 @@
 #include "glrhi/core/texture2D.hpp"
 
-glrhi::texture2D::texture2D() {
+glrhi::texture2D::texture2D(bool mipmap) {
     glCreateTextures(GL_TEXTURE_2D, 1, &m_ID);
 
-	glTextureParameteri(m_ID, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	if (mipmap)
+		glTextureParameteri(m_ID, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	else
+		glTextureParameteri(m_ID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
 	glTextureParameteri(m_ID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTextureParameteri(m_ID, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTextureParameteri(m_ID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	m_mipmap = mipmap;
 }
 
 glrhi::texture2D::~texture2D() {
@@ -19,7 +25,11 @@ void glrhi::texture2D::loadEmpty(unsigned int width, unsigned int height, GLenum
 
 void glrhi::texture2D::loadData(unsigned int width, unsigned int height, GLenum internalFormat, GLenum dataFormat, GLenum type, const void* data) const {
     loadEmpty(width, height, internalFormat);
-	glTextureSubImage2D(m_ID, 0, 0, 0, width, height, dataFormat, type, data);  
+	glTextureSubImage2D(m_ID, 0, 0, 0, width, height, dataFormat, type, data);
+
+	if (m_mipmap)
+		glGenerateTextureMipmap(m_ID);
+
 }
 
 void glrhi::texture2D::loadFile(const char* path, GLenum internalFormat) const {
