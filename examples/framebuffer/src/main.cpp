@@ -54,9 +54,12 @@ int main()
 	glCreateFramebuffers(1, &FBO);
 
 	glrhi::texture2D fbTex(false);
-    fbTex.loadEmpty(1280, 720, GL_RGBA8);
+    fbTex.loadEmpty(1280, 720, GL_RGB8);
 
 	glNamedFramebufferTexture(FBO, GL_COLOR_ATTACHMENT0, fbTex.getID(), 0);
+
+    GLenum drawBuf[] = { GL_COLOR_ATTACHMENT0 };
+    glNamedFramebufferDrawBuffers(FBO, 1, drawBuf);
 
 	auto fboStatus = glCheckNamedFramebufferStatus(FBO, GL_FRAMEBUFFER);
 	if (fboStatus != GL_FRAMEBUFFER_COMPLETE)
@@ -64,10 +67,11 @@ int main()
 
     while (!window.shouldClose())
     {
+        glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glBindFramebuffer(GL_FRAMEBUFFER, FBO);
         shader.use();
         VAO.bind();
         
@@ -75,9 +79,13 @@ int main()
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
         buffer.use();
         quadVAO.bind();
         fbTex.bind(0, buffer, "screen");
+
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
  
         window.swapBuffers();
