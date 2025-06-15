@@ -55,8 +55,12 @@ int main()
 
 	glrhi::texture2D fbTex(false);
     fbTex.loadEmpty(1280, 720, GL_RGB8);
-
 	glNamedFramebufferTexture(FBO, GL_COLOR_ATTACHMENT0, fbTex.getID(), 0);
+
+    GLuint rbo;
+    glCreateRenderbuffers(1, &rbo);
+    glNamedRenderbufferStorage(rbo, GL_DEPTH_COMPONENT24, 1280, 720);
+    glNamedFramebufferRenderbuffer(FBO, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rbo);
 
     GLenum drawBuf[] = { GL_COLOR_ATTACHMENT0 };
     glNamedFramebufferDrawBuffers(FBO, 1, drawBuf);
@@ -65,12 +69,13 @@ int main()
 	if (fboStatus != GL_FRAMEBUFFER_COMPLETE)
 		std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
 
+    glEnable(GL_DEPTH_TEST);
+
     while (!window.shouldClose())
     {
         glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         shader.use();
         VAO.bind();
@@ -79,8 +84,7 @@ int main()
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         buffer.use();
         quadVAO.bind();
