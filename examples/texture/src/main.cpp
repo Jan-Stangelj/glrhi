@@ -25,8 +25,14 @@ int main()
 
     VAO.init(VBO, EBO, 5*sizeof(float));
 
-    glrhi::texture2D txt;
-    txt.loadFile("../examples/texture/red_brick.jpg", GL_RGB8);
+    int widthImg, heightImg, numColCh;
+	stbi_set_flip_vertically_on_load(true);
+	unsigned char* data = stbi_load("../examples/texture/red_brick.jpg", &widthImg, &heightImg, &numColCh, 0);
+
+    glrhi::texture2D txt(widthImg, heightImg, GL_RGB8);
+    txt.loadData(GL_RGB, GL_UNSIGNED_BYTE, data);
+
+    stbi_image_free(data);  
 
     shader.use();
     txt.bind(0, shader, "txt");

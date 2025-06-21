@@ -9,13 +9,11 @@ namespace glrhi {
     class texture2D {
     public:
 
-        texture2D(bool mipmap = true);
+        texture2D(GLsizei width, GLsizei height, GLenum internalFormat, GLsizei mips = 1);
         ~texture2D();
 
-        void loadEmpty(unsigned int width, unsigned int height, GLenum internalFormat) const;
-        void loadData(unsigned int width, unsigned int height, GLenum internalFormat, GLenum dataFormat, GLenum type, const void* data) const;
-        void loadFile(const char* path, GLenum internalFormat) const;
-        void loadFileFloat(const char* path, GLenum internalFormat) const;
+
+        void loadData(GLenum dataFormat, GLenum dataType, const void* data, GLint mip = 0) const;
 
         void bind(GLuint textureUnit, glrhi::shader& shader, const char* textureUniform) const;
         void unbind() const;
@@ -26,6 +24,6 @@ namespace glrhi {
 
         GLuint m_ID;
 
-        bool m_mipmap = true;
+        GLsizei m_width, m_height;
     };
 }

@@ -53,8 +53,7 @@ int main()
 	GLuint FBO;
 	glCreateFramebuffers(1, &FBO);
 
-	glrhi::texture2D fbTex(false);
-    fbTex.loadEmpty(1280, 720, GL_RGB8);
+	glrhi::texture2D fbTex(1280, 720, GL_RGB8);
 	glNamedFramebufferTexture(FBO, GL_COLOR_ATTACHMENT0, fbTex.getID(), 0);
 
     GLuint rbo;
