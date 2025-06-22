@@ -1,5 +1,7 @@
 #include "glrhi/glrhi.hpp"
 
+#include "stb_image.h"
+
 int main()
 {
     glrhi::window window(1280, 720, "Texture example");
@@ -25,14 +27,7 @@ int main()
 
     VAO.init(VBO, EBO, 5*sizeof(float));
 
-    int widthImg, heightImg, numColCh;
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char* data = stbi_load("../examples/texture/red_brick.jpg", &widthImg, &heightImg, &numColCh, 0);
-
-    glrhi::texture2D txt(widthImg, heightImg, GL_RGB8);
-    txt.loadData(GL_RGB, GL_UNSIGNED_BYTE, data);
-
-    stbi_image_free(data);  
+    glrhi::texture2D txt("../examples/texture/red_brick.jpg", GL_RGBA8);
 
     shader.use();
     txt.bind(0, shader, "txt");
