@@ -1,7 +1,7 @@
 #pragma once
 
 #include "glad/glad.h"
-#include "glrhi/core/shader.hpp"
+#include "glrhi/glrhi.hpp"
 
 #include "stb_image.h"
 

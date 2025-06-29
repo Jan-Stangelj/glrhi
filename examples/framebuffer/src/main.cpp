@@ -1,5 +1,7 @@
 #include "glrhi/glrhi.hpp"
 
+#include <memory>
+
 #include <iostream>
 
 int main()
@@ -49,30 +51,21 @@ int main()
     quadVAO.addAttribute(2, GL_FLOAT, GL_FALSE, 3*sizeof(float));
     quadVAO.init(quadVBO, quadEBO, 5*sizeof(float));
 
-    
-	GLuint FBO;
-	glCreateFramebuffers(1, &FBO);
+    auto colorTex = std::make_shared<glrhi::texture2D>(1280, 720, GL_RGBA8);
+    auto depthTex = std::make_shared<glrhi::texture2D>(1280, 720, GL_DEPTH_COMPONENT24);
 
-	glrhi::texture2D fbTex(1280, 720, GL_RGB8);
-	glNamedFramebufferTexture(FBO, GL_COLOR_ATTACHMENT0, fbTex.getID(), 0);
+    glrhi::fbo FBO;
 
-    GLuint rbo;
-    glCreateRenderbuffers(1, &rbo);
-    glNamedRenderbufferStorage(rbo, GL_DEPTH_COMPONENT24, 1280, 720);
-    glNamedFramebufferRenderbuffer(FBO, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rbo);
+    FBO.attachColorTexture(colorTex);
+    FBO.attachDepthTexture(depthTex);
 
-    GLenum drawBuf[] = { GL_COLOR_ATTACHMENT0 };
-    glNamedFramebufferDrawBuffers(FBO, 1, drawBuf);
-
-	auto fboStatus = glCheckNamedFramebufferStatus(FBO, GL_FRAMEBUFFER);
-	if (fboStatus != GL_FRAMEBUFFER_COMPLETE)
-		std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
+    FBO.init();
 
     glEnable(GL_DEPTH_TEST);
 
     while (!window.shouldClose())
     {
-        glBindFramebuffer(GL_FRAMEBUFFER, FBO);
+        FBO.bind();
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -81,13 +74,13 @@ int main()
         
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        FBO.unbind();
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         buffer.use();
         quadVAO.bind();
-        fbTex.bind(0, buffer, "screen");
+        colorTex->bind(0, buffer, "screen");
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
  
