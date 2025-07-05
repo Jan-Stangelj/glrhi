@@ -10,7 +10,7 @@ glrhi::fbo::~fbo() {
     glDeleteFramebuffers(1, &m_ID);
 }
 
-void glrhi::fbo::attachColorTexture(const std::shared_ptr<glrhi::texture2D>& texture) {
+void glrhi::fbo::attachColorTexture(glrhi::texture2D* texture) {
     if (!(m_numColorTextures < m_colorTextures.size())) {
         std::cerr << "ERROR::FRAMEBUFFER::COLOR_TEXTURE_ATTACHMENT_FAILED:\n"
                       "Number of texture attachments exceeded maximum (" << m_colorTextures.size() << ")\n";
@@ -23,7 +23,7 @@ void glrhi::fbo::attachColorTexture(const std::shared_ptr<glrhi::texture2D>& tex
     m_numColorTextures++;
 }
 
-void glrhi::fbo::attachDepthTexture(const std::shared_ptr<glrhi::texture2D>& texture) {
+void glrhi::fbo::attachDepthTexture(glrhi::texture2D* texture) {
     if (m_depthTexture != nullptr) {
         std::cerr << "ERROR::FRAMEBUFFER::DEPTH_TEXTURE_ATTACHMENT_FAILED:\n"
                      "Depth texture already attached\n";

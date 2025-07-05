@@ -51,13 +51,13 @@ int main()
     quadVAO.addAttribute(2, GL_FLOAT, GL_FALSE, 3*sizeof(float));
     quadVAO.init(quadVBO, quadEBO, 5*sizeof(float));
 
-    auto colorTex = std::make_shared<glrhi::texture2D>(1280, 720, GL_RGBA8);
-    auto depthTex = std::make_shared<glrhi::texture2D>(1280, 720, GL_DEPTH_COMPONENT24);
+    glrhi::texture2D colorTex = glrhi::texture2D(1280, 720, GL_RGBA8);
+    glrhi::texture2D depthTex = glrhi::texture2D(1280, 720, GL_DEPTH_COMPONENT24);
 
     glrhi::fbo FBO;
 
-    FBO.attachColorTexture(colorTex);
-    FBO.attachDepthTexture(depthTex);
+    FBO.attachColorTexture(&colorTex);
+    FBO.attachDepthTexture(&depthTex);
 
     FBO.init();
 
@@ -80,7 +80,7 @@ int main()
 
         buffer.use();
         quadVAO.bind();
-        colorTex->bind(0, buffer, "screen");
+        colorTex.bind(0, buffer, "screen");
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
  

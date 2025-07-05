@@ -1,6 +1,6 @@
 #pragma once
 
-#include "glrhi/glrhi.hpp"
+#include "glrhi/core/texture2D.hpp"
 
 #include "glad/glad.h"
 
@@ -8,16 +8,14 @@
 #include <memory>
 
 namespace glrhi {
-    class texture2D;
-
     class fbo {
     public:
 
         fbo();
         ~fbo();
 
-        void attachColorTexture(const std::shared_ptr<glrhi::texture2D>& texture);
-        void attachDepthTexture(const std::shared_ptr<glrhi::texture2D>& texture);
+        void attachColorTexture(glrhi::texture2D* texture);
+        void attachDepthTexture(glrhi::texture2D* texture);
 
         void init();
 
@@ -30,11 +28,10 @@ namespace glrhi {
 
         GLuint m_ID = 0;
 
-        // Yes, I know, this is dogshit
-        std::array<std::shared_ptr<glrhi::texture2D>, 8> m_colorTextures;
+        std::array<glrhi::texture2D*, 8> m_colorTextures;
         unsigned int m_numColorTextures = 0;
 
-        std::shared_ptr<glrhi::texture2D> m_depthTexture = nullptr;
+        glrhi::texture2D* m_depthTexture;
 
     };
 }
