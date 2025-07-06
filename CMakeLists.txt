@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project("Renderer" LANGUAGES CXX C)
+project("glrhi" LANGUAGES CXX C)
 set (CMAKE_CXX_STANDARD 20)
 
 set("GLFW_BUILD_DOCS" OFF CACHE BOOL "" FORCE)
@@ -23,11 +23,15 @@ target_include_directories("glrhi" PUBLIC  ${PROJECT_SOURCE_DIR}/vendor/include)
 
 target_link_libraries("glrhi" PUBLIC glad glfw glm)
 
-add_executable("triangle" "examples/triangle/src/main.cpp")
-target_link_libraries("triangle" glrhi)
+option("GLRHI_BUILD_EXAMPLES" "Build examples for glrhi" ON)
 
-add_executable("texture" "examples/texture/src/main.cpp")
-target_link_libraries("texture" glrhi)
+if (GLRHI_BUILD_EXAMPLES)
+    add_executable("triangle" "examples/triangle/src/main.cpp")
+    target_link_libraries("triangle" glrhi)
 
-add_executable("framebuffer" "examples/framebuffer/src/main.cpp")
-target_link_libraries("framebuffer" glrhi)
+    add_executable("texture" "examples/texture/src/main.cpp")
+    target_link_libraries("texture" glrhi)
+
+    add_executable("framebuffer" "examples/framebuffer/src/main.cpp")
+    target_link_libraries("framebuffer" glrhi)
+endif()
