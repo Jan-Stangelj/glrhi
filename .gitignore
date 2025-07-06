@@ -32,3 +32,8 @@
 *.app
 
 build/
+
+# Ignore settings files and NOT the gitignore
+.*
+!.gitignore
+!.gitmodules
