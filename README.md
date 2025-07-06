@@ -51,4 +51,7 @@ Finally link the library to your executable.
         target_link_libraries("your_executable" glrhi)
 
 ## Examples
-See [examples](EXAMPLES.md).
+See [EXAMPLES.md](EXAMPLES.md).
+
+## License
+See [LICENSE](LICENSE)
