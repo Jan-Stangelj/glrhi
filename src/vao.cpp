@@ -1,29 +1,32 @@
 #include "glrhi/core/vao.hpp"
 
-glrhi::vao::vao() {
-    glCreateVertexArrays(1, &m_ID);
-}
+namespace glrhi {
 
-glrhi::vao::~vao() {
-    glDeleteVertexArrays(1, &m_ID);
-}
+    vao::vao() {
+        glCreateVertexArrays(1, &m_ID);
+    }
 
-void glrhi::vao::addAttribute(GLint size, GLenum type, GLboolean normalized, GLuint pointer) {
-    glEnableVertexArrayAttrib(m_ID, m_attributeCounter);
-    glVertexArrayAttribBinding(m_ID, m_attributeCounter, 0);
-    glVertexArrayAttribFormat(m_ID, m_attributeCounter, size, type, normalized, pointer);
-    m_attributeCounter++;
-}
+    vao::~vao() {
+        glDeleteVertexArrays(1, &m_ID);
+    }
 
-void glrhi::vao::init(const glrhi::vbo& VBO, const glrhi::ebo& EBO, GLsizei stride) const {
-    glVertexArrayVertexBuffer(m_ID, 0, VBO.getID(), 0, stride);
-    glVertexArrayElementBuffer(m_ID, EBO.getID());
-}
+    void vao::addAttribute(GLint size, GLenum type, GLboolean normalized, GLuint pointer) {
+        glEnableVertexArrayAttrib(m_ID, m_attributeCounter);
+        glVertexArrayAttribBinding(m_ID, m_attributeCounter, 0);
+        glVertexArrayAttribFormat(m_ID, m_attributeCounter, size, type, normalized, pointer);
+        m_attributeCounter++;
+    }
 
-void glrhi::vao::bind() const {
-    glBindVertexArray(m_ID);
-}
+    void vao::init(const vbo& VBO, const glrhi::ebo& EBO, GLsizei stride) const {
+        glVertexArrayVertexBuffer(m_ID, 0, VBO.getID(), 0, stride);
+        glVertexArrayElementBuffer(m_ID, EBO.getID());
+    }
 
-void glrhi::vao::unbind() const {
-    glBindVertexArray(0);
+    void vao::bind() const {
+        glBindVertexArray(m_ID);
+    }
+
+    void vao::unbind() const {
+        glBindVertexArray(0);
+    }
 }

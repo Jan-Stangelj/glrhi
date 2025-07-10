@@ -51,8 +51,8 @@ int main()
     quadVAO.addAttribute(2, GL_FLOAT, GL_FALSE, 3*sizeof(float));
     quadVAO.init(quadVBO, quadEBO, 5*sizeof(float));
 
-    glrhi::texture2D colorTex = glrhi::texture2D(1280, 720, GL_RGBA8);
-    glrhi::texture2D depthTex = glrhi::texture2D(1280, 720, GL_DEPTH_COMPONENT24);
+    glrhi::texture2D colorTex(1280, 720, GL_RGBA8);
+    glrhi::texture2D depthTex(1280, 720, GL_DEPTH_COMPONENT24);
 
     glrhi::fbo FBO;
 

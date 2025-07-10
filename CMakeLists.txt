@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project("glrhi" LANGUAGES CXX C)
-set (CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED On)
 
 set("GLFW_BUILD_DOCS" OFF CACHE BOOL "" FORCE)
 set("GLFW_BUILD_TESTS" OFF CACHE BOOL "" FORCE)
@@ -15,6 +16,15 @@ add_subdirectory("vendor/glm")
 
 file(GLOB_RECURSE "SOURCES" CONFIGURE_DEPENDS "src/*.cpp")
 add_library("glrhi" "${SOURCES}")
+
+# Enable ALL warnings
+if(MSVC)
+  target_compile_options(glrhi PRIVATE /W4 /WX)
+elseif(CMAKE_COMPILER_IS_GNUCXX)
+  target_compile_options(glrhi PRIVATE -Wall -Wextra -Wpedantic)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+  target_compile_options(glrhi PRIVATE -Wall -Wextra -Wpedantic)
+endif()
 
 target_compile_definitions("glrhi" PUBLIC "GLFW_INCLUDE_NONE=1") 
 

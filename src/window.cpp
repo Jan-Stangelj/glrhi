@@ -8,6 +8,69 @@ void APIENTRY glDebugOutput(GLenum source,
                             GLenum severity, 
                             GLsizei length, 
                             const char *message, 
+                            const void *userParam);
+
+namespace glrhi {
+
+    window::window(unsigned int width, unsigned int height, const char* title){
+        // window settings
+        glfwInit();
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+
+        // Create window and OpenGL context
+        m_window = glfwCreateWindow(width, height, title, NULL, NULL);
+        if (m_window == NULL){
+            std::cerr << "Failed to create GLFW window\n";
+            glfwTerminate();
+            return;
+        }
+        glfwMakeContextCurrent(m_window);
+
+        // Initialize GLAD
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
+            std::cerr << "Failed to initialize GLAD\n";
+            return;
+        }
+
+
+        int flags; glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
+        if (flags & GL_CONTEXT_FLAG_DEBUG_BIT)
+        {
+            glEnable(GL_DEBUG_OUTPUT);
+            glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+            glDebugMessageCallback(glDebugOutput, nullptr);
+            glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
+        }
+        std::clog << "OpenGL Debug Context Enabled\n";
+    }
+    window::~window(){
+        glfwTerminate();
+    }
+
+    bool window::shouldClose() const {
+        return glfwWindowShouldClose(m_window);
+    }
+
+    void window::swapBuffers() const {
+        glfwPollEvents();
+        glfwSwapBuffers(m_window);
+    }
+
+    GLFWwindow* window::getGlfwWindow() const{
+        return m_window;
+    }
+}
+
+void APIENTRY glDebugOutput(GLenum source, 
+                            GLenum type, 
+                            unsigned int id, 
+                            GLenum severity, 
+                            GLsizei length, 
+                            const char *message, 
                             const void *userParam)
 {
     // ignore non-significant error/warning codes
@@ -48,56 +111,4 @@ void APIENTRY glDebugOutput(GLenum source,
     } std::cerr << std::endl;
     std::cerr << std::endl;
     glfwTerminate();
-}
-
-glrhi::window::window(unsigned int width, unsigned int height, const char* title){
-    // window settings
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
-    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
-
-    // Create window and OpenGL context
-    m_window = glfwCreateWindow(width, height, title, NULL, NULL);
-    if (m_window == NULL){
-        std::cerr << "Failed to create GLFW window\n";
-        glfwTerminate();
-        return;
-    }
-    glfwMakeContextCurrent(m_window);
-
-    // Initialize GLAD
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
-        std::cerr << "Failed to initialize GLAD\n";
-        return;
-    }
-
-
-    int flags; glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
-    if (flags & GL_CONTEXT_FLAG_DEBUG_BIT)
-    {
-        glEnable(GL_DEBUG_OUTPUT);
-        glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-        glDebugMessageCallback(glDebugOutput, nullptr);
-        glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
-    }
-    std::clog << "OpenGL Debug Context Enabled\n";
-}
-glrhi::window::~window(){
-    glfwTerminate();
-}
-
-bool glrhi::window::shouldClose() const {
-    return glfwWindowShouldClose(m_window);
-}
-
-void glrhi::window::swapBuffers() const {
-    glfwPollEvents();
-    glfwSwapBuffers(m_window);
-}
-
-GLFWwindow* glrhi::window::getGlfwWindow() const{
-    return m_window;
 }
