@@ -5,7 +5,6 @@ int main()
     glrhi::window window(1280, 720, "Uniform buffer example");
 
     glrhi::shader shader("../examples/uniform_buffer/shaders/basic.vert", "../examples/uniform_buffer/shaders/basic.frag");
-    shader.setVec3("color", glm::vec3(1.0f, 0.0f, 1.0f));
 
     float vertices[] = {
          0.0f,  0.5f, 0.0f,
@@ -24,18 +23,15 @@ int main()
     VAO.addAttribute(3, GL_FLOAT, GL_FALSE, 0);
     VAO.init(VBO, EBO, 3*sizeof(float));
 
-    unsigned int uboExampleBlock;
-    glGenBuffers(1, &uboExampleBlock); // gen buffer
-    glBindBuffer(GL_UNIFORM_BUFFER, uboExampleBlock); // bind
-    glBufferData(GL_UNIFORM_BUFFER, 16, NULL, GL_STATIC_DRAW); // allocate memory
-    glBindBuffer(GL_UNIFORM_BUFFER, 0); // unbind
+    GLuint uboExampleBlock;
+    glCreateBuffers(1, &uboExampleBlock); // gen buffer
 
-    glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboExampleBlock); // set binding point
+    glNamedBufferData(uboExampleBlock, 16, NULL, GL_STATIC_DRAW); // allocate memory
 
-    glBindBuffer(GL_UNIFORM_BUFFER, uboExampleBlock); // bind
+    glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboExampleBlock); // add binding point
+
     float color[4] = {1.0f, 0.0f, 1.0f, 1.0f}; // the color to send
-    glBufferSubData(GL_UNIFORM_BUFFER, 0, 16, &color); // send the data
-    glBindBuffer(GL_UNIFORM_BUFFER, 0); // unbind
+    glNamedBufferSubData(uboExampleBlock, 0, 16, &color); // send the data
 
     while (!window.shouldClose())
     {
