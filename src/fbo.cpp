@@ -38,6 +38,9 @@ namespace glrhi {
     }
 
     void fbo::init() {
+
+        // Adds the color buffers to a list, to tell OpenGL how many there are
+        // (this is a weird system by used by OGL imho)
         std::vector<GLenum> drawBuffers;
         for (unsigned int i = 0; i < m_numColorTextures; ++i) {
             drawBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);

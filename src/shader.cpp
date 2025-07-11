@@ -100,9 +100,12 @@ namespace glrhi {
     }
 
     GLint shader::m_getLocation(const char* name) {
+        // if the location is in the cache, return that location
         if (m_cache.find(name) != m_cache.end()) {
             return m_cache[name];
         }
+
+        // Otherwise get the location from OpenGL, add it to the cache and return it
         GLint location = glGetUniformLocation(m_ID, name);
         m_cache[name] = location;
         return location;
