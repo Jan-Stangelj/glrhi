@@ -23,15 +23,11 @@ int main()
     VAO.addAttribute(3, GL_FLOAT, GL_FALSE, 0);
     VAO.init(VBO, EBO, 3*sizeof(float));
 
-    GLuint uboExampleBlock;
-    glCreateBuffers(1, &uboExampleBlock); // gen buffer
 
-    glNamedBufferData(uboExampleBlock, 16, nullptr, GL_STATIC_DRAW); // allocate memory
+    float color[4] = {1.0f, 0.6f, 1.0f, 1.0f};
 
-    glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboExampleBlock); // add binding point
-
-    float color[4] = {1.0f, 0.0f, 1.0f, 1.0f}; // the color to send
-    glNamedBufferSubData(uboExampleBlock, 0, 16, &color); // send the data
+    glrhi::ubo UBO(16, color);
+    UBO.addBindingPoint(0);
 
     while (!window.shouldClose())
     {
