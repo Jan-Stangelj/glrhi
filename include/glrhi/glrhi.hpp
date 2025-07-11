@@ -7,3 +7,4 @@
 #include "glrhi/core/window.hpp"
 #include "glrhi/core/texture2D.hpp"
 #include "glrhi/core/fbo.hpp"
+#include "glrhi/core/ubo.hpp"

@@ -26,7 +26,7 @@ int main()
     GLuint uboExampleBlock;
     glCreateBuffers(1, &uboExampleBlock); // gen buffer
 
-    glNamedBufferData(uboExampleBlock, 16, NULL, GL_STATIC_DRAW); // allocate memory
+    glNamedBufferData(uboExampleBlock, 16, nullptr, GL_STATIC_DRAW); // allocate memory
 
     glBindBufferBase(GL_UNIFORM_BUFFER, 0, uboExampleBlock); // add binding point
 
