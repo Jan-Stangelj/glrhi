@@ -44,4 +44,7 @@ if (GLRHI_BUILD_EXAMPLES)
 
     add_executable("framebuffer" "examples/framebuffer/src/main.cpp")
     target_link_libraries("framebuffer" glrhi)
+
+    add_executable("uniform_buffer" "examples/uniform_buffer/src/main.cpp")
+    target_link_libraries("uniform_buffer" glrhi)
 endif()
