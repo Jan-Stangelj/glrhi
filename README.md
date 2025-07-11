@@ -39,12 +39,12 @@ And compile it (The j option sets the amount of threads make will use)
 ## Usage
 To use the library in a CMake project, first add it as a subdirectory.
 
-        add_subdirectory("vendor/glrhi)
+        add_subdirectory("vendor/glrhi")
 
 (Optional) Disable building examples
 
         set("GLRHI_BUILD_EXAMPLES" OFF CACHE BOOL "")
-        add_subdirectory("vendor/glrhi)
+        add_subdirectory("vendor/glrhi")
 
 Finally link the library to your executable.
 
