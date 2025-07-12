@@ -50,8 +50,8 @@ namespace glrhi {
 
         GLenum status = glCheckNamedFramebufferStatus(m_ID, GL_FRAMEBUFFER);
         if (status != GL_FRAMEBUFFER_COMPLETE) {
-            std::cerr << "ERROR::FRAMEBUFFER::INIT_FAILED:\n"
-                        "Framebuffer is not complete (status: " << std::hex << status << ")\n";
+            std::cerr << "ERROR::FRAMEBUFFER::INIT_FAILED\n"
+                        "Framebuffer is not complete\n";
         }
     }
 

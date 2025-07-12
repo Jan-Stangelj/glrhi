@@ -10,12 +10,10 @@ namespace glrhi{
     class compute{
     public:
 
-        compute(const char* vertexPath, const char* fragmentPath);
+        compute(const char* computePath);
         ~compute();
 
-        void use() const;
-
-        void dispatch(GLuint x, GLuint y, GLuint z);
+        void dispatch(GLuint x, GLuint y, GLuint z) const;
 
         void setBool(const char* name, bool value);
         void setInt(const char* name, int value);
