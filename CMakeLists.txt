@@ -47,4 +47,7 @@ if (GLRHI_BUILD_EXAMPLES)
 
     add_executable("uniform_buffer" "examples/uniform_buffer/src/main.cpp")
     target_link_libraries("uniform_buffer" glrhi)
+
+    add_executable("ssbo" "examples/ssbo/src/main.cpp")
+    target_link_libraries("ssbo" glrhi)
 endif()

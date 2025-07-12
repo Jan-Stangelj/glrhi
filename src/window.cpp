@@ -57,6 +57,7 @@ namespace glrhi {
     }
 
     void window::swapBuffers() const {
+        glfwPollEvents();
         glfwSwapBuffers(m_window);
     }
 
