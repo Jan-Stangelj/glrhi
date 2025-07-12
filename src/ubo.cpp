@@ -20,7 +20,7 @@ namespace glrhi {
     }
 
     void ubo::resetBindingPoint(GLuint bindingPoint) const {
-        glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, 0); // add binding point
+        glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, 0); // reset binding point
     }
 
 }
