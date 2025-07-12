@@ -50,4 +50,7 @@ if (GLRHI_BUILD_EXAMPLES)
 
     add_executable("ssbo" "examples/ssbo/src/main.cpp")
     target_link_libraries("ssbo" glrhi)
+
+    add_executable("compute" "examples/compute/src/main.cpp")
+    target_link_libraries("compute" glrhi)
 endif()
