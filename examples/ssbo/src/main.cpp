@@ -22,18 +22,12 @@ int main()
 
     VAO.addAttribute(3, GL_FLOAT, GL_FALSE, 0);
     VAO.init(VBO, EBO, 3*sizeof(float));
-
-
-    GLuint SSBO;
-    glCreateBuffers(1, &SSBO);
-
-    glNamedBufferStorage(SSBO, sizeof(float) * 4, nullptr, GL_DYNAMIC_STORAGE_BIT);
+    
 
     float color[] = {1.0f, 0.5f, 1.0f, 1.0f};
-    glNamedBufferSubData(SSBO, 0, sizeof(float) * 4, color);
 
-    glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, SSBO);
-
+    glrhi::ssbo SSBO(sizeof(float) * 4, color);
+    SSBO.addBindingPoint(0);
 
     while (!window.shouldClose())
     {

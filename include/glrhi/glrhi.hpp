@@ -8,3 +8,4 @@
 #include "glrhi/core/texture2D.hpp"
 #include "glrhi/core/fbo.hpp"
 #include "glrhi/core/ubo.hpp"
+#include "glrhi/core/ssbo.hpp"
