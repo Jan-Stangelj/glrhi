@@ -4,5 +4,5 @@
 - Compute shaders
 - 3D textures
 - Cubemaps
-- Shader Storage Buffer Objects (SSBO)
+- ~~Shader Storage Buffer Objects (SSBO)~~
 - Tesselation shader?
