@@ -26,7 +26,7 @@ int main()
 
     float color[4] = {1.0f, 0.6f, 1.0f, 1.0f};
 
-    glrhi::ubo UBO(16, color);
+    glrhi::ubo UBO(sizeof(float) * 4, color);
     UBO.addBindingPoint(0);
 
     while (!window.shouldClose())
