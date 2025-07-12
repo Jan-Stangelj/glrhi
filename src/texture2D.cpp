@@ -6,7 +6,7 @@ namespace glrhi {
 	texture2D::texture2D(GLsizei width, 
 								GLsizei height, 
 								GLenum internalFormat, 
-								GLsizei mips) : m_width(width), m_height(height) {
+								GLsizei mips) : m_width(width), m_height(height), m_format(internalFormat) {
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_ID);
 
@@ -56,8 +56,10 @@ namespace glrhi {
 
 		// Allocate memory on the gpu
 		glTextureStorage2D(m_ID, mips, internalFormat, widthImg, heightImg);
+
 		m_width = widthImg;
 		m_height = heightImg;
+		m_format = internalFormat;
 
 		// load the image data to the gpu
 		loadData(GL_RGBA, dataType, data);
@@ -94,5 +96,9 @@ namespace glrhi {
 	void texture2D::bind(GLuint textureUnit, glrhi::shader& shader, const char* textureUniform) const {
 		glBindTextureUnit(textureUnit, m_ID);
 		shader.setInt(textureUniform, textureUnit);
+	}
+
+	void texture2D::bindImage(GLuint unit, GLint mip, GLenum access) const {
+		glBindImageTexture(unit, m_ID, mip, GL_FALSE, 0, access, m_format);
 	}
 }
