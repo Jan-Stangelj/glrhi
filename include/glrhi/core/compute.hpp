@@ -7,13 +7,15 @@
 #include <string>
 
 namespace glrhi{
-    class shader{
+    class compute{
     public:
 
-        shader(const char* vertexPath, const char* fragmentPath);
-        ~shader();
+        compute(const char* vertexPath, const char* fragmentPath);
+        ~compute();
 
         void use() const;
+
+        void dispatch(GLuint x, GLuint y, GLuint z);
 
         void setBool(const char* name, bool value);
         void setInt(const char* name, int value);

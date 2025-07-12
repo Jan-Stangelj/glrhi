@@ -87,7 +87,7 @@ namespace glrhi {
 
 	}
 
-	void texture2D::genMipmaps() {
+	void texture2D::genMipmaps() const {
 		glGenerateTextureMipmap(m_ID);
 	}
 

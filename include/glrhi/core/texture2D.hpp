@@ -15,7 +15,7 @@ namespace glrhi {
 
         void loadData(GLenum dataFormat, GLenum dataType, const void* data, GLint mip = 0) const;
 
-        void genMipmaps();
+        void genMipmaps() const;
 
         void bind(GLuint textureUnit, glrhi::shader& shader, const char* textureUniform) const;
 

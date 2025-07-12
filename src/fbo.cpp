@@ -37,7 +37,7 @@ namespace glrhi {
         glNamedFramebufferTexture(m_ID, GL_DEPTH_ATTACHMENT, texture->getID(), 0);
     }
 
-    void fbo::init() {
+    void fbo::init() const {
 
         // Adds the color buffers to a list, to tell OpenGL how many there are
         // (this is a weird system by used by OGL imho)
@@ -55,11 +55,11 @@ namespace glrhi {
         }
     }
 
-    void fbo::bind() {
+    void fbo::bind() const {
         glBindFramebuffer(GL_FRAMEBUFFER, m_ID);
     }
 
-    void fbo::unbind() {
+    void fbo::unbind() const {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 }

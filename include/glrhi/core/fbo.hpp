@@ -30,12 +30,12 @@ namespace glrhi {
          */
         void attachDepthTexture(glrhi::texture2D* texture);
 
-        void init();
+        void init() const;
 
-        void bind();
-        void unbind();
+        void bind() const;
+        void unbind() const;
         
-        GLuint getID() { return m_ID; }
+        GLuint getID() const { return m_ID; }
 
     private:
         GLuint m_ID = 0;
