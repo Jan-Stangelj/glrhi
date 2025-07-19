@@ -93,12 +93,19 @@ namespace glrhi {
 		glGenerateTextureMipmap(m_ID);
 	}
 
-	void texture2D::bind(GLuint textureUnit, glrhi::shader& shader, const char* textureUniform) const {
-		glBindTextureUnit(textureUnit, m_ID);
-		shader.setInt(textureUniform, textureUnit);
+	GLuint64 texture2D::getSamplerHandle() {
+		if (samplerHandle == 0) {
+			samplerHandle = glGetTextureHandleARB(m_ID);
+			glMakeTextureHandleResidentARB(samplerHandle);
+		}
+		return samplerHandle;
 	}
 
-	void texture2D::bindImage(GLuint unit, GLint mip, GLenum access) const {
-		glBindImageTexture(unit, m_ID, mip, GL_FALSE, 0, access, m_format);
+	GLuint64 texture2D::getImageHandle() {
+		if (imageHandle == 0) {
+			imageHandle = glGetImageHandleARB(m_ID, 0, GL_FALSE, 0, m_format);
+			glMakeImageHandleResidentARB(imageHandle, GL_READ_WRITE);
+		}
+		return imageHandle;
 	}
 }

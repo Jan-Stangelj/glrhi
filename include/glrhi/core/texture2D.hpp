@@ -1,7 +1,6 @@
 #pragma once
 
 #include "glad/glad.h"
-#include "glrhi/core/shader.hpp"
 
 #include "stb_image.h"
 
@@ -17,14 +16,17 @@ namespace glrhi {
 
         void genMipmaps() const;
 
-        void bind(GLuint textureUnit, glrhi::shader& shader, const char* textureUniform) const;
-        void bindImage(GLuint unit, GLint mip, GLenum access) const;
+        GLuint64 getSamplerHandle();
+        GLuint64 getImageHandle();
 
         GLuint getID() const { return m_ID; };
 
     private:
 
-        GLuint m_ID;
+        GLuint m_ID = 0;
+
+        GLuint64 samplerHandle = 0;
+        GLuint64 imageHandle = 0;
 
         GLsizei m_width, m_height;
         GLenum m_format;
