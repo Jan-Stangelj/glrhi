@@ -1,10 +1,11 @@
 #version 460 core
+#extension GL_ARB_bindless_texture : require
 
 out vec4 FragColor;
 
 in vec2 texCoord;
 
-uniform sampler2D txt;
+layout(bindless_sampler) uniform sampler2D txt;
 
 void main()
 {

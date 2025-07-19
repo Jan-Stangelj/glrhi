@@ -1,9 +1,5 @@
 #include "glrhi/glrhi.hpp"
 
-#include <memory>
-
-#include <iostream>
-
 int main()
 {
     glrhi::window window(1280, 720, "Framebuffer example");
@@ -52,6 +48,8 @@ int main()
     quadVAO.init(quadVBO, quadEBO, 5*sizeof(float));
 
     glrhi::texture2D colorTex(1280, 720, GL_RGBA8);
+    buffer.setHandle64("screen", colorTex.getSamplerHandle());
+
     glrhi::texture2D depthTex(1280, 720, GL_DEPTH_COMPONENT24);
 
     glrhi::fbo FBO;
@@ -80,7 +78,6 @@ int main()
 
         buffer.use();
         quadVAO.bind();
-        colorTex.bind(0, buffer, "screen");
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
  
