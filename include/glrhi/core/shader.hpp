@@ -31,6 +31,8 @@ namespace glrhi{
         void setMat3(const char* name, const glm::mat3& mat);
         void setMat4(const char* name, const glm::mat4& mat);
 
+        void setHandle64(const char* name, const GLuint64& handle);
+
     private:
         GLint m_getLocation(const char* name);
 

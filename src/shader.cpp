@@ -150,4 +150,8 @@ namespace glrhi {
     void shader::setMat4(const char* name, const glm::mat4 &mat) {
         glProgramUniformMatrix4fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
     }
+
+    void shader::setHandle64(const char* name, const GLuint64& handle) {
+        glProgramUniformHandleui64ARB(m_ID, m_getLocation(name), handle);
+    }
 }
