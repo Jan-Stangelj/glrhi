@@ -77,6 +77,12 @@ namespace glrhi {
 	}
 
 	texture2D::~texture2D() {
+		if (samplerHandle)
+			glMakeTextureHandleNonResidentARB(samplerHandle);
+
+		if (imageHandle)
+			glMakeImageHandleNonResidentARB(imageHandle);
+
 		glDeleteTextures(1, &m_ID);
 	}
 
@@ -94,7 +100,7 @@ namespace glrhi {
 	}
 
 	GLuint64 texture2D::getSamplerHandle() {
-		if (samplerHandle == 0) {
+		if (!samplerHandle) {
 			samplerHandle = glGetTextureHandleARB(m_ID);
 			glMakeTextureHandleResidentARB(samplerHandle);
 		}
@@ -102,7 +108,7 @@ namespace glrhi {
 	}
 
 	GLuint64 texture2D::getImageHandle() {
-		if (imageHandle == 0) {
+		if (!imageHandle) {
 			imageHandle = glGetImageHandleARB(m_ID, 0, GL_FALSE, 0, m_format);
 			glMakeImageHandleResidentARB(imageHandle, GL_READ_WRITE);
 		}
