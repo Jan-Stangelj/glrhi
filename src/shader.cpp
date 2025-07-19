@@ -120,6 +120,7 @@ namespace glrhi {
     void shader::setFloat(const char* name, float value) { 
         glProgramUniform1f(m_ID, m_getLocation(name), value); 
     }
+
     void shader::setVec2(const char* name, const glm::vec2 &value) { 
         glProgramUniform2fv(m_ID, m_getLocation(name), 1, &value[0]); 
     }
@@ -129,6 +130,17 @@ namespace glrhi {
     void shader::setVec4(const char* name, const glm::vec4 &value) { 
         glProgramUniform4fv(m_ID, m_getLocation(name), 1, &value[0]); 
     }
+
+    void shader::setUVec2(const char* name, const glm::uvec2 &value) { 
+        glProgramUniform2uiv(m_ID, m_getLocation(name), 1, &value[0]); 
+    }
+    void shader::setUVec3(const char* name, const glm::uvec3 &value) { 
+        glProgramUniform3uiv(m_ID, m_getLocation(name), 1, &value[0]); 
+    }
+    void shader::setUVec4(const char* name, const glm::uvec4 &value) { 
+        glProgramUniform4uiv(m_ID, m_getLocation(name), 1, &value[0]); 
+    }
+
     void shader::setMat2(const char* name, const glm::mat2 &mat) {
         glProgramUniformMatrix2fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
     }
