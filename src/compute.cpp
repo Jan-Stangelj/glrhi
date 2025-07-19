@@ -93,6 +93,7 @@ namespace glrhi {
     void compute::setFloat(const char* name, float value) { 
         glProgramUniform1f(m_ID, m_getLocation(name), value); 
     }
+
     void compute::setVec2(const char* name, const glm::vec2 &value) { 
         glProgramUniform2fv(m_ID, m_getLocation(name), 1, &value[0]); 
     }
@@ -102,6 +103,17 @@ namespace glrhi {
     void compute::setVec4(const char* name, const glm::vec4 &value) { 
         glProgramUniform4fv(m_ID, m_getLocation(name), 1, &value[0]); 
     }
+
+    void compute::setUVec2(const char* name, const glm::uvec2 &value) { 
+        glProgramUniform2uiv(m_ID, m_getLocation(name), 1, &value[0]); 
+    }
+    void compute::setUVec3(const char* name, const glm::uvec3 &value) { 
+        glProgramUniform3uiv(m_ID, m_getLocation(name), 1, &value[0]); 
+    }
+    void compute::setUVec4(const char* name, const glm::uvec4 &value) { 
+        glProgramUniform4uiv(m_ID, m_getLocation(name), 1, &value[0]); 
+    }
+
     void compute::setMat2(const char* name, const glm::mat2 &mat) {
         glProgramUniformMatrix2fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
     }
@@ -110,5 +122,9 @@ namespace glrhi {
     }
     void compute::setMat4(const char* name, const glm::mat4 &mat) {
         glProgramUniformMatrix4fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
+    }
+
+    void compute::setHandle64(const char* name, const GLuint64& handle) {
+        glProgramUniformHandleui64ARB(m_ID, m_getLocation(name), handle);
     }
 }

@@ -1,9 +1,5 @@
 #include "glrhi/glrhi.hpp"
 
-#include <memory>
-
-#include <iostream>
-
 int main()
 {
     glrhi::window window(1280, 720, "Compute example");
@@ -34,7 +30,7 @@ int main()
     quadVAO.init(quadVBO, quadEBO, 5*sizeof(float));
 
     glrhi::texture2D colorTex(1280, 720, GL_RGBA8);
-    colorTex.bindImage(0, 0, GL_READ_WRITE);
+    rainbow.setHandle64("imgOutput", colorTex.getImageHandle());
 
     while (!window.shouldClose())
     {
@@ -45,7 +41,7 @@ int main()
 
         buffer.use();
         quadVAO.bind();
-        colorTex.bind(0, buffer, "screen");
+        buffer.setHandle64("screen", colorTex.getSamplerHandle());
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
  
