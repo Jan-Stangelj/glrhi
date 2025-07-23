@@ -20,7 +20,7 @@ add_library("glrhi" "${SOURCES}")
 # Enable ALL warnings
 if(MSVC)
   target_compile_options(glrhi PRIVATE /W4 /WX)
-elseif(CMAKE_COMPILER_IS_GNUCXX)
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNUc")
   target_compile_options(glrhi PRIVATE -Wall -Wextra -Wpedantic)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   target_compile_options(glrhi PRIVATE -Wall -Wextra -Wpedantic)
