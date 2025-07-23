@@ -99,6 +99,14 @@ namespace glrhi {
 		glGenerateTextureMipmap(m_ID);
 	}
 
+	void texture2D::bind(GLuint textureUnit) {
+		glBindTextureUnit(textureUnit, m_ID);
+	}
+
+	void texture2D::bindImage(GLuint unit, GLint mip) {
+		glBindImageTexture(unit, m_ID, mip, GL_FALSE, 0, GL_READ_WRITE, m_format);
+	}
+
 	GLuint64 texture2D::getSamplerHandle() {
 		if (!samplerHandle) {
 			samplerHandle = glGetTextureHandleARB(m_ID);
@@ -107,9 +115,9 @@ namespace glrhi {
 		return samplerHandle;
 	}
 
-	GLuint64 texture2D::getImageHandle() {
+	GLuint64 texture2D::getImageHandle(GLint mip) {
 		if (!imageHandle) {
-			imageHandle = glGetImageHandleARB(m_ID, 0, GL_FALSE, 0, m_format);
+			imageHandle = glGetImageHandleARB(m_ID, mip, GL_FALSE, 0, m_format);
 			glMakeImageHandleResidentARB(imageHandle, GL_READ_WRITE);
 		}
 		return imageHandle;

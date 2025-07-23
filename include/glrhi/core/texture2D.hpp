@@ -16,8 +16,11 @@ namespace glrhi {
 
         void genMipmaps() const;
 
+        void bind(GLuint textureUnit);
+        void bindImage(GLuint unit, GLint mip);
+
         GLuint64 getSamplerHandle();
-        GLuint64 getImageHandle();
+        GLuint64 getImageHandle(GLint mip);
 
         GLuint getID() const { return m_ID; };
 
