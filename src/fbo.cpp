@@ -13,28 +13,26 @@ namespace glrhi {
         glDeleteFramebuffers(1, &m_ID);
     }
 
-    void fbo::attachColorTexture(glrhi::texture2D* texture) {
-        if (!(m_numColorTextures < m_colorTextures.size())) {
+    void fbo::attachColorTexture(const glrhi::texture2D& texture) {
+        if (!(m_colorTextures < m_maxColorTextures)) {
             std::cerr << "ERROR::FRAMEBUFFER::COLOR_TEXTURE_ATTACHMENT_FAILED:\n"
-                        "Number of texture attachments exceeded maximum (" << m_colorTextures.size() << ")\n";
+                        "Number of texture attachments exceeded maximum (" << m_colorTextures << ")\n";
             return;
         }
-        m_colorTextures[m_numColorTextures] = texture;
 
-        glNamedFramebufferTexture(m_ID, GL_COLOR_ATTACHMENT0 + m_numColorTextures, texture->getID(), 0);
+        glNamedFramebufferTexture(m_ID, GL_COLOR_ATTACHMENT0 + m_colorTextures, texture.getID(), 0);
 
-        m_numColorTextures++;
+        m_colorTextures++;
     }
 
-    void fbo::attachDepthTexture(glrhi::texture2D* texture) {
-        if (m_depthTexture != nullptr) {
+    void fbo::attachDepthTexture(const glrhi::texture2D& texture) {
+        if (m_depthTexture == true) {
             std::cerr << "ERROR::FRAMEBUFFER::DEPTH_TEXTURE_ATTACHMENT_FAILED:\n"
                         "Depth texture already attached\n";
             return;
         }
-        m_depthTexture = texture;
 
-        glNamedFramebufferTexture(m_ID, GL_DEPTH_ATTACHMENT, texture->getID(), 0);
+        glNamedFramebufferTexture(m_ID, GL_DEPTH_ATTACHMENT, texture.getID(), 0);
     }
 
     void fbo::init() const {
@@ -42,7 +40,7 @@ namespace glrhi {
         // Adds the color buffers to a list, to tell OpenGL how many there are
         // (this is a weird system by used by OGL imho)
         std::vector<GLenum> drawBuffers;
-        for (unsigned int i = 0; i < m_numColorTextures; ++i) {
+        for (unsigned int i = 0; i < m_colorTextures; i++) {
             drawBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);
         }
 

@@ -55,8 +55,8 @@ int main()
 
     glrhi::fbo FBO;
 
-    FBO.attachColorTexture(&colorTex);
-    FBO.attachDepthTexture(&depthTex);
+    FBO.attachColorTexture(colorTex);
+    FBO.attachDepthTexture(depthTex);
 
     FBO.init();
 
