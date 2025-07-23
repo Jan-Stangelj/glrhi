@@ -1,4 +1,5 @@
 #include "glrhi/core/window.hpp"
+#include "GLFW/glfw3.h"
 
 #include <iostream>
 
@@ -56,8 +57,11 @@ namespace glrhi {
         return glfwWindowShouldClose(m_window);
     }
 
-    void window::swapBuffers() const {
+    void window::poolEvents() const {
         glfwPollEvents();
+    }
+
+    void window::swapBuffers() const {
         glfwSwapBuffers(m_window);
     }
 

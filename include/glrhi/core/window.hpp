@@ -5,8 +5,6 @@
 
 #include <glm/glm.hpp>
 
-#include <string>
-
 namespace glrhi {
     class window{
     public:
@@ -16,6 +14,7 @@ namespace glrhi {
 
         bool shouldClose() const;
 
+        void poolEvents() const;
         void swapBuffers() const;
 
         GLFWwindow* getGlfwWindow() const;

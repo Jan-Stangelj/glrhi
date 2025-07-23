@@ -19,8 +19,4 @@ namespace glrhi {
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bindingPoint, m_ID); // add binding point
     }
 
-    void ssbo::resetBindingPoint(GLuint bindingPoint) const {
-        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bindingPoint, 0); // reset binding point
-    }
-
 }

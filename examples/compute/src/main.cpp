@@ -37,6 +37,7 @@ int main()
 
     while (!window.shouldClose())
     {
+        window.poolEvents();
 
         rainbow.dispatch(1280, 720, 1);
 

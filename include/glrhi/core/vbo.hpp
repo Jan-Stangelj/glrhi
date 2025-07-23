@@ -9,9 +9,6 @@ namespace glrhi {
         vbo(const void* data, unsigned int size);
         ~vbo();
 
-        void bind() const;
-        void unbind() const;
-
         GLuint getID() const { return m_ID; }
 
     private:

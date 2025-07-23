@@ -9,11 +9,4 @@ namespace glrhi {
 	vbo::~vbo() {
 		glDeleteBuffers(1, &m_ID);
 	}
-
-	void vbo::bind() const {
-		glBindBuffer(GL_ARRAY_BUFFER, m_ID);
-	}
-	void vbo::unbind() const {
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-	}
 }
