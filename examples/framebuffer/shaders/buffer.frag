@@ -5,7 +5,7 @@ out vec4 FragColor;
 
 in vec2 texCoord;
 
-layout(bindless_sampler) uniform sampler2D screen;
+uniform sampler2D screen;
 
 void main()
 {

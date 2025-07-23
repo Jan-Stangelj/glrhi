@@ -30,7 +30,10 @@ int main()
     quadVAO.init(quadVBO, quadEBO, 5*sizeof(float));
 
     glrhi::texture2D colorTex(1280, 720, GL_RGBA8);
-    rainbow.setHandle64("imgOutput", colorTex.getImageHandle());
+    colorTex.bindImage(0, 0);
+    
+    colorTex.bind(0);
+    buffer.setInt("screen", 0);
 
     while (!window.shouldClose())
     {
@@ -41,7 +44,6 @@ int main()
 
         buffer.use();
         quadVAO.bind();
-        buffer.setHandle64("screen", colorTex.getSamplerHandle());
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
  

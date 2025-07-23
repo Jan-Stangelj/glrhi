@@ -48,7 +48,8 @@ int main()
     quadVAO.init(quadVBO, quadEBO, 5*sizeof(float));
 
     glrhi::texture2D colorTex(1280, 720, GL_RGBA8);
-    buffer.setHandle64("screen", colorTex.getSamplerHandle());
+    colorTex.bind(0);
+    buffer.setInt("screen", 0);
 
     glrhi::texture2D depthTex(1280, 720, GL_DEPTH_COMPONENT24);
 

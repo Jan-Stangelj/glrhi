@@ -28,7 +28,8 @@ int main()
     VAO.init(VBO, EBO, 5*sizeof(float));
 
     glrhi::texture2D txt("../examples/texture/red_brick.jpg", GL_RGBA8);
-    shader.setHandle64("txt", txt.getSamplerHandle());
+    txt.bind(0);
+    shader.setInt("txt", 0);
 
     shader.use();
     VAO.bind();
