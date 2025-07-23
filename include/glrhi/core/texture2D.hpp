@@ -16,12 +16,19 @@ namespace glrhi {
 
         void loadData(GLenum dataFormat, GLenum dataType, const void* data, GLint mip = 0) const;
 
+        /// @brief Generates mipmaps using default OpenGL function.
         void genMipmaps() const;
 
+        /// @warning Only binds texture unit, not the texture.
         void bind(GLuint textureUnit);
+
+        /// @warning Only binds texture unit, not the texture.
         void bindImage(GLuint unit, GLint mip);
 
+        /// @brief Gets the handle for bindless usage.
         GLuint64 getSamplerHandle();
+
+        /// @brief Gets the handle for bindless image usage. Acces defaults to read/write.
         GLuint64 getImageHandle(GLint mip);
 
         GLuint getID() const { return m_ID; };

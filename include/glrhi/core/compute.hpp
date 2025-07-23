@@ -32,6 +32,7 @@ namespace glrhi{
         void setMat3(const char* name, const glm::mat3& mat);
         void setMat4(const char* name, const glm::mat4& mat);
 
+        /// @brief Sets the handle for bindless textures
         void setHandle64(const char* name, const GLuint64& handle);
 
     private:

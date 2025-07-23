@@ -5,8 +5,6 @@
 #include "glrhi/core/vbo.hpp"
 #include "glrhi/core/ebo.hpp"
 
-#include <vector>
-
 namespace glrhi {
     class vao {
     public:
@@ -16,6 +14,7 @@ namespace glrhi {
 
         void addAttribute(GLint size, GLenum dataType, GLboolean normalized, GLuint offset);
 
+        /// @brief Inits the VAO with the added attributes.
         void init(const glrhi::vbo& VBO, const glrhi::ebo& EBO, GLsizei stride) const;
 
         void bind() const;

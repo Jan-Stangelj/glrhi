@@ -14,6 +14,7 @@ namespace glrhi {
         void attachColorTexture(const glrhi::texture2D& texture);
         void attachDepthTexture(const glrhi::texture2D& texture);
 
+        /// @brief Inits the fbo. Textures must be added before init.
         void init() const;
 
         void bind() const;

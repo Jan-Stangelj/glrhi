@@ -12,7 +12,6 @@ namespace glrhi {
         void sendData(GLintptr offset, GLsizeiptr size, const void* data) const;
 
         void addBindingPoint(GLuint bindingPoint) const;
-        void resetBindingPoint(GLuint bindingPoint) const;
 
         GLuint getID() const { return m_ID; }
 
