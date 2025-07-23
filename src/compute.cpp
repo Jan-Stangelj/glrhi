@@ -6,7 +6,7 @@
 
 namespace glrhi {
     
-    compute::compute(const char* computePath){
+    compute::compute(const std::filesystem::path& computePath){
 
         std::string computeCode;
         std::ifstream cShaderFile;

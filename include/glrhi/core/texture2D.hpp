@@ -4,12 +4,14 @@
 
 #include "stb_image.h"
 
+#include <filesystem>
+
 namespace glrhi {
     class texture2D {
     public:
 
         texture2D(GLsizei width, GLsizei height, GLenum internalFormat, GLsizei mips = 1);
-        texture2D(const char* file, GLenum internalFormat, GLsizei mips = 1);
+        texture2D(const std::filesystem::path& file, GLenum internalFormat, GLsizei mips = 1);
         ~texture2D();
 
         void loadData(GLenum dataFormat, GLenum dataType, const void* data, GLint mip = 0) const;

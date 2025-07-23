@@ -6,7 +6,7 @@
 
 namespace glrhi {
     
-    shader::shader(const char* vertexPath, const char* fragmentPath){
+    shader::shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath){
 
         // retrieve the vertex/fragment source code from filePath
         std::string vertexCode;

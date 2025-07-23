@@ -5,12 +5,13 @@
 
 #include <unordered_map>
 #include <string_view>
+#include <filesystem>
 
 namespace glrhi{
     class shader{
     public:
 
-        shader(const char* vertexPath, const char* fragmentPath);
+        shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
         ~shader();
 
         void use() const;

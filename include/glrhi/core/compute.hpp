@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
+#include <filesystem>
 #include <unordered_map>
 #include <string_view>
 
@@ -10,7 +11,7 @@ namespace glrhi{
     class compute{
     public:
 
-        compute(const char* computePath);
+        compute(const std::filesystem::path& computePath);
         ~compute();
 
         void dispatch(GLuint x, GLuint y, GLuint z) const;

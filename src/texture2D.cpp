@@ -24,7 +24,7 @@ namespace glrhi {
 
 	}
 
-	texture2D::texture2D(const char* file, GLenum internalFormat, GLsizei mips) {
+	texture2D::texture2D(const std::filesystem::path& file, GLenum internalFormat, GLsizei mips) {
 
 		// Texture creation
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_ID);
@@ -42,7 +42,7 @@ namespace glrhi {
 		void* data = nullptr;
 
 		// check image properties
-		if (stbi_is_hdr(file)) {
+		if (stbi_is_hdr(file.c_str())) {
 			hdr = true;
 			dataType = GL_FLOAT;
 		}
@@ -50,9 +50,9 @@ namespace glrhi {
 		// Loading image into memory
 		stbi_set_flip_vertically_on_load(true);
 		if (!hdr)
-			data = stbi_load(file, &widthImg, &heightImg, &numColCh, 4);
+			data = stbi_load(file.c_str(), &widthImg, &heightImg, &numColCh, 4);
 		else
-			data = stbi_loadf(file, &widthImg, &heightImg, &numColCh, 4);
+			data = stbi_loadf(file.c_str(), &widthImg, &heightImg, &numColCh, 4);
 
 		// Allocate memory on the gpu
 		glTextureStorage2D(m_ID, mips, internalFormat, widthImg, heightImg);
