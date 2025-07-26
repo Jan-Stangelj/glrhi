@@ -68,8 +68,8 @@ namespace glrhi {
     private:
         GLuint m_ID = 0;
 
-        unsigned short m_colorTextures = 0;
-        unsigned short m_maxColorTextures = 8;
+        GLint m_colorTextures = 0;
+        GLint m_maxColorTextures = 8;
 
         bool m_depthTexture = false;
     };

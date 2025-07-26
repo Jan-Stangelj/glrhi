@@ -1,4 +1,5 @@
 #include "glrhi/core/fbo.hpp"
+#include "glrhi/core/texture2D.hpp"
 
 #include <iostream>
 #include <vector>
@@ -7,6 +8,9 @@ namespace glrhi {
 
     fbo::fbo() {
         glCreateFramebuffers(1, &m_ID);
+
+        // Get max number of attachments that can be drawn to
+        glGetIntegerv(GL_MAX_DRAW_BUFFERS, &m_maxColorTextures);
     }
 
     fbo::~fbo() {
