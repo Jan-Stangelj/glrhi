@@ -11,22 +11,23 @@ namespace glrhi {
         std::string computeCode;
         std::ifstream cShaderFile;
 
+        // Enables warnings when reading files.
         cShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         try
         {
             cShaderFile.open(computePath);
 
+            // Reads the file into a temporary variable
             std::stringstream cShaderStream;
-
             cShaderStream << cShaderFile.rdbuf();
 
             cShaderFile.close();
 
-            computeCode = cShaderStream.str();
+            computeCode = cShaderStream.str(); // Copies the temp variable
         }
         catch (std::ifstream::failure& e)
         {
-            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
+            std::cout << "ERROR::SHADER::COMPUTE::FILE_NOT_SUCCESSFULLY_READ: " << e.what() << std::endl;
         }
 
         const char* cShaderCode = computeCode.c_str();
@@ -34,8 +35,10 @@ namespace glrhi {
         GLint success;
         GLchar infoLog[1024];
 
-        unsigned int compute;
+        GLuint compute;
 
+
+        // Compiles the shader
         compute = glCreateShader(GL_COMPUTE_SHADER);
         glShaderSource(compute, 1, &cShaderCode, NULL);
         glCompileShader(compute);
@@ -47,7 +50,7 @@ namespace glrhi {
             std::cerr << "ERROR::SHADER::COMPUTE::COMPILATION_FAILED\n" << infoLog << "\n";
         }
         
-        // shader Program
+        // Creates a program and links the compiled shader to it 
         m_ID = glCreateProgram();
         glAttachShader(m_ID, compute);
         glLinkProgram(m_ID);
@@ -59,6 +62,7 @@ namespace glrhi {
             std::cerr << "ERROR::SHADER::COMPUTE::LINKING_FAILED\n" << infoLog << "\n";
         }
 
+        // Deletes the shader, beacouse it's no longer used.
         glDeleteShader(compute);
     }
 
@@ -69,7 +73,7 @@ namespace glrhi {
     void compute::dispatch(GLuint x, GLuint y, GLuint z) const {
         glUseProgram(m_ID);
         glDispatchCompute(x, y, z);
-        glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
+        glMemoryBarrier(GL_ALL_BARRIER_BITS);   // Wait until shader finishes execution
     }
 
     GLint compute::m_getLocation(const char* name) {

@@ -10,6 +10,7 @@ namespace glrhi {
 
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_ID);
 
+		// Set texture sampling to use mipmaps if there are any
 		if (mips > 1)
 			glTextureParameteri(m_ID, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		else
@@ -17,6 +18,7 @@ namespace glrhi {
 
 		glTextureParameteri(m_ID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+		// Texture wrapping options
 		glTextureParameteri(m_ID, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTextureParameteri(m_ID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
@@ -29,9 +31,15 @@ namespace glrhi {
 		// Texture creation
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_ID);
 
-		// Texture options
+		// Set texture sampling to use mipmaps if there are any
+		if (mips > 1)
+			glTextureParameteri(m_ID, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		else
+			glTextureParameteri(m_ID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
 		glTextureParameteri(m_ID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+		// Texture wrapping options
 		glTextureParameteri(m_ID, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTextureParameteri(m_ID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
@@ -73,16 +81,19 @@ namespace glrhi {
 			glTextureParameteri(m_ID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		}
 
+		// Free the memory used by stb.
 		stbi_image_free(data);  
 	}
 
 	texture2D::~texture2D() {
-		if (samplerHandle)
-			glMakeTextureHandleNonResidentARB(samplerHandle);
+		// Make handles non resident if they were used
+		if (m_samplerHandle)
+			glMakeTextureHandleNonResidentARB(m_samplerHandle);
 
-		if (imageHandle)
-			glMakeImageHandleNonResidentARB(imageHandle);
+		if (m_imageHandle)
+			glMakeImageHandleNonResidentARB(m_imageHandle);
 
+		// Delete the texture buffer
 		glDeleteTextures(1, &m_ID);
 	}
 
@@ -108,18 +119,26 @@ namespace glrhi {
 	}
 
 	GLuint64 texture2D::getSamplerHandle() {
-		if (!samplerHandle) {
-			samplerHandle = glGetTextureHandleARB(m_ID);
-			glMakeTextureHandleResidentARB(samplerHandle);
+		// If sampler handle was not yet cached and made residend,
+		// cache it and make it resident.
+		if (!m_samplerHandle) {
+			m_samplerHandle = glGetTextureHandleARB(m_ID);
+			glMakeTextureHandleResidentARB(m_samplerHandle);
 		}
-		return samplerHandle;
+
+		// return the cached handle
+		return m_samplerHandle;
 	}
 
 	GLuint64 texture2D::getImageHandle(GLint mip) {
-		if (!imageHandle) {
-			imageHandle = glGetImageHandleARB(m_ID, mip, GL_FALSE, 0, m_format);
-			glMakeImageHandleResidentARB(imageHandle, GL_READ_WRITE);
+		// If sampler handle was not yet cached and made residend,
+		// cache it and make it resident.
+		if (!m_imageHandle) {
+			m_imageHandle = glGetImageHandleARB(m_ID, mip, GL_FALSE, 0, m_format);
+			glMakeImageHandleResidentARB(m_imageHandle, GL_READ_WRITE);
 		}
-		return imageHandle;
+
+		// return the cached handle
+		return m_imageHandle;
 	}
 }

@@ -95,8 +95,8 @@ namespace glrhi {
 
         GLuint m_ID = 0;
 
-        GLuint64 samplerHandle = 0;
-        GLuint64 imageHandle = 0;
+        GLuint64 m_samplerHandle = 0;
+        GLuint64 m_imageHandle = 0;
 
         GLsizei m_width, m_height;
         GLenum m_format;

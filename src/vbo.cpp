@@ -4,7 +4,7 @@ namespace glrhi {
 
 	vbo::vbo(const void* data, unsigned int size) {
 		glCreateBuffers(1, &m_ID);
-		glNamedBufferData(m_ID, size, data, GL_STATIC_DRAW);
+		glNamedBufferData(m_ID, size, data, GL_STATIC_DRAW); // Allocate memory on the GPU
 	}
 	vbo::~vbo() {
 		glDeleteBuffers(1, &m_ID);

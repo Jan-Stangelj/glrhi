@@ -14,6 +14,7 @@ namespace glrhi {
     }
 
     void fbo::attachColorTexture(const glrhi::texture2D& texture) {
+        // Logs an error if the maximum number of color textures are already attached.
         if (!(m_colorTextures < m_maxColorTextures)) {
             std::cerr << "ERROR::FRAMEBUFFER::COLOR_TEXTURE_ATTACHMENT_FAILED:\n"
                         "Number of texture attachments exceeded maximum (" << m_colorTextures << ")\n";
@@ -26,6 +27,7 @@ namespace glrhi {
     }
 
     void fbo::attachDepthTexture(const glrhi::texture2D& texture) {
+        // Logs an error if a depth texture is already attached.
         if (m_depthTexture == true) {
             std::cerr << "ERROR::FRAMEBUFFER::DEPTH_TEXTURE_ATTACHMENT_FAILED:\n"
                         "Depth texture already attached\n";
@@ -33,6 +35,8 @@ namespace glrhi {
         }
 
         glNamedFramebufferTexture(m_ID, GL_DEPTH_ATTACHMENT, texture.getID(), 0);
+
+        m_depthTexture = true;
     }
 
     void fbo::init() const {
@@ -46,6 +50,7 @@ namespace glrhi {
 
         glNamedFramebufferDrawBuffers(m_ID, static_cast<GLsizei>(drawBuffers.size()), drawBuffers.data());
 
+        // Checks if the framebuffer was initialized correctly
         GLenum status = glCheckNamedFramebufferStatus(m_ID, GL_FRAMEBUFFER);
         if (status != GL_FRAMEBUFFER_COMPLETE) {
             std::cerr << "ERROR::FRAMEBUFFER::INIT_FAILED\n"

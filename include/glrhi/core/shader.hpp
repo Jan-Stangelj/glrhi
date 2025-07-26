@@ -23,8 +23,8 @@ namespace glrhi{
         /**
          * @brief Construct a new shader.
          * 
-         * @param vertexPath Path to a text file containing the vertex shade code.
-         * @param fragmentPath Path to a text file containing the vertex shade code.
+         * @param vertexPath Path to a text file containing the vertex shader code in GLSL.
+         * @param fragmentPath Path to a text file containing the vertex shader code in GLSL.
          */
         shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
         ~shader();
