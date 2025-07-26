@@ -1,3 +1,8 @@
+/**
+ * @file shader.hpp
+ * @brief Handles the creation and usage of shaders.
+ */
+
 #pragma once
 
 #include <glad/glad.h>
@@ -8,12 +13,25 @@
 #include <filesystem>
 
 namespace glrhi{
+
+    /**
+     * @brief Handles the creation and usage of shaders.
+     */
     class shader{
     public:
 
+        /**
+         * @brief Construct a new shader.
+         * 
+         * @param vertexPath Path to a text file containing the vertex shade code.
+         * @param fragmentPath Path to a text file containing the vertex shade code.
+         */
         shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
         ~shader();
 
+        /**
+         * @brief Selects the shader to be used in the subsequent draw calls.
+         */
         void use() const;
 
         void setBool(const char* name, bool value);
@@ -32,7 +50,12 @@ namespace glrhi{
         void setMat3(const char* name, const glm::mat3& mat);
         void setMat4(const char* name, const glm::mat4& mat);
 
-        /// @brief Sets the handle for bindless textures
+        /**
+         * @brief Sets a texture handle for use with bindless textures.
+         * 
+         * @param name Name of the uniform to set to.
+         * @param handle The texture handle.
+         */
         void setHandle64(const char* name, const GLuint64& handle);
 
     private:
