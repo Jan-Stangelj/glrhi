@@ -2,8 +2,9 @@
 
 ### qol / fixes
 - ~~Window seperate pool events function~~
-- ~~VAO auto offset and stride calculation~~
+- ~~VAO auto offset and stride calculation~~ (Decided not to)
 - ~~Remove binding from VBO / EBO (not needed with DSA)~~
+- Safe 0 overhead fbo setup
 
 ### Features
 - Geometry shaders
