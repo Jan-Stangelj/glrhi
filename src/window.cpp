@@ -14,7 +14,13 @@ void APIENTRY glDebugOutput(GLenum source,
 namespace glrhi {
 
     window::window(unsigned int width, unsigned int height, const char* title){
+        create(width, height, title);
+    }
+    window::~window(){
+        glfwTerminate();
+    }
 
+    void window::create(unsigned int width, unsigned int height, const char* title) {
         // window settings
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -48,9 +54,6 @@ namespace glrhi {
             glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
             std::clog << "OpenGL Debug Context Enabled\n";
         }
-    }
-    window::~window(){
-        glfwTerminate();
     }
 
     bool window::shouldClose() const {

@@ -26,7 +26,10 @@ namespace glrhi {
          * @param title The title of the window.
          */
         window(unsigned int width, unsigned int height, const char* title);
+        window() = default;
         ~window();
+
+        void create(unsigned int width, unsigned int height, const char* title);
 
         /**
          * @return Returns true if the window should close.

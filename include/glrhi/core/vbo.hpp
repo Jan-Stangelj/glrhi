@@ -22,7 +22,16 @@ namespace glrhi {
          * @param size Size of the data in bytes.
          */
         vbo(const void* data, unsigned int size);
+        vbo() = default;
         ~vbo();
+
+        /**
+         * @brief Construct a new VBO.
+         * 
+         * @param data Pointer to the vertices data.
+         * @param size Size of the data in bytes.
+         */
+        void create(const void* data, unsigned int size);
 
         /**
          * @brief Returns The VBO's OpenGL ID.

@@ -1,13 +1,23 @@
 #include "glrhi/core/texture2D.hpp"
+#include <iostream>
 
 
 namespace glrhi {
 
-	texture2D::texture2D(GLsizei width, 
-								GLsizei height, 
-								GLenum internalFormat, 
-								GLsizei mips) : m_width(width), m_height(height), m_format(internalFormat) {
+	texture2D::texture2D(GLsizei width, GLsizei height, GLenum internalFormat, GLsizei mips) {
+		create(width, height, internalFormat, mips);
+	}
 
+	texture2D::texture2D(const std::filesystem::path& file, GLenum internalFormat, GLsizei mips) {
+		create(file, internalFormat, mips);
+	}
+
+	void texture2D::create(GLsizei width, GLsizei height, GLenum internalFormat, GLsizei mips) {
+		if (m_ID) {
+			std::cerr << "ERROR::TEXTURE2D::TEXTURE_ALREADY_CREATED\n";
+			return;
+		}
+		
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_ID);
 
 		// Set texture sampling to use mipmaps if there are any
@@ -24,10 +34,17 @@ namespace glrhi {
 
 		glTextureStorage2D(m_ID, mips, internalFormat, width, height);
 
+		m_width = width;
+		m_height = height;
+		m_format = internalFormat;
 	}
 
-	texture2D::texture2D(const std::filesystem::path& file, GLenum internalFormat, GLsizei mips) {
-
+	void texture2D::create(const std::filesystem::path& file, GLenum internalFormat, GLsizei mips) {
+		if (m_ID) {
+			std::cerr << "ERROR::TEXTURE2D::TEXTURE_ALREADY_CREATED\n";
+			return;
+		}
+		
 		// Texture creation
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_ID);
 

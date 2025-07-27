@@ -22,7 +22,16 @@ namespace glrhi {
          * @param data Optionally pass in all data on creation.
          */
         ubo(GLsizeiptr size, const void* data = nullptr);
+        ubo() = default;
         ~ubo();
+
+        /**
+         * @brief Construct a new UBO.
+         * 
+         * @param size The size of the UBO in bytes.
+         * @param data Optionally pass in all data on creation.
+         */
+        void create(GLsizeiptr size, const void* data = nullptr);
 
         /**
          * @brief Uploads a chunk of data to the UBO one the GPU.

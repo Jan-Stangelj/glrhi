@@ -27,7 +27,15 @@ namespace glrhi{
          * @param computePath Path to a text file containing the compute shader code in GLSL.
          */
         compute(const std::filesystem::path& computePath);
+        compute() = default;
         ~compute();
+
+        /**
+         * @brief Construct a new compute shader.
+         * 
+         * @param computePath Path to a text file containing the compute shader code in GLSL.
+         */
+        void create(const std::filesystem::path& computePath);
 
         /**
          * @brief Dispatches the compute shader with the set number of invocations.

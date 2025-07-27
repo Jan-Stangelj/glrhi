@@ -22,7 +22,16 @@ namespace glrhi {
          * @param size Size of the data in bytes.
          */
         ebo(const void* data, unsigned int size);
+        ebo() = default;
         ~ebo();
+
+        /**
+         * @brief Construct a new EBO.
+         * 
+         * @param data Pointer to the indices data.
+         * @param size Size of the data in bytes.
+         */
+        void create(const void* data, unsigned int size);
         
         /**
          * @brief Returns the EBO's OpenGL ID.

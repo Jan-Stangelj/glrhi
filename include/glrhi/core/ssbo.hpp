@@ -22,7 +22,16 @@ namespace glrhi {
          * @param data Optionally pass in all data on creation.
          */
         ssbo(GLsizeiptr size, const void* data = nullptr);
+        ssbo() = default;
         ~ssbo();
+
+        /**
+         * @brief Construct a new SSBO.
+         * 
+         * @param size The size of the SSBO in bytes.
+         * @param data Optionally pass in all data on creation.
+         */
+        void create(GLsizeiptr size, const void* data = nullptr);
 
         /**
          * @brief Uploads a chunk of data to the SSBO on the GPU.

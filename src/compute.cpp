@@ -1,5 +1,6 @@
 #include "glrhi/core/compute.hpp"
 
+#include <filesystem>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -7,6 +8,19 @@
 namespace glrhi {
     
     compute::compute(const std::filesystem::path& computePath){
+        create(computePath);
+    }
+
+    compute::~compute() {
+        glDeleteProgram(m_ID);
+    }
+
+    void compute::create(const std::filesystem::path& computePath) {
+
+        if (m_ID) {
+            std::cerr << "ERROR::SHADER::COMPUTE::SHADER_ALREADY_CREATED\n";
+            return;
+        }
 
         std::string computeCode;
         std::ifstream cShaderFile;
@@ -64,10 +78,6 @@ namespace glrhi {
 
         // Deletes the shader, beacouse it's no longer used.
         glDeleteShader(compute);
-    }
-
-    compute::~compute() {
-        glDeleteProgram(m_ID);
     }
 
     void compute::dispatch(GLuint x, GLuint y, GLuint z) const {

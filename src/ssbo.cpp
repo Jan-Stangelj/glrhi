@@ -1,16 +1,26 @@
 #include "glrhi/core/ssbo.hpp"
+#include <iostream>
 
 namespace glrhi {
 
     ssbo::ssbo(GLsizeiptr size, const void* data) {
-        glCreateBuffers(1, &m_ID);
-
-        // Allocate memory on the GPU and optionally load data
-        glNamedBufferStorage(m_ID, size, data, GL_DYNAMIC_STORAGE_BIT);
+        create(size, data);
     }
 
     ssbo::~ssbo() {
         glDeleteBuffers(1, &m_ID);
+    }
+
+    void ssbo::create(GLsizeiptr size, const void* data) {
+        if (m_ID) {
+            std::cerr << "ERROR::SSBO::BUFFER_ALREADY_CREATED\n";
+            return;
+        }
+
+        glCreateBuffers(1, &m_ID);
+
+        // Allocate memory on the GPU and optionally load data
+        glNamedBufferStorage(m_ID, size, data, GL_DYNAMIC_STORAGE_BIT);
     }
 
     void ssbo::sendData(GLintptr offset, GLsizeiptr size, const void* data) const {

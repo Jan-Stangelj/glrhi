@@ -27,7 +27,16 @@ namespace glrhi{
          * @param fragmentPath Path to a text file containing the vertex shader code in GLSL.
          */
         shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
+        shader() = default;
         ~shader();
+
+        /**
+         * @brief Construct a new shader.
+         * 
+         * @param vertexPath Path to a text file containing the vertex shader code in GLSL.
+         * @param fragmentPath Path to a text file containing the vertex shader code in GLSL.
+         */
+        void create(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
 
         /**
          * @brief Selects the shader to be used in the subsequent draw calls.

@@ -7,6 +7,18 @@
 namespace glrhi {
     
     shader::shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath){
+        create(vertexPath, fragmentPath);
+    }
+
+    shader::~shader() {
+        glDeleteProgram(m_ID);
+    }
+
+    void shader::create(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath) {
+        if (m_ID) {
+            std::cerr << "ERROR::SHADER::SHADER_ALREADY_CREATED\n";
+            return;
+        }
 
         // retrieve the vertex/fragment source code from filePath
         std::string vertexCode;
@@ -88,11 +100,6 @@ namespace glrhi {
         // delete shaders; they’re linked into our program and no longer necessary
         glDeleteShader(vertex);
         glDeleteShader(fragment);
-        
-    }
-
-    shader::~shader() {
-        glDeleteProgram(m_ID);
     }
 
     void shader::use() const {
