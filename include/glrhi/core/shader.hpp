@@ -61,7 +61,7 @@ namespace glrhi{
     private:
         GLint m_getLocation(const char* name);
 
-        GLuint m_ID;
+        GLuint m_ID = 0;
 
         std::unordered_map<std::string_view, GLint> m_cache;
     };

@@ -52,7 +52,7 @@ namespace glrhi {
 
     private:
 
-        GLFWwindow* m_window;
+        GLFWwindow* m_window = nullptr;
 
     };
 }

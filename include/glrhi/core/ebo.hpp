@@ -33,7 +33,7 @@ namespace glrhi {
 
     private:
 
-        GLuint m_ID;
+        GLuint m_ID = 0;
 
     };
 }
