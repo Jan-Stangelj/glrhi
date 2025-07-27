@@ -1,0 +1,126 @@
+\doxysection{glrhi\+::compute Class Reference}
+\hypertarget{classglrhi_1_1compute}{}\label{classglrhi_1_1compute}\index{glrhi::compute@{glrhi::compute}}
+
+
+Handles the creation and usage of compute shaders.  
+
+
+
+
+{\ttfamily \#include $<$compute.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classglrhi_1_1compute_a6abd8a910fa60a3807dd857014f3ebd0}{compute}} (const std\+::filesystem\+::path \&compute\+Path)
+\begin{DoxyCompactList}\small\item\em Construct a new compute shader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1compute_af2f1920b297f5496439c5db8a667f09f}{dispatch}} (GLuint x, GLuint y, GLuint z) const
+\begin{DoxyCompactList}\small\item\em Dispatches the compute shader with the set number of invocations. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1compute_a8b60691d528adb4a1dfe9dbc0efc30f8}\label{classglrhi_1_1compute_a8b60691d528adb4a1dfe9dbc0efc30f8} 
+void {\bfseries set\+Bool} (const char \texorpdfstring{$\ast$}{*}name, bool value)
+\item 
+\Hypertarget{classglrhi_1_1compute_a03b5ef2488a56a9345b0edba94a5a8a4}\label{classglrhi_1_1compute_a03b5ef2488a56a9345b0edba94a5a8a4} 
+void {\bfseries set\+Int} (const char \texorpdfstring{$\ast$}{*}name, int value)
+\item 
+\Hypertarget{classglrhi_1_1compute_a8d4d5e820f6d2a6254ec834ffd643037}\label{classglrhi_1_1compute_a8d4d5e820f6d2a6254ec834ffd643037} 
+void {\bfseries set\+Float} (const char \texorpdfstring{$\ast$}{*}name, float value)
+\item 
+\Hypertarget{classglrhi_1_1compute_af0f4013081d23c49c0470d138e43b077}\label{classglrhi_1_1compute_af0f4013081d23c49c0470d138e43b077} 
+void {\bfseries set\+Vec2} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::vec2 \&value)
+\item 
+\Hypertarget{classglrhi_1_1compute_a47d2e0f8a92d2a02c5b5c84d7ae0934f}\label{classglrhi_1_1compute_a47d2e0f8a92d2a02c5b5c84d7ae0934f} 
+void {\bfseries set\+Vec3} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::vec3 \&value)
+\item 
+\Hypertarget{classglrhi_1_1compute_a181c5963b9612161e4f708435a891192}\label{classglrhi_1_1compute_a181c5963b9612161e4f708435a891192} 
+void {\bfseries set\+Vec4} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::vec4 \&value)
+\item 
+\Hypertarget{classglrhi_1_1compute_a7d7268581dacba3280ff45f91158afc8}\label{classglrhi_1_1compute_a7d7268581dacba3280ff45f91158afc8} 
+void {\bfseries set\+UVec2} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::uvec2 \&value)
+\item 
+\Hypertarget{classglrhi_1_1compute_ae58b9039913db35bcd3c9e9f89c21ec9}\label{classglrhi_1_1compute_ae58b9039913db35bcd3c9e9f89c21ec9} 
+void {\bfseries set\+UVec3} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::uvec3 \&value)
+\item 
+\Hypertarget{classglrhi_1_1compute_aa3686b53227f2251c98211f5a9bbc97b}\label{classglrhi_1_1compute_aa3686b53227f2251c98211f5a9bbc97b} 
+void {\bfseries set\+UVec4} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::uvec4 \&value)
+\item 
+\Hypertarget{classglrhi_1_1compute_a63533b81889bd60b0589f4b6e2b72db7}\label{classglrhi_1_1compute_a63533b81889bd60b0589f4b6e2b72db7} 
+void {\bfseries set\+Mat2} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::mat2 \&mat)
+\item 
+\Hypertarget{classglrhi_1_1compute_afd7e108566dc66fc17d82bbbb58c4c25}\label{classglrhi_1_1compute_afd7e108566dc66fc17d82bbbb58c4c25} 
+void {\bfseries set\+Mat3} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::mat3 \&mat)
+\item 
+\Hypertarget{classglrhi_1_1compute_a4272dce4be1150ed2a1257a77e8ac375}\label{classglrhi_1_1compute_a4272dce4be1150ed2a1257a77e8ac375} 
+void {\bfseries set\+Mat4} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::mat4 \&mat)
+\item 
+void \mbox{\hyperlink{classglrhi_1_1compute_a4e85d1d16125c161971c926a4136ab67}{set\+Handle64}} (const char \texorpdfstring{$\ast$}{*}name, const GLuint64 \&handle)
+\begin{DoxyCompactList}\small\item\em Sets a texture handle for use with bindless textures. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles the creation and usage of compute shaders. 
+
+\label{doc-constructors}
+\Hypertarget{classglrhi_1_1compute_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classglrhi_1_1compute_a6abd8a910fa60a3807dd857014f3ebd0}\index{glrhi::compute@{glrhi::compute}!compute@{compute}}
+\index{compute@{compute}!glrhi::compute@{glrhi::compute}}
+\doxysubsubsection{\texorpdfstring{compute()}{compute()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1compute_a6abd8a910fa60a3807dd857014f3ebd0} 
+glrhi\+::compute\+::compute (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{compute\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Construct a new compute shader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em compute\+Path} & Path to a text file containing the compute shader code in GLSL. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classglrhi_1_1compute_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1compute_af2f1920b297f5496439c5db8a667f09f}\index{glrhi::compute@{glrhi::compute}!dispatch@{dispatch}}
+\index{dispatch@{dispatch}!glrhi::compute@{glrhi::compute}}
+\doxysubsubsection{\texorpdfstring{dispatch()}{dispatch()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1compute_af2f1920b297f5496439c5db8a667f09f} 
+void glrhi\+::compute\+::dispatch (\begin{DoxyParamCaption}\item[{GLuint}]{x}{, }\item[{GLuint}]{y}{, }\item[{GLuint}]{z}{}\end{DoxyParamCaption}) const}
+
+
+
+Dispatches the compute shader with the set number of invocations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & Number of invocations in the x dimension. \\
+\hline
+{\em y} & Number of invocations in the y dimension. \\
+\hline
+{\em z} & Number of invocations in the z dimension. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classglrhi_1_1compute_a4e85d1d16125c161971c926a4136ab67}\index{glrhi::compute@{glrhi::compute}!setHandle64@{setHandle64}}
+\index{setHandle64@{setHandle64}!glrhi::compute@{glrhi::compute}}
+\doxysubsubsection{\texorpdfstring{setHandle64()}{setHandle64()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1compute_a4e85d1d16125c161971c926a4136ab67} 
+void glrhi\+::compute\+::set\+Handle64 (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{const GLuint64 \&}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Sets a texture handle for use with bindless textures. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the uniform to set to. \\
+\hline
+{\em handle} & The texture handle. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{compute_8hpp}{compute.\+hpp}}\item 
+/home/jan/dev/glrhi/src/compute.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,92 @@
+\doxysection{glrhi\+::fbo Class Reference}
+\hypertarget{classglrhi_1_1fbo}{}\label{classglrhi_1_1fbo}\index{glrhi::fbo@{glrhi::fbo}}
+
+
+Handles the creation and usage of Framebuffer objects.  
+
+
+
+
+{\ttfamily \#include $<$fbo.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classglrhi_1_1fbo_a2a87678ed3189f4a83b8855626c97ed3}\label{classglrhi_1_1fbo_a2a87678ed3189f4a83b8855626c97ed3} 
+{\bfseries fbo} ()
+\begin{DoxyCompactList}\small\item\em Construct a new fbo object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1fbo_a788b5a335ad363f34b75d1472676f8a8}{attach\+Color\+Texture}} (const \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi\+::texture2D}} \&texture)
+\begin{DoxyCompactList}\small\item\em Attaches a color texture to the FBO. The binding points start at 0 and incriment by 1 each function call. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1fbo_a796274104d7edfc27a1220af78d6a578}{attach\+Depth\+Texture}} (const \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi\+::texture2D}} \&texture)
+\begin{DoxyCompactList}\small\item\em Attaches a depth texture to the FBO. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1fbo_a0699377ef929afac1e0ccdca84fbf7c0}\label{classglrhi_1_1fbo_a0699377ef929afac1e0ccdca84fbf7c0} 
+void {\bfseries init} () const
+\begin{DoxyCompactList}\small\item\em Inits the FBO with the textures added prior to the init. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1fbo_acbffac5d7b4ed9fb5f94683788b24a55}\label{classglrhi_1_1fbo_acbffac5d7b4ed9fb5f94683788b24a55} 
+void {\bfseries bind} () const
+\begin{DoxyCompactList}\small\item\em Binds the FBO for drawing. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1fbo_a0cfcdac62939b37698d53730c5f8bfd2}\label{classglrhi_1_1fbo_a0cfcdac62939b37698d53730c5f8bfd2} 
+void {\bfseries unbind} () const
+\begin{DoxyCompactList}\small\item\em Unbinds the FBO, I.\+e. binds the default framebuffer 0. \end{DoxyCompactList}\item 
+GLuint \mbox{\hyperlink{classglrhi_1_1fbo_a6b6c4c5a83b8b346aedcfb6c47c81ed6}{get\+ID}} () const
+\begin{DoxyCompactList}\small\item\em Returns the FBO\textquotesingle{}s Open\+GL ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles the creation and usage of Framebuffer objects. 
+
+\label{doc-func-members}
+\Hypertarget{classglrhi_1_1fbo_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1fbo_a788b5a335ad363f34b75d1472676f8a8}\index{glrhi::fbo@{glrhi::fbo}!attachColorTexture@{attachColorTexture}}
+\index{attachColorTexture@{attachColorTexture}!glrhi::fbo@{glrhi::fbo}}
+\doxysubsubsection{\texorpdfstring{attachColorTexture()}{attachColorTexture()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1fbo_a788b5a335ad363f34b75d1472676f8a8} 
+void glrhi\+::fbo\+::attach\+Color\+Texture (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi\+::texture2D}} \&}]{texture}{}\end{DoxyParamCaption})}
+
+
+
+Attaches a color texture to the FBO. The binding points start at 0 and incriment by 1 each function call. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & The texture to attach. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classglrhi_1_1fbo_a796274104d7edfc27a1220af78d6a578}\index{glrhi::fbo@{glrhi::fbo}!attachDepthTexture@{attachDepthTexture}}
+\index{attachDepthTexture@{attachDepthTexture}!glrhi::fbo@{glrhi::fbo}}
+\doxysubsubsection{\texorpdfstring{attachDepthTexture()}{attachDepthTexture()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1fbo_a796274104d7edfc27a1220af78d6a578} 
+void glrhi\+::fbo\+::attach\+Depth\+Texture (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi\+::texture2D}} \&}]{texture}{}\end{DoxyParamCaption})}
+
+
+
+Attaches a depth texture to the FBO. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em texture} & The texture to attach.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+There can only be 1 depth texture attached, so calling this function multiple times will resoult in an error. 
+\end{DoxyWarning}
+\Hypertarget{classglrhi_1_1fbo_a6b6c4c5a83b8b346aedcfb6c47c81ed6}\index{glrhi::fbo@{glrhi::fbo}!getID@{getID}}
+\index{getID@{getID}!glrhi::fbo@{glrhi::fbo}}
+\doxysubsubsection{\texorpdfstring{getID()}{getID()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1fbo_a6b6c4c5a83b8b346aedcfb6c47c81ed6} 
+GLuint glrhi\+::fbo\+::get\+ID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the FBO\textquotesingle{}s Open\+GL ID. 
+
+\begin{DoxyReturn}{Returns}
+The FBO\textquotesingle{}s Open\+GL ID. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{fbo_8hpp}{fbo.\+hpp}}\item 
+/home/jan/dev/glrhi/src/fbo.\+cpp\end{DoxyCompactItemize}

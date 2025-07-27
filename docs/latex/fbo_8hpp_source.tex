@@ -1,0 +1,43 @@
+\doxysection{fbo.\+hpp}
+\hypertarget{fbo_8hpp_source}{}\label{fbo_8hpp_source}\index{/home/jan/dev/glrhi/include/glrhi/core/fbo.hpp@{/home/jan/dev/glrhi/include/glrhi/core/fbo.hpp}}
+\mbox{\hyperlink{fbo_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{texture2D_8hpp}{glrhi/core/texture2D.hpp}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}glad/glad.h"{}}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }glrhi\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classglrhi_1_1fbo_a2a87678ed3189f4a83b8855626c97ed3}{fbo}}\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1fbo_a2a87678ed3189f4a83b8855626c97ed3}{fbo}}();}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1fbo_a2a87678ed3189f4a83b8855626c97ed3}{\string~fbo}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1fbo_a788b5a335ad363f34b75d1472676f8a8}{attachColorTexture}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi::texture2D}}\&\ texture);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1fbo_a796274104d7edfc27a1220af78d6a578}{attachDepthTexture}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi::texture2D}}\&\ texture);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1fbo_a0699377ef929afac1e0ccdca84fbf7c0}{init}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1fbo_acbffac5d7b4ed9fb5f94683788b24a55}{bind}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1fbo_a0cfcdac62939b37698d53730c5f8bfd2}{unbind}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ GLuint\ \mbox{\hyperlink{classglrhi_1_1fbo_a6b6c4c5a83b8b346aedcfb6c47c81ed6}{getID}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_ID;\ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ GLuint\ m\_ID\ =\ 0;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ GLint\ m\_colorTextures\ =\ 0;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ GLint\ m\_maxColorTextures\ =\ 8;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ m\_depthTexture\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00075\ \ \ \ \ \};}
+\DoxyCodeLine{00076\ \}}
+
+\end{DoxyCode}

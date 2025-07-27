@@ -1,0 +1,110 @@
+\doxysection{glrhi\+::shader Class Reference}
+\hypertarget{classglrhi_1_1shader}{}\label{classglrhi_1_1shader}\index{glrhi::shader@{glrhi::shader}}
+
+
+Handles the creation and usage of shaders.  
+
+
+
+
+{\ttfamily \#include $<$shader.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classglrhi_1_1shader_a9bae8d841280bdf491747483e43b9369}{shader}} (const std\+::filesystem\+::path \&vertex\+Path, const std\+::filesystem\+::path \&fragment\+Path)
+\begin{DoxyCompactList}\small\item\em Construct a new shader. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1shader_ab39644b222f4b0f5949a6cb62c47088d}\label{classglrhi_1_1shader_ab39644b222f4b0f5949a6cb62c47088d} 
+void {\bfseries use} () const
+\begin{DoxyCompactList}\small\item\em Selects the shader to be used in the subsequent draw calls. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1shader_ac43aff57cd0dee54eaedeaada5bc092f}\label{classglrhi_1_1shader_ac43aff57cd0dee54eaedeaada5bc092f} 
+void {\bfseries set\+Bool} (const char \texorpdfstring{$\ast$}{*}name, bool value)
+\item 
+\Hypertarget{classglrhi_1_1shader_a5d4a2010379599413347943cea41a21b}\label{classglrhi_1_1shader_a5d4a2010379599413347943cea41a21b} 
+void {\bfseries set\+Int} (const char \texorpdfstring{$\ast$}{*}name, int value)
+\item 
+\Hypertarget{classglrhi_1_1shader_a943916300531af54cd89c01fa7eee6db}\label{classglrhi_1_1shader_a943916300531af54cd89c01fa7eee6db} 
+void {\bfseries set\+Float} (const char \texorpdfstring{$\ast$}{*}name, float value)
+\item 
+\Hypertarget{classglrhi_1_1shader_ae1fee88a5f885b80f16cbb7e149fa58a}\label{classglrhi_1_1shader_ae1fee88a5f885b80f16cbb7e149fa58a} 
+void {\bfseries set\+Vec2} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::vec2 \&value)
+\item 
+\Hypertarget{classglrhi_1_1shader_a9ee53f46a663d07cb0f68fe05227f391}\label{classglrhi_1_1shader_a9ee53f46a663d07cb0f68fe05227f391} 
+void {\bfseries set\+Vec3} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::vec3 \&value)
+\item 
+\Hypertarget{classglrhi_1_1shader_abc4d4a3d7c9cf4192fa40b277c8bac96}\label{classglrhi_1_1shader_abc4d4a3d7c9cf4192fa40b277c8bac96} 
+void {\bfseries set\+Vec4} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::vec4 \&value)
+\item 
+\Hypertarget{classglrhi_1_1shader_a4db49bd3f892e61ad74fb8a071740c1e}\label{classglrhi_1_1shader_a4db49bd3f892e61ad74fb8a071740c1e} 
+void {\bfseries set\+UVec2} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::uvec2 \&value)
+\item 
+\Hypertarget{classglrhi_1_1shader_a0f1b497cb4afa55a5333549be93b4916}\label{classglrhi_1_1shader_a0f1b497cb4afa55a5333549be93b4916} 
+void {\bfseries set\+UVec3} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::uvec3 \&value)
+\item 
+\Hypertarget{classglrhi_1_1shader_a476eb299cbdf2281924f70d2797d317c}\label{classglrhi_1_1shader_a476eb299cbdf2281924f70d2797d317c} 
+void {\bfseries set\+UVec4} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::uvec4 \&value)
+\item 
+\Hypertarget{classglrhi_1_1shader_a685b1adee9d78b51080062f086e45a8a}\label{classglrhi_1_1shader_a685b1adee9d78b51080062f086e45a8a} 
+void {\bfseries set\+Mat2} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::mat2 \&mat)
+\item 
+\Hypertarget{classglrhi_1_1shader_ac88bfc8261fcf176f65b2eaad56afd66}\label{classglrhi_1_1shader_ac88bfc8261fcf176f65b2eaad56afd66} 
+void {\bfseries set\+Mat3} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::mat3 \&mat)
+\item 
+\Hypertarget{classglrhi_1_1shader_a4e6ea198770d666e689da2444dca5871}\label{classglrhi_1_1shader_a4e6ea198770d666e689da2444dca5871} 
+void {\bfseries set\+Mat4} (const char \texorpdfstring{$\ast$}{*}name, const glm\+::mat4 \&mat)
+\item 
+void \mbox{\hyperlink{classglrhi_1_1shader_afb5595f7a7fd23a9e772c796da98adf3}{set\+Handle64}} (const char \texorpdfstring{$\ast$}{*}name, const GLuint64 \&handle)
+\begin{DoxyCompactList}\small\item\em Sets a texture handle for use with bindless textures. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles the creation and usage of shaders. 
+
+\label{doc-constructors}
+\Hypertarget{classglrhi_1_1shader_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classglrhi_1_1shader_a9bae8d841280bdf491747483e43b9369}\index{glrhi::shader@{glrhi::shader}!shader@{shader}}
+\index{shader@{shader}!glrhi::shader@{glrhi::shader}}
+\doxysubsubsection{\texorpdfstring{shader()}{shader()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1shader_a9bae8d841280bdf491747483e43b9369} 
+glrhi\+::shader\+::shader (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{vertex\+Path}{, }\item[{const std\+::filesystem\+::path \&}]{fragment\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Construct a new shader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+Path} & Path to a text file containing the vertex shader code in GLSL. \\
+\hline
+{\em fragment\+Path} & Path to a text file containing the vertex shader code in GLSL. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classglrhi_1_1shader_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1shader_afb5595f7a7fd23a9e772c796da98adf3}\index{glrhi::shader@{glrhi::shader}!setHandle64@{setHandle64}}
+\index{setHandle64@{setHandle64}!glrhi::shader@{glrhi::shader}}
+\doxysubsubsection{\texorpdfstring{setHandle64()}{setHandle64()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1shader_afb5595f7a7fd23a9e772c796da98adf3} 
+void glrhi\+::shader\+::set\+Handle64 (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{const GLuint64 \&}]{handle}{}\end{DoxyParamCaption})}
+
+
+
+Sets a texture handle for use with bindless textures. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the uniform to set to. \\
+\hline
+{\em handle} & The texture handle. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{shader_8hpp}{shader.\+hpp}}\item 
+/home/jan/dev/glrhi/src/shader.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,105 @@
+\doxysection{glrhi\+::ubo Class Reference}
+\hypertarget{classglrhi_1_1ubo}{}\label{classglrhi_1_1ubo}\index{glrhi::ubo@{glrhi::ubo}}
+
+
+Handles the creation and usage of Uniform Buffer Objects.  
+
+
+
+
+{\ttfamily \#include $<$ubo.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classglrhi_1_1ubo_a26a48bd9a52e5361b9de09a88157c2f4}{ubo}} (GLsizeiptr size, const void \texorpdfstring{$\ast$}{*}data=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new UBO. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1ubo_a2f9a466dfd07b4f2f6387406a86468fc}{send\+Data}} (GLintptr offset, GLsizeiptr size, const void \texorpdfstring{$\ast$}{*}data) const
+\begin{DoxyCompactList}\small\item\em Uploads a chunk of data to the UBO one the GPU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1ubo_a7a42c2c97a52bf5ebba2d5d228a238e1}{add\+Binding\+Point}} (GLuint binding\+Point) const
+\begin{DoxyCompactList}\small\item\em Adds the UBO to a binding point to be used in a shader. \end{DoxyCompactList}\item 
+GLuint \mbox{\hyperlink{classglrhi_1_1ubo_a02f3d49617014806ade28f790cd6f6ac}{get\+ID}} () const
+\begin{DoxyCompactList}\small\item\em Returns the UBO\textquotesingle{}s Open\+GL ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles the creation and usage of Uniform Buffer Objects. 
+
+\label{doc-constructors}
+\Hypertarget{classglrhi_1_1ubo_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classglrhi_1_1ubo_a26a48bd9a52e5361b9de09a88157c2f4}\index{glrhi::ubo@{glrhi::ubo}!ubo@{ubo}}
+\index{ubo@{ubo}!glrhi::ubo@{glrhi::ubo}}
+\doxysubsubsection{\texorpdfstring{ubo()}{ubo()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1ubo_a26a48bd9a52e5361b9de09a88157c2f4} 
+glrhi\+::ubo\+::ubo (\begin{DoxyParamCaption}\item[{GLsizeiptr}]{size}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+
+
+Construct a new UBO. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The size of the UBO in bytes. \\
+\hline
+{\em data} & Optionally pass in all data on creation. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classglrhi_1_1ubo_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1ubo_a7a42c2c97a52bf5ebba2d5d228a238e1}\index{glrhi::ubo@{glrhi::ubo}!addBindingPoint@{addBindingPoint}}
+\index{addBindingPoint@{addBindingPoint}!glrhi::ubo@{glrhi::ubo}}
+\doxysubsubsection{\texorpdfstring{addBindingPoint()}{addBindingPoint()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1ubo_a7a42c2c97a52bf5ebba2d5d228a238e1} 
+void glrhi\+::ubo\+::add\+Binding\+Point (\begin{DoxyParamCaption}\item[{GLuint}]{binding\+Point}{}\end{DoxyParamCaption}) const}
+
+
+
+Adds the UBO to a binding point to be used in a shader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em binding\+Point} & The binding point to add the SSBO to. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classglrhi_1_1ubo_a02f3d49617014806ade28f790cd6f6ac}\index{glrhi::ubo@{glrhi::ubo}!getID@{getID}}
+\index{getID@{getID}!glrhi::ubo@{glrhi::ubo}}
+\doxysubsubsection{\texorpdfstring{getID()}{getID()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1ubo_a02f3d49617014806ade28f790cd6f6ac} 
+GLuint glrhi\+::ubo\+::get\+ID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the UBO\textquotesingle{}s Open\+GL ID. 
+
+\begin{DoxyReturn}{Returns}
+The UBO\textquotesingle{}s Open\+GL ID. 
+\end{DoxyReturn}
+\Hypertarget{classglrhi_1_1ubo_a2f9a466dfd07b4f2f6387406a86468fc}\index{glrhi::ubo@{glrhi::ubo}!sendData@{sendData}}
+\index{sendData@{sendData}!glrhi::ubo@{glrhi::ubo}}
+\doxysubsubsection{\texorpdfstring{sendData()}{sendData()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1ubo_a2f9a466dfd07b4f2f6387406a86468fc} 
+void glrhi\+::ubo\+::send\+Data (\begin{DoxyParamCaption}\item[{GLintptr}]{offset}{, }\item[{GLsizeiptr}]{size}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption}) const}
+
+
+
+Uploads a chunk of data to the UBO one the GPU. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & Byte offset in the SSBO, where data upload should begin. \\
+\hline
+{\em size} & Size in bytes of the data to be uploaded. \\
+\hline
+{\em data} & Pointer to the data in CPU memory to upload. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{ubo_8hpp}{ubo.\+hpp}}\item 
+/home/jan/dev/glrhi/src/ubo.\+cpp\end{DoxyCompactItemize}

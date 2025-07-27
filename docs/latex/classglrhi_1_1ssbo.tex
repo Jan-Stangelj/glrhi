@@ -1,0 +1,105 @@
+\doxysection{glrhi\+::ssbo Class Reference}
+\hypertarget{classglrhi_1_1ssbo}{}\label{classglrhi_1_1ssbo}\index{glrhi::ssbo@{glrhi::ssbo}}
+
+
+Handles the creation and usage of Shader Storage Buffer Objects.  
+
+
+
+
+{\ttfamily \#include $<$ssbo.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classglrhi_1_1ssbo_a760fe3b246e884ba214e6ed118a7c9f5}{ssbo}} (GLsizeiptr size, const void \texorpdfstring{$\ast$}{*}data=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new SSBO. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1ssbo_a3e75a046d44c099ce676f208e48a65e7}{send\+Data}} (GLintptr offset, GLsizeiptr size, const void \texorpdfstring{$\ast$}{*}data) const
+\begin{DoxyCompactList}\small\item\em Uploads a chunk of data to the SSBO on the GPU. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1ssbo_a4a5fc65605ab66401451c33b5c4233e0}{add\+Binding\+Point}} (GLuint binding\+Point) const
+\begin{DoxyCompactList}\small\item\em Adds the SSBO to a binding point to be used in a shader. \end{DoxyCompactList}\item 
+GLuint \mbox{\hyperlink{classglrhi_1_1ssbo_a0db4a00356dddacfe93bd85a1142d88c}{get\+ID}} () const
+\begin{DoxyCompactList}\small\item\em Returns the SSBO\textquotesingle{}s Open\+GL ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles the creation and usage of Shader Storage Buffer Objects. 
+
+\label{doc-constructors}
+\Hypertarget{classglrhi_1_1ssbo_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classglrhi_1_1ssbo_a760fe3b246e884ba214e6ed118a7c9f5}\index{glrhi::ssbo@{glrhi::ssbo}!ssbo@{ssbo}}
+\index{ssbo@{ssbo}!glrhi::ssbo@{glrhi::ssbo}}
+\doxysubsubsection{\texorpdfstring{ssbo()}{ssbo()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1ssbo_a760fe3b246e884ba214e6ed118a7c9f5} 
+glrhi\+::ssbo\+::ssbo (\begin{DoxyParamCaption}\item[{GLsizeiptr}]{size}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+
+
+Construct a new SSBO. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The size of the SSBO in bytes. \\
+\hline
+{\em data} & Optionally pass in all data on creation. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classglrhi_1_1ssbo_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1ssbo_a4a5fc65605ab66401451c33b5c4233e0}\index{glrhi::ssbo@{glrhi::ssbo}!addBindingPoint@{addBindingPoint}}
+\index{addBindingPoint@{addBindingPoint}!glrhi::ssbo@{glrhi::ssbo}}
+\doxysubsubsection{\texorpdfstring{addBindingPoint()}{addBindingPoint()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1ssbo_a4a5fc65605ab66401451c33b5c4233e0} 
+void glrhi\+::ssbo\+::add\+Binding\+Point (\begin{DoxyParamCaption}\item[{GLuint}]{binding\+Point}{}\end{DoxyParamCaption}) const}
+
+
+
+Adds the SSBO to a binding point to be used in a shader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em binding\+Point} & The binding point to add the SSBO to. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classglrhi_1_1ssbo_a0db4a00356dddacfe93bd85a1142d88c}\index{glrhi::ssbo@{glrhi::ssbo}!getID@{getID}}
+\index{getID@{getID}!glrhi::ssbo@{glrhi::ssbo}}
+\doxysubsubsection{\texorpdfstring{getID()}{getID()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1ssbo_a0db4a00356dddacfe93bd85a1142d88c} 
+GLuint glrhi\+::ssbo\+::get\+ID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the SSBO\textquotesingle{}s Open\+GL ID. 
+
+\begin{DoxyReturn}{Returns}
+The SSBO\textquotesingle{}s Open\+GL ID. 
+\end{DoxyReturn}
+\Hypertarget{classglrhi_1_1ssbo_a3e75a046d44c099ce676f208e48a65e7}\index{glrhi::ssbo@{glrhi::ssbo}!sendData@{sendData}}
+\index{sendData@{sendData}!glrhi::ssbo@{glrhi::ssbo}}
+\doxysubsubsection{\texorpdfstring{sendData()}{sendData()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1ssbo_a3e75a046d44c099ce676f208e48a65e7} 
+void glrhi\+::ssbo\+::send\+Data (\begin{DoxyParamCaption}\item[{GLintptr}]{offset}{, }\item[{GLsizeiptr}]{size}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption}) const}
+
+
+
+Uploads a chunk of data to the SSBO on the GPU. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & Byte offset in the SSBO, where data upload should begin. \\
+\hline
+{\em size} & Size in bytes of the data to be uploaded. \\
+\hline
+{\em data} & Pointer to the data in CPU memory to upload. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{ssbo_8hpp}{ssbo.\+hpp}}\item 
+/home/jan/dev/glrhi/src/ssbo.\+cpp\end{DoxyCompactItemize}

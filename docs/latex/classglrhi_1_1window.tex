@@ -1,0 +1,86 @@
+\doxysection{glrhi\+::window Class Reference}
+\hypertarget{classglrhi_1_1window}{}\label{classglrhi_1_1window}\index{glrhi::window@{glrhi::window}}
+
+
+Handles creation of windows, swapping buffers and pooling input using GLFW.  
+
+
+
+
+{\ttfamily \#include $<$window.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classglrhi_1_1window_ac232479bbfc1d3a5c5e7de20b4caee15}{window}} (unsigned int width, unsigned int height, const char \texorpdfstring{$\ast$}{*}title)
+\begin{DoxyCompactList}\small\item\em Construct a new window with the provided dimensions and title. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classglrhi_1_1window_a2d338f8b76e697478cdd7f5923872ef0}{should\+Close}} () const
+\item 
+\Hypertarget{classglrhi_1_1window_ae43930f7103b5d9b9c0b69dfca9af42c}\label{classglrhi_1_1window_ae43930f7103b5d9b9c0b69dfca9af42c} 
+void {\bfseries pool\+Events} () const
+\begin{DoxyCompactList}\small\item\em Pools input events. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1window_ae9872ea341748b507fbb41f497271207}\label{classglrhi_1_1window_ae9872ea341748b507fbb41f497271207} 
+void {\bfseries swap\+Buffers} () const
+\begin{DoxyCompactList}\small\item\em Swaps buffers used for double-\/buffering. \end{DoxyCompactList}\item 
+GLFWwindow \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classglrhi_1_1window_a997d66cd0ff8af17c0e9c3dfba0f6262}{get\+Glfw\+Window}} () const
+\begin{DoxyCompactList}\small\item\em Returns the GLFW window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles creation of windows, swapping buffers and pooling input using GLFW. 
+
+\label{doc-constructors}
+\Hypertarget{classglrhi_1_1window_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classglrhi_1_1window_ac232479bbfc1d3a5c5e7de20b4caee15}\index{glrhi::window@{glrhi::window}!window@{window}}
+\index{window@{window}!glrhi::window@{glrhi::window}}
+\doxysubsubsection{\texorpdfstring{window()}{window()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1window_ac232479bbfc1d3a5c5e7de20b4caee15} 
+glrhi\+::window\+::window (\begin{DoxyParamCaption}\item[{unsigned int}]{width}{, }\item[{unsigned int}]{height}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{title}{}\end{DoxyParamCaption})}
+
+
+
+Construct a new window with the provided dimensions and title. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & The width of the window. \\
+\hline
+{\em height} & The height of the window. \\
+\hline
+{\em title} & The title of the window. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classglrhi_1_1window_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1window_a997d66cd0ff8af17c0e9c3dfba0f6262}\index{glrhi::window@{glrhi::window}!getGlfwWindow@{getGlfwWindow}}
+\index{getGlfwWindow@{getGlfwWindow}!glrhi::window@{glrhi::window}}
+\doxysubsubsection{\texorpdfstring{getGlfwWindow()}{getGlfwWindow()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1window_a997d66cd0ff8af17c0e9c3dfba0f6262} 
+GLFWwindow \texorpdfstring{$\ast$}{*} glrhi\+::window\+::get\+Glfw\+Window (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Returns the GLFW window. 
+
+\begin{DoxyReturn}{Returns}
+GLFWwindow\texorpdfstring{$\ast$}{*} 
+\end{DoxyReturn}
+\Hypertarget{classglrhi_1_1window_a2d338f8b76e697478cdd7f5923872ef0}\index{glrhi::window@{glrhi::window}!shouldClose@{shouldClose}}
+\index{shouldClose@{shouldClose}!glrhi::window@{glrhi::window}}
+\doxysubsubsection{\texorpdfstring{shouldClose()}{shouldClose()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1window_a2d338f8b76e697478cdd7f5923872ef0} 
+bool glrhi\+::window\+::should\+Close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\begin{DoxyReturn}{Returns}
+Returns true if the window should close. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{window_8hpp}{window.\+hpp}}\item 
+/home/jan/dev/glrhi/src/window.\+cpp\end{DoxyCompactItemize}

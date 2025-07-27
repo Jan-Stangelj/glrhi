@@ -1,0 +1,96 @@
+\doxysection{glrhi\+::vao Class Reference}
+\hypertarget{classglrhi_1_1vao}{}\label{classglrhi_1_1vao}\index{glrhi::vao@{glrhi::vao}}
+
+
+Handles the creation and usage of Vertex Array Objects.  
+
+
+
+
+{\ttfamily \#include $<$vao.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classglrhi_1_1vao_a06a58dda2431ed0cc80abbc87acac279}\label{classglrhi_1_1vao_a06a58dda2431ed0cc80abbc87acac279} 
+{\bfseries vao} ()
+\begin{DoxyCompactList}\small\item\em Construct a new VAO. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1vao_a482f11dd8148441f1782019531486240}{add\+Attribute}} (GLint size, GLenum data\+Type, GLboolean normalized, GLuint offset)
+\begin{DoxyCompactList}\small\item\em Adds an attribute to the VAO. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1vao_a432cd598fa9f9120c21d7cdb95c2e625}{init}} (const \mbox{\hyperlink{classglrhi_1_1vbo}{glrhi\+::vbo}} \&VBO, const \mbox{\hyperlink{classglrhi_1_1ebo}{glrhi\+::ebo}} \&EBO, GLsizei stride) const
+\begin{DoxyCompactList}\small\item\em Inits the VAO with the added attributes and links the VBO and EBO to it. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1vao_a2770af599cd815251e06d32da6da50d5}\label{classglrhi_1_1vao_a2770af599cd815251e06d32da6da50d5} 
+void {\bfseries bind} () const
+\begin{DoxyCompactList}\small\item\em Binds the VAO for drawind. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1vao_a5ae6a973cc87fa174cb18219a24afe15}\label{classglrhi_1_1vao_a5ae6a973cc87fa174cb18219a24afe15} 
+void {\bfseries unbind} () const
+\begin{DoxyCompactList}\small\item\em Unbinds the VAO, ie. binds VAO 0. \end{DoxyCompactList}\item 
+GLuint \mbox{\hyperlink{classglrhi_1_1vao_acc919255c76153b3ed0432fc102fb54b}{get\+ID}} () const
+\begin{DoxyCompactList}\small\item\em Returns the VAO\textquotesingle{}s Open\+GL ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles the creation and usage of Vertex Array Objects. 
+
+\label{doc-func-members}
+\Hypertarget{classglrhi_1_1vao_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1vao_a482f11dd8148441f1782019531486240}\index{glrhi::vao@{glrhi::vao}!addAttribute@{addAttribute}}
+\index{addAttribute@{addAttribute}!glrhi::vao@{glrhi::vao}}
+\doxysubsubsection{\texorpdfstring{addAttribute()}{addAttribute()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1vao_a482f11dd8148441f1782019531486240} 
+void glrhi\+::vao\+::add\+Attribute (\begin{DoxyParamCaption}\item[{GLint}]{size}{, }\item[{GLenum}]{data\+Type}{, }\item[{GLboolean}]{normalized}{, }\item[{GLuint}]{offset}{}\end{DoxyParamCaption})}
+
+
+
+Adds an attribute to the VAO. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & Size of the attribute (not in bytes, count, see triangle example). \\
+\hline
+{\em data\+Type} & Data type of the attribute. \\
+\hline
+{\em normalized} & True if the attribute is normalized. \\
+\hline
+{\em offset} & The offset from previous attributes. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classglrhi_1_1vao_acc919255c76153b3ed0432fc102fb54b}\index{glrhi::vao@{glrhi::vao}!getID@{getID}}
+\index{getID@{getID}!glrhi::vao@{glrhi::vao}}
+\doxysubsubsection{\texorpdfstring{getID()}{getID()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1vao_acc919255c76153b3ed0432fc102fb54b} 
+GLuint glrhi\+::vao\+::get\+ID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns the VAO\textquotesingle{}s Open\+GL ID. 
+
+\begin{DoxyReturn}{Returns}
+The VAO\textquotesingle{}s Open\+GL ID. 
+\end{DoxyReturn}
+\Hypertarget{classglrhi_1_1vao_a432cd598fa9f9120c21d7cdb95c2e625}\index{glrhi::vao@{glrhi::vao}!init@{init}}
+\index{init@{init}!glrhi::vao@{glrhi::vao}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1vao_a432cd598fa9f9120c21d7cdb95c2e625} 
+void glrhi\+::vao\+::init (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classglrhi_1_1vbo}{glrhi\+::vbo}} \&}]{VBO}{, }\item[{const \mbox{\hyperlink{classglrhi_1_1ebo}{glrhi\+::ebo}} \&}]{EBO}{, }\item[{GLsizei}]{stride}{}\end{DoxyParamCaption}) const}
+
+
+
+Inits the VAO with the added attributes and links the VBO and EBO to it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em VBO} & The VBO to link to the VAO. \\
+\hline
+{\em EBO} & The EBO to link to the VAO. \\
+\hline
+{\em stride} & The size of all attributes (not in bytes, count, see triangle example). \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{vao_8hpp}{vao.\+hpp}}\item 
+/home/jan/dev/glrhi/src/vao.\+cpp\end{DoxyCompactItemize}
