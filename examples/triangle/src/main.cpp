@@ -1,3 +1,4 @@
+#include "glrhi/core/ebo.hpp"
 #include "glrhi/glrhi.hpp"
 
 int main()
@@ -7,12 +8,12 @@ int main()
     glrhi::shader shader("../examples/triangle/shaders/basic.vert", "../examples/triangle/shaders/basic.frag");
     shader.setVec3("color", glm::vec3(1.0f, 0.0f, 1.0f));
 
-    float vertices[] = {
+    GLfloat vertices[] = {
          0.0f,  0.5f, 0.0f,
          0.5f, -0.5f, 0.0f,
         -0.5f, -0.5f, 0.0f
     };
-    unsigned int indices[] = {
+    GLuint indices[] = {
         0, 1, 2
     };
     
@@ -22,7 +23,7 @@ int main()
     glrhi::ebo EBO(indices, sizeof(indices));
 
     VAO.addAttribute(3, GL_FLOAT, GL_FALSE, 0);
-    VAO.init(VBO, EBO, 3*sizeof(float));
+    VAO.init(VBO, EBO, 3*sizeof(GLfloat));
 
     while (!window.shouldClose())
     {

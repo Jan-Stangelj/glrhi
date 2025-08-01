@@ -40,7 +40,7 @@ namespace glrhi {
          * 
          * @param VBO The VBO to link to the VAO.
          * @param EBO The EBO to link to the VAO.
-         * @param stride The size of all attributes (not in bytes, count, see triangle example).
+         * @param stride The size of all attributes in bytes.
          */
         void init(const glrhi::vbo& VBO, const glrhi::ebo& EBO, GLsizei stride) const;
 
