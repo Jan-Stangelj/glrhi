@@ -53,4 +53,7 @@ if (GLRHI_BUILD_EXAMPLES)
 
     add_executable("compute" "examples/compute/src/main.cpp")
     target_link_libraries("compute" glrhi)
+
+    add_executable("mesh" "examples/mesh/src/main.cpp")
+    target_link_libraries("mesh" glrhi)
 endif()
