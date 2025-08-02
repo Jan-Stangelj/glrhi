@@ -7,8 +7,8 @@
 
 #include <glad/glad.h>
 
-#include "glrhi/core/vbo.hpp"
-#include "glrhi/core/ebo.hpp"
+#include <glrhi/core/vbo.hpp>
+#include <glrhi/core/ebo.hpp>
 
 namespace glrhi {
 

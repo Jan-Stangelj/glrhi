@@ -5,9 +5,9 @@
 
 #pragma once
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
-#include "stb_image.h"
+#include <stb_image.h>
 
 #include <filesystem>
 

@@ -5,9 +5,9 @@
 
 #pragma once
 
-#include "glrhi/core/texture2D.hpp"
+#include <glrhi/core/texture2D.hpp>
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 namespace glrhi {
 
