@@ -56,4 +56,7 @@ if (GLRHI_BUILD_EXAMPLES)
 
     add_executable("mesh" "examples/mesh/src/main.cpp")
     target_link_libraries("mesh" glrhi)
+
+    add_executable("camera" "examples/camera/src/main.cpp")
+    target_link_libraries("camera" glrhi)
 endif()
