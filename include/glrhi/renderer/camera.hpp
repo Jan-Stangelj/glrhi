@@ -35,7 +35,7 @@ namespace glrhi {
         glm::vec3 position = glm::vec3(0.0f);
 
         /**
-         * @brief Euler direction of the camera in degrees.
+         * @brief Euler direction of the camera in degrees. (pitch, yaw, roll)
          */
         glm::vec3 direction = glm::vec3(0.0f);
 

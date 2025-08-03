@@ -1,3 +1,4 @@
+#include "glrhi/renderer/debugcam.hpp"
 #include <glrhi/glrhi.hpp>
 #include <glrhi/glrenderer.hpp>
 
@@ -27,9 +28,14 @@ int main()
     cam.uploadData();
     cam.bind();
 
+    glrhi::debugCamera dbgcam;
+
     while (!window.shouldClose())
     {
         window.poolEvents();
+
+        dbgcam.apply(cam, window, 0.01f);
+        cam.uploadData();
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
