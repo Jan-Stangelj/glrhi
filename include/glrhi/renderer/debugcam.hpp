@@ -13,8 +13,8 @@ namespace glrhi {
 
         void apply(glrhi::camera& camera, const glrhi::window& window, float deltaTime);
 
-        float sensitivity = 1.0f;
-        float speed = 1.0f;
+        float sensitivity = 0.33f;
+        float speed = 1.5f;
 
     private:
 
