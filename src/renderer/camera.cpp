@@ -8,17 +8,17 @@ namespace glrhi {
         m_cameraData.create(sizeof(glm::mat4) * 2);
     }
 
-    void camera::uploadData() const {
+    void camera::uploadData() {
         glm::vec3 dirRad = glm::radians(direction);
 
         glm::mat4 rotation = glm::eulerAngleXYZ(dirRad.x, dirRad.y, dirRad.z);
 
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * rotation;
-        glm::mat4 view = glm::inverse(transform);
+        m_view = glm::inverse(transform);
 
-        glm::mat4 perspective = glm::perspective(glm::radians(fov), aspectRatio, near, far);
+        m_projection = glm::perspective(glm::radians(fov), aspectRatio, near, far);
 
-        glm::mat4 matrices[2] = {view, perspective};
+        glm::mat4 matrices[2] = {m_view, m_projection};
 
         m_cameraData.sendData(0, sizeof(glm::mat4) * 2, matrices);
     }

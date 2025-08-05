@@ -22,7 +22,7 @@ namespace glrhi {
         /**
          * @brief Recalculates the matrices and uploads them to the GPU.
          */
-        void uploadData() const;
+        void uploadData();
         
         /**
          * @brief Binds the UBO with the data to binding point 0.
@@ -59,7 +59,13 @@ namespace glrhi {
          */
         float aspectRatio = 16.0f / 9.0f;
 
+        glm::mat4 getView() { return m_view; }
+        glm::mat4 getProjection() { return m_projection; } 
+
     private:
+
+        glm::mat4 m_view;
+        glm::mat4 m_projection;
 
         glrhi::ubo m_cameraData;
 
