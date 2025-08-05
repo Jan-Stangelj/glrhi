@@ -1,8 +1,11 @@
 #include "glrhi/renderer/debugcam.hpp"
+#include <chrono>
 #include <glrhi/glrhi.hpp>
 #include <glrhi/glrenderer.hpp>
 
 #include <vector>
+
+#include <iostream>
 
 int main()
 {
@@ -30,11 +33,21 @@ int main()
 
     glrhi::debugCamera dbgcam;
 
-    while (!window.shouldClose())
-    {
+    auto timer = std::chrono::high_resolution_clock::now();
+
+    while (!window.shouldClose()) {
+
+        auto currentTime = std::chrono::high_resolution_clock::now();
+
+        std::chrono::duration<float> delta = currentTime - timer;
+        float dTime = delta.count();
+        timer = currentTime;
+
+        std::cout << "Frametime: " << dTime << '\n';
+
         window.poolEvents();
 
-        dbgcam.apply(cam, window, 0.01f);
+        dbgcam.apply(cam, window, dTime);
         cam.uploadData();
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
