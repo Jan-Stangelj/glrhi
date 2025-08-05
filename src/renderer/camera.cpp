@@ -1,7 +1,11 @@
+#include "glm/detail/type_quat.hpp"
+#include "glm/ext/matrix_float4x4.hpp"
 #include <glrhi/renderer/camera.hpp>
 
+#include <glm/gtc/quaternion.hpp>
+
 #define GLM_ENABLE_EXPERIMENTAL
-#include <glm/gtx/euler_angles.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 namespace glrhi {
     camera::camera() {
@@ -11,7 +15,13 @@ namespace glrhi {
     void camera::uploadData() {
         glm::vec3 dirRad = glm::radians(direction);
 
-        glm::mat4 rotation = glm::eulerAngleXYZ(dirRad.x, dirRad.y, dirRad.z);
+        glm::quat qPitch = glm::angleAxis(dirRad.x, glm::vec3(1, 0, 0));
+        glm::quat qYaw   = glm::angleAxis(dirRad.y,   glm::vec3(0, 1, 0));
+        glm::quat qRoll  = glm::angleAxis(dirRad.z,  glm::vec3(0, 0, 1));
+
+        glm::quat orientation = qYaw * qPitch * qRoll;
+
+        glm::mat4 rotation = glm::toMat4(orientation);
 
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) * rotation;
         m_view = glm::inverse(transform);
