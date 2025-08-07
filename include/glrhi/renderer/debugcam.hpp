@@ -1,3 +1,8 @@
+/**
+ * @file debugcam.hpp
+ * @brief 
+ */
+
 #pragma once
 
 #include <glrhi/renderer/camera.hpp>

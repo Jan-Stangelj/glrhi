@@ -43,8 +43,6 @@ int main()
         float dTime = delta.count();
         timer = currentTime;
 
-        std::cout << "Frametime: " << dTime << '\n';
-
         window.poolEvents();
 
         dbgcam.apply(cam, window, dTime);
