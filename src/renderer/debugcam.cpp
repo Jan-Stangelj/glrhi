@@ -9,8 +9,12 @@ namespace glrhi {
 
     void debugCamera::m_updatePosition(glrhi::camera& camera, const glrhi::window& window, float deltaTime) {
 
-        if (glfwGetMouseButton(window.getGlfwWindow(), GLFW_MOUSE_BUTTON_RIGHT) != GLFW_PRESS)
+        if (glfwGetMouseButton(window.getGlfwWindow(), GLFW_MOUSE_BUTTON_RIGHT) != GLFW_PRESS) {
+            glfwSetInputMode(window.getGlfwWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
             return;
+        }
+
+        glfwSetInputMode(window.getGlfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
         glm::vec3 forward = glm::vec3(camera.getView()[0][2], camera.getView()[1][2], camera.getView()[2][2]);
         glm::vec3 right = glm::vec3(camera.getView()[0][0], camera.getView()[0][1], camera.getView()[2][0]);
