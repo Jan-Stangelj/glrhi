@@ -1,11 +1,8 @@
-#include "glrhi/renderer/debugcam.hpp"
-#include <chrono>
 #include <glrhi/glrhi.hpp>
 #include <glrhi/glrenderer.hpp>
 
 #include <vector>
-
-#include <iostream>
+#include <chrono>
 
 int main()
 {
