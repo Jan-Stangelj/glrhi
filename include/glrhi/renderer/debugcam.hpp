@@ -16,9 +16,24 @@ namespace glrhi {
         debugCamera() = default;
         ~debugCamera() = default;
 
+
+        /**
+         * @brief Updates the refrenced camera's position and direction using input from the supplied window.
+         * 
+         * @param camera The camera, to which to apply the changes.
+         * @param window The window from which to pull input.
+         * @param deltaTime Delta time from the previous frame.
+         */
         void apply(glrhi::camera& camera, const glrhi::window& window, float deltaTime);
 
+        /**
+         * @brief Mouse sensitivity.
+         */
         float sensitivity = 0.33f;
+
+        /**
+         * @brief The speed at which the camera moves.
+         */
         float speed = 1.5f;
 
     private:
