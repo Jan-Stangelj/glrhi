@@ -1,3 +1,5 @@
+#include "glrhi/core/ebo.hpp"
+#include <cstddef>
 #include <glrhi/renderer/mesh.hpp>
 
 #include <iostream>
@@ -16,10 +18,12 @@ namespace glrhi {
         m_vbo.create(vertices.data(), vertices.size() * sizeof(vertex));
         m_ebo.create(indices.data(), indices.size() * sizeof(GLuint));
         
-        m_vao.addAttribute(3, GL_FLOAT, GL_FALSE, 0);
+        m_vao.addAttribute(3, GL_FLOAT, GL_FALSE, offsetof(vertex, position));
         m_vao.addAttribute(2, GL_FLOAT, GL_FALSE, offsetof(vertex, textureUV));
+        m_vao.addAttribute(3, GL_FLOAT, GL_FALSE, offsetof(vertex, normal));
+        m_vao.addAttribute(3, GL_FLOAT, GL_FALSE, offsetof(vertex, tangent));
 
-        m_vao.init(m_vbo, m_ebo, 5*sizeof(GLfloat));
+        m_vao.init(m_vbo, m_ebo, 11*sizeof(GLfloat));
 
         m_numIndices = indices.size();
     }

@@ -9,12 +9,11 @@ int main()
     glrhi::window window(1280, 720, "Material example");
 
     glrhi::shader shader("../examples/material/shaders/basic.vert", "../examples/material/shaders/basic.frag");
-    shader.setVec3("color", glm::vec3(1.0f, 0.0f, 1.0f));
 
     std::vector<glrhi::vertex> vertices = {
-         {glm::vec3(0.0f,  0.5f, 0.0f), glm::vec2(0.5f, 1.0f)},
-         {glm::vec3(0.5f, -0.5f, 0.0f), glm::vec2(1.0f, 0.0f)},
-         {glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec2(0.0f, 0.0f)}
+         {glm::vec3(0.0f,  0.5f, 0.0f), glm::vec2(0.5f, 1.0f), glm::vec3(0.0f), glm::vec3(0.0f)},
+         {glm::vec3(0.5f, -0.5f, 0.0f), glm::vec2(1.0f, 0.0f), glm::vec3(0.0f), glm::vec3(0.0f)},
+         {glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec3(0.0f), glm::vec3(0.0f)}
     };
     std::vector<GLuint> indices = {
         0, 1, 2

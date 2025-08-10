@@ -10,11 +10,11 @@ int main()
 
     glrhi::shader shader("../examples/camera/shaders/basic.vert", "../examples/camera/shaders/basic.frag");
     shader.setVec3("color", glm::vec3(1.0f, 0.0f, 1.0f));
-
+    
     std::vector<glrhi::vertex> vertices = {
-         {glm::vec3(0.0f,  0.5f, 0.0f), glm::vec2(0.0f, 0.0f)},
-         {glm::vec3(0.5f, -0.5f, 0.0f), glm::vec2(0.0f, 0.0f)},
-         {glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec2(0.0f, 0.0f)}
+         {glm::vec3(0.0f,  0.5f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec3(0.0f), glm::vec3(0.0f)},
+         {glm::vec3(0.5f, -0.5f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec3(0.0f), glm::vec3(0.0f)},
+         {glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec3(0.0f), glm::vec3(0.0f)}
     };
     std::vector<GLuint> indices = {
         0, 1, 2

@@ -15,6 +15,8 @@ namespace glrhi {
     struct vertex {
         glm::vec3 position;
         glm::vec2 textureUV;
+        glm::vec3 normal;
+        glm::vec3 tangent;
     };
 
     /**
