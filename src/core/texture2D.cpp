@@ -127,11 +127,11 @@ namespace glrhi {
 		glGenerateTextureMipmap(m_ID);
 	}
 
-	void texture2D::bind(GLuint textureUnit) {
+	void texture2D::bind(GLuint textureUnit) const {
 		glBindTextureUnit(textureUnit, m_ID);
 	}
 
-	void texture2D::bindImage(GLuint unit, GLint mip) {
+	void texture2D::bindImage(GLuint unit, GLint mip) const {
 		glBindImageTexture(unit, m_ID, mip, GL_FALSE, 0, GL_READ_WRITE, m_format);
 	}
 

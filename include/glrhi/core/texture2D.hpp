@@ -79,7 +79,7 @@ namespace glrhi {
          * 
          * @param textureUnit The texture unit to bind to.
          */
-        void bind(GLuint textureUnit);
+        void bind(GLuint textureUnit) const;
 
         /**
          * @brief Binds the texture as a image.
@@ -87,7 +87,7 @@ namespace glrhi {
          * @param unit Image unit to bind to.
          * @param mip The mip to bind.
          */
-        void bindImage(GLuint unit, GLint mip);
+        void bindImage(GLuint unit, GLint mip) const;
 
         /**
          * @brief Get the texture handle for bindless texture use.

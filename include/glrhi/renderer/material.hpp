@@ -1,5 +1,6 @@
 #pragma once
 
+#include "glrhi/core/shader.hpp"
 #include <glrhi/glrhi.hpp>
 
 #include <glm/glm.hpp>
@@ -11,9 +12,9 @@ namespace glrhi {
     public:
 
         material();
-        ~material();
+        ~material() = default;
 
-        void bind();
+        void bind(glrhi::shader& shader) const;
 
         void setAlbedoTexture(const std::filesystem::path& path);
         void setARMtexture(const std::filesystem::path& path);
@@ -21,8 +22,8 @@ namespace glrhi {
         void setEmissionTexture(const std::filesystem::path& path);
 
         glm::vec4 albedo = glm::vec4(1.0f);
-        glm::vec3 arm = glm::vec3(0.0f, 1.0f, 0.0f);
-        glm::vec3 emission = glm::vec3(0.0f);
+        glm::vec4 arm = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
+        glm::vec4 emission = glm::vec4(0.0f);
 
     private:
 
@@ -31,12 +32,11 @@ namespace glrhi {
         glrhi::texture2D m_normalTex;
         glrhi::texture2D m_emissionTex;
 
-        bool m_hasAlbedoTex = false;
-        bool m_hasARMtex = false;
-        bool m_hasNormalTex = false;
-        bool m_hasEmissionTex = false;
+        float m_hasAlbedoTex = false;
+        float m_hasARMtex = false;
+        float m_hasNormalTex = false;
+        float m_hasEmissionTex = false;
 
-        glrhi::ubo m_materialBuffer;
-
+        glrhi::ubo m_matBuffer;
     };
 }
