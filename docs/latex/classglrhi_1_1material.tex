@@ -3,33 +3,108 @@
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classglrhi_1_1material_ab54c64a16d90d73c99aff74b13b44c58}\label{classglrhi_1_1material_ab54c64a16d90d73c99aff74b13b44c58} 
-void {\bfseries bind} (\mbox{\hyperlink{classglrhi_1_1shader}{glrhi\+::shader}} \&\mbox{\hyperlink{classglrhi_1_1shader}{shader}}) const
-\item 
-\Hypertarget{classglrhi_1_1material_a6431cbd2106c89b105ebc852f6cb1ace}\label{classglrhi_1_1material_a6431cbd2106c89b105ebc852f6cb1ace} 
-void {\bfseries set\+Albedo\+Texture} (const std\+::filesystem\+::path \&path)
-\item 
-\Hypertarget{classglrhi_1_1material_af39b90627c8d0aa66903990047f9c7be}\label{classglrhi_1_1material_af39b90627c8d0aa66903990047f9c7be} 
-void {\bfseries set\+ARMtexture} (const std\+::filesystem\+::path \&path)
-\item 
-\Hypertarget{classglrhi_1_1material_ab2647f3b7759f4f9e9605f5a8a850d12}\label{classglrhi_1_1material_ab2647f3b7759f4f9e9605f5a8a850d12} 
-void {\bfseries set\+Normal\+Texture} (const std\+::filesystem\+::path \&path)
-\item 
-\Hypertarget{classglrhi_1_1material_ae638c85f2e73e8bb9cec136995de0c90}\label{classglrhi_1_1material_ae638c85f2e73e8bb9cec136995de0c90} 
-void {\bfseries set\+Emission\+Texture} (const std\+::filesystem\+::path \&path)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classglrhi_1_1material_ab54c64a16d90d73c99aff74b13b44c58}{bind}} (\mbox{\hyperlink{classglrhi_1_1shader}{glrhi\+::shader}} \&\mbox{\hyperlink{classglrhi_1_1shader}{shader}}) const
+\begin{DoxyCompactList}\small\item\em Binds the material in the specified shader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1material_a6431cbd2106c89b105ebc852f6cb1ace}{set\+Albedo\+Texture}} (const std\+::filesystem\+::path \&path)
+\begin{DoxyCompactList}\small\item\em Loads the albedo texture. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1material_af39b90627c8d0aa66903990047f9c7be}{set\+ARMtexture}} (const std\+::filesystem\+::path \&path)
+\begin{DoxyCompactList}\small\item\em Loads the ARM texture. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1material_ab2647f3b7759f4f9e9605f5a8a850d12}{set\+Normal\+Texture}} (const std\+::filesystem\+::path \&path)
+\begin{DoxyCompactList}\small\item\em Loads the normal texture. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1material_ae638c85f2e73e8bb9cec136995de0c90}{set\+Emission\+Texture}} (const std\+::filesystem\+::path \&path)
+\begin{DoxyCompactList}\small\item\em Loads the emission texture. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{classglrhi_1_1material_ad0b9c584e139d05c78c8f025ac5885c2}\label{classglrhi_1_1material_ad0b9c584e139d05c78c8f025ac5885c2} 
 glm\+::vec4 {\bfseries albedo} = glm\+::vec4(1.\+0f)
-\item 
+\begin{DoxyCompactList}\small\item\em Fallback albedo, used if no texture is provided. \end{DoxyCompactList}\item 
 \Hypertarget{classglrhi_1_1material_a59ca218e7c94ee284a1e0702e949bd38}\label{classglrhi_1_1material_a59ca218e7c94ee284a1e0702e949bd38} 
 glm\+::vec4 {\bfseries arm} = glm\+::vec4(0.\+0f, 1.\+0f, 0.\+0f, 0.\+0f)
-\item 
+\begin{DoxyCompactList}\small\item\em Fallback ARM, used if no texture is provided. \end{DoxyCompactList}\item 
 \Hypertarget{classglrhi_1_1material_acb292ec20074e606dd7158faf2d3722b}\label{classglrhi_1_1material_acb292ec20074e606dd7158faf2d3722b} 
 glm\+::vec4 {\bfseries emission} = glm\+::vec4(0.\+0f)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Fallback emission, used if no texture is provided. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classglrhi_1_1material_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1material_ab54c64a16d90d73c99aff74b13b44c58}\index{glrhi::material@{glrhi::material}!bind@{bind}}
+\index{bind@{bind}!glrhi::material@{glrhi::material}}
+\doxysubsubsection{\texorpdfstring{bind()}{bind()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1material_ab54c64a16d90d73c99aff74b13b44c58} 
+void glrhi\+::material\+::bind (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classglrhi_1_1shader}{glrhi\+::shader}} \&}]{shader}{}\end{DoxyParamCaption}) const}
+
+
+
+Binds the material in the specified shader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shader} & The shader to bind the material in. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classglrhi_1_1material_a6431cbd2106c89b105ebc852f6cb1ace}\index{glrhi::material@{glrhi::material}!setAlbedoTexture@{setAlbedoTexture}}
+\index{setAlbedoTexture@{setAlbedoTexture}!glrhi::material@{glrhi::material}}
+\doxysubsubsection{\texorpdfstring{setAlbedoTexture()}{setAlbedoTexture()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1material_a6431cbd2106c89b105ebc852f6cb1ace} 
+void glrhi\+::material\+::set\+Albedo\+Texture (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Loads the albedo texture. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the texture. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classglrhi_1_1material_af39b90627c8d0aa66903990047f9c7be}\index{glrhi::material@{glrhi::material}!setARMtexture@{setARMtexture}}
+\index{setARMtexture@{setARMtexture}!glrhi::material@{glrhi::material}}
+\doxysubsubsection{\texorpdfstring{setARMtexture()}{setARMtexture()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1material_af39b90627c8d0aa66903990047f9c7be} 
+void glrhi\+::material\+::set\+ARMtexture (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Loads the ARM texture. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the texture. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classglrhi_1_1material_ae638c85f2e73e8bb9cec136995de0c90}\index{glrhi::material@{glrhi::material}!setEmissionTexture@{setEmissionTexture}}
+\index{setEmissionTexture@{setEmissionTexture}!glrhi::material@{glrhi::material}}
+\doxysubsubsection{\texorpdfstring{setEmissionTexture()}{setEmissionTexture()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1material_ae638c85f2e73e8bb9cec136995de0c90} 
+void glrhi\+::material\+::set\+Emission\+Texture (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Loads the emission texture. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the texture. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classglrhi_1_1material_ab2647f3b7759f4f9e9605f5a8a850d12}\index{glrhi::material@{glrhi::material}!setNormalTexture@{setNormalTexture}}
+\index{setNormalTexture@{setNormalTexture}!glrhi::material@{glrhi::material}}
+\doxysubsubsection{\texorpdfstring{setNormalTexture()}{setNormalTexture()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1material_ab2647f3b7759f4f9e9605f5a8a850d12} 
+void glrhi\+::material\+::set\+Normal\+Texture (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Loads the normal texture. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the texture. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

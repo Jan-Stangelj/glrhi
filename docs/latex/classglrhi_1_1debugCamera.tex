@@ -3,18 +3,41 @@
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{classglrhi_1_1debugCamera_a8ee61a2b085ad93f71fa52b86f19239d}\label{classglrhi_1_1debugCamera_a8ee61a2b085ad93f71fa52b86f19239d} 
-void {\bfseries apply} (\mbox{\hyperlink{classglrhi_1_1camera}{glrhi\+::camera}} \&\mbox{\hyperlink{classglrhi_1_1camera}{camera}}, const \mbox{\hyperlink{classglrhi_1_1window}{glrhi\+::window}} \&\mbox{\hyperlink{classglrhi_1_1window}{window}}, float delta\+Time)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{classglrhi_1_1debugCamera_a8ee61a2b085ad93f71fa52b86f19239d}{apply}} (\mbox{\hyperlink{classglrhi_1_1camera}{glrhi\+::camera}} \&\mbox{\hyperlink{classglrhi_1_1camera}{camera}}, const \mbox{\hyperlink{classglrhi_1_1window}{glrhi\+::window}} \&\mbox{\hyperlink{classglrhi_1_1window}{window}}, float delta\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the refrenced camera\textquotesingle{}s position and direction using input from the supplied window. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{classglrhi_1_1debugCamera_a18c7c431c49f55dbd455e3fde1b051bd}\label{classglrhi_1_1debugCamera_a18c7c431c49f55dbd455e3fde1b051bd} 
 float {\bfseries sensitivity} = 0.\+33f
-\item 
+\begin{DoxyCompactList}\small\item\em Mouse sensitivity. \end{DoxyCompactList}\item 
 \Hypertarget{classglrhi_1_1debugCamera_ad0295150921cf3454c5f563479303edb}\label{classglrhi_1_1debugCamera_ad0295150921cf3454c5f563479303edb} 
 float {\bfseries speed} = 1.\+5f
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em The speed at which the camera moves. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classglrhi_1_1debugCamera_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1debugCamera_a8ee61a2b085ad93f71fa52b86f19239d}\index{glrhi::debugCamera@{glrhi::debugCamera}!apply@{apply}}
+\index{apply@{apply}!glrhi::debugCamera@{glrhi::debugCamera}}
+\doxysubsubsection{\texorpdfstring{apply()}{apply()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1debugCamera_a8ee61a2b085ad93f71fa52b86f19239d} 
+void glrhi\+::debug\+Camera\+::apply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classglrhi_1_1camera}{glrhi\+::camera}} \&}]{camera}{, }\item[{const \mbox{\hyperlink{classglrhi_1_1window}{glrhi\+::window}} \&}]{window}{, }\item[{float}]{delta\+Time}{}\end{DoxyParamCaption})}
+
+
+
+Updates the refrenced camera\textquotesingle{}s position and direction using input from the supplied window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em camera} & The camera, to which to apply the changes. \\
+\hline
+{\em window} & The window from which to pull input. \\
+\hline
+{\em delta\+Time} & Delta time from the previous frame. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

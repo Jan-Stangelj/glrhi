@@ -18,31 +18,37 @@
 \DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ material();}
 \DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \string~material()\ =\ \textcolor{keywordflow}{default};}
 \DoxyCodeLine{00016\ }
-\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ bind(\mbox{\hyperlink{classglrhi_1_1shader}{glrhi::shader}}\&\ \mbox{\hyperlink{classglrhi_1_1shader}{shader}})\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00018\ }
-\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setAlbedoTexture(\textcolor{keyword}{const}\ std::filesystem::path\&\ path);}
-\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setARMtexture(\textcolor{keyword}{const}\ std::filesystem::path\&\ path);}
-\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setNormalTexture(\textcolor{keyword}{const}\ std::filesystem::path\&\ path);}
-\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ setEmissionTexture(\textcolor{keyword}{const}\ std::filesystem::path\&\ path);}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1material_ab54c64a16d90d73c99aff74b13b44c58}{bind}}(\mbox{\hyperlink{classglrhi_1_1shader}{glrhi::shader}}\&\ \mbox{\hyperlink{classglrhi_1_1shader}{shader}})\ \textcolor{keyword}{const};}
 \DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ glm::vec4\ albedo\ =\ glm::vec4(1.0f);}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ glm::vec4\ arm\ =\ glm::vec4(0.0f,\ 1.0f,\ 0.0f,\ 0.0f);}
-\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ glm::vec4\ emission\ =\ glm::vec4(0.0f);}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi::texture2D}}\ m\_albedoTex;}
-\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi::texture2D}}\ m\_armTex;}
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi::texture2D}}\ m\_normalTex;}
-\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi::texture2D}}\ m\_emissionTex;}
-\DoxyCodeLine{00034\ }
-\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_hasAlbedoTex\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_hasARMtex\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_hasNormalTex\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_hasEmissionTex\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00039\ }
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1ubo}{glrhi::ubo}}\ m\_matBuffer;}
-\DoxyCodeLine{00041\ \ \ \ \ \};}
-\DoxyCodeLine{00042\ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1material_a6431cbd2106c89b105ebc852f6cb1ace}{setAlbedoTexture}}(\textcolor{keyword}{const}\ std::filesystem::path\&\ path);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1material_af39b90627c8d0aa66903990047f9c7be}{setARMtexture}}(\textcolor{keyword}{const}\ std::filesystem::path\&\ path);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1material_ab2647f3b7759f4f9e9605f5a8a850d12}{setNormalTexture}}(\textcolor{keyword}{const}\ std::filesystem::path\&\ path);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1material_ae638c85f2e73e8bb9cec136995de0c90}{setEmissionTexture}}(\textcolor{keyword}{const}\ std::filesystem::path\&\ path);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ glm::vec4\ \mbox{\hyperlink{classglrhi_1_1material_ad0b9c584e139d05c78c8f025ac5885c2}{albedo}}\ =\ glm::vec4(1.0f);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ glm::vec4\ \mbox{\hyperlink{classglrhi_1_1material_a59ca218e7c94ee284a1e0702e949bd38}{arm}}\ =\ glm::vec4(0.0f,\ 1.0f,\ 0.0f,\ 0.0f);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ glm::vec4\ \mbox{\hyperlink{classglrhi_1_1material_acb292ec20074e606dd7158faf2d3722b}{emission}}\ =\ glm::vec4(0.0f);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi::texture2D}}\ m\_albedoTex;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi::texture2D}}\ m\_armTex;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi::texture2D}}\ m\_normalTex;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D}{glrhi::texture2D}}\ m\_emissionTex;}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_hasAlbedoTex\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_hasARMtex\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_hasNormalTex\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ m\_hasEmissionTex\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1ubo}{glrhi::ubo}}\ m\_matBuffer;}
+\DoxyCodeLine{00081\ \ \ \ \ \};}
+\DoxyCodeLine{00082\ \}}
 
 \end{DoxyCode}

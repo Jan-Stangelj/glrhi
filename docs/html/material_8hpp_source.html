@@ -107,34 +107,48 @@ $(function(){initNavTree('material_8hpp_source.html','',''); });
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        material();</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        ~material() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keywordtype">void</span> bind(<a class="code hl_class" href="classglrhi_1_1shader.html">glrhi::shader</a>&amp; <a class="code hl_class" href="classglrhi_1_1shader.html">shader</a>) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordtype">void</span> setAlbedoTexture(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordtype">void</span> setARMtexture(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>        <span class="keywordtype">void</span> setNormalTexture(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">void</span> setEmissionTexture(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classglrhi_1_1material.html#ab54c64a16d90d73c99aff74b13b44c58">bind</a>(<a class="code hl_class" href="classglrhi_1_1shader.html">glrhi::shader</a>&amp; <a class="code hl_class" href="classglrhi_1_1shader.html">shader</a>) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        glm::vec4 albedo = glm::vec4(1.0f);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        glm::vec4 arm = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        glm::vec4 emission = glm::vec4(0.0f);</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <a class="code hl_class" href="classglrhi_1_1texture2D.html">glrhi::texture2D</a> m_albedoTex;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <a class="code hl_class" href="classglrhi_1_1texture2D.html">glrhi::texture2D</a> m_armTex;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <a class="code hl_class" href="classglrhi_1_1texture2D.html">glrhi::texture2D</a> m_normalTex;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>        <a class="code hl_class" href="classglrhi_1_1texture2D.html">glrhi::texture2D</a> m_emissionTex;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        <span class="keywordtype">float</span> m_hasAlbedoTex = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keywordtype">float</span> m_hasARMtex = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordtype">float</span> m_hasNormalTex = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keywordtype">float</span> m_hasEmissionTex = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <a class="code hl_class" href="classglrhi_1_1ubo.html">glrhi::ubo</a> m_matBuffer;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    };</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classglrhi_1_1material.html#a6431cbd2106c89b105ebc852f6cb1ace">setAlbedoTexture</a>(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classglrhi_1_1material.html#af39b90627c8d0aa66903990047f9c7be">setARMtexture</a>(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classglrhi_1_1material.html#ab2647f3b7759f4f9e9605f5a8a850d12">setNormalTexture</a>(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classglrhi_1_1material.html#ae638c85f2e73e8bb9cec136995de0c90">setEmissionTexture</a>(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classglrhi_1_1material.html#ad0b9c584e139d05c78c8f025ac5885c2">   56</a></span>        glm::vec4 <a class="code hl_variable" href="classglrhi_1_1material.html#ad0b9c584e139d05c78c8f025ac5885c2">albedo</a> = glm::vec4(1.0f);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="classglrhi_1_1material.html#a59ca218e7c94ee284a1e0702e949bd38">   61</a></span>        glm::vec4 <a class="code hl_variable" href="classglrhi_1_1material.html#a59ca218e7c94ee284a1e0702e949bd38">arm</a> = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classglrhi_1_1material.html#acb292ec20074e606dd7158faf2d3722b">   66</a></span>        glm::vec4 <a class="code hl_variable" href="classglrhi_1_1material.html#acb292ec20074e606dd7158faf2d3722b">emission</a> = glm::vec4(0.0f);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>        <a class="code hl_class" href="classglrhi_1_1texture2D.html">glrhi::texture2D</a> m_albedoTex;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <a class="code hl_class" href="classglrhi_1_1texture2D.html">glrhi::texture2D</a> m_armTex;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>        <a class="code hl_class" href="classglrhi_1_1texture2D.html">glrhi::texture2D</a> m_normalTex;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <a class="code hl_class" href="classglrhi_1_1texture2D.html">glrhi::texture2D</a> m_emissionTex;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordtype">float</span> m_hasAlbedoTex = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordtype">float</span> m_hasARMtex = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        <span class="keywordtype">float</span> m_hasNormalTex = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordtype">float</span> m_hasEmissionTex = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        <a class="code hl_class" href="classglrhi_1_1ubo.html">glrhi::ubo</a> m_matBuffer;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    };</div>
 </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>}</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
+<div class="ttc" id="aclassglrhi_1_1material_html_a59ca218e7c94ee284a1e0702e949bd38"><div class="ttname"><a href="classglrhi_1_1material.html#a59ca218e7c94ee284a1e0702e949bd38">glrhi::material::arm</a></div><div class="ttdeci">glm::vec4 arm</div><div class="ttdoc">Fallback ARM, used if no texture is provided.</div><div class="ttdef"><b>Definition</b> material.hpp:61</div></div>
+<div class="ttc" id="aclassglrhi_1_1material_html_a6431cbd2106c89b105ebc852f6cb1ace"><div class="ttname"><a href="classglrhi_1_1material.html#a6431cbd2106c89b105ebc852f6cb1ace">glrhi::material::setAlbedoTexture</a></div><div class="ttdeci">void setAlbedoTexture(const std::filesystem::path &amp;path)</div><div class="ttdoc">Loads the albedo texture.</div><div class="ttdef"><b>Definition</b> material.cpp:35</div></div>
+<div class="ttc" id="aclassglrhi_1_1material_html_ab2647f3b7759f4f9e9605f5a8a850d12"><div class="ttname"><a href="classglrhi_1_1material.html#ab2647f3b7759f4f9e9605f5a8a850d12">glrhi::material::setNormalTexture</a></div><div class="ttdeci">void setNormalTexture(const std::filesystem::path &amp;path)</div><div class="ttdoc">Loads the normal texture.</div><div class="ttdef"><b>Definition</b> material.cpp:45</div></div>
+<div class="ttc" id="aclassglrhi_1_1material_html_ab54c64a16d90d73c99aff74b13b44c58"><div class="ttname"><a href="classglrhi_1_1material.html#ab54c64a16d90d73c99aff74b13b44c58">glrhi::material::bind</a></div><div class="ttdeci">void bind(glrhi::shader &amp;shader) const</div><div class="ttdoc">Binds the material in the specified shader.</div><div class="ttdef"><b>Definition</b> material.cpp:12</div></div>
+<div class="ttc" id="aclassglrhi_1_1material_html_acb292ec20074e606dd7158faf2d3722b"><div class="ttname"><a href="classglrhi_1_1material.html#acb292ec20074e606dd7158faf2d3722b">glrhi::material::emission</a></div><div class="ttdeci">glm::vec4 emission</div><div class="ttdoc">Fallback emission, used if no texture is provided.</div><div class="ttdef"><b>Definition</b> material.hpp:66</div></div>
+<div class="ttc" id="aclassglrhi_1_1material_html_ad0b9c584e139d05c78c8f025ac5885c2"><div class="ttname"><a href="classglrhi_1_1material.html#ad0b9c584e139d05c78c8f025ac5885c2">glrhi::material::albedo</a></div><div class="ttdeci">glm::vec4 albedo</div><div class="ttdoc">Fallback albedo, used if no texture is provided.</div><div class="ttdef"><b>Definition</b> material.hpp:56</div></div>
+<div class="ttc" id="aclassglrhi_1_1material_html_ae638c85f2e73e8bb9cec136995de0c90"><div class="ttname"><a href="classglrhi_1_1material.html#ae638c85f2e73e8bb9cec136995de0c90">glrhi::material::setEmissionTexture</a></div><div class="ttdeci">void setEmissionTexture(const std::filesystem::path &amp;path)</div><div class="ttdoc">Loads the emission texture.</div><div class="ttdef"><b>Definition</b> material.cpp:50</div></div>
+<div class="ttc" id="aclassglrhi_1_1material_html_af39b90627c8d0aa66903990047f9c7be"><div class="ttname"><a href="classglrhi_1_1material.html#af39b90627c8d0aa66903990047f9c7be">glrhi::material::setARMtexture</a></div><div class="ttdeci">void setARMtexture(const std::filesystem::path &amp;path)</div><div class="ttdoc">Loads the ARM texture.</div><div class="ttdef"><b>Definition</b> material.cpp:40</div></div>
 <div class="ttc" id="aclassglrhi_1_1shader_html"><div class="ttname"><a href="classglrhi_1_1shader.html">glrhi::shader</a></div><div class="ttdoc">Handles the creation and usage of shaders.</div><div class="ttdef"><b>Definition</b> shader.hpp:20</div></div>
 <div class="ttc" id="aclassglrhi_1_1texture2D_html"><div class="ttname"><a href="classglrhi_1_1texture2D.html">glrhi::texture2D</a></div><div class="ttdoc">Handles the creation and usage of 2d textures.</div><div class="ttdef"><b>Definition</b> texture2D.hpp:19</div></div>
 <div class="ttc" id="aclassglrhi_1_1ubo_html"><div class="ttname"><a href="classglrhi_1_1ubo.html">glrhi::ubo</a></div><div class="ttdoc">Handles the creation and usage of Uniform Buffer Objects.</div><div class="ttdef"><b>Definition</b> ubo.hpp:15</div></div>

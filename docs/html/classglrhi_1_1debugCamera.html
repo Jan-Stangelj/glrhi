@@ -94,16 +94,55 @@ $(function(){initNavTree('classglrhi_1_1debugCamera.html','','classglrhi_1_1debu
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8ee61a2b085ad93f71fa52b86f19239d" id="r_a8ee61a2b085ad93f71fa52b86f19239d"><td class="memItemLeft" align="right" valign="top"><a id="a8ee61a2b085ad93f71fa52b86f19239d" name="a8ee61a2b085ad93f71fa52b86f19239d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>apply</b> (<a class="el" href="classglrhi_1_1camera.html">glrhi::camera</a> &amp;<a class="el" href="classglrhi_1_1camera.html">camera</a>, const <a class="el" href="classglrhi_1_1window.html">glrhi::window</a> &amp;<a class="el" href="classglrhi_1_1window.html">window</a>, float deltaTime)</td></tr>
+<tr class="memitem:a8ee61a2b085ad93f71fa52b86f19239d" id="r_a8ee61a2b085ad93f71fa52b86f19239d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ee61a2b085ad93f71fa52b86f19239d">apply</a> (<a class="el" href="classglrhi_1_1camera.html">glrhi::camera</a> &amp;<a class="el" href="classglrhi_1_1camera.html">camera</a>, const <a class="el" href="classglrhi_1_1window.html">glrhi::window</a> &amp;<a class="el" href="classglrhi_1_1window.html">window</a>, float deltaTime)</td></tr>
+<tr class="memdesc:a8ee61a2b085ad93f71fa52b86f19239d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the refrenced camera's position and direction using input from the supplied window.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a18c7c431c49f55dbd455e3fde1b051bd" id="r_a18c7c431c49f55dbd455e3fde1b051bd"><td class="memItemLeft" align="right" valign="top"><a id="a18c7c431c49f55dbd455e3fde1b051bd" name="a18c7c431c49f55dbd455e3fde1b051bd"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>sensitivity</b> = 0.33f</td></tr>
+<tr class="memdesc:a18c7c431c49f55dbd455e3fde1b051bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mouse sensitivity. <br /></td></tr>
 <tr class="memitem:ad0295150921cf3454c5f563479303edb" id="r_ad0295150921cf3454c5f563479303edb"><td class="memItemLeft" align="right" valign="top"><a id="ad0295150921cf3454c5f563479303edb" name="ad0295150921cf3454c5f563479303edb"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>speed</b> = 1.5f</td></tr>
+<tr class="memdesc:ad0295150921cf3454c5f563479303edb"><td class="mdescLeft">&#160;</td><td class="mdescRight">The speed at which the camera moves. <br /></td></tr>
 </table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a8ee61a2b085ad93f71fa52b86f19239d" name="a8ee61a2b085ad93f71fa52b86f19239d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ee61a2b085ad93f71fa52b86f19239d">&#9670;&#160;</a></span>apply()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void glrhi::debugCamera::apply </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classglrhi_1_1camera.html">glrhi::camera</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>camera</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classglrhi_1_1window.html">glrhi::window</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>window</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>deltaTime</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Updates the refrenced camera's position and direction using input from the supplied window. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">camera</td><td>The camera, to which to apply the changes. </td></tr>
+    <tr><td class="paramname">window</td><td>The window from which to pull input. </td></tr>
+    <tr><td class="paramname">deltaTime</td><td>Delta time from the previous frame. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>/home/jan/glrhi/include/glrhi/renderer/<a class="el" href="debugcam_8hpp_source.html">debugcam.hpp</a></li>
 <li>/home/jan/glrhi/src/renderer/<b>debugcam.cpp</b></li>

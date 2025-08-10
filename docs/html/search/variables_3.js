@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['near_0',['near',['../classglrhi_1_1camera.html#ab9f23ea22e073e7c80910b62cb4d8445',1,'glrhi::camera']]]
+  ['far_0',['far',['../classglrhi_1_1camera.html#ac08f5478b7219d2cab37930145840779',1,'glrhi::camera']]],
+  ['fov_1',['fov',['../classglrhi_1_1camera.html#ac8b75fe16fb4a1b251d158e8ca5140fd',1,'glrhi::camera']]]
 ];

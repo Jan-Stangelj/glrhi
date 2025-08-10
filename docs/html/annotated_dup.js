@@ -3,10 +3,10 @@ var annotated_dup =
     [ "glrhi", null, [
       [ "camera", "classglrhi_1_1camera.html", "classglrhi_1_1camera" ],
       [ "compute", "classglrhi_1_1compute.html", "classglrhi_1_1compute" ],
-      [ "debugCamera", "classglrhi_1_1debugCamera.html", null ],
+      [ "debugCamera", "classglrhi_1_1debugCamera.html", "classglrhi_1_1debugCamera" ],
       [ "ebo", "classglrhi_1_1ebo.html", "classglrhi_1_1ebo" ],
       [ "fbo", "classglrhi_1_1fbo.html", "classglrhi_1_1fbo" ],
-      [ "material", "classglrhi_1_1material.html", null ],
+      [ "material", "classglrhi_1_1material.html", "classglrhi_1_1material" ],
       [ "mesh", "classglrhi_1_1mesh.html", "classglrhi_1_1mesh" ],
       [ "shader", "classglrhi_1_1shader.html", "classglrhi_1_1shader" ],
       [ "ssbo", "classglrhi_1_1ssbo.html", "classglrhi_1_1ssbo" ],

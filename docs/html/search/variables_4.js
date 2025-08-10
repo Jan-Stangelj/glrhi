@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['position_0',['position',['../classglrhi_1_1camera.html#aea1b09dba960873ca3cdb08161616bba',1,'glrhi::camera']]]
+  ['near_0',['near',['../classglrhi_1_1camera.html#ab9f23ea22e073e7c80910b62cb4d8445',1,'glrhi::camera']]]
 ];
