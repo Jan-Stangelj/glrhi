@@ -34,17 +34,21 @@ namespace glrhi {
 
     void material::setAlbedoTexture(const std::filesystem::path& path) {
         m_albedoTex.create(path, GL_RGBA8);
+        m_hasAlbedoTex = true;
     }
 
     void material::setARMtexture(const std::filesystem::path& path) {
         m_armTex.create(path, GL_RGB8);
+        m_hasARMtex = true;
     }
 
     void material::setNormalTexture(const std::filesystem::path& path) {
         m_normalTex.create(path, GL_RGB8);
+        m_hasNormalTex = true;
     }
 
     void material::setEmissionTexture(const std::filesystem::path& path) {
         m_emissionTex.create(path, GL_RGB8);
+        m_hasEmissionTex = true;
     }
 }
