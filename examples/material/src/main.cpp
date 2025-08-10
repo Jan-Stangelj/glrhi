@@ -33,6 +33,8 @@ int main()
     glrhi::material mat;
 
     mat.setAlbedoTexture("../examples/material/albedo.jpg");
+    mat.setARMtexture("../examples/material/arm.jpg");
+    mat.setNormalTexture("../examples/material/normal.png");
 
     mat.bind(shader);
 
