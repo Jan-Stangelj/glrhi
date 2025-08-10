@@ -1,37 +1,38 @@
 #pragma once
 
-#include "mesh.hpp"
+#include <glrhi/glrhi.hpp>
+#include <glrhi/renderer/material.hpp>
+#include <glrhi/renderer/mesh.hpp>
 
-#include "assimp/Importer.hpp"
-#include "assimp/scene.h"
-#include "assimp/postprocess.h"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
-
-#include <string>
+#include <filesystem>
 #include <vector>
-#include <iostream>
-#include <memory>
 
 
-namespace Renderer {
-    class Model {
+namespace glrhi {
+    struct submesh {
+        glrhi::mesh mesh;
+        glrhi::material material;
+    };
+
+    class model {
     public:
-        Model(const std::string& path);
+        model(const std::filesystem::path& path);
 
-        void draw(Renderer::Shader& shader);
+        void draw(glrhi::shader& shader);
 
         glm::vec3 size = glm::vec3(1.0f);
         glm::vec3 rotation = glm::vec3(0.0f);
         glm::vec3 position = glm::vec3(0.0f);
     private:
         
-        std::vector<Mesh> meshes;
-        std::string directory;
+        std::vector<glrhi::submesh> m_meshes;
+        std::filesystem::path directory;
 
         void processNode(aiNode* node, const aiScene* scene);
-        Renderer::Mesh processMesh(aiMesh* mesh, const aiScene* scene);
+        glrhi::submesh processMesh(aiMesh* mesh, const aiScene* scene);
     };
 }

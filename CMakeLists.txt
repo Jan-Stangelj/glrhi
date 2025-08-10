@@ -32,7 +32,7 @@ target_compile_definitions("glrhi" PUBLIC "GLFW_INCLUDE_NONE=1")
 target_include_directories("glrhi" PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories("glrhi" PUBLIC  ${PROJECT_SOURCE_DIR}/vendor/include)
 
-target_link_libraries("glrhi" PUBLIC glad glfw glm)
+target_link_libraries("glrhi" PUBLIC glad glfw glm assimp)
 
 option("GLRHI_BUILD_EXAMPLES" "Build examples for glrhi" ON)
 
