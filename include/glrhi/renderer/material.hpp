@@ -58,7 +58,7 @@ namespace glrhi {
         /**
          * @brief Fallback ARM, used if no texture is provided.
          */
-        glm::vec4 arm = glm::vec4(0.0f, 1.0f, 0.0f, 0.0f);
+        glm::vec4 arm = glm::vec4(1.0f, 1.0f, 0.0f, 0.0f);
 
         /**
          * @brief Fallback emission, used if no texture is provided.

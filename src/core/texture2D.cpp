@@ -79,6 +79,11 @@ namespace glrhi {
 		else
 			data = stbi_loadf(file.c_str(), &widthImg, &heightImg, &numColCh, 4);
 
+		if (data == nullptr) {
+			std::cerr << "ERROR::TEXTURE2D::FAILED_TO_OPEN_FILE: " << file << '\n';
+			return;
+		}
+
 		// Allocate memory on the gpu
 		glTextureStorage2D(m_ID, mips, internalFormat, widthImg, heightImg);
 
@@ -124,18 +129,30 @@ namespace glrhi {
 	}
 
 	void texture2D::genMipmaps() const {
+		if (!m_ID)
+			return;
+
 		glGenerateTextureMipmap(m_ID);
 	}
 
 	void texture2D::bind(GLuint textureUnit) const {
+		if (!m_ID)
+			return;
+
 		glBindTextureUnit(textureUnit, m_ID);
 	}
 
 	void texture2D::bindImage(GLuint unit, GLint mip) const {
+		if (!m_ID)
+			return;
+
 		glBindImageTexture(unit, m_ID, mip, GL_FALSE, 0, GL_READ_WRITE, m_format);
 	}
 
 	GLuint64 texture2D::getSamplerHandle() {
+		if (!m_ID)
+			return -1;
+
 		// If sampler handle was not yet cached and made residend,
 		// cache it and make it resident.
 		if (!m_samplerHandle) {
@@ -148,6 +165,9 @@ namespace glrhi {
 	}
 
 	GLuint64 texture2D::getImageHandle(GLint mip) {
+		if (!m_ID)
+			return -1;
+
 		// If sampler handle was not yet cached and made residend,
 		// cache it and make it resident.
 		if (!m_imageHandle) {

@@ -1,4 +1,5 @@
 #include "glrhi/core/ebo.hpp"
+#include <cmath>
 #include <filesystem>
 #include <glrhi/renderer/material.hpp>
 

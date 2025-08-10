@@ -10,17 +10,22 @@
 
 #include <filesystem>
 #include <vector>
+#include <memory>
 
 
 namespace glrhi {
     struct submesh {
-        glrhi::mesh mesh;
-        glrhi::material material;
+        std::shared_ptr<glrhi::mesh> mesh;
+        std::shared_ptr<glrhi::material> material;
     };
 
     class model {
     public:
         model(const std::filesystem::path& path);
+        model() = default;
+        ~model() = default;
+
+        void create(const std::filesystem::path& path);
 
         void draw(glrhi::shader& shader);
 
@@ -30,9 +35,9 @@ namespace glrhi {
     private:
         
         std::vector<glrhi::submesh> m_meshes;
-        std::filesystem::path directory;
+        std::filesystem::path m_directory;
 
-        void processNode(aiNode* node, const aiScene* scene);
-        glrhi::submesh processMesh(aiMesh* mesh, const aiScene* scene);
+        void m_processNode(aiNode* node, const aiScene* scene);
+        glrhi::submesh m_processMesh(aiMesh* mesh, const aiScene* scene);
     };
 }
