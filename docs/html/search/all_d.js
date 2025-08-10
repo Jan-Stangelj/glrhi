@@ -1,8 +1,11 @@
 var searchData=
 [
-  ['ubo_0',['ubo',['../classglrhi_1_1ubo.html',1,'glrhi::ubo'],['../classglrhi_1_1ubo.html#a26a48bd9a52e5361b9de09a88157c2f4',1,'glrhi::ubo::ubo()']]],
-  ['ubo_2ehpp_1',['ubo.hpp',['../ubo_8hpp.html',1,'']]],
-  ['unbind_2',['unbind',['../classglrhi_1_1fbo.html#a0cfcdac62939b37698d53730c5f8bfd2',1,'glrhi::fbo::unbind()'],['../classglrhi_1_1vao.html#a5ae6a973cc87fa174cb18219a24afe15',1,'glrhi::vao::unbind()']]],
-  ['usage_3',['Usage',['../index.html#autotoc_md6',1,'']]],
-  ['use_4',['use',['../classglrhi_1_1shader.html#ab39644b222f4b0f5949a6cb62c47088d',1,'glrhi::shader']]]
+  ['senddata_0',['sendData',['../classglrhi_1_1ssbo.html#a3e75a046d44c099ce676f208e48a65e7',1,'glrhi::ssbo::sendData()'],['../classglrhi_1_1ubo.html#a2f9a466dfd07b4f2f6387406a86468fc',1,'glrhi::ubo::sendData()']]],
+  ['sethandle64_1',['setHandle64',['../classglrhi_1_1compute.html#a4e85d1d16125c161971c926a4136ab67',1,'glrhi::compute::setHandle64()'],['../classglrhi_1_1shader.html#afb5595f7a7fd23a9e772c796da98adf3',1,'glrhi::shader::setHandle64()']]],
+  ['shader_2',['shader',['../classglrhi_1_1shader.html',1,'glrhi::shader'],['../classglrhi_1_1shader.html#a9bae8d841280bdf491747483e43b9369',1,'glrhi::shader::shader()']]],
+  ['shader_2ehpp_3',['shader.hpp',['../shader_8hpp.html',1,'']]],
+  ['shouldclose_4',['shouldClose',['../classglrhi_1_1window.html#a2d338f8b76e697478cdd7f5923872ef0',1,'glrhi::window']]],
+  ['ssbo_5',['ssbo',['../classglrhi_1_1ssbo.html',1,'glrhi::ssbo'],['../classglrhi_1_1ssbo.html#a760fe3b246e884ba214e6ed118a7c9f5',1,'glrhi::ssbo::ssbo()']]],
+  ['ssbo_2ehpp_6',['ssbo.hpp',['../ssbo_8hpp.html',1,'']]],
+  ['swapbuffers_7',['swapBuffers',['../classglrhi_1_1window.html#ae9872ea341748b507fbb41f497271207',1,'glrhi::window']]]
 ];

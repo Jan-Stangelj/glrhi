@@ -1,5 +1,5 @@
 \doxysection{vbo.\+hpp}
-\hypertarget{vbo_8hpp_source}{}\label{vbo_8hpp_source}\index{/home/jan/dev/glrhi/include/glrhi/core/vbo.hpp@{/home/jan/dev/glrhi/include/glrhi/core/vbo.hpp}}
+\hypertarget{vbo_8hpp_source}{}\label{vbo_8hpp_source}\index{/home/jan/glrhi/include/glrhi/core/vbo.hpp@{/home/jan/glrhi/include/glrhi/core/vbo.hpp}}
 \mbox{\hyperlink{vbo_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
@@ -14,15 +14,18 @@
 \DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00017\ }
 \DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1vbo_a28ff85c166d69f6766144b179a92b554}{vbo}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size);}
-\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1vbo_a28ff85c166d69f6766144b179a92b554}{\string~vbo}}();}
-\DoxyCodeLine{00026\ }
-\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ GLuint\ \mbox{\hyperlink{classglrhi_1_1vbo_a9548aa36c7bc81e3a857385417ebf83e}{getID}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_ID;\ \}}
-\DoxyCodeLine{00033\ }
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1vbo_a28ff85c166d69f6766144b179a92b554}{vbo}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1vbo_a28ff85c166d69f6766144b179a92b554}{\string~vbo}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1vbo_a51518e1e8f7657d60b642fff7061c7e7}{create}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ size);}
 \DoxyCodeLine{00035\ }
-\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ GLuint\ m\_ID;}
-\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00038\ \ \ \ \ \};}
-\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ GLuint\ \mbox{\hyperlink{classglrhi_1_1vbo_a9548aa36c7bc81e3a857385417ebf83e}{getID}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_ID;\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ GLuint\ m\_ID\ =\ 0;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \};}
+\DoxyCodeLine{00048\ \}}
 
 \end{DoxyCode}

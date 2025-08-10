@@ -1,5 +1,5 @@
 \doxysection{window.\+hpp}
-\hypertarget{window_8hpp_source}{}\label{window_8hpp_source}\index{/home/jan/dev/glrhi/include/glrhi/core/window.hpp@{/home/jan/dev/glrhi/include/glrhi/core/window.hpp}}
+\hypertarget{window_8hpp_source}{}\label{window_8hpp_source}\index{/home/jan/glrhi/include/glrhi/core/window.hpp@{/home/jan/glrhi/include/glrhi/core/window.hpp}}
 \mbox{\hyperlink{window_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
@@ -17,21 +17,24 @@
 \DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00020\ }
 \DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1window_ac232479bbfc1d3a5c5e7de20b4caee15}{window}}(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ title);}
-\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1window_ac232479bbfc1d3a5c5e7de20b4caee15}{\string~window}}();}
-\DoxyCodeLine{00030\ }
-\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classglrhi_1_1window_a2d338f8b76e697478cdd7f5923872ef0}{shouldClose}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00035\ }
-\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1window_ae43930f7103b5d9b9c0b69dfca9af42c}{poolEvents}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00040\ }
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1window_ae9872ea341748b507fbb41f497271207}{swapBuffers}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ GLFWwindow*\ \mbox{\hyperlink{classglrhi_1_1window_a997d66cd0ff8af17c0e9c3dfba0f6262}{getGlfwWindow}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00052\ }
-\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00054\ }
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ GLFWwindow*\ m\_window;}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00057\ \ \ \ \ \};}
-\DoxyCodeLine{00058\ \}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1window_ac232479bbfc1d3a5c5e7de20b4caee15}{window}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1window_ac232479bbfc1d3a5c5e7de20b4caee15}{\string~window}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ create(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ title);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classglrhi_1_1window_a2d338f8b76e697478cdd7f5923872ef0}{shouldClose}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1window_ae43930f7103b5d9b9c0b69dfca9af42c}{poolEvents}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1window_ae9872ea341748b507fbb41f497271207}{swapBuffers}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ GLFWwindow*\ \mbox{\hyperlink{classglrhi_1_1window_a997d66cd0ff8af17c0e9c3dfba0f6262}{getGlfwWindow}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ GLFWwindow*\ m\_window\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \};}
+\DoxyCodeLine{00061\ \}}
 
 \end{DoxyCode}

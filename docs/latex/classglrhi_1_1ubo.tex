@@ -14,6 +14,8 @@ Handles the creation and usage of Uniform Buffer Objects.
 \item 
 \mbox{\hyperlink{classglrhi_1_1ubo_a26a48bd9a52e5361b9de09a88157c2f4}{ubo}} (GLsizeiptr size, const void \texorpdfstring{$\ast$}{*}data=nullptr)
 \begin{DoxyCompactList}\small\item\em Construct a new UBO. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1ubo_a5515edabfcf931f799e99ce58cb4a3bc}{create}} (GLsizeiptr size, const void \texorpdfstring{$\ast$}{*}data=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new UBO. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classglrhi_1_1ubo_a2f9a466dfd07b4f2f6387406a86468fc}{send\+Data}} (GLintptr offset, GLsizeiptr size, const void \texorpdfstring{$\ast$}{*}data) const
 \begin{DoxyCompactList}\small\item\em Uploads a chunk of data to the UBO one the GPU. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classglrhi_1_1ubo_a7a42c2c97a52bf5ebba2d5d228a238e1}{add\+Binding\+Point}} (GLuint binding\+Point) const
@@ -65,6 +67,23 @@ Adds the UBO to a binding point to be used in a shader.
 {\em binding\+Point} & The binding point to add the SSBO to. \\
 \hline
 \end{DoxyParams}
+\Hypertarget{classglrhi_1_1ubo_a5515edabfcf931f799e99ce58cb4a3bc}\index{glrhi::ubo@{glrhi::ubo}!create@{create}}
+\index{create@{create}!glrhi::ubo@{glrhi::ubo}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1ubo_a5515edabfcf931f799e99ce58cb4a3bc} 
+void glrhi\+::ubo\+::create (\begin{DoxyParamCaption}\item[{GLsizeiptr}]{size}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+
+
+Construct a new UBO. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The size of the UBO in bytes. \\
+\hline
+{\em data} & Optionally pass in all data on creation. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classglrhi_1_1ubo_a02f3d49617014806ade28f790cd6f6ac}\index{glrhi::ubo@{glrhi::ubo}!getID@{getID}}
 \index{getID@{getID}!glrhi::ubo@{glrhi::ubo}}
 \doxysubsubsection{\texorpdfstring{getID()}{getID()}}
@@ -101,5 +120,5 @@ Uploads a chunk of data to the UBO one the GPU.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{ubo_8hpp}{ubo.\+hpp}}\item 
-/home/jan/dev/glrhi/src/ubo.\+cpp\end{DoxyCompactItemize}
+/home/jan/glrhi/include/glrhi/core/\mbox{\hyperlink{ubo_8hpp}{ubo.\+hpp}}\item 
+/home/jan/glrhi/src/core/ubo.\+cpp\end{DoxyCompactItemize}

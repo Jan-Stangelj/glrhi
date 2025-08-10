@@ -101,6 +101,8 @@ $(function(){initNavTree('classglrhi_1_1compute.html','','classglrhi_1_1compute-
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6abd8a910fa60a3807dd857014f3ebd0" id="r_a6abd8a910fa60a3807dd857014f3ebd0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6abd8a910fa60a3807dd857014f3ebd0">compute</a> (const std::filesystem::path &amp;computePath)</td></tr>
 <tr class="memdesc:a6abd8a910fa60a3807dd857014f3ebd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new compute shader.  <br /></td></tr>
+<tr class="memitem:ac1733ee18b85656d1dd5bfe6312a29ca" id="r_ac1733ee18b85656d1dd5bfe6312a29ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac1733ee18b85656d1dd5bfe6312a29ca">create</a> (const std::filesystem::path &amp;computePath)</td></tr>
+<tr class="memdesc:ac1733ee18b85656d1dd5bfe6312a29ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new compute shader.  <br /></td></tr>
 <tr class="memitem:af2f1920b297f5496439c5db8a667f09f" id="r_af2f1920b297f5496439c5db8a667f09f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af2f1920b297f5496439c5db8a667f09f">dispatch</a> (GLuint x, GLuint y, GLuint z) const</td></tr>
 <tr class="memdesc:af2f1920b297f5496439c5db8a667f09f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dispatches the compute shader with the set number of invocations.  <br /></td></tr>
 <tr class="memitem:a8b60691d528adb4a1dfe9dbc0efc30f8" id="r_a8b60691d528adb4a1dfe9dbc0efc30f8"><td class="memItemLeft" align="right" valign="top"><a id="a8b60691d528adb4a1dfe9dbc0efc30f8" name="a8b60691d528adb4a1dfe9dbc0efc30f8"></a>
@@ -159,6 +161,31 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setMat4</b> (const ch
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="ac1733ee18b85656d1dd5bfe6312a29ca" name="ac1733ee18b85656d1dd5bfe6312a29ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1733ee18b85656d1dd5bfe6312a29ca">&#9670;&#160;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void glrhi::compute::create </td>
+          <td>(</td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>computePath</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new compute shader. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">computePath</td><td>Path to a text file containing the compute shader code in GLSL. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="af2f1920b297f5496439c5db8a667f09f" name="af2f1920b297f5496439c5db8a667f09f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af2f1920b297f5496439c5db8a667f09f">&#9670;&#160;</a></span>dispatch()</h2>
 
@@ -226,8 +253,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setMat4</b> (const ch
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/jan/dev/glrhi/include/glrhi/core/<a class="el" href="compute_8hpp_source.html">compute.hpp</a></li>
-<li>/home/jan/dev/glrhi/src/<b>compute.cpp</b></li>
+<li>/home/jan/glrhi/include/glrhi/core/<a class="el" href="compute_8hpp_source.html">compute.hpp</a></li>
+<li>/home/jan/glrhi/src/core/<b>compute.cpp</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['ubo_0',['ubo',['../classglrhi_1_1ubo.html#a26a48bd9a52e5361b9de09a88157c2f4',1,'glrhi::ubo']]],
-  ['unbind_1',['unbind',['../classglrhi_1_1fbo.html#a0cfcdac62939b37698d53730c5f8bfd2',1,'glrhi::fbo::unbind()'],['../classglrhi_1_1vao.html#a5ae6a973cc87fa174cb18219a24afe15',1,'glrhi::vao::unbind()']]],
-  ['use_2',['use',['../classglrhi_1_1shader.html#ab39644b222f4b0f5949a6cb62c47088d',1,'glrhi::shader']]]
+  ['texture2d_0',['texture2D',['../classglrhi_1_1texture2D.html#a510549a050b7747bc3590a746a5eaa81',1,'glrhi::texture2D::texture2D(GLsizei width, GLsizei height, GLenum internalFormat, GLsizei mips=1)'],['../classglrhi_1_1texture2D.html#a5bfc30737ee7487d1fbd6775e73e5ec4',1,'glrhi::texture2D::texture2D(const std::filesystem::path &amp;file, GLenum internalFormat, GLsizei mips=1)']]]
 ];

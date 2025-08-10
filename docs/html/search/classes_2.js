@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fbo_0',['fbo',['../classglrhi_1_1fbo.html',1,'glrhi']]]
+  ['ebo_0',['ebo',['../classglrhi_1_1ebo.html',1,'glrhi']]]
 ];

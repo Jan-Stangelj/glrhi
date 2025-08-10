@@ -101,6 +101,8 @@ $(function(){initNavTree('classglrhi_1_1ubo.html','','classglrhi_1_1ubo-members'
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a26a48bd9a52e5361b9de09a88157c2f4" id="r_a26a48bd9a52e5361b9de09a88157c2f4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26a48bd9a52e5361b9de09a88157c2f4">ubo</a> (GLsizeiptr size, const void *data=nullptr)</td></tr>
 <tr class="memdesc:a26a48bd9a52e5361b9de09a88157c2f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new UBO.  <br /></td></tr>
+<tr class="memitem:a5515edabfcf931f799e99ce58cb4a3bc" id="r_a5515edabfcf931f799e99ce58cb4a3bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5515edabfcf931f799e99ce58cb4a3bc">create</a> (GLsizeiptr size, const void *data=nullptr)</td></tr>
+<tr class="memdesc:a5515edabfcf931f799e99ce58cb4a3bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new UBO.  <br /></td></tr>
 <tr class="memitem:a2f9a466dfd07b4f2f6387406a86468fc" id="r_a2f9a466dfd07b4f2f6387406a86468fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f9a466dfd07b4f2f6387406a86468fc">sendData</a> (GLintptr offset, GLsizeiptr size, const void *data) const</td></tr>
 <tr class="memdesc:a2f9a466dfd07b4f2f6387406a86468fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uploads a chunk of data to the UBO one the GPU.  <br /></td></tr>
 <tr class="memitem:a7a42c2c97a52bf5ebba2d5d228a238e1" id="r_a7a42c2c97a52bf5ebba2d5d228a238e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a42c2c97a52bf5ebba2d5d228a238e1">addBindingPoint</a> (GLuint bindingPoint) const</td></tr>
@@ -161,6 +163,36 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">bindingPoint</td><td>The binding point to add the SSBO to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5515edabfcf931f799e99ce58cb4a3bc" name="a5515edabfcf931f799e99ce58cb4a3bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5515edabfcf931f799e99ce58cb4a3bc">&#9670;&#160;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void glrhi::ubo::create </td>
+          <td>(</td>
+          <td class="paramtype">GLsizeiptr</td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>data</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new UBO. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>The size of the UBO in bytes. </td></tr>
+    <tr><td class="paramname">data</td><td>Optionally pass in all data on creation. </td></tr>
   </table>
   </dd>
 </dl>
@@ -232,8 +264,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/jan/dev/glrhi/include/glrhi/core/<a class="el" href="ubo_8hpp_source.html">ubo.hpp</a></li>
-<li>/home/jan/dev/glrhi/src/<b>ubo.cpp</b></li>
+<li>/home/jan/glrhi/include/glrhi/core/<a class="el" href="ubo_8hpp_source.html">ubo.hpp</a></li>
+<li>/home/jan/glrhi/src/core/<b>ubo.cpp</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

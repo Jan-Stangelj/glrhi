@@ -1,0 +1,49 @@
+\doxysection{camera.\+hpp}
+\hypertarget{camera_8hpp_source}{}\label{camera_8hpp_source}\index{/home/jan/glrhi/include/glrhi/renderer/camera.hpp@{/home/jan/glrhi/include/glrhi/renderer/camera.hpp}}
+\mbox{\hyperlink{camera_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <glm/glm.hpp>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <glrhi/glrhi.hpp>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }glrhi\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{class\ }camera\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ camera();}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \string~camera()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1camera_a0588929c8a8cb5345b7f71544e72b5d7}{uploadData}}();}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1camera_a79769646dadbbbba5a8156aa136c57ae}{bind}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ glm::vec3\ \mbox{\hyperlink{classglrhi_1_1camera_aea1b09dba960873ca3cdb08161616bba}{position}}\ =\ glm::vec3(0.0f);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ glm::vec3\ \mbox{\hyperlink{classglrhi_1_1camera_ab5a7de735007afd122a80f623da8bb7e}{direction}}\ =\ glm::vec3(0.0f);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classglrhi_1_1camera_ab9f23ea22e073e7c80910b62cb4d8445}{near}}\ =\ 0.1f;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classglrhi_1_1camera_ac08f5478b7219d2cab37930145840779}{far}}\ =\ 100.0f;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classglrhi_1_1camera_ac8b75fe16fb4a1b251d158e8ca5140fd}{fov}}\ =\ 60.0f;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classglrhi_1_1camera_a12a0ed4ba39ecf999e042fc590c438cc}{aspectRatio}}\ =\ 16.0f\ /\ 9.0f;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ glm::mat4\ getView()\ \{\ \textcolor{keywordflow}{return}\ m\_view;\ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ glm::mat4\ getProjection()\ \{\ \textcolor{keywordflow}{return}\ m\_projection;\ \}\ }
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ glm::mat4\ m\_view;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ glm::mat4\ m\_projection;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1ubo}{glrhi::ubo}}\ m\_cameraData;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \};}
+\DoxyCodeLine{00073\ \}}
+
+\end{DoxyCode}

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>glrhi: /home/jan/dev/glrhi/include/glrhi/core/ubo.hpp Source File</title>
+<title>glrhi: /home/jan/glrhi/include/glrhi/core/ubo.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,25 +104,29 @@ $(function(){initNavTree('ubo_8hpp_source.html','',''); });
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_function" href="classglrhi_1_1ubo.html#a26a48bd9a52e5361b9de09a88157c2f4">ubo</a>(GLsizeiptr size, <span class="keyword">const</span> <span class="keywordtype">void</span>* data = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_function" href="classglrhi_1_1ubo.html#a26a48bd9a52e5361b9de09a88157c2f4">~ubo</a>();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classglrhi_1_1ubo.html#a2f9a466dfd07b4f2f6387406a86468fc">sendData</a>(GLintptr offset, GLsizeiptr size, <span class="keyword">const</span> <span class="keywordtype">void</span>* data) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_function" href="classglrhi_1_1ubo.html#a26a48bd9a52e5361b9de09a88157c2f4">ubo</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_function" href="classglrhi_1_1ubo.html#a26a48bd9a52e5361b9de09a88157c2f4">~ubo</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classglrhi_1_1ubo.html#a5515edabfcf931f799e99ce58cb4a3bc">create</a>(GLsizeiptr size, <span class="keyword">const</span> <span class="keywordtype">void</span>* data = <span class="keyword">nullptr</span>);</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classglrhi_1_1ubo.html#a7a42c2c97a52bf5ebba2d5d228a238e1">addBindingPoint</a>(GLuint bindingPoint) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classglrhi_1_1ubo.html#a02f3d49617014806ade28f790cd6f6ac">   48</a></span>        GLuint <a class="code hl_function" href="classglrhi_1_1ubo.html#a02f3d49617014806ade28f790cd6f6ac">getID</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_ID; }</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        GLuint m_ID = 0;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    };</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classglrhi_1_1ubo.html#a2f9a466dfd07b4f2f6387406a86468fc">sendData</a>(GLintptr offset, GLsizeiptr size, <span class="keyword">const</span> <span class="keywordtype">void</span>* data) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classglrhi_1_1ubo.html#a7a42c2c97a52bf5ebba2d5d228a238e1">addBindingPoint</a>(GLuint bindingPoint) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classglrhi_1_1ubo.html#a02f3d49617014806ade28f790cd6f6ac">   57</a></span>        GLuint <a class="code hl_function" href="classglrhi_1_1ubo.html#a02f3d49617014806ade28f790cd6f6ac">getID</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_ID; }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        GLuint m_ID = 0;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    };</div>
 </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
-<div class="ttc" id="aclassglrhi_1_1ubo_html_a02f3d49617014806ade28f790cd6f6ac"><div class="ttname"><a href="classglrhi_1_1ubo.html#a02f3d49617014806ade28f790cd6f6ac">glrhi::ubo::getID</a></div><div class="ttdeci">GLuint getID() const</div><div class="ttdoc">Returns the UBO&#39;s OpenGL ID.</div><div class="ttdef"><b>Definition</b> ubo.hpp:48</div></div>
-<div class="ttc" id="aclassglrhi_1_1ubo_html_a26a48bd9a52e5361b9de09a88157c2f4"><div class="ttname"><a href="classglrhi_1_1ubo.html#a26a48bd9a52e5361b9de09a88157c2f4">glrhi::ubo::ubo</a></div><div class="ttdeci">ubo(GLsizeiptr size, const void *data=nullptr)</div><div class="ttdoc">Construct a new UBO.</div><div class="ttdef"><b>Definition</b> ubo.cpp:5</div></div>
-<div class="ttc" id="aclassglrhi_1_1ubo_html_a2f9a466dfd07b4f2f6387406a86468fc"><div class="ttname"><a href="classglrhi_1_1ubo.html#a2f9a466dfd07b4f2f6387406a86468fc">glrhi::ubo::sendData</a></div><div class="ttdeci">void sendData(GLintptr offset, GLsizeiptr size, const void *data) const</div><div class="ttdoc">Uploads a chunk of data to the UBO one the GPU.</div><div class="ttdef"><b>Definition</b> ubo.cpp:16</div></div>
-<div class="ttc" id="aclassglrhi_1_1ubo_html_a7a42c2c97a52bf5ebba2d5d228a238e1"><div class="ttname"><a href="classglrhi_1_1ubo.html#a7a42c2c97a52bf5ebba2d5d228a238e1">glrhi::ubo::addBindingPoint</a></div><div class="ttdeci">void addBindingPoint(GLuint bindingPoint) const</div><div class="ttdoc">Adds the UBO to a binding point to be used in a shader.</div><div class="ttdef"><b>Definition</b> ubo.cpp:20</div></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>}</div>
+<div class="ttc" id="aclassglrhi_1_1ubo_html_a02f3d49617014806ade28f790cd6f6ac"><div class="ttname"><a href="classglrhi_1_1ubo.html#a02f3d49617014806ade28f790cd6f6ac">glrhi::ubo::getID</a></div><div class="ttdeci">GLuint getID() const</div><div class="ttdoc">Returns the UBO&#39;s OpenGL ID.</div><div class="ttdef"><b>Definition</b> ubo.hpp:57</div></div>
+<div class="ttc" id="aclassglrhi_1_1ubo_html_a26a48bd9a52e5361b9de09a88157c2f4"><div class="ttname"><a href="classglrhi_1_1ubo.html#a26a48bd9a52e5361b9de09a88157c2f4">glrhi::ubo::ubo</a></div><div class="ttdeci">ubo(GLsizeiptr size, const void *data=nullptr)</div><div class="ttdoc">Construct a new UBO.</div><div class="ttdef"><b>Definition</b> ubo.cpp:7</div></div>
+<div class="ttc" id="aclassglrhi_1_1ubo_html_a2f9a466dfd07b4f2f6387406a86468fc"><div class="ttname"><a href="classglrhi_1_1ubo.html#a2f9a466dfd07b4f2f6387406a86468fc">glrhi::ubo::sendData</a></div><div class="ttdeci">void sendData(GLintptr offset, GLsizeiptr size, const void *data) const</div><div class="ttdoc">Uploads a chunk of data to the UBO one the GPU.</div><div class="ttdef"><b>Definition</b> ubo.cpp:27</div></div>
+<div class="ttc" id="aclassglrhi_1_1ubo_html_a5515edabfcf931f799e99ce58cb4a3bc"><div class="ttname"><a href="classglrhi_1_1ubo.html#a5515edabfcf931f799e99ce58cb4a3bc">glrhi::ubo::create</a></div><div class="ttdeci">void create(GLsizeiptr size, const void *data=nullptr)</div><div class="ttdoc">Construct a new UBO.</div><div class="ttdef"><b>Definition</b> ubo.cpp:15</div></div>
+<div class="ttc" id="aclassglrhi_1_1ubo_html_a7a42c2c97a52bf5ebba2d5d228a238e1"><div class="ttname"><a href="classglrhi_1_1ubo.html#a7a42c2c97a52bf5ebba2d5d228a238e1">glrhi::ubo::addBindingPoint</a></div><div class="ttdeci">void addBindingPoint(GLuint bindingPoint) const</div><div class="ttdoc">Adds the UBO to a binding point to be used in a shader.</div><div class="ttdef"><b>Definition</b> ubo.cpp:31</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

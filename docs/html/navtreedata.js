@@ -33,14 +33,15 @@ var NAVTREE =
     [ "Usage", "index.html#autotoc_md6", null ],
     [ "Examples", "index.html#autotoc_md7", null ],
     [ "License", "index.html#autotoc_md8", null ],
-    [ "TBD", "md__2home_2jan_2dev_2glrhi_2EXAMPLES.html", null ],
-    [ "TODO", "md__2home_2jan_2dev_2glrhi_2TODO.html", null ],
+    [ "TBD", "md__2home_2jan_2glrhi_2EXAMPLES.html", null ],
+    [ "TODO", "md__2home_2jan_2glrhi_2TODO.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ]
+        [ "Functions", "functions_func.html", null ],
+        [ "Variables", "functions_vars.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [

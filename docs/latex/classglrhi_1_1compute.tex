@@ -14,6 +14,8 @@ Handles the creation and usage of compute shaders.
 \item 
 \mbox{\hyperlink{classglrhi_1_1compute_a6abd8a910fa60a3807dd857014f3ebd0}{compute}} (const std\+::filesystem\+::path \&compute\+Path)
 \begin{DoxyCompactList}\small\item\em Construct a new compute shader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1compute_ac1733ee18b85656d1dd5bfe6312a29ca}{create}} (const std\+::filesystem\+::path \&compute\+Path)
+\begin{DoxyCompactList}\small\item\em Construct a new compute shader. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classglrhi_1_1compute_af2f1920b297f5496439c5db8a667f09f}{dispatch}} (GLuint x, GLuint y, GLuint z) const
 \begin{DoxyCompactList}\small\item\em Dispatches the compute shader with the set number of invocations. \end{DoxyCompactList}\item 
 \Hypertarget{classglrhi_1_1compute_a8b60691d528adb4a1dfe9dbc0efc30f8}\label{classglrhi_1_1compute_a8b60691d528adb4a1dfe9dbc0efc30f8} 
@@ -82,6 +84,21 @@ Construct a new compute shader.
 \label{doc-func-members}
 \Hypertarget{classglrhi_1_1compute_doc-func-members}
 \doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1compute_ac1733ee18b85656d1dd5bfe6312a29ca}\index{glrhi::compute@{glrhi::compute}!create@{create}}
+\index{create@{create}!glrhi::compute@{glrhi::compute}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1compute_ac1733ee18b85656d1dd5bfe6312a29ca} 
+void glrhi\+::compute\+::create (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{compute\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Construct a new compute shader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em compute\+Path} & Path to a text file containing the compute shader code in GLSL. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classglrhi_1_1compute_af2f1920b297f5496439c5db8a667f09f}\index{glrhi::compute@{glrhi::compute}!dispatch@{dispatch}}
 \index{dispatch@{dispatch}!glrhi::compute@{glrhi::compute}}
 \doxysubsubsection{\texorpdfstring{dispatch()}{dispatch()}}
@@ -122,5 +139,5 @@ Sets a texture handle for use with bindless textures.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{compute_8hpp}{compute.\+hpp}}\item 
-/home/jan/dev/glrhi/src/compute.\+cpp\end{DoxyCompactItemize}
+/home/jan/glrhi/include/glrhi/core/\mbox{\hyperlink{compute_8hpp}{compute.\+hpp}}\item 
+/home/jan/glrhi/src/core/compute.\+cpp\end{DoxyCompactItemize}

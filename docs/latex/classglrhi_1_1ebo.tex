@@ -14,6 +14,8 @@ Handles creation and usage of Element Buffer Objects.
 \item 
 \mbox{\hyperlink{classglrhi_1_1ebo_a57e7d8b266584746cf987b6a1f81de0b}{ebo}} (const void \texorpdfstring{$\ast$}{*}data, unsigned int size)
 \begin{DoxyCompactList}\small\item\em Construct a new EBO. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1ebo_aca551a92a4f15b09624e6f25a1b91d03}{create}} (const void \texorpdfstring{$\ast$}{*}data, unsigned int size)
+\begin{DoxyCompactList}\small\item\em Construct a new EBO. \end{DoxyCompactList}\item 
 GLuint \mbox{\hyperlink{classglrhi_1_1ebo_a7b00e3a4d89eeca17690cad3c5167745}{get\+ID}} () const
 \begin{DoxyCompactList}\small\item\em Returns the EBO\textquotesingle{}s Open\+GL ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -46,6 +48,23 @@ Construct a new EBO.
 \label{doc-func-members}
 \Hypertarget{classglrhi_1_1ebo_doc-func-members}
 \doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1ebo_aca551a92a4f15b09624e6f25a1b91d03}\index{glrhi::ebo@{glrhi::ebo}!create@{create}}
+\index{create@{create}!glrhi::ebo@{glrhi::ebo}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1ebo_aca551a92a4f15b09624e6f25a1b91d03} 
+void glrhi\+::ebo\+::create (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{unsigned int}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Construct a new EBO. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pointer to the indices data. \\
+\hline
+{\em size} & Size of the data in bytes. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classglrhi_1_1ebo_a7b00e3a4d89eeca17690cad3c5167745}\index{glrhi::ebo@{glrhi::ebo}!getID@{getID}}
 \index{getID@{getID}!glrhi::ebo@{glrhi::ebo}}
 \doxysubsubsection{\texorpdfstring{getID()}{getID()}}
@@ -63,5 +82,5 @@ The EBO\textquotesingle{}s Open\+GL ID.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{ebo_8hpp}{ebo.\+hpp}}\item 
-/home/jan/dev/glrhi/src/ebo.\+cpp\end{DoxyCompactItemize}
+/home/jan/glrhi/include/glrhi/core/\mbox{\hyperlink{ebo_8hpp}{ebo.\+hpp}}\item 
+/home/jan/glrhi/src/core/ebo.\+cpp\end{DoxyCompactItemize}

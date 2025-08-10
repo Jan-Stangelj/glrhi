@@ -14,6 +14,8 @@ Handles the creation and usage of Shader Storage Buffer Objects.
 \item 
 \mbox{\hyperlink{classglrhi_1_1ssbo_a760fe3b246e884ba214e6ed118a7c9f5}{ssbo}} (GLsizeiptr size, const void \texorpdfstring{$\ast$}{*}data=nullptr)
 \begin{DoxyCompactList}\small\item\em Construct a new SSBO. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1ssbo_acdb09b806880b25f56476699da077c20}{create}} (GLsizeiptr size, const void \texorpdfstring{$\ast$}{*}data=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new SSBO. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classglrhi_1_1ssbo_a3e75a046d44c099ce676f208e48a65e7}{send\+Data}} (GLintptr offset, GLsizeiptr size, const void \texorpdfstring{$\ast$}{*}data) const
 \begin{DoxyCompactList}\small\item\em Uploads a chunk of data to the SSBO on the GPU. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classglrhi_1_1ssbo_a4a5fc65605ab66401451c33b5c4233e0}{add\+Binding\+Point}} (GLuint binding\+Point) const
@@ -65,6 +67,23 @@ Adds the SSBO to a binding point to be used in a shader.
 {\em binding\+Point} & The binding point to add the SSBO to. \\
 \hline
 \end{DoxyParams}
+\Hypertarget{classglrhi_1_1ssbo_acdb09b806880b25f56476699da077c20}\index{glrhi::ssbo@{glrhi::ssbo}!create@{create}}
+\index{create@{create}!glrhi::ssbo@{glrhi::ssbo}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1ssbo_acdb09b806880b25f56476699da077c20} 
+void glrhi\+::ssbo\+::create (\begin{DoxyParamCaption}\item[{GLsizeiptr}]{size}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+
+
+Construct a new SSBO. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The size of the SSBO in bytes. \\
+\hline
+{\em data} & Optionally pass in all data on creation. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classglrhi_1_1ssbo_a0db4a00356dddacfe93bd85a1142d88c}\index{glrhi::ssbo@{glrhi::ssbo}!getID@{getID}}
 \index{getID@{getID}!glrhi::ssbo@{glrhi::ssbo}}
 \doxysubsubsection{\texorpdfstring{getID()}{getID()}}
@@ -101,5 +120,5 @@ Uploads a chunk of data to the SSBO on the GPU.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{ssbo_8hpp}{ssbo.\+hpp}}\item 
-/home/jan/dev/glrhi/src/ssbo.\+cpp\end{DoxyCompactItemize}
+/home/jan/glrhi/include/glrhi/core/\mbox{\hyperlink{ssbo_8hpp}{ssbo.\+hpp}}\item 
+/home/jan/glrhi/src/core/ssbo.\+cpp\end{DoxyCompactItemize}

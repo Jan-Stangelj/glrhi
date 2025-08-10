@@ -1,0 +1,56 @@
+\doxysection{glrhi\+::camera Class Reference}
+\hypertarget{classglrhi_1_1camera}{}\label{classglrhi_1_1camera}\index{glrhi::camera@{glrhi::camera}}
+
+
+Generic camera class.  
+
+
+
+
+{\ttfamily \#include $<$camera.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classglrhi_1_1camera_a0588929c8a8cb5345b7f71544e72b5d7}\label{classglrhi_1_1camera_a0588929c8a8cb5345b7f71544e72b5d7} 
+void {\bfseries upload\+Data} ()
+\begin{DoxyCompactList}\small\item\em Recalculates the matrices and uploads them to the GPU. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1camera_a79769646dadbbbba5a8156aa136c57ae}\label{classglrhi_1_1camera_a79769646dadbbbba5a8156aa136c57ae} 
+void {\bfseries bind} () const
+\begin{DoxyCompactList}\small\item\em Binds the UBO with the data to binding point 0. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1camera_a585e94dda4805b015f2764fdff7a73c1}\label{classglrhi_1_1camera_a585e94dda4805b015f2764fdff7a73c1} 
+glm\+::mat4 {\bfseries get\+View} ()
+\item 
+\Hypertarget{classglrhi_1_1camera_ad0065f6a147d49ac41dda2d7b9393f8a}\label{classglrhi_1_1camera_ad0065f6a147d49ac41dda2d7b9393f8a} 
+glm\+::mat4 {\bfseries get\+Projection} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classglrhi_1_1camera_aea1b09dba960873ca3cdb08161616bba}\label{classglrhi_1_1camera_aea1b09dba960873ca3cdb08161616bba} 
+glm\+::vec3 {\bfseries position} = glm\+::vec3(0.\+0f)
+\begin{DoxyCompactList}\small\item\em Position of the camera. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1camera_ab5a7de735007afd122a80f623da8bb7e}\label{classglrhi_1_1camera_ab5a7de735007afd122a80f623da8bb7e} 
+glm\+::vec3 {\bfseries direction} = glm\+::vec3(0.\+0f)
+\begin{DoxyCompactList}\small\item\em Euler direction of the camera in degrees. (pitch, yaw, roll) \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1camera_ab9f23ea22e073e7c80910b62cb4d8445}\label{classglrhi_1_1camera_ab9f23ea22e073e7c80910b62cb4d8445} 
+float {\bfseries near} = 0.\+1f
+\begin{DoxyCompactList}\small\item\em Distance to the near plane. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1camera_ac08f5478b7219d2cab37930145840779}\label{classglrhi_1_1camera_ac08f5478b7219d2cab37930145840779} 
+float {\bfseries far} = 100.\+0f
+\begin{DoxyCompactList}\small\item\em Distance to the far plane. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1camera_ac8b75fe16fb4a1b251d158e8ca5140fd}\label{classglrhi_1_1camera_ac8b75fe16fb4a1b251d158e8ca5140fd} 
+float {\bfseries fov} = 60.\+0f
+\begin{DoxyCompactList}\small\item\em Fov in the y dimension. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1camera_a12a0ed4ba39ecf999e042fc590c438cc}\label{classglrhi_1_1camera_a12a0ed4ba39ecf999e042fc590c438cc} 
+float {\bfseries aspect\+Ratio} = 16.\+0f / 9.\+0f
+\begin{DoxyCompactList}\small\item\em width / height \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Generic camera class. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jan/glrhi/include/glrhi/renderer/\mbox{\hyperlink{camera_8hpp}{camera.\+hpp}}\item 
+/home/jan/glrhi/src/renderer/camera.\+cpp\end{DoxyCompactItemize}

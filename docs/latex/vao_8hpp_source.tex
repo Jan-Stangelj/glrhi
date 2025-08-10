@@ -1,5 +1,5 @@
 \doxysection{vao.\+hpp}
-\hypertarget{vao_8hpp_source}{}\label{vao_8hpp_source}\index{/home/jan/dev/glrhi/include/glrhi/core/vao.hpp@{/home/jan/dev/glrhi/include/glrhi/core/vao.hpp}}
+\hypertarget{vao_8hpp_source}{}\label{vao_8hpp_source}\index{/home/jan/glrhi/include/glrhi/core/vao.hpp@{/home/jan/glrhi/include/glrhi/core/vao.hpp}}
 \mbox{\hyperlink{vao_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
@@ -8,8 +8,8 @@
 \DoxyCodeLine{00007\ }
 \DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <glad/glad.h>}}
 \DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{vbo_8hpp}{glrhi/core/vbo.hpp}}"{}}}
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ebo_8hpp}{glrhi/core/ebo.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{vbo_8hpp}{glrhi/core/vbo.hpp}}>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ebo_8hpp}{glrhi/core/ebo.hpp}}>}}
 \DoxyCodeLine{00012\ }
 \DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }glrhi\ \{}
 \DoxyCodeLine{00014\ }
@@ -31,7 +31,7 @@
 \DoxyCodeLine{00063\ }
 \DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{private}:}
 \DoxyCodeLine{00065\ }
-\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ GLuint\ m\_ID;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ GLuint\ m\_ID\ =\ 0;}
 \DoxyCodeLine{00067\ }
 \DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ m\_attributeCounter\ =\ 0;}
 \DoxyCodeLine{00069\ \ \ \ \ \};}

@@ -101,6 +101,8 @@ $(function(){initNavTree('classglrhi_1_1shader.html','','classglrhi_1_1shader-me
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a9bae8d841280bdf491747483e43b9369" id="r_a9bae8d841280bdf491747483e43b9369"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9bae8d841280bdf491747483e43b9369">shader</a> (const std::filesystem::path &amp;vertexPath, const std::filesystem::path &amp;fragmentPath)</td></tr>
 <tr class="memdesc:a9bae8d841280bdf491747483e43b9369"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new shader.  <br /></td></tr>
+<tr class="memitem:a0aa9b62d5ecddcb04abe28935e34841d" id="r_a0aa9b62d5ecddcb04abe28935e34841d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0aa9b62d5ecddcb04abe28935e34841d">create</a> (const std::filesystem::path &amp;vertexPath, const std::filesystem::path &amp;fragmentPath)</td></tr>
+<tr class="memdesc:a0aa9b62d5ecddcb04abe28935e34841d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new shader.  <br /></td></tr>
 <tr class="memitem:ab39644b222f4b0f5949a6cb62c47088d" id="r_ab39644b222f4b0f5949a6cb62c47088d"><td class="memItemLeft" align="right" valign="top"><a id="ab39644b222f4b0f5949a6cb62c47088d" name="ab39644b222f4b0f5949a6cb62c47088d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>use</b> () const</td></tr>
 <tr class="memdesc:ab39644b222f4b0f5949a6cb62c47088d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the shader to be used in the subsequent draw calls. <br /></td></tr>
@@ -165,6 +167,36 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setMat4</b> (const ch
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a0aa9b62d5ecddcb04abe28935e34841d" name="a0aa9b62d5ecddcb04abe28935e34841d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aa9b62d5ecddcb04abe28935e34841d">&#9670;&#160;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void glrhi::shader::create </td>
+          <td>(</td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>vertexPath</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::filesystem::path &amp;</td>          <td class="paramname"><span class="paramname"><em>fragmentPath</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new shader. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vertexPath</td><td>Path to a text file containing the vertex shader code in GLSL. </td></tr>
+    <tr><td class="paramname">fragmentPath</td><td>Path to a text file containing the vertex shader code in GLSL. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="afb5595f7a7fd23a9e772c796da98adf3" name="afb5595f7a7fd23a9e772c796da98adf3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afb5595f7a7fd23a9e772c796da98adf3">&#9670;&#160;</a></span>setHandle64()</h2>
 
@@ -196,8 +228,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setMat4</b> (const ch
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/jan/dev/glrhi/include/glrhi/core/<a class="el" href="shader_8hpp_source.html">shader.hpp</a></li>
-<li>/home/jan/dev/glrhi/src/<b>shader.cpp</b></li>
+<li>/home/jan/glrhi/include/glrhi/core/<a class="el" href="shader_8hpp_source.html">shader.hpp</a></li>
+<li>/home/jan/glrhi/src/core/<b>shader.cpp</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

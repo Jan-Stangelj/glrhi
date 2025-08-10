@@ -101,6 +101,8 @@ $(function(){initNavTree('classglrhi_1_1ssbo.html','','classglrhi_1_1ssbo-member
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a760fe3b246e884ba214e6ed118a7c9f5" id="r_a760fe3b246e884ba214e6ed118a7c9f5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a760fe3b246e884ba214e6ed118a7c9f5">ssbo</a> (GLsizeiptr size, const void *data=nullptr)</td></tr>
 <tr class="memdesc:a760fe3b246e884ba214e6ed118a7c9f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new SSBO.  <br /></td></tr>
+<tr class="memitem:acdb09b806880b25f56476699da077c20" id="r_acdb09b806880b25f56476699da077c20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdb09b806880b25f56476699da077c20">create</a> (GLsizeiptr size, const void *data=nullptr)</td></tr>
+<tr class="memdesc:acdb09b806880b25f56476699da077c20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new SSBO.  <br /></td></tr>
 <tr class="memitem:a3e75a046d44c099ce676f208e48a65e7" id="r_a3e75a046d44c099ce676f208e48a65e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e75a046d44c099ce676f208e48a65e7">sendData</a> (GLintptr offset, GLsizeiptr size, const void *data) const</td></tr>
 <tr class="memdesc:a3e75a046d44c099ce676f208e48a65e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uploads a chunk of data to the SSBO on the GPU.  <br /></td></tr>
 <tr class="memitem:a4a5fc65605ab66401451c33b5c4233e0" id="r_a4a5fc65605ab66401451c33b5c4233e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a5fc65605ab66401451c33b5c4233e0">addBindingPoint</a> (GLuint bindingPoint) const</td></tr>
@@ -161,6 +163,36 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">bindingPoint</td><td>The binding point to add the SSBO to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="acdb09b806880b25f56476699da077c20" name="acdb09b806880b25f56476699da077c20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdb09b806880b25f56476699da077c20">&#9670;&#160;</a></span>create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void glrhi::ssbo::create </td>
+          <td>(</td>
+          <td class="paramtype">GLsizeiptr</td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *</td>          <td class="paramname"><span class="paramname"><em>data</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a new SSBO. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>The size of the SSBO in bytes. </td></tr>
+    <tr><td class="paramname">data</td><td>Optionally pass in all data on creation. </td></tr>
   </table>
   </dd>
 </dl>
@@ -232,8 +264,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/jan/dev/glrhi/include/glrhi/core/<a class="el" href="ssbo_8hpp_source.html">ssbo.hpp</a></li>
-<li>/home/jan/dev/glrhi/src/<b>ssbo.cpp</b></li>
+<li>/home/jan/glrhi/include/glrhi/core/<a class="el" href="ssbo_8hpp_source.html">ssbo.hpp</a></li>
+<li>/home/jan/glrhi/src/core/<b>ssbo.cpp</b></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

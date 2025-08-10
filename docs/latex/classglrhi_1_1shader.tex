@@ -14,6 +14,8 @@ Handles the creation and usage of shaders.
 \item 
 \mbox{\hyperlink{classglrhi_1_1shader_a9bae8d841280bdf491747483e43b9369}{shader}} (const std\+::filesystem\+::path \&vertex\+Path, const std\+::filesystem\+::path \&fragment\+Path)
 \begin{DoxyCompactList}\small\item\em Construct a new shader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1shader_a0aa9b62d5ecddcb04abe28935e34841d}{create}} (const std\+::filesystem\+::path \&vertex\+Path, const std\+::filesystem\+::path \&fragment\+Path)
+\begin{DoxyCompactList}\small\item\em Construct a new shader. \end{DoxyCompactList}\item 
 \Hypertarget{classglrhi_1_1shader_ab39644b222f4b0f5949a6cb62c47088d}\label{classglrhi_1_1shader_ab39644b222f4b0f5949a6cb62c47088d} 
 void {\bfseries use} () const
 \begin{DoxyCompactList}\small\item\em Selects the shader to be used in the subsequent draw calls. \end{DoxyCompactList}\item 
@@ -85,6 +87,23 @@ Construct a new shader.
 \label{doc-func-members}
 \Hypertarget{classglrhi_1_1shader_doc-func-members}
 \doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1shader_a0aa9b62d5ecddcb04abe28935e34841d}\index{glrhi::shader@{glrhi::shader}!create@{create}}
+\index{create@{create}!glrhi::shader@{glrhi::shader}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1shader_a0aa9b62d5ecddcb04abe28935e34841d} 
+void glrhi\+::shader\+::create (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{vertex\+Path}{, }\item[{const std\+::filesystem\+::path \&}]{fragment\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Construct a new shader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+Path} & Path to a text file containing the vertex shader code in GLSL. \\
+\hline
+{\em fragment\+Path} & Path to a text file containing the vertex shader code in GLSL. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classglrhi_1_1shader_afb5595f7a7fd23a9e772c796da98adf3}\index{glrhi::shader@{glrhi::shader}!setHandle64@{setHandle64}}
 \index{setHandle64@{setHandle64}!glrhi::shader@{glrhi::shader}}
 \doxysubsubsection{\texorpdfstring{setHandle64()}{setHandle64()}}
@@ -106,5 +125,5 @@ Sets a texture handle for use with bindless textures.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{shader_8hpp}{shader.\+hpp}}\item 
-/home/jan/dev/glrhi/src/shader.\+cpp\end{DoxyCompactItemize}
+/home/jan/glrhi/include/glrhi/core/\mbox{\hyperlink{shader_8hpp}{shader.\+hpp}}\item 
+/home/jan/glrhi/src/core/shader.\+cpp\end{DoxyCompactItemize}

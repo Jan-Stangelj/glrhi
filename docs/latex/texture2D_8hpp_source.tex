@@ -1,14 +1,14 @@
 \doxysection{texture2\+D.\+hpp}
-\hypertarget{texture2D_8hpp_source}{}\label{texture2D_8hpp_source}\index{/home/jan/dev/glrhi/include/glrhi/core/texture2D.hpp@{/home/jan/dev/glrhi/include/glrhi/core/texture2D.hpp}}
+\hypertarget{texture2D_8hpp_source}{}\label{texture2D_8hpp_source}\index{/home/jan/glrhi/include/glrhi/core/texture2D.hpp@{/home/jan/glrhi/include/glrhi/core/texture2D.hpp}}
 \mbox{\hyperlink{texture2D_8hpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
 \DoxyCodeLine{00005\ }
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#pragma\ once}}
 \DoxyCodeLine{00007\ }
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}glad/glad.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <glad/glad.h>}}
 \DoxyCodeLine{00009\ }
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}stb\_image.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <stb\_image.h>}}
 \DoxyCodeLine{00011\ }
 \DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <filesystem>}}
 \DoxyCodeLine{00013\ }
@@ -20,32 +20,37 @@
 \DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D_a510549a050b7747bc3590a746a5eaa81}{texture2D}}(GLsizei\ width,\ GLsizei\ height,\ GLenum\ internalFormat,\ GLsizei\ mips\ =\ 1);}
 \DoxyCodeLine{00031\ }
 \DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D_a510549a050b7747bc3590a746a5eaa81}{texture2D}}(\textcolor{keyword}{const}\ std::filesystem::path\&\ file,\ GLenum\ internalFormat,\ GLsizei\ mips\ =\ 1);}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D_a510549a050b7747bc3590a746a5eaa81}{\string~texture2D}}();}
-\DoxyCodeLine{00041\ }
-\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1texture2D_a2ec569c7b6c2f35a26a2bd0ca6423752}{loadData}}(GLenum\ dataFormat,\ GLenum\ dataType,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ GLint\ mip\ =\ 0)\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ }
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1texture2D_aec07f6b59466a0b41aa0a6036dac1695}{genMipmaps}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00056\ }
-\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1texture2D_a8be311ecd3e2a66aa63855b5613c5ceb}{bind}}(GLuint\ textureUnit);}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1texture2D_a98893db927234b32003ce83fc5ddc57c}{bindImage}}(GLuint\ unit,\ GLint\ mip);}
-\DoxyCodeLine{00071\ }
-\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ GLuint64\ \mbox{\hyperlink{classglrhi_1_1texture2D_ad067d1b60cf6bc8a43ec4e7913236569}{getSamplerHandle}}();}
-\DoxyCodeLine{00078\ }
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ GLuint64\ \mbox{\hyperlink{classglrhi_1_1texture2D_aa42206385f5656899e0d9223790ce915}{getImageHandle}}(GLint\ mip);}
-\DoxyCodeLine{00086\ }
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ GLuint\ \mbox{\hyperlink{classglrhi_1_1texture2D_ab1b2f014c6a40281c17376f8bce2f9a6}{getID}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_ID;\ \};}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00095\ }
-\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ GLuint\ m\_ID\ =\ 0;}
-\DoxyCodeLine{00097\ }
-\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ GLuint64\ m\_samplerHandle\ =\ 0;}
-\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ GLuint64\ m\_imageHandle\ =\ 0;}
-\DoxyCodeLine{00100\ }
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ GLsizei\ m\_width,\ m\_height;}
-\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ GLenum\ m\_format;}
-\DoxyCodeLine{00103\ \ \ \ \ \};}
-\DoxyCodeLine{00104\ \}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D_a510549a050b7747bc3590a746a5eaa81}{texture2D}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classglrhi_1_1texture2D_a510549a050b7747bc3590a746a5eaa81}{\string~texture2D}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1texture2D_ae2cb576e496064d4d04b3255a3271ef6}{create}}(GLsizei\ width,\ GLsizei\ height,\ GLenum\ internalFormat,\ GLsizei\ mips\ =\ 1);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1texture2D_ae2cb576e496064d4d04b3255a3271ef6}{create}}(\textcolor{keyword}{const}\ std::filesystem::path\&\ file,\ GLenum\ internalFormat,\ GLsizei\ mips\ =\ 1);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1texture2D_a2ec569c7b6c2f35a26a2bd0ca6423752}{loadData}}(GLenum\ dataFormat,\ GLenum\ dataType,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ data,\ GLint\ mip\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1texture2D_aec07f6b59466a0b41aa0a6036dac1695}{genMipmaps}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1texture2D_a52b4470fa5575fa85f492f568ee51802}{bind}}(GLuint\ textureUnit)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classglrhi_1_1texture2D_a65886f19f68d147eb0463810b52481ba}{bindImage}}(GLuint\ unit,\ GLint\ mip)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ GLuint64\ \mbox{\hyperlink{classglrhi_1_1texture2D_ad067d1b60cf6bc8a43ec4e7913236569}{getSamplerHandle}}();}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ GLuint64\ \mbox{\hyperlink{classglrhi_1_1texture2D_aa42206385f5656899e0d9223790ce915}{getImageHandle}}(GLint\ mip);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ GLuint\ \mbox{\hyperlink{classglrhi_1_1texture2D_ab1b2f014c6a40281c17376f8bce2f9a6}{getID}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ m\_ID;\ \};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ GLuint\ m\_ID\ =\ 0;}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ GLuint64\ m\_samplerHandle\ =\ 0;}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ GLuint64\ m\_imageHandle\ =\ 0;}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ GLsizei\ m\_width\ =\ 1024,\ m\_height\ =\ 1024;}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ GLenum\ m\_format\ =\ GL\_RGBA8;}
+\DoxyCodeLine{00123\ \ \ \ \ \};}
+\DoxyCodeLine{00124\ \}}
 
 \end{DoxyCode}

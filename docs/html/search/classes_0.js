@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['compute_0',['compute',['../classglrhi_1_1compute.html',1,'glrhi']]]
+  ['camera_0',['camera',['../classglrhi_1_1camera.html',1,'glrhi']]],
+  ['compute_1',['compute',['../classglrhi_1_1compute.html',1,'glrhi']]]
 ];

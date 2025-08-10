@@ -16,14 +16,18 @@ Handles the creation and usage of 2d textures.
 \begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classglrhi_1_1texture2D}{texture2D}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classglrhi_1_1texture2D_a5bfc30737ee7487d1fbd6775e73e5ec4}{texture2D}} (const std\+::filesystem\+::path \&file, GLenum internal\+Format, GLsizei mips=1)
 \begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classglrhi_1_1texture2D}{texture2D}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1texture2D_ae2cb576e496064d4d04b3255a3271ef6}{create}} (GLsizei width, GLsizei height, GLenum internal\+Format, GLsizei mips=1)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classglrhi_1_1texture2D}{texture2D}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1texture2D_a5bfb4c5da4b17247ebb88f346b9f52b3}{create}} (const std\+::filesystem\+::path \&file, GLenum internal\+Format, GLsizei mips=1)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classglrhi_1_1texture2D}{texture2D}. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classglrhi_1_1texture2D_a2ec569c7b6c2f35a26a2bd0ca6423752}{load\+Data}} (GLenum data\+Format, GLenum data\+Type, const void \texorpdfstring{$\ast$}{*}data, GLint mip=0) const
 \begin{DoxyCompactList}\small\item\em Loads data into the texture. \end{DoxyCompactList}\item 
 \Hypertarget{classglrhi_1_1texture2D_aec07f6b59466a0b41aa0a6036dac1695}\label{classglrhi_1_1texture2D_aec07f6b59466a0b41aa0a6036dac1695} 
 void {\bfseries gen\+Mipmaps} () const
 \begin{DoxyCompactList}\small\item\em Generates mipmaps using default Open\+GL function. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classglrhi_1_1texture2D_a8be311ecd3e2a66aa63855b5613c5ceb}{bind}} (GLuint texture\+Unit)
+void \mbox{\hyperlink{classglrhi_1_1texture2D_a52b4470fa5575fa85f492f568ee51802}{bind}} (GLuint texture\+Unit) const
 \begin{DoxyCompactList}\small\item\em Binds the texture to a texture unit. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classglrhi_1_1texture2D_a98893db927234b32003ce83fc5ddc57c}{bind\+Image}} (GLuint unit, GLint mip)
+void \mbox{\hyperlink{classglrhi_1_1texture2D_a65886f19f68d147eb0463810b52481ba}{bind\+Image}} (GLuint unit, GLint mip) const
 \begin{DoxyCompactList}\small\item\em Binds the texture as a image. \end{DoxyCompactList}\item 
 GLuint64 \mbox{\hyperlink{classglrhi_1_1texture2D_ad067d1b60cf6bc8a43ec4e7913236569}{get\+Sampler\+Handle}} ()
 \begin{DoxyCompactList}\small\item\em Get the texture handle for bindless texture use. \end{DoxyCompactList}\item 
@@ -84,11 +88,11 @@ Construct a new \doxylink{classglrhi_1_1texture2D}{texture2D}.
 \label{doc-func-members}
 \Hypertarget{classglrhi_1_1texture2D_doc-func-members}
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classglrhi_1_1texture2D_a8be311ecd3e2a66aa63855b5613c5ceb}\index{glrhi::texture2D@{glrhi::texture2D}!bind@{bind}}
+\Hypertarget{classglrhi_1_1texture2D_a52b4470fa5575fa85f492f568ee51802}\index{glrhi::texture2D@{glrhi::texture2D}!bind@{bind}}
 \index{bind@{bind}!glrhi::texture2D@{glrhi::texture2D}}
 \doxysubsubsection{\texorpdfstring{bind()}{bind()}}
-{\footnotesize\ttfamily \label{classglrhi_1_1texture2D_a8be311ecd3e2a66aa63855b5613c5ceb} 
-void glrhi\+::texture2\+D\+::bind (\begin{DoxyParamCaption}\item[{GLuint}]{texture\+Unit}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classglrhi_1_1texture2D_a52b4470fa5575fa85f492f568ee51802} 
+void glrhi\+::texture2\+D\+::bind (\begin{DoxyParamCaption}\item[{GLuint}]{texture\+Unit}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -99,11 +103,11 @@ Binds the texture to a texture unit.
 {\em texture\+Unit} & The texture unit to bind to. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classglrhi_1_1texture2D_a98893db927234b32003ce83fc5ddc57c}\index{glrhi::texture2D@{glrhi::texture2D}!bindImage@{bindImage}}
+\Hypertarget{classglrhi_1_1texture2D_a65886f19f68d147eb0463810b52481ba}\index{glrhi::texture2D@{glrhi::texture2D}!bindImage@{bindImage}}
 \index{bindImage@{bindImage}!glrhi::texture2D@{glrhi::texture2D}}
 \doxysubsubsection{\texorpdfstring{bindImage()}{bindImage()}}
-{\footnotesize\ttfamily \label{classglrhi_1_1texture2D_a98893db927234b32003ce83fc5ddc57c} 
-void glrhi\+::texture2\+D\+::bind\+Image (\begin{DoxyParamCaption}\item[{GLuint}]{unit}{, }\item[{GLint}]{mip}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classglrhi_1_1texture2D_a65886f19f68d147eb0463810b52481ba} 
+void glrhi\+::texture2\+D\+::bind\+Image (\begin{DoxyParamCaption}\item[{GLuint}]{unit}{, }\item[{GLint}]{mip}{}\end{DoxyParamCaption}) const}
 
 
 
@@ -114,6 +118,46 @@ Binds the texture as a image.
 {\em unit} & Image unit to bind to. \\
 \hline
 {\em mip} & The mip to bind. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classglrhi_1_1texture2D_a5bfb4c5da4b17247ebb88f346b9f52b3}\index{glrhi::texture2D@{glrhi::texture2D}!create@{create}}
+\index{create@{create}!glrhi::texture2D@{glrhi::texture2D}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classglrhi_1_1texture2D_a5bfb4c5da4b17247ebb88f346b9f52b3} 
+void glrhi\+::texture2\+D\+::create (\begin{DoxyParamCaption}\item[{const std\+::filesystem\+::path \&}]{file}{, }\item[{GLenum}]{internal\+Format}{, }\item[{GLsizei}]{mips}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+
+
+Construct a new \doxylink{classglrhi_1_1texture2D}{texture2D}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & Path to the file from which to load the texture. \\
+\hline
+{\em internal\+Format} & The internal format of the texture (ex. GL\+\_\+\+RGBA32F) \\
+\hline
+{\em mips} & The number of mips the texture should have. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classglrhi_1_1texture2D_ae2cb576e496064d4d04b3255a3271ef6}\index{glrhi::texture2D@{glrhi::texture2D}!create@{create}}
+\index{create@{create}!glrhi::texture2D@{glrhi::texture2D}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classglrhi_1_1texture2D_ae2cb576e496064d4d04b3255a3271ef6} 
+void glrhi\+::texture2\+D\+::create (\begin{DoxyParamCaption}\item[{GLsizei}]{width}{, }\item[{GLsizei}]{height}{, }\item[{GLenum}]{internal\+Format}{, }\item[{GLsizei}]{mips}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+
+
+Construct a new \doxylink{classglrhi_1_1texture2D}{texture2D}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & Width of the texture. \\
+\hline
+{\em height} & Height of the texture. \\
+\hline
+{\em internal\+Format} & The internal format of the texture (ex. GL\+\_\+\+RGBA32F) \\
+\hline
+{\em mips} & The number of mips the texture should have. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classglrhi_1_1texture2D_ab1b2f014c6a40281c17376f8bce2f9a6}\index{glrhi::texture2D@{glrhi::texture2D}!getID@{getID}}
@@ -185,5 +229,5 @@ Loads data into the texture.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{texture2D_8hpp}{texture2\+D.\+hpp}}\item 
-/home/jan/dev/glrhi/src/texture2\+D.\+cpp\end{DoxyCompactItemize}
+/home/jan/glrhi/include/glrhi/core/\mbox{\hyperlink{texture2D_8hpp}{texture2\+D.\+hpp}}\item 
+/home/jan/glrhi/src/core/texture2\+D.\+cpp\end{DoxyCompactItemize}

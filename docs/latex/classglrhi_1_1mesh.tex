@@ -1,0 +1,74 @@
+\doxysection{glrhi\+::mesh Class Reference}
+\hypertarget{classglrhi_1_1mesh}{}\label{classglrhi_1_1mesh}\index{glrhi::mesh@{glrhi::mesh}}
+
+
+Handles the loading and drawing of meshes.  
+
+
+
+
+{\ttfamily \#include $<$mesh.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classglrhi_1_1mesh_ace8b9aa32de9eabab685617df738e193}{mesh}} (const std\+::vector$<$ \mbox{\hyperlink{structglrhi_1_1vertex}{vertex}} $>$ \&vertices, const std\+::vector$<$ GLuint $>$ \&indices)
+\begin{DoxyCompactList}\small\item\em Construct a new mesh and loads the provided data to GPU memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1mesh_a24bee65ed1794ab038076a597a16640a}{load}} (const std\+::vector$<$ \mbox{\hyperlink{structglrhi_1_1vertex}{vertex}} $>$ \&vertices, const std\+::vector$<$ GLuint $>$ \&indices)
+\begin{DoxyCompactList}\small\item\em Loads the provided data to gpu memory. \end{DoxyCompactList}\item 
+\Hypertarget{classglrhi_1_1mesh_ac1287a9c3bfbdb1e475362e825afafac}\label{classglrhi_1_1mesh_ac1287a9c3bfbdb1e475362e825afafac} 
+void {\bfseries draw} ()
+\begin{DoxyCompactList}\small\item\em Issues a draw call with the appropriate number of indices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles the loading and drawing of meshes. 
+
+\label{doc-constructors}
+\Hypertarget{classglrhi_1_1mesh_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classglrhi_1_1mesh_ace8b9aa32de9eabab685617df738e193}\index{glrhi::mesh@{glrhi::mesh}!mesh@{mesh}}
+\index{mesh@{mesh}!glrhi::mesh@{glrhi::mesh}}
+\doxysubsubsection{\texorpdfstring{mesh()}{mesh()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1mesh_ace8b9aa32de9eabab685617df738e193} 
+glrhi\+::mesh\+::mesh (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structglrhi_1_1vertex}{vertex}} $>$ \&}]{vertices}{, }\item[{const std\+::vector$<$ GLuint $>$ \&}]{indices}{}\end{DoxyParamCaption})}
+
+
+
+Construct a new mesh and loads the provided data to GPU memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & Refrence to the vertices to be loaded. \\
+\hline
+{\em indices} & Refrence to the indices to be loaded. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classglrhi_1_1mesh_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1mesh_a24bee65ed1794ab038076a597a16640a}\index{glrhi::mesh@{glrhi::mesh}!load@{load}}
+\index{load@{load}!glrhi::mesh@{glrhi::mesh}}
+\doxysubsubsection{\texorpdfstring{load()}{load()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1mesh_a24bee65ed1794ab038076a597a16640a} 
+void glrhi\+::mesh\+::load (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{structglrhi_1_1vertex}{vertex}} $>$ \&}]{vertices}{, }\item[{const std\+::vector$<$ GLuint $>$ \&}]{indices}{}\end{DoxyParamCaption})}
+
+
+
+Loads the provided data to gpu memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertices} & Refrence to the vertices to be loaded. \\
+\hline
+{\em indices} & Refrence to the indices to be loaded. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/jan/glrhi/include/glrhi/renderer/\mbox{\hyperlink{mesh_8hpp}{mesh.\+hpp}}\item 
+/home/jan/glrhi/src/renderer/mesh.\+cpp\end{DoxyCompactItemize}

@@ -14,6 +14,8 @@ Handles the creation and usage of Vertex Buffer Objects.
 \item 
 \mbox{\hyperlink{classglrhi_1_1vbo_a28ff85c166d69f6766144b179a92b554}{vbo}} (const void \texorpdfstring{$\ast$}{*}data, unsigned int size)
 \begin{DoxyCompactList}\small\item\em Construct a new VBO. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classglrhi_1_1vbo_a51518e1e8f7657d60b642fff7061c7e7}{create}} (const void \texorpdfstring{$\ast$}{*}data, unsigned int size)
+\begin{DoxyCompactList}\small\item\em Construct a new VBO. \end{DoxyCompactList}\item 
 GLuint \mbox{\hyperlink{classglrhi_1_1vbo_a9548aa36c7bc81e3a857385417ebf83e}{get\+ID}} () const
 \begin{DoxyCompactList}\small\item\em Returns The VBO\textquotesingle{}s Open\+GL ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -46,6 +48,23 @@ Construct a new VBO.
 \label{doc-func-members}
 \Hypertarget{classglrhi_1_1vbo_doc-func-members}
 \doxysubsection{Member Function Documentation}
+\Hypertarget{classglrhi_1_1vbo_a51518e1e8f7657d60b642fff7061c7e7}\index{glrhi::vbo@{glrhi::vbo}!create@{create}}
+\index{create@{create}!glrhi::vbo@{glrhi::vbo}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily \label{classglrhi_1_1vbo_a51518e1e8f7657d60b642fff7061c7e7} 
+void glrhi\+::vbo\+::create (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{unsigned int}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Construct a new VBO. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pointer to the vertices data. \\
+\hline
+{\em size} & Size of the data in bytes. \\
+\hline
+\end{DoxyParams}
 \Hypertarget{classglrhi_1_1vbo_a9548aa36c7bc81e3a857385417ebf83e}\index{glrhi::vbo@{glrhi::vbo}!getID@{getID}}
 \index{getID@{getID}!glrhi::vbo@{glrhi::vbo}}
 \doxysubsubsection{\texorpdfstring{getID()}{getID()}}
@@ -63,5 +82,5 @@ The VBO\textquotesingle{}s Open\+GL ID.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-/home/jan/dev/glrhi/include/glrhi/core/\mbox{\hyperlink{vbo_8hpp}{vbo.\+hpp}}\item 
-/home/jan/dev/glrhi/src/vbo.\+cpp\end{DoxyCompactItemize}
+/home/jan/glrhi/include/glrhi/core/\mbox{\hyperlink{vbo_8hpp}{vbo.\+hpp}}\item 
+/home/jan/glrhi/src/core/vbo.\+cpp\end{DoxyCompactItemize}

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>glrhi: /home/jan/dev/glrhi/include/glrhi/core/ebo.hpp Source File</title>
+<title>glrhi: /home/jan/glrhi/include/glrhi/core/ebo.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,19 +104,23 @@ $(function(){initNavTree('ebo_8hpp_source.html','',''); });
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <a class="code hl_function" href="classglrhi_1_1ebo.html#a57e7d8b266584746cf987b6a1f81de0b">ebo</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* data, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_function" href="classglrhi_1_1ebo.html#a57e7d8b266584746cf987b6a1f81de0b">~ebo</a>();</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classglrhi_1_1ebo.html#a7b00e3a4d89eeca17690cad3c5167745">   32</a></span>        GLuint <a class="code hl_function" href="classglrhi_1_1ebo.html#a7b00e3a4d89eeca17690cad3c5167745">getID</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_ID; }</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        GLuint m_ID;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    };</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <a class="code hl_function" href="classglrhi_1_1ebo.html#a57e7d8b266584746cf987b6a1f81de0b">ebo</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <a class="code hl_function" href="classglrhi_1_1ebo.html#a57e7d8b266584746cf987b6a1f81de0b">~ebo</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classglrhi_1_1ebo.html#aca551a92a4f15b09624e6f25a1b91d03">create</a>(<span class="keyword">const</span> <span class="keywordtype">void</span>* data, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> size);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>        </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="classglrhi_1_1ebo.html#a7b00e3a4d89eeca17690cad3c5167745">   41</a></span>        GLuint <a class="code hl_function" href="classglrhi_1_1ebo.html#a7b00e3a4d89eeca17690cad3c5167745">getID</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> m_ID; }</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        GLuint m_ID = 0;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    };</div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>}</div>
-<div class="ttc" id="aclassglrhi_1_1ebo_html_a57e7d8b266584746cf987b6a1f81de0b"><div class="ttname"><a href="classglrhi_1_1ebo.html#a57e7d8b266584746cf987b6a1f81de0b">glrhi::ebo::ebo</a></div><div class="ttdeci">ebo(const void *data, unsigned int size)</div><div class="ttdoc">Construct a new EBO.</div><div class="ttdef"><b>Definition</b> ebo.cpp:5</div></div>
-<div class="ttc" id="aclassglrhi_1_1ebo_html_a7b00e3a4d89eeca17690cad3c5167745"><div class="ttname"><a href="classglrhi_1_1ebo.html#a7b00e3a4d89eeca17690cad3c5167745">glrhi::ebo::getID</a></div><div class="ttdeci">GLuint getID() const</div><div class="ttdoc">Returns the EBO&#39;s OpenGL ID.</div><div class="ttdef"><b>Definition</b> ebo.hpp:32</div></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
+<div class="ttc" id="aclassglrhi_1_1ebo_html_a57e7d8b266584746cf987b6a1f81de0b"><div class="ttname"><a href="classglrhi_1_1ebo.html#a57e7d8b266584746cf987b6a1f81de0b">glrhi::ebo::ebo</a></div><div class="ttdeci">ebo(const void *data, unsigned int size)</div><div class="ttdoc">Construct a new EBO.</div><div class="ttdef"><b>Definition</b> ebo.cpp:6</div></div>
+<div class="ttc" id="aclassglrhi_1_1ebo_html_a7b00e3a4d89eeca17690cad3c5167745"><div class="ttname"><a href="classglrhi_1_1ebo.html#a7b00e3a4d89eeca17690cad3c5167745">glrhi::ebo::getID</a></div><div class="ttdeci">GLuint getID() const</div><div class="ttdoc">Returns the EBO&#39;s OpenGL ID.</div><div class="ttdef"><b>Definition</b> ebo.hpp:41</div></div>
+<div class="ttc" id="aclassglrhi_1_1ebo_html_aca551a92a4f15b09624e6f25a1b91d03"><div class="ttname"><a href="classglrhi_1_1ebo.html#aca551a92a4f15b09624e6f25a1b91d03">glrhi::ebo::create</a></div><div class="ttdeci">void create(const void *data, unsigned int size)</div><div class="ttdoc">Construct a new EBO.</div><div class="ttdef"><b>Definition</b> ebo.cpp:14</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

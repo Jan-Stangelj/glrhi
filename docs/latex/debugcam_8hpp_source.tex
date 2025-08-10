@@ -1,0 +1,37 @@
+\doxysection{debugcam.\+hpp}
+\hypertarget{debugcam_8hpp_source}{}\label{debugcam_8hpp_source}\index{/home/jan/glrhi/include/glrhi/renderer/debugcam.hpp@{/home/jan/glrhi/include/glrhi/renderer/debugcam.hpp}}
+\mbox{\hyperlink{debugcam_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{camera_8hpp}{glrhi/renderer/camera.hpp}}>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{window_8hpp}{glrhi/core/window.hpp}}>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }glrhi\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{class\ }debugCamera\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ debugCamera()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \string~debugCamera()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ apply(\mbox{\hyperlink{classglrhi_1_1camera}{glrhi::camera}}\&\ \mbox{\hyperlink{classglrhi_1_1camera}{camera}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classglrhi_1_1window}{glrhi::window}}\&\ \mbox{\hyperlink{classglrhi_1_1window}{window}},\ \textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ sensitivity\ =\ 0.33f;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ speed\ =\ 1.5f;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ m\_updateDirection(\mbox{\hyperlink{classglrhi_1_1camera}{glrhi::camera}}\&\ \mbox{\hyperlink{classglrhi_1_1camera}{camera}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classglrhi_1_1window}{glrhi::window}}\&\ \mbox{\hyperlink{classglrhi_1_1window}{window}});}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ m\_updatePosition(\mbox{\hyperlink{classglrhi_1_1camera}{glrhi::camera}}\&\ \mbox{\hyperlink{classglrhi_1_1camera}{camera}},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classglrhi_1_1window}{glrhi::window}}\&\ \mbox{\hyperlink{classglrhi_1_1window}{window}},\ \textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ lastX\ =\ 0.0;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ lastY\ =\ 0.0;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ firstMouse\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00033\ \ \ \ \ \};}
+\DoxyCodeLine{00034\ \}}
+
+\end{DoxyCode}
