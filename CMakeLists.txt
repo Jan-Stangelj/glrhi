@@ -10,9 +10,18 @@ set("GLFW_BUILD_EXAMPLES" OFF CACHE BOOL "" FORCE)
 set("GLFW_INSTALL" OFF CACHE BOOL "" FORCE)
 set("BUILD_SHARED_LIBS" OFF CACHE BOOL "" FORCE)
 
+set(ASSIMP_BUILD_ALL_IMPORTERS_BY_DEFAULT OFF)
+set(ASSIMP_BUILD_ALL_EXPORTERS_BY_DEFAULT OFF)
+
+set(ASSIMP_BUILD_OBJ_IMPORTER ON)
+set(ASSIMP_BUILD_GLTF_IMPORTER ON)
+set(ASSIMP_BUILD_FBX_IMPORTER OFF)
+set(ASSIMP_BUILD_3DS_IMPORTER OFF)
+
 add_subdirectory("vendor/glad")
 add_subdirectory("vendor/glfw")
 add_subdirectory("vendor/glm")
+add_subdirectory("vendor/assimp")
 
 file(GLOB_RECURSE "SOURCES" CONFIGURE_DEPENDS "src/*.cpp")
 add_library("glrhi" "${SOURCES}")
