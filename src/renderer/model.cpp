@@ -7,6 +7,7 @@
 #include "assimp/material.h"
 #include "assimp/mesh.h"
 #include "glm/ext/matrix_transform.hpp"
+#include "glm/trigonometric.hpp"
 #include "glrhi/core/ebo.hpp"
 #include "glrhi/renderer/material.hpp"
 
@@ -153,17 +154,17 @@ namespace glrhi {
     glm::mat4 model::m_calcModelMatrix() const {
         glm::mat4 model(1.0f);
 
+        model = glm::translate(model, position);
+
         model = glm::scale(model, size);
 
-        glm::quat qPitch = glm::angleAxis(rotation.x, glm::vec3(1, 0, 0));
-        glm::quat qYaw   = glm::angleAxis(rotation.y,   glm::vec3(0, 1, 0));
-        glm::quat qRoll  = glm::angleAxis(rotation.z,  glm::vec3(0, 0, 1));
+        glm::quat qPitch = glm::angleAxis(glm::radians(rotation.x), glm::vec3(1, 0, 0));
+        glm::quat qYaw   = glm::angleAxis(glm::radians(rotation.y),   glm::vec3(0, 1, 0));
+        glm::quat qRoll  = glm::angleAxis(glm::radians(rotation.z),  glm::vec3(0, 0, 1));
 
         glm::quat orientation = qYaw * qPitch * qRoll;
 
         model = model * glm::toMat4(orientation);
-
-        model = glm::scale(model, size);
 
         return model;
     }

@@ -1,3 +1,4 @@
+#include "glrhi/renderer/model.hpp"
 #include <glrhi/glrhi.hpp>
 #include <glrhi/glrenderer.hpp>
 
@@ -13,12 +14,17 @@ int main()
     glrhi::shader buffer("../examples/renderer/shaders/buffer.vert", "../examples/renderer/shaders/buffer.frag");
 
     glrhi::model sponza("../examples/renderer/sponza/Sponza.gltf");
-    sponza.size = glm::vec3(0.1f);
+    sponza.size = glm::vec3(0.01f);
+
+    glrhi::model helmet("../examples/renderer/helmet/DamagedHelmet.gltf");
+    helmet.size = glm::vec3(0.5f);
+    helmet.position = glm::vec3(0.0f, 1.5f, 0.0f);
+    helmet.rotation = glm::vec3(90.0f, 0.0f, 0.0f);
 
     glrhi::gbuffer gbuffer(1280, 720);
 
     glrhi::camera cam;
-    cam.position.z = 3.0f;
+    cam.position.y = 5.0f;
 
     cam.uploadData();
     cam.bind();
@@ -45,6 +51,7 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         sponza.draw(buffer);
+        helmet.draw(buffer);
 
         gbuffer.renderResoult();
  

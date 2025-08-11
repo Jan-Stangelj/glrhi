@@ -43,5 +43,5 @@ void main()
     g_normalRoughness = vec4(normal, arm.g);
     g_emissionMetallic = vec4(emissionOut.xyz, arm.b);
     g_position = fragPos;
-    g_resoult = albedoOut.xyz;
+    g_resoult = albedoOut.xyz + g_emissionMetallic.xyz;
 }
