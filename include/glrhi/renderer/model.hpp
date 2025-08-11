@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include "assimp/material.h"
+#include "assimp/mesh.h"
 #include <glrhi/glrhi.hpp>
 #include <glrhi/renderer/material.hpp>
 #include <glrhi/renderer/mesh.hpp>
@@ -55,7 +57,7 @@ namespace glrhi {
          * 
          * @param shader The shader to render the model with.
          */
-        void draw(glrhi::shader& shader);
+        void draw(glrhi::shader& shader) const;
 
         /**
          * @brief Size of the model.
@@ -78,5 +80,11 @@ namespace glrhi {
 
         void m_processNode(aiNode* node, const aiScene* scene);
         glrhi::submesh m_processMesh(aiMesh* mesh, const aiScene* scene);
+
+        void m_processVertices(aiMesh* mesh, std::vector<vertex>& verticesOutput);
+        void m_processIndices(aiMesh* mesh, std::vector<GLuint>& indicesOutput);
+        void m_processMaterial(aiMaterial* mesh, std::shared_ptr<glrhi::material> materialOutput);
+
+        glm::mat4 m_calcModelMatrix() const;
     };
 }

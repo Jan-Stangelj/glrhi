@@ -3,7 +3,12 @@
 
 #include <glm/gtc/quaternion.hpp>
 #include <memory>
+#include <vector>
+#include "assimp/material.h"
+#include "assimp/mesh.h"
 #include "glm/ext/matrix_transform.hpp"
+#include "glrhi/core/ebo.hpp"
+#include "glrhi/renderer/material.hpp"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
@@ -42,7 +47,40 @@ namespace glrhi {
 
         std::vector<vertex> vertices;
         vertices.reserve(mesh->mNumVertices);
+        m_processVertices(mesh, vertices);
 
+
+        std::vector<GLuint> indices;
+        indices.reserve(mesh->mNumVertices);
+        m_processIndices(mesh, indices);
+
+        std::shared_ptr<glrhi::material> material = std::make_shared<glrhi::material>();
+
+        if (mesh->mMaterialIndex >= 0)
+            m_processMaterial(scene->mMaterials[mesh->mMaterialIndex], material);
+
+        glrhi::submesh returnMesh;
+
+        returnMesh.material = material;
+        returnMesh.mesh = std::make_shared<glrhi::mesh>(vertices, indices);
+
+        return returnMesh;
+    }
+
+    void model::draw(glrhi::shader& shader) const {
+        shader.use();
+
+        glm::mat4 model = m_calcModelMatrix();
+
+        shader.setMat4("u_model", model);
+
+        for (auto mesh : m_meshes) {
+            mesh.material->bind(shader);
+            mesh.mesh->draw();
+        }
+    }
+
+    void model::m_processVertices(aiMesh* mesh, std::vector<vertex>& verticesOutput) {
         for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
             glrhi::vertex vertex;
 
@@ -66,67 +104,53 @@ namespace glrhi {
             vertex.tangent.y = mesh->mTangents[i].y;
             vertex.tangent.z = mesh->mTangents[i].z;
 
-            vertices.push_back(vertex);
+            verticesOutput.push_back(vertex);
         }
+    }
 
-        std::vector<GLuint> indices;
-        indices.reserve(mesh->mNumVertices);
-
+    void model::m_processIndices(aiMesh* mesh, std::vector<GLuint>& indicesOutput) {
         for (unsigned int i = 0; i < mesh->mNumFaces; i++) {
             aiFace face = mesh->mFaces[i];
             for (unsigned int j = 0; j < face.mNumIndices; j++) {
-                indices.push_back(face.mIndices[j]);
+                indicesOutput.push_back(face.mIndices[j]);
             }
         }
-
-        std::shared_ptr<glrhi::material> material = std::make_shared<glrhi::material>();
-
-        if (mesh->mMaterialIndex >= 0) {
-            aiMaterial* mat = scene->mMaterials[mesh->mMaterialIndex];
-
-            aiColor4D albedo;
-            float roughness, metallic;
-
-            mat->Get(AI_MATKEY_COLOR_DIFFUSE, albedo);
-            mat->Get(AI_MATKEY_ROUGHNESS_FACTOR, roughness);
-            mat->Get(AI_MATKEY_METALLIC_FACTOR, metallic);
-
-            material->albedo = glm::vec4(albedo.r, albedo.g, albedo.b, albedo.a);
-            material->arm = glm::vec4(1.0f, roughness, metallic, 0.0f);
-
-            if (mat->GetTextureCount(aiTextureType_DIFFUSE) >= 1) {
-                aiString str;
-                mat->GetTexture(aiTextureType_DIFFUSE, 0, &str);
-                material->setAlbedoTexture(m_directory.string() + '/' + str.C_Str());
-            }
-            if (mat->GetTextureCount(aiTextureType_GLTF_METALLIC_ROUGHNESS) >= 1) {
-                aiString str;
-                mat->GetTexture(aiTextureType_GLTF_METALLIC_ROUGHNESS, 0, &str);
-                material->setARMtexture(m_directory.string() + '/' + str.C_Str());
-            }
-            if (mat->GetTextureCount(aiTextureType_NORMALS)) {
-                aiString str;
-                mat->GetTexture(aiTextureType_NORMALS, 0, &str);
-                material->setNormalTexture(m_directory.string() + '/' + str.C_Str());
-            }
-            if (mat->GetTextureCount(aiTextureType_EMISSIVE) >= 1) {
-                aiString str;
-                mat->GetTexture(aiTextureType_EMISSIVE, 0, &str);
-                material->setEmissionTexture(m_directory.string() + '/' + str.C_Str());
-            }
-        }
-
-        glrhi::submesh returnMesh;
-
-        returnMesh.material = material;
-        returnMesh.mesh = std::make_shared<glrhi::mesh>(vertices, indices);
-
-        return returnMesh;
     }
 
-    void model::draw(glrhi::shader& shader) {
-        shader.use();
+    void model::m_processMaterial(aiMaterial* material, std::shared_ptr<glrhi::material> materialOutput) {
+        aiColor4D albedo;
+        float roughness, metallic;
 
+        material->Get(AI_MATKEY_COLOR_DIFFUSE, albedo);
+        material->Get(AI_MATKEY_ROUGHNESS_FACTOR, roughness);
+        material->Get(AI_MATKEY_METALLIC_FACTOR, metallic);
+
+        materialOutput->albedo = glm::vec4(albedo.r, albedo.g, albedo.b, albedo.a);
+        materialOutput->arm = glm::vec4(1.0f, roughness, metallic, 0.0f);
+
+        if (material->GetTextureCount(aiTextureType_DIFFUSE) >= 1) {
+            aiString str;
+            material->GetTexture(aiTextureType_DIFFUSE, 0, &str);
+            materialOutput->setAlbedoTexture(m_directory.string() + '/' + str.C_Str());
+        }
+        if (material->GetTextureCount(aiTextureType_GLTF_METALLIC_ROUGHNESS) >= 1) {
+            aiString str;
+            material->GetTexture(aiTextureType_GLTF_METALLIC_ROUGHNESS, 0, &str);
+            materialOutput->setARMtexture(m_directory.string() + '/' + str.C_Str());
+        }
+        if (material->GetTextureCount(aiTextureType_NORMALS)) {
+            aiString str;
+            material->GetTexture(aiTextureType_NORMALS, 0, &str);
+            materialOutput->setNormalTexture(m_directory.string() + '/' + str.C_Str());
+        }
+        if (material->GetTextureCount(aiTextureType_EMISSIVE) >= 1) {
+            aiString str;
+            material->GetTexture(aiTextureType_EMISSIVE, 0, &str);
+            materialOutput->setEmissionTexture(m_directory.string() + '/' + str.C_Str());
+        }
+    }
+
+    glm::mat4 model::m_calcModelMatrix() const {
         glm::mat4 model(1.0f);
 
         model = glm::scale(model, size);
@@ -141,11 +165,6 @@ namespace glrhi {
 
         model = glm::scale(model, size);
 
-        shader.setMat4("u_model", model);
-
-        for (auto mesh : m_meshes) {
-            mesh.material->bind(shader);
-            mesh.mesh->draw();
-        }
+        return model;
     }
 }
