@@ -45,14 +45,14 @@ namespace glrhi {
 
     void gbuffer::m_loadQuad() {
         float quad[] = {
-            -1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
-            1.0f, 1.0f, 0.0f, 1.0f, 1.0f,
-            -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-            1.0f, -1.0f, 0.0f, 1.0f, 0.0f
+            -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, // zgoraj levo
+            1.0f, 1.0f, 0.0f, 1.0f, 1.0f, // zgoraj desno
+            -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, // spodaj levo
+            1.0f, -1.0f, 0.0f, 1.0f, 0.0f // spodaj desno
         };
 
         unsigned int quadIndices[] = {
-            0, 1, 2,
+            0, 2, 1,
             1, 2, 3
         };
 

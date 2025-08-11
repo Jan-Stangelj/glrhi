@@ -1,3 +1,4 @@
+#include "glrhi/core/ebo.hpp"
 #include <glrhi/glrhi.hpp>
 #include <glrhi/glrenderer.hpp>
 
@@ -27,6 +28,7 @@ int main()
     auto timer = std::chrono::high_resolution_clock::now();
 
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
 
     while (!window.shouldClose()) {
 
