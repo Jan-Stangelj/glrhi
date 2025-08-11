@@ -1,8 +1,8 @@
-#include "glrhi/core/ebo.hpp"
 #include <glrhi/glrhi.hpp>
 #include <glrhi/glrenderer.hpp>
 
-#include <chrono>
+#include <glrhi/utils/timer.hpp>
+
 #include <iostream>
 #include <cmath>
 
@@ -25,18 +25,15 @@ int main()
 
     glrhi::debugCamera dbgcam;
 
-    auto timer = std::chrono::high_resolution_clock::now();
+    glrhi::timer timer;
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
 
     while (!window.shouldClose()) {
 
-        auto currentTime = std::chrono::high_resolution_clock::now();
-
-        std::chrono::duration<float> delta = currentTime - timer;
-        float dTime = delta.count();
-        timer = currentTime;
+        float dTime = timer.get();
+        timer.reset();
         std::cout << floor(1.0f / dTime) << '\n';
 
         window.poolEvents();
