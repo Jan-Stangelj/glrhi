@@ -55,6 +55,13 @@ namespace glrhi {
         const char* vShaderCode = vertexCode.c_str();
         const char* fShaderCode = fragmentCode.c_str();
 
+        createFromCode(vShaderCode, fShaderCode);
+    }
+
+    void shader::createFromCode(const char* vertexCode, const char* fragmentCode) {
+        const char* vShaderCode = vertexCode;
+        const char* fShaderCode = fragmentCode;
+
         // 2. compile shaders
         unsigned int vertex, fragment;
         int success;

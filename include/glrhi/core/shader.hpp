@@ -39,6 +39,14 @@ namespace glrhi{
         void create(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
 
         /**
+         * @brief Construct a new shader from already provided code
+         * 
+         * @param vertexCode C string of the vertex shader code.
+         * @param fragmentCode C string of the fragment shader code.
+         */
+        void createFromCode(const char* vertexCode, const char* fragmentCode);
+
+        /**
          * @brief Selects the shader to be used in the subsequent draw calls.
          */
         void use() const;
