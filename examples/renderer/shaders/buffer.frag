@@ -4,6 +4,7 @@ layout(location = 0) out vec3 g_albedo;
 layout(location = 1) out vec4 g_normalRoughness;
 layout(location = 2) out vec4 g_emissionMetallic;
 layout(location = 3) out vec3 g_position;
+layout(location = 4) out vec3 g_resoult;
 
 in vec2 texUV;
 in vec3 fragPos;
@@ -42,4 +43,5 @@ void main()
     g_normalRoughness = vec4(normal, arm.g);
     g_emissionMetallic = vec4(emissionOut.xyz, arm.b);
     g_position = fragPos;
+    g_resoult = albedoOut.xyz;
 }

@@ -8,7 +8,7 @@ namespace glrhi {
     class gbuffer {
     public:
 
-        gbuffer();
+        gbuffer(unsigned int width, unsigned int height);
         ~gbuffer() = default;
 
         void bind();
@@ -24,7 +24,7 @@ namespace glrhi {
         glrhi::vbo m_quadVBO;
         glrhi::ebo m_quadEBO;
 
-        glrhi::fbo m_gbuffer;
+        glrhi::fbo m_gBuffer;
 
         glrhi::texture2D m_albedo;
         glrhi::texture2D m_normalRoughness;
