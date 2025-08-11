@@ -66,4 +66,7 @@ if (GLRHI_BUILD_EXAMPLES)
 
     add_executable("model" "examples/model/src/main.cpp")
     target_link_libraries("model" glrhi)
+
+    add_executable("renderer" "examples/renderer/src/main.cpp")
+    target_link_libraries("renderer" glrhi)
 endif()
