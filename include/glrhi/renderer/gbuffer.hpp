@@ -72,5 +72,9 @@ namespace glrhi {
 
         glrhi::shader m_resoultShader;
 
+        void m_loadQuad();
+        void m_initFramebuffer(unsigned int width, unsigned int height);
+        void m_loadShader();
+
     };
 }
