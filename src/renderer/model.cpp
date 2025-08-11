@@ -146,7 +146,6 @@ namespace glrhi {
         for (auto mesh : m_meshes) {
             mesh.material->bind(shader);
             mesh.mesh->draw();
-            std::cout << "Draw mesh\n";
         }
     }
 }

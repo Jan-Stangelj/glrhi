@@ -1,10 +1,9 @@
-#include "glm/fwd.hpp"
-#include "glrhi/core/ebo.hpp"
-#include "glrhi/renderer/model.hpp"
 #include <glrhi/glrhi.hpp>
 #include <glrhi/glrenderer.hpp>
 
 #include <chrono>
+#include <iostream>
+#include <cmath>
 
 int main()
 {
@@ -34,6 +33,7 @@ int main()
         std::chrono::duration<float> delta = currentTime - timer;
         float dTime = delta.count();
         timer = currentTime;
+        std::cout << floor(1.0f / dTime) << '\n';
 
         window.poolEvents();
 
