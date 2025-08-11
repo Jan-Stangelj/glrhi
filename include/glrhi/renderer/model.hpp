@@ -1,3 +1,8 @@
+/**
+ * @file model.hpp
+ * @brief Contains the model class for loading 3d models.
+ */
+
 #pragma once
 
 #include <glrhi/glrhi.hpp>
@@ -14,23 +19,57 @@
 
 
 namespace glrhi {
+
+    /**
+     * @brief Internal format, used in the model class.
+     */
     struct submesh {
         std::shared_ptr<glrhi::mesh> mesh;
         std::shared_ptr<glrhi::material> material;
     };
 
+    /**
+     * @brief Class used to load 3d models.
+     */
     class model {
     public:
+
+        /**
+         * @brief Construct a new model object and loads the provided 3d model.
+         * 
+         * @param path Path to the 3d model.
+         */
         model(const std::filesystem::path& path);
         model() = default;
         ~model() = default;
 
+        /**
+         * @brief Loads a 3d model, if not already.
+         * 
+         * @param path Path to the 3d model.
+         */
         void create(const std::filesystem::path& path);
 
+        /**
+         * @brief Issues a draw call for all sub meshes.
+         * 
+         * @param shader The shader to render the model with.
+         */
         void draw(glrhi::shader& shader);
 
+        /**
+         * @brief Size of the model.
+         */
         glm::vec3 size = glm::vec3(1.0f);
+
+        /**
+         * @brief Rotation of the model.
+         */
         glm::vec3 rotation = glm::vec3(0.0f);
+
+        /**
+         * @brief Position of the model.
+         */
         glm::vec3 position = glm::vec3(0.0f);
     private:
         

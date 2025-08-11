@@ -1,3 +1,8 @@
+/**
+ * @file material.hpp
+ * @brief Contains the material class.
+ */
+
 #pragma once
 
 #include "glrhi/core/shader.hpp"
@@ -11,6 +16,9 @@ namespace glrhi {
     class material {
     public:
 
+        /**
+         * @brief Construct a new material object
+         */
         material();
         ~material() = default;
 
