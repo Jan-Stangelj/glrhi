@@ -14,6 +14,7 @@ add_subdirectory("vendor/glad")
 add_subdirectory("vendor/glfw")
 add_subdirectory("vendor/glm")
 add_subdirectory("vendor/assimp")
+add_subdirectory("vendor/meshoptimizer")
 
 file(GLOB_RECURSE "SOURCES" CONFIGURE_DEPENDS "src/*.cpp")
 add_library("glrhi" "${SOURCES}")
@@ -32,7 +33,7 @@ target_compile_definitions("glrhi" PUBLIC "GLFW_INCLUDE_NONE=1")
 target_include_directories("glrhi" PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_include_directories("glrhi" PUBLIC  ${PROJECT_SOURCE_DIR}/vendor/include)
 
-target_link_libraries("glrhi" PUBLIC glad glfw glm assimp)
+target_link_libraries("glrhi" PUBLIC glad glfw glm assimp meshoptimizer)
 
 option("GLRHI_BUILD_EXAMPLES" "Build examples for glrhi" ON)
 

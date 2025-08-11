@@ -6,6 +6,7 @@
 #include <vector>
 #include "assimp/material.h"
 #include "assimp/mesh.h"
+#include "assimp/postprocess.h"
 #include "glm/ext/matrix_transform.hpp"
 #include "glm/trigonometric.hpp"
 #include "glrhi/core/ebo.hpp"
@@ -13,6 +14,8 @@
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
+
+#include <meshoptimizer.h>
 
 namespace glrhi {
     model::model(const std::filesystem::path& path) {
@@ -22,7 +25,8 @@ namespace glrhi {
                                                         aiProcess_GenNormals |
                                                         aiProcess_OptimizeMeshes |
                                                         aiProcess_OptimizeGraph |
-                                                        aiProcess_CalcTangentSpace);
+                                                        aiProcess_CalcTangentSpace |
+                                                        aiProcess_JoinIdenticalVertices);
 
         if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
             std::cerr << "ERROR::MODEL::ASSIMP::" << importer.GetErrorString() << "\n";
@@ -50,10 +54,13 @@ namespace glrhi {
         vertices.reserve(mesh->mNumVertices);
         m_processVertices(mesh, vertices);
 
-
         std::vector<GLuint> indices;
         indices.reserve(mesh->mNumVertices);
         m_processIndices(mesh, indices);
+
+        meshopt_optimizeVertexCache(&indices[0], &indices[0], indices.size(), vertices.size());
+        meshopt_optimizeOverdraw(&indices[0], &indices[0], indices.size(), &vertices[0].position.x, vertices.size(), sizeof(glrhi::vertex), 1.05f);
+        meshopt_optimizeVertexFetch(&vertices[0], &indices[0], indices.size(), &vertices[0], vertices.size(), sizeof(glrhi::vertex));
 
         std::shared_ptr<glrhi::material> material = std::make_shared<glrhi::material>();
 

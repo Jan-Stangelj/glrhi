@@ -7,3 +7,6 @@
 [submodule "vendor/assimp"]
 	path = vendor/assimp
 	url = https://github.com/assimp/assimp.git
+[submodule "vendor/meshoptimizer"]
+	path = vendor/meshoptimizer
+	url = https://github.com/zeux/meshoptimizer.git
