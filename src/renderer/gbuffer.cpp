@@ -95,7 +95,7 @@ namespace glrhi {
     }
 
     void gbuffer::m_initFramebuffer(unsigned int width, unsigned int height) {
-        m_albedo.create(width, height, GL_RGB8);
+        m_albedo.create(width, height, GL_RGBA16F);
         m_normalRoughness.create(width, height, GL_RGBA16F);
         m_emissionMetallic.create(width, height, GL_RGBA8);
         m_position.create(width, height, GL_RGB16F);

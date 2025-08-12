@@ -23,6 +23,7 @@ int main()
         dbgcam.apply(renderer.getCamera(), renderer.getWindow(), renderer.deltaTime());
 
         renderer.gBufferPass();
+        renderer.lightingPass();
         renderer.postProcessPass();
         renderer.renderResoult();
     }
