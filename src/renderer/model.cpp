@@ -64,7 +64,7 @@ namespace glrhi {
 
         // Only process material, if there is one
         if (mesh->mMaterialIndex >= 0)
-            m_processMaterial(scene->mMaterials[mesh->mMaterialIndex], material);
+            m_processMaterial(scene->mMaterials[mesh->mMaterialIndex], *material.get());
 
         glrhi::submesh returnMesh;
 
@@ -131,7 +131,7 @@ namespace glrhi {
         meshopt_optimizeVertexFetch(&verticesInOut[0], &indicesInOut[0], indicesInOut.size(), &verticesInOut[0], verticesInOut.size(), sizeof(glrhi::vertex));
     }
 
-    void model::m_processMaterial(aiMaterial* material, std::unique_ptr<glrhi::material>& materialOutput) {
+    void model::m_processMaterial(aiMaterial* material, glrhi::material& materialOutput) {
         aiColor4D albedo;
         float roughness, metallic;
 
@@ -139,28 +139,28 @@ namespace glrhi {
         material->Get(AI_MATKEY_ROUGHNESS_FACTOR, roughness);
         material->Get(AI_MATKEY_METALLIC_FACTOR, metallic);
 
-        materialOutput->albedo = glm::vec4(albedo.r, albedo.g, albedo.b, albedo.a);
-        materialOutput->arm = glm::vec4(1.0f, roughness, metallic, 0.0f);
+        materialOutput.albedo = glm::vec4(albedo.r, albedo.g, albedo.b, albedo.a);
+        materialOutput.arm = glm::vec4(1.0f, roughness, metallic, 0.0f);
 
         if (material->GetTextureCount(aiTextureType_DIFFUSE) >= 1) {
             aiString str;
             material->GetTexture(aiTextureType_DIFFUSE, 0, &str);
-            materialOutput->setAlbedoTexture(m_directory.string() + '/' + str.C_Str());
+            materialOutput.setAlbedoTexture(m_directory.string() + '/' + str.C_Str());
         }
         if (material->GetTextureCount(aiTextureType_GLTF_METALLIC_ROUGHNESS) >= 1) {
             aiString str;
             material->GetTexture(aiTextureType_GLTF_METALLIC_ROUGHNESS, 0, &str);
-            materialOutput->setARMtexture(m_directory.string() + '/' + str.C_Str());
+            materialOutput.setARMtexture(m_directory.string() + '/' + str.C_Str());
         }
         if (material->GetTextureCount(aiTextureType_NORMALS)) {
             aiString str;
             material->GetTexture(aiTextureType_NORMALS, 0, &str);
-            materialOutput->setNormalTexture(m_directory.string() + '/' + str.C_Str());
+            materialOutput.setNormalTexture(m_directory.string() + '/' + str.C_Str());
         }
         if (material->GetTextureCount(aiTextureType_EMISSIVE) >= 1) {
             aiString str;
             material->GetTexture(aiTextureType_EMISSIVE, 0, &str);
-            materialOutput->setEmissionTexture(m_directory.string() + '/' + str.C_Str());
+            materialOutput.setEmissionTexture(m_directory.string() + '/' + str.C_Str());
         }
     }
 

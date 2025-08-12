@@ -84,7 +84,7 @@ namespace glrhi {
         void m_processVertices(aiMesh* mesh, std::vector<vertex>& verticesOutput);
         void m_processIndices(aiMesh* mesh, std::vector<GLuint>& indicesOutput);
         void m_optimizeMesh(std::vector<vertex>& verticesInOut, std::vector<GLuint>& indicesInOut);
-        void m_processMaterial(aiMaterial* mesh, std::unique_ptr<glrhi::material>& materialOutput);
+        void m_processMaterial(aiMaterial* mesh, glrhi::material& materialOutput);
 
         glm::mat4 m_calcModelMatrix() const;
     };
