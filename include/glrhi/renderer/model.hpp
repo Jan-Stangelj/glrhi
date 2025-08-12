@@ -26,8 +26,8 @@ namespace glrhi {
      * @brief Internal format, used in the model class.
      */
     struct submesh {
-        std::shared_ptr<glrhi::mesh> mesh;
-        std::shared_ptr<glrhi::material> material;
+        std::unique_ptr<glrhi::mesh> mesh;
+        std::unique_ptr<glrhi::material> material;
     };
 
     /**
@@ -79,11 +79,11 @@ namespace glrhi {
         std::filesystem::path m_directory;
 
         void m_processNode(aiNode* node, const aiScene* scene);
-        glrhi::submesh m_processMesh(aiMesh* mesh, const aiScene* scene);
+        void m_processMesh(aiMesh* mesh, const aiScene* scene);
 
         void m_processVertices(aiMesh* mesh, std::vector<vertex>& verticesOutput);
         void m_processIndices(aiMesh* mesh, std::vector<GLuint>& indicesOutput);
-        void m_processMaterial(aiMaterial* mesh, std::shared_ptr<glrhi::material> materialOutput);
+        void m_processMaterial(aiMaterial* mesh, std::unique_ptr<glrhi::material>& materialOutput);
 
         glm::mat4 m_calcModelMatrix() const;
     };

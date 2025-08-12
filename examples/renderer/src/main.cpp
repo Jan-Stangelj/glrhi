@@ -1,8 +1,5 @@
-#include "glrhi/core/compute.hpp"
-#include "glrhi/renderer/model.hpp"
 #include <glrhi/glrhi.hpp>
 #include <glrhi/glrenderer.hpp>
-
 #include <glrhi/utils/timer.hpp>
 
 #include <iostream>

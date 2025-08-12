@@ -40,7 +40,7 @@ namespace glrhi {
     void model::m_processNode(aiNode* node, const aiScene* scene) {
         for (unsigned int i = 0; i < node->mNumMeshes; i++) {
             aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-            m_meshes.push_back(m_processMesh(mesh, scene));
+            m_processMesh(mesh, scene);
         }
 
         for (unsigned int i = 0; i < node->mNumChildren; i++) {
@@ -48,7 +48,7 @@ namespace glrhi {
         }
     }
 
-    glrhi::submesh model::m_processMesh(aiMesh* mesh, const aiScene* scene) {
+    void model::m_processMesh(aiMesh* mesh, const aiScene* scene) {
 
         std::vector<vertex> vertices;
         vertices.reserve(mesh->mNumVertices);
@@ -62,17 +62,17 @@ namespace glrhi {
         meshopt_optimizeOverdraw(&indices[0], &indices[0], indices.size(), &vertices[0].position.x, vertices.size(), sizeof(glrhi::vertex), 1.05f);
         meshopt_optimizeVertexFetch(&vertices[0], &indices[0], indices.size(), &vertices[0], vertices.size(), sizeof(glrhi::vertex));
 
-        std::shared_ptr<glrhi::material> material = std::make_shared<glrhi::material>();
+        std::unique_ptr<glrhi::material> material = std::make_unique<glrhi::material>();
 
         if (mesh->mMaterialIndex >= 0)
             m_processMaterial(scene->mMaterials[mesh->mMaterialIndex], material);
 
         glrhi::submesh returnMesh;
 
-        returnMesh.material = material;
-        returnMesh.mesh = std::make_shared<glrhi::mesh>(vertices, indices);
+        returnMesh.material = std::move(material);
+        returnMesh.mesh = std::make_unique<glrhi::mesh>(vertices, indices);
 
-        return returnMesh;
+        m_meshes.push_back(std::move(returnMesh));
     }
 
     void model::draw(glrhi::shader& shader) const {
@@ -82,7 +82,8 @@ namespace glrhi {
 
         shader.setMat4("u_model", model);
 
-        for (auto mesh : m_meshes) {
+        for (unsigned int i = 0; i < m_meshes.size(); i++) {
+            const glrhi::submesh& mesh = m_meshes[i];
             mesh.material->bind(shader);
             mesh.mesh->draw();
         }
@@ -125,7 +126,7 @@ namespace glrhi {
         }
     }
 
-    void model::m_processMaterial(aiMaterial* material, std::shared_ptr<glrhi::material> materialOutput) {
+    void model::m_processMaterial(aiMaterial* material, std::unique_ptr<glrhi::material>& materialOutput) {
         aiColor4D albedo;
         float roughness, metallic;
 
