@@ -8,6 +8,7 @@
 #include "renderer/material.hpp"
 #include "renderer/model.hpp"
 #include "renderer/gbuffer.hpp"
+#include "renderer/lighting.hpp"
 
 #include "utils/timer.hpp"
 
@@ -29,6 +30,10 @@ namespace glrhi {
         void addModel(const char* name, const std::filesystem::path& model) { m_models.try_emplace(name, model); }
         void removeModel(const char* name) { m_models.erase(name); }
         glrhi::model& getModel(const char* name) { return m_models[name]; }
+
+        void addLight(const char* name) { m_lights.try_emplace(name); }
+        void removeLight(const char* name) { m_lights.erase(name); }
+        glrhi::light& getLight(const char* name) { return m_lights[name]; }
 
         void pushPostProcessShader(const std::filesystem::path& computeShader) { m_postProcessShaders.emplace_back(computeShader); }
         void popPostProcessShader() {m_postProcessShaders.pop_back(); }
@@ -60,6 +65,7 @@ namespace glrhi {
         glrhi::timer m_deltaTimer;
 
         std::map<std::string_view, glrhi::model> m_models;
+        std::map<std::string_view, glrhi::light> m_lights;
         std::vector<glrhi::compute> m_postProcessShaders;
 
         constexpr static std::string_view m_vertexGbufferCode = "#version 460 core\n\nlayout (location = 0) in vec3 a_pos;\nlayout (location = 1) in vec2 a_texUV;\nlayout (location = 2) in vec3 a_normal;\nlayout (location = 3) in vec3 a_tangent;\n\nout vec2 texUV;\nout vec3 fragPos;\nout mat3 TBN;\n\nlayout (std140, binding=0) uniform cam {\n    mat4 view;\n    mat4 projection;\n};\n\nuniform mat4 u_model;\n\nvoid main() {\n    gl_Position = projection * view * u_model * vec4(a_pos, 1.0);\n\n    fragPos = vec3(u_model * vec4(a_pos, 1.0));\n\n    texUV = vec2(a_texUV.x, a_texUV.y);\n\n    vec3 T = normalize(vec3(u_model * vec4(a_tangent, 0.0)));\n\tvec3 N = normalize(vec3(u_model * vec4(a_normal, 0.0)));\n\tvec3 B = cross(T, N);\n\tTBN = mat3(T, B, N);\n\n}";
