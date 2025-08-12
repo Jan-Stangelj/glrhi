@@ -4,7 +4,7 @@ int main()
 {
     glrhi::renderer renderer(1280, 720, "Renderer example");
 
-    renderer.pushPostProcessShader("../examples/renderer/shaders/postprocess.comp");
+    //renderer.pushPostProcessShader("../examples/renderer/shaders/postprocess.comp");
 
     renderer.addModel("sponza", "../examples/renderer/sponza/Sponza.gltf");
     renderer.getModel("sponza").size = glm::vec3(0.01f);

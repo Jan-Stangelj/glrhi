@@ -1,5 +1,6 @@
 #include "glm/detail/type_quat.hpp"
 #include "glm/ext/matrix_float4x4.hpp"
+#include "glm/ext/vector_float4.hpp"
 #include <glrhi/renderer/camera.hpp>
 
 #include <glm/gtc/quaternion.hpp>
@@ -9,7 +10,7 @@
 
 namespace glrhi {
     camera::camera() {
-        m_cameraData.create(sizeof(glm::mat4) * 2);
+        m_cameraData.create(sizeof(glm::mat4) * 2 + sizeof(glm::vec4));
     }
 
     void camera::uploadData() {
@@ -31,6 +32,7 @@ namespace glrhi {
         glm::mat4 matrices[2] = {m_view, m_projection};
 
         m_cameraData.sendData(0, sizeof(glm::mat4) * 2, matrices);
+        m_cameraData.sendData(sizeof(glm::mat4) * 2, sizeof(glm::vec4), &position);
     }
 
     void camera::bind() const {

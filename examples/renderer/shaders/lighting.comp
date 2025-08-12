@@ -4,6 +4,12 @@ layout (local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 
 const float PI = 3.14159265359;
 
+layout (std140, binding=0) uniform cam {
+    mat4 view;
+    mat4 projection;
+    vec4 camPos;
+};
+
 layout(rgba16f, binding = 0) uniform image2D u_resoult;
 layout(rgba16f, binding = 1) uniform image2D u_albedoInLightingOut;
 
@@ -11,7 +17,7 @@ uniform sampler2D u_normalRoughness;
 uniform sampler2D u_emissionMetallic;
 uniform sampler2D u_position;
 
-//vec3 calcLight(vec3 albedo, float roughness, float metallic, vec3 normal, vec3 radiance, vec3 lightDir, vec3 fragPos);
+vec3 calcLight(vec3 albedo, float roughness, float metallic, vec3 normal, vec3 radiance, vec3 lightDir, vec3 fragPos);
 
 void main() {
     vec2 texUV = vec2(0.0);
@@ -22,18 +28,29 @@ void main() {
     vec4 normalRoughness = texture(u_normalRoughness, texUV);
     vec4 emissionMetallic = texture(u_emissionMetallic, texUV);
 
-    vec3 albedo = imageLoad(u_albedoInLightingOut, texelCoord).rgb;
+    vec3 albedo = pow(imageLoad(u_albedoInLightingOut, texelCoord).rgb, vec3(2.2));
     vec3 arm = vec3(1.0, normalRoughness.w, emissionMetallic.w);
+    vec3 normal = normalRoughness.rgb;
     vec3 position = texture(u_position, texUV).rgb;
 
-    vec4 outColor = vec4(vec3(1.0) - albedo, 1.0);
+    vec3 lightColor = vec3(1.0);
+    float lightStrenght = 66.0;
+    vec3 lightPos = vec3(0.0, 3.0, 0.0);
+    vec3 lightDir = lightPos - position;
+    float distance = length(lightDir);
+    float attenuation = lightStrenght / pow(distance, distance);
 
-    imageStore(u_resoult, texelCoord, outColor);
+    vec3 outColor = calcLight(albedo, arm.g, arm.b, normal, lightColor * attenuation, normalize(lightDir), position);
+    outColor += emissionMetallic.rgb;
+
+    outColor = pow(outColor, vec3(1.0 / 2.2));
+
+    imageStore(u_resoult, texelCoord, vec4(outColor, 1.0));
 }
 
 // --------------------------------------------------------------------------------------------------------------------------
 // --------------------------------------------------------------------------------------------------------------------------
-/*
+
 float DistributionGGX(vec3 N, vec3 H, float roughness) {
     float a = roughness*roughness;
     float a2 = a*a;
@@ -70,7 +87,7 @@ vec3 fresnelSchlick(float cosTheta, vec3 F0) {
 vec3 calcLight(vec3 albedo, float roughness, float metallic, vec3 normal, vec3 radiance, vec3 lightDir, vec3 fragPos) {
 
     vec3 N = normal;
-    vec3 V = normalize(camPos - fragPos);
+    vec3 V = normalize(camPos.xyz - fragPos);
 
 	vec3 F0 = vec3(0.04);
     F0 = mix(F0, albedo, metallic);
@@ -98,4 +115,4 @@ vec3 calcLight(vec3 albedo, float roughness, float metallic, vec3 normal, vec3 r
 	float NdotL = max(dot(N, L), 0.0);  
 
 	return (kD * albedo / PI + specular) * radiance * NdotL;
-}*/
+}
