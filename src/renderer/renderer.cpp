@@ -17,6 +17,7 @@ namespace glrhi {
     }
 
     void renderer::lightingPass() {
+        m_gBuffer.bindTexturesLightingPass(m_lightingShader);
         m_lightingShader.dispatch(m_width, m_height, 1);
     }
 

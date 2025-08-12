@@ -55,9 +55,16 @@ namespace glrhi {
          * @param shader the shader to bind them in.
          *
          * @details It binds the following sampler2D uniforms:
-         *          u_albedo, u_normalRoughness, u_emissionMetallic, u_position, u_resoult.
+         *          u_albedo, u_normalRoughness, u_emissionMetallic, u_position.
+         *          And the following image2D uniforms:
+         *          u_resoult
          */
         void bindTextures(glrhi::compute& shader);
+
+        /**
+         * @brief Not meant for end user
+         */
+        void bindTexturesLightingPass(glrhi::compute& shader);
 
         /**
          * @brief Binds the default framebuffer and renders the contents of the resoult texture to the screen.

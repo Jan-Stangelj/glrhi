@@ -48,6 +48,21 @@ namespace glrhi {
         m_resoult.bindImage(0, 0);
     }
 
+    void gbuffer::bindTexturesLightingPass(glrhi::compute& shader) {
+        m_albedo.bindImage(1, 0);
+
+        m_normalRoughness.bind(1);
+        shader.setInt("u_normalRoughness", 1);
+
+        m_emissionMetallic.bind(2);
+        shader.setInt("u_emissionMetallic", 2);
+
+        m_position.bind(3);
+        shader.setInt("u_position", 3);
+
+        m_resoult.bindImage(0, 0);
+    }
+
     void gbuffer::renderResoult() {
         unbind();
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

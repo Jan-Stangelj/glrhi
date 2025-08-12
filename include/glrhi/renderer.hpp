@@ -20,7 +20,7 @@ namespace glrhi {
     class renderer {
     public:
 
-        renderer(unsigned int width, unsigned int height, const char* title) : m_window(width, height, title), m_gBuffer(width, height) { m_gBufferShader.createFromCode(m_vertexGbufferCode.data(), m_fragmentGbufferCode.data()); m_width = width; m_height = height; glEnable(GL_DEPTH_TEST); glEnable(GL_CULL_FACE); }
+        renderer(unsigned int width, unsigned int height, const char* title) : m_window(width, height, title), m_gBuffer(width, height) { m_gBufferShader.createFromCode(m_vertexGbufferCode.data(), m_fragmentGbufferCode.data()); m_lightingShader.create("../examples/renderer/shaders/lighting.comp"); m_width = width; m_height = height; glEnable(GL_DEPTH_TEST); glEnable(GL_CULL_FACE); }
         ~renderer() = default;
 
         glrhi::camera& getCamera() { return m_camera; }
