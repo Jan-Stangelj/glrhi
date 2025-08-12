@@ -1,5 +1,5 @@
 #include <glrhi/glrhi.hpp>
-#include <glrhi/glrenderer.hpp>
+#include <glrhi/renderer.hpp>
 #include <glrhi/utils/timer.hpp>
 
 #include <iostream>
@@ -39,7 +39,6 @@ int main()
 
         float dTime = timer.get();
         timer.reset();
-        std::cout << floor(1.0f / dTime) << '\n';
 
         window.poolEvents();
 

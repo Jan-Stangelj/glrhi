@@ -1,5 +1,5 @@
 #include <glrhi/glrhi.hpp>
-#include <glrhi/glrenderer.hpp>
+#include <glrhi/renderer.hpp>
 
 #include <vector>
 #include <chrono>
