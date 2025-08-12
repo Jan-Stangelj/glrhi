@@ -58,12 +58,11 @@ namespace glrhi {
         indices.reserve(mesh->mNumVertices);
         m_processIndices(mesh, indices);
 
-        meshopt_optimizeVertexCache(&indices[0], &indices[0], indices.size(), vertices.size());
-        meshopt_optimizeOverdraw(&indices[0], &indices[0], indices.size(), &vertices[0].position.x, vertices.size(), sizeof(glrhi::vertex), 1.05f);
-        meshopt_optimizeVertexFetch(&vertices[0], &indices[0], indices.size(), &vertices[0], vertices.size(), sizeof(glrhi::vertex));
+        m_optimizeMesh(vertices, indices);
 
         std::unique_ptr<glrhi::material> material = std::make_unique<glrhi::material>();
 
+        // Only process material, if there is one
         if (mesh->mMaterialIndex >= 0)
             m_processMaterial(scene->mMaterials[mesh->mMaterialIndex], material);
 
@@ -124,6 +123,12 @@ namespace glrhi {
                 indicesOutput.push_back(face.mIndices[j]);
             }
         }
+    }
+
+    void model::m_optimizeMesh(std::vector<vertex>& verticesInOut, std::vector<GLuint>& indicesInOut) {
+        meshopt_optimizeVertexCache(&indicesInOut[0], &indicesInOut[0], indicesInOut.size(), verticesInOut.size());
+        meshopt_optimizeOverdraw(&indicesInOut[0], &indicesInOut[0], indicesInOut.size(), &verticesInOut[0].position.x, verticesInOut.size(), sizeof(glrhi::vertex), 1.05f);
+        meshopt_optimizeVertexFetch(&verticesInOut[0], &indicesInOut[0], indicesInOut.size(), &verticesInOut[0], verticesInOut.size(), sizeof(glrhi::vertex));
     }
 
     void model::m_processMaterial(aiMaterial* material, std::unique_ptr<glrhi::material>& materialOutput) {
