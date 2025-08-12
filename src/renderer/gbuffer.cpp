@@ -32,7 +32,7 @@ namespace glrhi {
         m_resoult.bindImage(0, 0);
     }
 
-        void gbuffer::bindTextures(glrhi::compute& shader) {
+    void gbuffer::bindTextures(glrhi::compute& shader) {
         m_albedo.bind(0);
         shader.setInt("u_albedo", 0);
 

@@ -1,62 +1,30 @@
-#include <glrhi/glrhi.hpp>
 #include <glrhi/renderer.hpp>
-#include <glrhi/utils/timer.hpp>
-
-#include <iostream>
-#include <cmath>
 
 int main()
 {
-    glrhi::window window(1280, 720, "Model example");
+    glrhi::renderer renderer(1280, 720, "Renderer example");
 
-    glrhi::shader buffer("../examples/renderer/shaders/buffer.vert", "../examples/renderer/shaders/buffer.frag");
-    glrhi::compute postProcess("../examples/renderer/shaders/postprocess.comp");
+    renderer.pushPostProcessShader("../examples/renderer/shaders/postprocess.comp");
 
-    glrhi::model sponza("../examples/renderer/sponza/Sponza.gltf");
-    sponza.size = glm::vec3(0.01f);
+    renderer.addModel("sponza", "../examples/renderer/sponza/Sponza.gltf");
+    renderer.getModel("sponza").size = glm::vec3(0.01f);
 
-    glrhi::model helmet("../examples/renderer/helmet/DamagedHelmet.gltf");
-    helmet.size = glm::vec3(0.5f);
-    helmet.position = glm::vec3(0.0f, 1.5f, 0.0f);
-    helmet.rotation = glm::vec3(90.0f, 0.0f, 0.0f);
-
-    glrhi::gbuffer gbuffer(1280, 720);
-
-    glrhi::camera cam;
-    cam.position.y = 5.0f;
-
-    cam.uploadData();
-    cam.bind();
+    renderer.addModel("helmet", "../examples/renderer/helmet/DamagedHelmet.gltf");
+    renderer.getModel("helmet").size = glm::vec3(0.5f);
+    renderer.getModel("helmet").position = glm::vec3(0.0f, 1.5f, 0.0f);
+    renderer.getModel("helmet").rotation = glm::vec3(90.0f, 0.0f, 0.0f);
 
     glrhi::debugCamera dbgcam;
 
-    glrhi::timer timer;
+    while (renderer.running()) {
 
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
+        renderer.getInput();
 
-    while (!window.shouldClose()) {
+        dbgcam.apply(renderer.getCamera(), renderer.getWindow(), renderer.deltaTime());
 
-        float dTime = timer.get();
-        timer.reset();
-
-        window.poolEvents();
-
-        dbgcam.apply(cam, window, dTime);
-        cam.uploadData();
-
-        gbuffer.bind();
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        sponza.draw(buffer);
-        helmet.draw(buffer);
-
-        gbuffer.bindTextures(postProcess);
-        postProcess.dispatch(1280, 720, 1);
-
-        gbuffer.renderResoult();
- 
-        window.swapBuffers();
+        renderer.gBufferPass();
+        renderer.postProcessPass();
+        renderer.renderResoult();
     }
 
     return 0;
