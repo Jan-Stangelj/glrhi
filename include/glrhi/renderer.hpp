@@ -36,6 +36,7 @@ namespace glrhi {
         bool running() { return !m_window.shouldClose(); }
         void getInput() { m_window.poolEvents(); m_deltaTime = m_deltaTimer.get(); m_deltaTimer.reset();}
         void gBufferPass();
+        void lightingPass();
         void postProcessPass();
         void renderResoult();
 
@@ -52,6 +53,7 @@ namespace glrhi {
 
         glrhi::gbuffer m_gBuffer;
         glrhi::shader m_gBufferShader;
+        glrhi::compute m_lightingShader;
 
         glrhi::camera m_camera;
 
