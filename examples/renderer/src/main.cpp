@@ -1,3 +1,4 @@
+#include "glrhi/core/compute.hpp"
 #include "glrhi/renderer/model.hpp"
 #include <glrhi/glrhi.hpp>
 #include <glrhi/glrenderer.hpp>
@@ -12,6 +13,7 @@ int main()
     glrhi::window window(1280, 720, "Model example");
 
     glrhi::shader buffer("../examples/renderer/shaders/buffer.vert", "../examples/renderer/shaders/buffer.frag");
+    glrhi::compute postProcess("../examples/renderer/shaders/postprocess.comp");
 
     glrhi::model sponza("../examples/renderer/sponza/Sponza.gltf");
     sponza.size = glm::vec3(0.01f);
@@ -52,6 +54,9 @@ int main()
 
         sponza.draw(buffer);
         helmet.draw(buffer);
+
+        gbuffer.bindTextures(postProcess);
+        postProcess.dispatch(1280, 720, 1);
 
         gbuffer.renderResoult();
  

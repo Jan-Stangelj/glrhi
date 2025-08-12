@@ -29,8 +29,23 @@ namespace glrhi {
         m_position.bind(3);
         shader.setInt("u_position", 3);
 
-        m_resoult.bind(4);
-        shader.setInt("u_resoult", 4);
+        m_resoult.bindImage(0, 0);
+    }
+
+        void gbuffer::bindTextures(glrhi::compute& shader) {
+        m_albedo.bind(0);
+        shader.setInt("u_albedo", 0);
+
+        m_normalRoughness.bind(1);
+        shader.setInt("u_normalRoughness", 1);
+
+        m_emissionMetallic.bind(2);
+        shader.setInt("u_emissionMetallic", 2);
+
+        m_position.bind(3);
+        shader.setInt("u_position", 3);
+
+        m_resoult.bindImage(0, 0);
     }
 
     void gbuffer::renderResoult() {
@@ -69,7 +84,7 @@ namespace glrhi {
         m_normalRoughness.create(width, height, GL_RGBA16F);
         m_emissionMetallic.create(width, height, GL_RGBA8);
         m_position.create(width, height, GL_RGB16F);
-        m_resoult.create(width, height, GL_RGB16F);
+        m_resoult.create(width, height, GL_RGBA16F);
 
         m_depth.create(width, height, GL_DEPTH_COMPONENT24);
 
