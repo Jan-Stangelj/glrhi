@@ -1,3 +1,4 @@
+#include "glrhi/renderer/lighting.hpp"
 #include <glrhi/renderer.hpp>
 
 int main()
@@ -13,6 +14,13 @@ int main()
     renderer.getModel("helmet").size = glm::vec3(0.5f);
     renderer.getModel("helmet").position = glm::vec3(0.0f, 1.5f, 0.0f);
     renderer.getModel("helmet").rotation = glm::vec3(90.0f, 0.0f, 0.0f);
+
+    renderer.addLight("light1");
+    glrhi::light& l1 = renderer.getLight("light1");
+    //l1.type = 0;
+    l1.direction = glm::vec4(1.0f);
+    l1.color = glm::vec4(1.0f);
+    l1.strength = 10.0f;
 
     glrhi::debugCamera dbgcam;
 

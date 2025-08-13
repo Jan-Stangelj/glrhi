@@ -24,7 +24,7 @@ namespace glrhi {
     }
 
     void ssbo::sendData(GLintptr offset, GLsizeiptr size, const void* data) const {
-        glNamedBufferSubData(m_ID, offset, size, &data);
+        glNamedBufferSubData(m_ID, offset, size, data);
     }
 
     void ssbo::addBindingPoint(GLuint bindingPoint) const {

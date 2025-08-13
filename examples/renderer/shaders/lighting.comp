@@ -2,12 +2,26 @@
 
 layout (local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 
+struct light {
+    vec4 position;
+    vec4 direction;
+    vec4 color;
+    float strenght;
+    float cutoff;
+    float outerCutoff;
+    int type;
+};
+
 const float PI = 3.14159265359;
 
 layout (std140, binding=0) uniform cam {
     mat4 view;
     mat4 projection;
     vec4 camPos;
+};
+
+layout (std430, binding = 0) readonly buffer colorExample {
+    light inLights[1024];
 };
 
 layout(rgba16f, binding = 0) uniform image2D u_resoult;
@@ -33,19 +47,42 @@ void main() {
     vec3 normal = normalRoughness.rgb;
     vec3 position = texture(u_position, texUV).rgb;
 
-    vec3 lightColor = vec3(1.0);
-    float lightStrenght = 66.0;
-    vec3 lightPos = vec3(0.0, 3.0, 0.0);
-    vec3 lightDir = lightPos - position;
-    float distance = length(lightDir);
-    float attenuation = lightStrenght / pow(distance, distance);
+    vec3 resoult = vec3(0.0);
 
-    vec3 outColor = calcLight(albedo, arm.g, arm.b, normal, lightColor * attenuation, normalize(lightDir), position);
-    outColor += emissionMetallic.rgb;
+    light l = inLights[0];
 
-    outColor = pow(outColor, vec3(1.0 / 2.2));
+    resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * l.strenght, l.direction.xyz, position);
 
-    imageStore(u_resoult, texelCoord, vec4(outColor, 1.0));
+	/*for (int i = 0; i < numLights; i++) {
+		light l = inLights[i];
+
+		vec3 lightDir = l.position.xyz - position;
+		float distance = length(lightDir);
+		float attenuation = l.strenght / pow(distance, distance);
+		
+		float theta = dot(normalize(lightDir), normalize(-l.direction.xyz));
+
+		if (theta < l.outerCutoff)
+			continue;
+
+		float epsilon = l.cutoff - l.outerCutoff;
+		float intensity = clamp((theta - l.outerCutoff) / epsilon, 0.0, 1.0);
+
+        
+
+        if (l.type == 0) {
+            resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * l.strenght, l.direction.xyz, position);
+        }
+        else if (l.type == 1) {
+            intensity = 1.0;
+        }
+
+		
+	}*/
+
+    resoult = pow(resoult, vec3(1.0 / 2.2));
+
+    imageStore(u_resoult, texelCoord, vec4(resoult, 1.0));
 }
 
 // --------------------------------------------------------------------------------------------------------------------------

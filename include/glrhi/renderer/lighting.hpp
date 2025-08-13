@@ -5,21 +5,13 @@
 #include <glm/glm.hpp>
 
 namespace glrhi {
-    enum lightType {
-        POINT,
-        DIRECTIONAL,
-        SPOT
-    };
     struct light {
-        glm::vec3 position;
-        glm::vec3 direction;
-
-        glm::vec3 color;
+        glm::vec4 position;
+        glm::vec4 direction;
+        glm::vec4 color;
         float strength;
-
         float cutoff;
         float outerCutoff;
-
-        lightType type;
+        int type;
     };
 }
