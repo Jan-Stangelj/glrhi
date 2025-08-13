@@ -5,7 +5,7 @@
 #include <iostream>
 
 namespace glrhi {
-    void renderer::gBufferPass() {
+    void renderer::gBufferPass(const glrhi::scene& scene) {
         m_camera.uploadData();
         m_camera.bind();
 
@@ -14,23 +14,11 @@ namespace glrhi {
 
         m_gBufferShader.use();
 
-        for (auto const& model : m_models) {
-            model.second.draw(m_gBufferShader);
-        }
+        scene.drawModels(m_gBufferShader);
     }
 
-    void renderer::lightingPass() {
-        int numLights = m_lights.size();
-        m_lightingShader.setInt("u_numLights", numLights);
-
-        unsigned int i = 0;
-        for (auto const& light : m_lights) {
-            size_t lightSize = sizeof(glrhi::light);
-            m_lightBuffer.sendData(lightSize * i, lightSize, &light.second);
-            i++;
-        }
-
-        m_lightBuffer.addBindingPoint(0);
+    void renderer::lightingPass(const glrhi::scene& scene) {
+        scene.updateLightBuffer(m_lightingShader);
 
         m_gBuffer.bindTexturesLightingPass(m_lightingShader);
         m_lightingShader.dispatch(m_width, m_height, 1);

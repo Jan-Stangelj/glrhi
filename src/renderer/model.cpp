@@ -60,7 +60,7 @@ namespace glrhi {
 
         m_optimizeMesh(vertices, indices);
 
-        std::unique_ptr<glrhi::material> material = std::make_unique<glrhi::material>();
+        std::shared_ptr<glrhi::material> material = std::make_shared<glrhi::material>();
 
         // Only process material, if there is one
         if (mesh->mMaterialIndex >= 0)
@@ -69,7 +69,7 @@ namespace glrhi {
         glrhi::submesh returnMesh;
 
         returnMesh.material = std::move(material);
-        returnMesh.mesh = std::make_unique<glrhi::mesh>(vertices, indices);
+        returnMesh.mesh = std::make_shared<glrhi::mesh>(vertices, indices);
 
         m_meshes.push_back(std::move(returnMesh));
     }

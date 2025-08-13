@@ -26,8 +26,8 @@ namespace glrhi {
      * @brief Internal format, used in the model class.
      */
     struct submesh {
-        std::unique_ptr<glrhi::mesh> mesh;
-        std::unique_ptr<glrhi::material> material;
+        std::shared_ptr<glrhi::mesh> mesh;
+        std::shared_ptr<glrhi::material> material;
     };
 
     /**

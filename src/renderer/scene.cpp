@@ -1,0 +1,43 @@
+#include "glrhi/renderer/model.hpp"
+#include <glrhi/renderer/scene.hpp>
+#include <utility>
+
+namespace glrhi {
+    scene::scene() : m_lightBuffer(sizeof(glrhi::light) * 1024) {}
+
+    unsigned int scene::addModel(const std::filesystem::path& path) {
+        m_models.emplace_back(path);
+        return m_models.size() - 1;
+    }
+    glrhi::model& scene::getModel(unsigned int id) {
+        return m_models[id];
+    }
+
+    unsigned int scene::addLight() {
+        m_lights.emplace_back();
+        return m_lights.size() - 1;
+    }
+    glrhi::light& scene::getLight(unsigned int id) {
+        return m_lights[id];
+    }
+
+    void scene::drawModels(glrhi::shader& shader) const {
+        for (auto const& model : m_models) {
+            model.draw(shader);
+        }
+    }
+
+    void scene::updateLightBuffer(glrhi::compute& shader) const {
+        int numLights = m_lights.size();
+        shader.setInt("u_numLights", numLights);
+
+        unsigned int i = 0;
+        for (auto const& light : m_lights) {
+            size_t lightSize = sizeof(glrhi::light);
+            m_lightBuffer.sendData(lightSize * i, lightSize, &light);
+            i++;
+        }
+
+        m_lightBuffer.addBindingPoint(0);
+    }
+}
