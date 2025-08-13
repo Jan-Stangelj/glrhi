@@ -1,3 +1,4 @@
+#include "glm/trigonometric.hpp"
 #include "glrhi/renderer/lighting.hpp"
 #include <glrhi/renderer.hpp>
 
@@ -17,10 +18,11 @@ int main()
 
     renderer.addLight("light1");
     glrhi::light& l1 = renderer.getLight("light1");
-    //l1.type = 0;
+    l1.type = glrhi::POINT;
     l1.direction = glm::vec4(1.0f);
+    l1.position = glm::vec4(0.0f, 3.0f, 0.0f, 0.0f);
     l1.color = glm::vec4(1.0f);
-    l1.strength = 10.0f;
+    l1.strength = 100.0f;
 
     glrhi::debugCamera dbgcam;
 

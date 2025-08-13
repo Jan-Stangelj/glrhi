@@ -7,8 +7,6 @@ struct light {
     vec4 direction;
     vec4 color;
     float strenght;
-    float cutoff;
-    float outerCutoff;
     int type;
 };
 
@@ -20,9 +18,10 @@ layout (std140, binding=0) uniform cam {
     vec4 camPos;
 };
 
-layout (std430, binding = 0) readonly buffer colorExample {
+layout (std430, binding = 0) readonly buffer lights {
     light inLights[1024];
 };
+uniform int u_numLights;
 
 layout(rgba16f, binding = 0) uniform image2D u_resoult;
 layout(rgba16f, binding = 1) uniform image2D u_albedoInLightingOut;
@@ -51,34 +50,23 @@ void main() {
 
     light l = inLights[0];
 
-    resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * l.strenght, l.direction.xyz, position);
+    //resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * l.strenght, l.direction.xyz, position);
 
-	/*for (int i = 0; i < numLights; i++) {
+	for (int i = 0; i < u_numLights; i++) {
 		light l = inLights[i];
+
+        if (l.type == 0)
+            resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * l.strenght, l.direction.xyz, position);
 
 		vec3 lightDir = l.position.xyz - position;
 		float distance = length(lightDir);
 		float attenuation = l.strenght / pow(distance, distance);
+
+        if (l.type == 1)
+            resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * attenuation, lightDir, position);
 		
 		float theta = dot(normalize(lightDir), normalize(-l.direction.xyz));
-
-		if (theta < l.outerCutoff)
-			continue;
-
-		float epsilon = l.cutoff - l.outerCutoff;
-		float intensity = clamp((theta - l.outerCutoff) / epsilon, 0.0, 1.0);
-
-        
-
-        if (l.type == 0) {
-            resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * l.strenght, l.direction.xyz, position);
-        }
-        else if (l.type == 1) {
-            intensity = 1.0;
-        }
-
-		
-	}*/
+	}
 
     resoult = pow(resoult, vec3(1.0 / 2.2));
 

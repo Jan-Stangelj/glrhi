@@ -21,7 +21,7 @@ namespace glrhi {
 
     void renderer::lightingPass() {
         int numLights = m_lights.size();
-        
+        m_lightingShader.setInt("u_numLights", numLights);
 
         unsigned int i = 0;
         for (auto const& light : m_lights) {
