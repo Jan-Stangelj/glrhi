@@ -1,5 +1,7 @@
 #include <glrhi/renderer.hpp>
 
+#include <glrhi/renderer/shaders.hpp>
+
 namespace glrhi {
     renderer::renderer(unsigned int width, unsigned int height, const char* title)  : m_window(width, height, title), m_gBuffer(width, height) { 
         m_gBufferShader.createFromCode(m_vertexGbufferCode.data(), m_fragmentGbufferCode.data()); 
