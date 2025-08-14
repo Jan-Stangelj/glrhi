@@ -2,19 +2,17 @@
 
 #include "glrhi.hpp"
 
-#include "renderer/mesh.hpp"
+#include "glrhi/core/ebo.hpp"
+#include "glrhi/core/vao.hpp"
+#include "glrhi/core/vbo.hpp"
 #include "renderer/camera.hpp"
 #include "renderer/debugcam.hpp"
-#include "renderer/material.hpp"
-#include "renderer/model.hpp"
 #include "renderer/gbuffer.hpp"
-#include "renderer/lighting.hpp"
 #include "renderer/scene.hpp"
 
 #include "utils/timer.hpp"
 
 #include <vector>
-#include <string_view>
 #include <filesystem>
 
 namespace glrhi {
@@ -50,6 +48,7 @@ namespace glrhi {
 
         glrhi::gbuffer m_gBuffer;
         glrhi::shader m_gBufferShader;
+        glrhi::shader m_skyboxShader;
         glrhi::compute m_lightingShader;
 
         glrhi::camera m_camera;
@@ -58,6 +57,8 @@ namespace glrhi {
 
         std::vector<glrhi::compute> m_postProcessShaders;
 
-        
+        glrhi::vbo m_skyboxVBO;
+        glrhi::vao m_skyboxVAO;
+        glrhi::ebo m_skyboxEBO;
     };
 }

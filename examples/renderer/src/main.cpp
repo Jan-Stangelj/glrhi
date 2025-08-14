@@ -25,6 +25,8 @@ int main()
     l1.color = glm::vec4(1.0f);
     l1.strength = 100.0f;
 
+    scene.setSkybox("../examples/renderer/skybox.hdr");
+
     glrhi::debugCamera dbgcam;
 
     while (renderer.running()) {

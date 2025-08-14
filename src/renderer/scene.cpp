@@ -1,3 +1,5 @@
+#include "glrhi/core/ebo.hpp"
+#include <filesystem>
 #include <glrhi/renderer/scene.hpp>
 
 namespace glrhi {
@@ -17,6 +19,15 @@ namespace glrhi {
     }
     glrhi::light& scene::getLight(unsigned int id) {
         return m_lights[id];
+    }
+
+    void scene::setSkybox(const std::filesystem::path& path) {
+        m_skybox.create(path, GL_RGB16F);
+        m_hasSkybox = true;
+    }
+    void scene::bindSkybox(glrhi::shader& shader) const {
+        m_skybox.bind(0);
+        shader.setInt("u_skybox", 0);
     }
 
     void scene::drawModels(glrhi::shader& shader) const {
