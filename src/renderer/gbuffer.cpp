@@ -135,7 +135,7 @@ namespace glrhi {
                                 "uniform sampler2D u_resoult;\n"
                                 "\n"
                                 "void main() {\n"
-                                "\tfragColor = vec4(texture(u_resoult, texUV).xyz, 1.0);\n"
+                                "\tfragColor = vec4(pow(texture(u_resoult, texUV).xyz, vec3(1.0 / 2.2)), 1.0);\n"
                                 "}";
 
         m_resoultShader.createFromCode(vertCode, fragCode);

@@ -153,7 +153,6 @@ namespace glrhi {
                                                             "\t\tfloat theta = dot(normalize(lightDir), normalize(-l.direction.xyz));\n"
                                                             "\t}\n"
                                                             "\n"
-                                                            "    resoult = pow(resoult, vec3(1.0 / 2.2));\n"
                                                             "\n"
                                                             "    if (position != vec3(0.0)) imageStore(u_resoult, texelCoord, vec4(resoult, 1.0));\n"
                                                             "}\n"
