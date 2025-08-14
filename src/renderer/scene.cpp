@@ -1,6 +1,4 @@
-#include "glrhi/renderer/model.hpp"
 #include <glrhi/renderer/scene.hpp>
-#include <utility>
 
 namespace glrhi {
     scene::scene() : m_lightBuffer(sizeof(glrhi::light) * 1024) {}

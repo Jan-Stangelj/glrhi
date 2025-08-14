@@ -1,10 +1,10 @@
 #pragma once
 
+#include <glrhi/glrhi.hpp>
+
 #include "glrhi/core/shader.hpp"
 #include "glrhi/core/ssbo.hpp"
 #include "glrhi/renderer/lighting.hpp"
-#include <glrhi/glrhi.hpp>
-
 #include <glrhi/renderer/model.hpp>
 
 #include <filesystem>
