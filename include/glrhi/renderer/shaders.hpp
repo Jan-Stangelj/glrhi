@@ -290,4 +290,44 @@ namespace glrhi {
         30, 31, 32,
         33, 34, 35
     };
+
+    constexpr std::string_view skyboxVert = "#version 460 core\n"
+                                "\n"
+                                "layout(location = 0) in vec3 a_pos;\n"
+                                "\n"
+                                "layout(std140, binding=0) uniform cam {\n"
+                                "    mat4 view;\n"
+                                "    mat4 projection;\n"
+                                "};\n"
+                                "\n"
+                                "out vec3 texCoord;\n"
+                                "\n"
+                                "void main() {\n"
+                                "    gl_Position = (projection * mat4(mat3(view)) * vec4(a_pos, 1.0)).xyww;\n"
+                                "    texCoord = a_pos;\n"
+                                "}";
+
+    constexpr std::string_view skyboxFrag = "#version 460 core\n"
+                                "\n"
+                                "layout(location = 4) out vec3 g_resoult;\n"
+                                "\n"
+                                "in vec3 texCoord;\n"
+                                "\n"
+                                "uniform sampler2D u_skybox;\n"
+                                "\n"
+                                "// Convert normalized direction vector to equirectangular UV\n"
+                                "vec2 sampleSphericalMap(vec3 v)\n"
+                                "{\n"
+                                "    vec3 dir = normalize(v);\n"
+                                "\n"
+                                "    float u = atan(dir.z, dir.x) / (2.0 * 3.14159265) + 0.5;\n"
+                                "    float v_ = asin(dir.y) / 3.14159265 + 0.5;\n"
+                                "\n"
+                                "    return vec2(u, v_);\n"
+                                "}\n"
+                                "\n"
+                                "void main() {\n"
+                                "    vec2 uv = sampleSphericalMap(texCoord);\n"
+                                "    g_resoult = texture(u_skybox, uv).rgb;\n"
+                                "}\n";
 }

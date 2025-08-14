@@ -9,7 +9,7 @@ namespace glrhi {
     renderer::renderer(unsigned int width, unsigned int height, const char* title)  : m_window(width, height, title), m_gBuffer(width, height) { 
         m_gBufferShader.createFromCode(glrhi::vertexGbufferCode.data(), glrhi::fragmentGbufferCode.data()); 
         m_lightingShader.createFromCode(glrhi::lightingShaderCode.data());
-        m_skyboxShader.create("../examples/renderer/shaders/skybox.vert", "../examples/renderer/shaders/skybox.frag");
+        m_skyboxShader.createFromCode(skyboxVert.data(), skyboxFrag.data());
         m_width = width; 
         m_height = height; 
         glEnable(GL_DEPTH_TEST); 
