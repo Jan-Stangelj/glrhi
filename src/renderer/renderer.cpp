@@ -4,8 +4,8 @@
 
 namespace glrhi {
     renderer::renderer(unsigned int width, unsigned int height, const char* title)  : m_window(width, height, title), m_gBuffer(width, height) { 
-        m_gBufferShader.createFromCode(m_vertexGbufferCode.data(), m_fragmentGbufferCode.data()); 
-        m_lightingShader.create("../examples/renderer/shaders/lighting.comp"); 
+        m_gBufferShader.createFromCode(glrhi::vertexGbufferCode.data(), glrhi::fragmentGbufferCode.data()); 
+        m_lightingShader.createFromCode(glrhi::lightingShaderCode.data()); 
         m_width = width; 
         m_height = height; 
         glEnable(GL_DEPTH_TEST); 

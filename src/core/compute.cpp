@@ -46,6 +46,10 @@ namespace glrhi {
 
         const char* cShaderCode = computeCode.c_str();
 
+        createFromCode(cShaderCode);
+    }
+
+    void compute::createFromCode(const char* code) {
         GLint success;
         GLchar infoLog[1024];
 
@@ -54,7 +58,7 @@ namespace glrhi {
 
         // Compiles the shader
         compute = glCreateShader(GL_COMPUTE_SHADER);
-        glShaderSource(compute, 1, &cShaderCode, NULL);
+        glShaderSource(compute, 1, &code, NULL);
         glCompileShader(compute);
 
         glGetShaderiv(compute, GL_COMPILE_STATUS, &success);

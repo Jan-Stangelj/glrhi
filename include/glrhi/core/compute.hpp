@@ -38,6 +38,14 @@ namespace glrhi{
         void create(const std::filesystem::path& computePath);
 
         /**
+         * @brief Construct a new shader from already provided code
+         * 
+         * @param vertexCode C string of the vertex shader code.
+         * @param fragmentCode C string of the fragment shader code.
+         */
+        void createFromCode(const char* code);
+
+        /**
          * @brief Dispatches the compute shader with the set number of invocations.
          * 
          * @param x Number of invocations in the x dimension.
