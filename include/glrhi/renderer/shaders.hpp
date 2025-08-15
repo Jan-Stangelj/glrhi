@@ -376,6 +376,6 @@ namespace glrhi {
                                 "\n"
                                 "void main() {\n"
                                 "    vec2 uv = sampleSphericalMap(texCoord);\n"
-                                "    g_resoult = texture(u_skybox, uv).rgb;\n"
+                                "    g_resoult = textureLod(u_skybox, uv, 0).rgb;\n"
                                 "}\n";
 }
