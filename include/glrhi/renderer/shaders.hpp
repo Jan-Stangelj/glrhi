@@ -133,7 +133,7 @@ namespace glrhi {
                                                             "    vec2 uv = sampleEquirectangular(normalize(reflDir));\n"
                                                             "    float maxMip = float(textureQueryLevels(u_skybox) - 1);\n"
                                                             "    float mipCount = float(textureQueryLevels(u_skybox));\n"
-                                                            "    float mip = pow(roughness, roughness) * 6; // more perceptual\n"
+                                                            "    float mip = pow(roughness, roughness) * 4; // more perceptual\n"
                                                             "    mip = clamp(mip, 0.0, mipCount - 1.0);\n"
                                                             "    return textureLod(u_skybox, uv, mip).rgb;\n"
                                                             "}\n"
