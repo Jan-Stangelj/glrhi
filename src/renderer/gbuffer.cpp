@@ -1,6 +1,8 @@
 #include "glrhi/core/shader.hpp"
 #include <glrhi/renderer/gbuffer.hpp>
 
+#include <iostream>
+
 namespace glrhi {
     gbuffer::gbuffer(unsigned int width, unsigned int height) {
         m_loadQuad();

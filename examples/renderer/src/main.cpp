@@ -1,16 +1,15 @@
-#include "glrhi/renderer/lighting.hpp"
 #include <glrhi/renderer.hpp>
 
 int main()
 {
     glrhi::renderer renderer(1280, 720, "Renderer example");
 
-    //renderer.pushPostProcessShader("../examples/renderer/shaders/postprocess.comp");
+    renderer.pushPostProcessShader("../examples/renderer/shaders/ssao.comp");
 
     glrhi::scene scene;
 
-    //unsigned int sponza = scene.addModel("../examples/renderer/sponza/Sponza.gltf");
-    //scene.getModel(sponza).size = glm::vec3(0.01f);
+    unsigned int sponza = scene.addModel("../examples/renderer/sponza/Sponza.gltf");
+    scene.getModel(sponza).size = glm::vec3(0.01f);
 
     unsigned int helmet = scene.addModel("../examples/renderer/helmet/DamagedHelmet.gltf");
     scene.getModel(helmet).size = glm::vec3(0.5f);

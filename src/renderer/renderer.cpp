@@ -56,6 +56,7 @@ namespace glrhi {
 
     void renderer::postProcessPass() {
         for (auto& shader : m_postProcessShaders) {
+            
             m_gBuffer.bindTextures(shader);
             shader.dispatch(m_width, m_height, 1);
         }
