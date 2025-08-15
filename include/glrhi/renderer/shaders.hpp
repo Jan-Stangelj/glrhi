@@ -77,8 +77,8 @@ namespace glrhi {
                                                                     "    vec4 emissionOut = texture(u_emission, texUV) * hasEmission + emission * (1-hasARM);\n"
                                                                     "\n"
                                                                     "    g_albedo = albedoOut.xyz;\n"
-                                                                    "    g_normalRoughness = vec4(normal, arm.g);\n"
-                                                                    "    g_emissionMetallic = vec4(emissionOut.xyz, arm.b);\n"
+                                                                    "    g_normalRoughness = vec4(normal, armOut.g);\n"
+                                                                    "    g_emissionMetallic = vec4(emissionOut.xyz, armOut.b);\n"
                                                                     "    g_position = fragPos;\n"
                                                                     "    g_resoult = albedoOut.xyz + g_emissionMetallic.xyz;\n"
                                                                     "}";
