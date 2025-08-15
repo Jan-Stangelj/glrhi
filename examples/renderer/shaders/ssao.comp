@@ -124,5 +124,5 @@ void main() {
 
     occlusion = 1.0 - (occlusion / samplesNum);
 
-    imageStore(u_resoult, texelCoord, vec4(inColor * occlusion, 1.0));
+    imageStore(u_resoult, texelCoord, vec4(inColor, occlusion));
 }
