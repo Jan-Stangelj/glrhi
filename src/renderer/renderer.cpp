@@ -11,7 +11,7 @@ namespace glrhi {
         m_lightingShader.createFromCode(glrhi::lightingShaderCode.data());
         m_skyboxShader.createFromCode(skyboxVert.data(), skyboxFrag.data());
         m_postProcessShaders.emplace_back();
-        m_postProcessShaders[0].create("../examples/renderer/shaders/ssao.comp");
+        m_postProcessShaders[0].createFromCode(ssaoCode.data());
         m_width = width; 
         m_height = height; 
         glEnable(GL_DEPTH_TEST); 

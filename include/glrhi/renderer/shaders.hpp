@@ -505,7 +505,7 @@ namespace glrhi {
                                         "\n"
                                         "    occlusion = 1.0 - (occlusion / samplesNum);\n"
                                         "\n"
-                                        "    imageStore(u_resoult, texelCoord, vec4(inColor, occlusion));\n"
+                                        "    imageStore(u_resoult, texelCoord, vec4(inColor, occlusion * occlusion));\n"
                                         "}\n"
                                         "";
 }
