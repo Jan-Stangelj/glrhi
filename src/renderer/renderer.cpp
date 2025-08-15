@@ -50,6 +50,7 @@ namespace glrhi {
         scene.updateLightBuffer(m_lightingShader);
 
         m_gBuffer.bindTexturesLightingPass(m_lightingShader);
+        scene.bindSkybox(m_lightingShader);
         m_lightingShader.dispatch(m_width, m_height, 1);
     }
 

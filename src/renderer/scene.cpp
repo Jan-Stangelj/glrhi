@@ -22,12 +22,17 @@ namespace glrhi {
     }
 
     void scene::setSkybox(const std::filesystem::path& path) {
-        m_skybox.create(path, GL_RGB16F);
+        m_skybox.create(path, GL_RGB16F, 12);
+        m_skybox.genMipmaps();
         m_hasSkybox = true;
     }
     void scene::bindSkybox(glrhi::shader& shader) const {
-        m_skybox.bind(0);
-        shader.setInt("u_skybox", 0);
+        m_skybox.bind(4);
+        shader.setInt("u_skybox", 4);
+    }
+    void scene::bindSkybox(glrhi::compute& shader) const {
+        m_skybox.bind(4);
+        shader.setInt("u_skybox", 4);
     }
 
     void scene::drawModels(glrhi::shader& shader) const {
