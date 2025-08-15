@@ -134,9 +134,29 @@ namespace glrhi {
                                 "\n"
                                 "uniform sampler2D u_resoult;\n"
                                 "\n"
+                                "// ACES Filmic tone mapping function\n"
+                                "vec3 ACESFilm(vec3 x) {\n"
+                                "    // ACES constants (Narkowicz 2015)\n"
+                                "    const float a = 2.51;\n"
+                                "    const float b = 0.03;\n"
+                                "    const float c = 2.43;\n"
+                                "    const float d = 0.59;\n"
+                                "    const float e = 0.14;\n"
+                                "    return clamp((x * (a * x + b)) / (x * (c * x + d) + e), 0.0, 1.0);\n"
+                                "}\n"
+                                "\n"
                                 "void main() {\n"
-                                "\tfragColor = vec4(pow(texture(u_resoult, texUV).xyz, vec3(1.0 / 2.2)), 1.0);\n"
-                                "}";
+                                "    vec3 color = texture(u_resoult, texUV).rgb;\n"
+                                "\n"
+                                "    // Apply ACES tone mapping\n"
+                                "    vec3 toneMapped = ACESFilm(color);\n"
+                                "\n"
+                                "    // Gamma correction (sRGB)\n"
+                                "    toneMapped = pow(toneMapped, vec3(1.0 / 2.2));\n"
+                                "\n"
+                                "    fragColor = vec4(toneMapped, 1.0);\n"
+                                "}\n"
+                                "";
 
         m_resoultShader.createFromCode(vertCode, fragCode);
     }
