@@ -1,24 +1,28 @@
 #include "glrhi/core/texture2D.hpp"
+#include <algorithm>
+#include <cmath>
 #include <iostream>
 
 
 namespace glrhi {
 
-	texture2D::texture2D(GLsizei width, GLsizei height, GLenum internalFormat, GLsizei mips) {
-		create(width, height, internalFormat, mips);
+	texture2D::texture2D(GLsizei width, GLsizei height, GLenum internalFormat) {
+		create(width, height, internalFormat);
 	}
 
-	texture2D::texture2D(const std::filesystem::path& file, GLenum internalFormat, GLsizei mips) {
-		create(file, internalFormat, mips);
+	texture2D::texture2D(const std::filesystem::path& file, GLenum internalFormat) {
+		create(file, internalFormat);
 	}
 
-	void texture2D::create(GLsizei width, GLsizei height, GLenum internalFormat, GLsizei mips) {
+	void texture2D::create(GLsizei width, GLsizei height, GLenum internalFormat) {
 		if (m_ID) {
 			std::cerr << "ERROR::TEXTURE2D::TEXTURE_ALREADY_CREATED\n";
 			return;
 		}
 		
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_ID);
+
+		int mips = 1 + (int) std::floor(std::log2(std::max(width, height)));
 
 		// Set texture sampling to use mipmaps if there are any
 		if (mips > 1)
@@ -39,7 +43,7 @@ namespace glrhi {
 		m_format = internalFormat;
 	}
 
-	void texture2D::create(const std::filesystem::path& file, GLenum internalFormat, GLsizei mips) {
+	void texture2D::create(const std::filesystem::path& file, GLenum internalFormat) {
 		if (m_ID) {
 			std::cerr << "ERROR::TEXTURE2D::TEXTURE_ALREADY_CREATED\n";
 			return;
@@ -47,18 +51,6 @@ namespace glrhi {
 		
 		// Texture creation
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_ID);
-
-		// Set texture sampling to use mipmaps if there are any
-		if (mips > 1)
-			glTextureParameteri(m_ID, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		else
-			glTextureParameteri(m_ID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-		glTextureParameteri(m_ID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-		// Texture wrapping options
-		glTextureParameteri(m_ID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(m_ID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 		// Image properties
 		int widthImg, heightImg, numColCh;
@@ -83,6 +75,20 @@ namespace glrhi {
 			std::cerr << "ERROR::TEXTURE2D::FAILED_TO_OPEN_FILE: " << file << '\n';
 			return;
 		}
+
+		int mips = 1 + (int) std::floor(std::log2(std::max(widthImg, heightImg)));
+
+		// Set texture sampling to use mipmaps if there are any
+		if (mips > 1)
+			glTextureParameteri(m_ID, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		else
+			glTextureParameteri(m_ID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+		glTextureParameteri(m_ID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		// Texture wrapping options
+		glTextureParameteri(m_ID, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTextureParameteri(m_ID, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 		// Allocate memory on the gpu
 		glTextureStorage2D(m_ID, mips, internalFormat, widthImg, heightImg);

@@ -27,7 +27,7 @@ namespace glrhi {
          * @param internalFormat The internal format of the texture (ex. GL_RGBA32F)
          * @param mips The number of mips the texture should have.
          */
-        texture2D(GLsizei width, GLsizei height, GLenum internalFormat, GLsizei mips = 1);
+        texture2D(GLsizei width, GLsizei height, GLenum internalFormat);
 
         /**
          * @brief Construct a new texture2D.
@@ -36,7 +36,7 @@ namespace glrhi {
          * @param internalFormat The internal format of the texture (ex. GL_RGBA32F)
          * @param mips The number of mips the texture should have.
          */
-        texture2D(const std::filesystem::path& file, GLenum internalFormat, GLsizei mips = 1);
+        texture2D(const std::filesystem::path& file, GLenum internalFormat);
         texture2D() = default;
         ~texture2D();
 
@@ -48,7 +48,7 @@ namespace glrhi {
          * @param internalFormat The internal format of the texture (ex. GL_RGBA32F)
          * @param mips The number of mips the texture should have.
          */
-        void create(GLsizei width, GLsizei height, GLenum internalFormat, GLsizei mips = 1);
+        void create(GLsizei width, GLsizei height, GLenum internalFormat);
 
         /**
          * @brief Construct a new texture2D.
@@ -57,7 +57,7 @@ namespace glrhi {
          * @param internalFormat The internal format of the texture (ex. GL_RGBA32F)
          * @param mips The number of mips the texture should have.
          */
-        void create(const std::filesystem::path& file, GLenum internalFormat, GLsizei mips = 1);
+        void create(const std::filesystem::path& file, GLenum internalFormat);
 
         /**
          * @brief Loads data into the texture.

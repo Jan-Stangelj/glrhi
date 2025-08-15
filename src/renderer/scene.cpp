@@ -22,7 +22,7 @@ namespace glrhi {
     }
 
     void scene::setSkybox(const std::filesystem::path& path) {
-        m_skybox.create(path, GL_RGB16F, 12);
+        m_skybox.create(path, GL_RGB16F);
         m_skybox.genMipmaps();
         m_hasSkybox = true;
     }
