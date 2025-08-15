@@ -3,9 +3,6 @@
 int main()
 {
     glrhi::renderer renderer(1280, 720, "Renderer example");
-
-    renderer.pushPostProcessShader("../examples/renderer/shaders/ssao.comp");
-
     glrhi::scene scene;
 
     unsigned int sponza = scene.addModel("../examples/renderer/sponza/Sponza.gltf");
