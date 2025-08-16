@@ -3,8 +3,6 @@
 
 #include <glrhi/renderer/shaders.hpp>
 
-
-#include <iostream>
 namespace glrhi {
     renderer::renderer(unsigned int width, unsigned int height, const char* title)  : m_window(width, height, title), m_gBuffer(width, height) { 
         m_gBufferShader.createFromCode(glrhi::vertexGbufferCode.data(), glrhi::fragmentGbufferCode.data()); 
@@ -14,6 +12,7 @@ namespace glrhi {
         m_postProcessShaders[0].createFromCode(ssaoCode.data());
         m_width = width; 
         m_height = height; 
+
         glEnable(GL_DEPTH_TEST); 
         glEnable(GL_CULL_FACE);
 
@@ -37,6 +36,7 @@ namespace glrhi {
 
         if (scene.hasSkybox()) {
             glDepthFunc(GL_EQUAL);
+            glDisable(GL_DEPTH_TEST);
 
             m_skyboxShader.use();
             scene.bindSkybox(m_skyboxShader);
@@ -45,6 +45,7 @@ namespace glrhi {
             glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
 
             glDepthFunc(GL_LESS);
+            glEnable(GL_DEPTH_TEST);
         }
     }
 
