@@ -12,7 +12,8 @@ namespace glrhi {
     }
 
     compute::~compute() {
-        glDeleteProgram(m_ID);
+        if (m_ID)
+            glDeleteProgram(m_ID);
     }
 
     void compute::create(const std::filesystem::path& computePath) {
@@ -85,6 +86,8 @@ namespace glrhi {
     }
 
     void compute::dispatch(GLuint x, GLuint y, GLuint z) const {
+        if (!m_ID)
+            return;
         glUseProgram(m_ID);
         glDispatchCompute(x, y, z);
         glMemoryBarrier(GL_ALL_BARRIER_BITS);   // Wait until shader finishes execution
@@ -103,46 +106,46 @@ namespace glrhi {
     }
 
     void compute::setBool(const char* name, bool value) {
-        glProgramUniform1i(m_ID, m_getLocation(name), (int)value); 
+        if (m_ID) glProgramUniform1i(m_ID, m_getLocation(name), (int)value); 
     }
     void compute::setInt(const char* name, int value){ 
-        glProgramUniform1i(m_ID, m_getLocation(name), value); 
+        if (m_ID) glProgramUniform1i(m_ID, m_getLocation(name), value); 
     }
     void compute::setFloat(const char* name, float value) { 
-        glProgramUniform1f(m_ID, m_getLocation(name), value); 
+        if (m_ID) glProgramUniform1f(m_ID, m_getLocation(name), value); 
     }
 
     void compute::setVec2(const char* name, const glm::vec2 &value) { 
-        glProgramUniform2fv(m_ID, m_getLocation(name), 1, &value[0]); 
+        if (m_ID) glProgramUniform2fv(m_ID, m_getLocation(name), 1, &value[0]); 
     }
     void compute::setVec3(const char* name, const glm::vec3 &value) { 
-        glProgramUniform3fv(m_ID, m_getLocation(name), 1, &value[0]); 
+        if (m_ID) glProgramUniform3fv(m_ID, m_getLocation(name), 1, &value[0]); 
     }
     void compute::setVec4(const char* name, const glm::vec4 &value) { 
-        glProgramUniform4fv(m_ID, m_getLocation(name), 1, &value[0]); 
+        if (m_ID) glProgramUniform4fv(m_ID, m_getLocation(name), 1, &value[0]); 
     }
 
     void compute::setUVec2(const char* name, const glm::uvec2 &value) { 
-        glProgramUniform2uiv(m_ID, m_getLocation(name), 1, &value[0]); 
+        if (m_ID) glProgramUniform2uiv(m_ID, m_getLocation(name), 1, &value[0]); 
     }
     void compute::setUVec3(const char* name, const glm::uvec3 &value) { 
-        glProgramUniform3uiv(m_ID, m_getLocation(name), 1, &value[0]); 
+        if (m_ID) glProgramUniform3uiv(m_ID, m_getLocation(name), 1, &value[0]); 
     }
     void compute::setUVec4(const char* name, const glm::uvec4 &value) { 
-        glProgramUniform4uiv(m_ID, m_getLocation(name), 1, &value[0]); 
+        if (m_ID) glProgramUniform4uiv(m_ID, m_getLocation(name), 1, &value[0]); 
     }
 
     void compute::setMat2(const char* name, const glm::mat2 &mat) {
-        glProgramUniformMatrix2fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
+        if (m_ID) glProgramUniformMatrix2fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
     }
     void compute::setMat3(const char* name, const glm::mat3 &mat) {
-        glProgramUniformMatrix3fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
+        if (m_ID) glProgramUniformMatrix3fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
     }
     void compute::setMat4(const char* name, const glm::mat4 &mat) {
-        glProgramUniformMatrix4fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
+        if (m_ID) glProgramUniformMatrix4fv(m_ID, m_getLocation(name), 1, GL_FALSE, &mat[0][0]);
     }
 
     void compute::setHandle64(const char* name, const GLuint64& handle) {
-        glProgramUniformHandleui64ARB(m_ID, m_getLocation(name), handle);
+        if (m_ID) glProgramUniformHandleui64ARB(m_ID, m_getLocation(name), handle);
     }
 }

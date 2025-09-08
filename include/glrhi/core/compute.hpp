@@ -30,6 +30,23 @@ namespace glrhi{
         compute() = default;
         ~compute();
 
+        compute(const glrhi::compute&) = delete;
+        glrhi::compute& operator=(const glrhi::compute&) = delete;
+
+        compute(glrhi::compute&& other) noexcept {
+            m_ID = other.m_ID;
+            other.m_ID = 0;
+        }
+        glrhi::compute& operator=(glrhi::compute&& other) {
+            if (this != &other) {
+                if (m_ID)
+                    glDeleteProgram(m_ID);
+                m_ID = other.m_ID;
+                other.m_ID = 0;
+            }
+            return *this;
+        }
+
         /**
          * @brief Construct a new compute shader.
          * 
