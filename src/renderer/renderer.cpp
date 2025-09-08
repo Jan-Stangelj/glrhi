@@ -8,8 +8,6 @@ namespace glrhi {
         m_gBufferShader.createFromCode(glrhi::vertexGbufferCode.data(), glrhi::fragmentGbufferCode.data()); 
         m_lightingShader.createFromCode(glrhi::lightingShaderCode.data());
         m_skyboxShader.createFromCode(skyboxVert.data(), skyboxFrag.data());
-        m_postProcessShaders.emplace_back();
-        m_postProcessShaders[0].createFromCode(ssaoCode.data());
         m_width = width; 
         m_height = height; 
 
