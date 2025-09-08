@@ -8,7 +8,8 @@ namespace glrhi {
 	}
 	
 	ebo::~ebo() {
-		glDeleteBuffers(1, &m_ID);
+		if (m_ID)
+			glDeleteBuffers(1, &m_ID);
 	}
 
 	void ebo::create(const void* data, unsigned int size) {

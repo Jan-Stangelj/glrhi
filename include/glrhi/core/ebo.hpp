@@ -25,6 +25,23 @@ namespace glrhi {
         ebo() = default;
         ~ebo();
 
+        ebo(const glrhi::ebo&) = delete;
+        glrhi::ebo& operator=(const glrhi::ebo&) = delete;
+
+        ebo(glrhi::ebo&& other) noexcept {
+            m_ID = other.m_ID;
+            other.m_ID = 0;
+        }
+        glrhi::ebo& operator=(glrhi::ebo&& other) {
+            if (this != &other) {
+                if (m_ID)
+                    glDeleteBuffers(1, &m_ID);
+                m_ID = other.m_ID;
+                other.m_ID = 0;
+            }
+            return *this;
+        }
+
         /**
          * @brief Construct a new EBO.
          * 
