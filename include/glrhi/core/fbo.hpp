@@ -37,6 +37,9 @@ namespace glrhi {
                 if (m_ID)
                     glDeleteFramebuffers(1, &m_ID);
                 m_ID = other.m_ID;
+                m_colorTextures = other.m_colorTextures;
+                m_maxColorTextures = other.m_maxColorTextures;
+                m_depthTexture = other.m_depthTexture;
                 other.m_ID = 0;
             }
             return *this;

@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include <string_view>
 #include <filesystem>
+#include <utility>
 
 namespace glrhi{
 
@@ -29,6 +30,24 @@ namespace glrhi{
         shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
         shader() = default;
         ~shader();
+
+        shader(const glrhi::shader&) = delete;
+        glrhi::shader& operator=(const glrhi::shader&) = delete;
+
+        shader(glrhi::shader&& other) noexcept {
+            m_ID = other.m_ID;
+            other.m_ID = 0;
+        }
+        glrhi::shader& operator=(glrhi::shader&& other) {
+            if (this != &other) {
+                if (m_ID)
+                    glDeleteProgram(m_ID);
+                m_ID = other.m_ID;
+                m_cache = std::move(other.m_cache);
+                other.m_ID = 0;
+            }
+            return *this;
+        }
 
         /**
          * @brief Construct a new shader.
