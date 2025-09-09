@@ -25,6 +25,23 @@ namespace glrhi {
         fbo();
         ~fbo();
 
+        fbo(const glrhi::fbo&) = delete;
+        glrhi::fbo& operator=(const glrhi::fbo&) = delete;
+
+        fbo(glrhi::fbo&& other) noexcept {
+            m_ID = other.m_ID;
+            other.m_ID = 0;
+        }
+        glrhi::fbo& operator=(glrhi::fbo&& other) {
+            if (this != &other) {
+                if (m_ID)
+                    glDeleteFramebuffers(1, &m_ID);
+                m_ID = other.m_ID;
+                other.m_ID = 0;
+            }
+            return *this;
+        }
+
         /**
          * @brief Attaches a color texture to the FBO.
          *        The binding points start at 0 and incriment by 1 each function call.

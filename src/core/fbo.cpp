@@ -14,10 +14,13 @@ namespace glrhi {
     }
 
     fbo::~fbo() {
-        glDeleteFramebuffers(1, &m_ID);
+        if (m_ID)
+            glDeleteFramebuffers(1, &m_ID);
     }
 
     void fbo::attachColorTexture(const glrhi::texture2D& texture) {
+        if (!m_ID) return;
+
         // Logs an error if the maximum number of color textures are already attached.
         if (!(m_colorTextures < m_maxColorTextures)) {
             std::cerr << "ERROR::FRAMEBUFFER::COLOR_TEXTURE_ATTACHMENT_FAILED:\n"
@@ -31,6 +34,8 @@ namespace glrhi {
     }
 
     void fbo::attachDepthTexture(const glrhi::texture2D& texture) {
+        if (!m_ID) return;
+
         // Logs an error if a depth texture is already attached.
         if (m_depthTexture == true) {
             std::cerr << "ERROR::FRAMEBUFFER::DEPTH_TEXTURE_ATTACHMENT_FAILED:\n"
@@ -44,6 +49,7 @@ namespace glrhi {
     }
 
     void fbo::init() const {
+        if (!m_ID) return;
 
         // Adds the color buffers to a list, to tell OpenGL how many there are
         // (this is a weird system by used by OGL imho)
@@ -63,6 +69,7 @@ namespace glrhi {
     }
 
     void fbo::bind() const {
+        if (!m_ID) return;
         glBindFramebuffer(GL_FRAMEBUFFER, m_ID);
     }
 
