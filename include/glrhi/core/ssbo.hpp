@@ -25,6 +25,24 @@ namespace glrhi {
         ssbo() = default;
         ~ssbo();
 
+
+        ssbo(const glrhi::ssbo&) = delete;
+        glrhi::ssbo& operator=(const glrhi::ssbo&) = delete;
+
+        ssbo(glrhi::ssbo&& other) noexcept {
+            m_ID = other.m_ID;
+            other.m_ID = 0;
+        }
+        glrhi::ssbo& operator=(glrhi::ssbo&& other) {
+            if (this != &other) {
+                if (m_ID)
+                    glDeleteProgram(m_ID);
+                m_ID = other.m_ID;
+                other.m_ID = 0;
+            }
+            return *this;
+        }
+
         /**
          * @brief Construct a new SSBO.
          * 

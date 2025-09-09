@@ -8,7 +8,7 @@ namespace glrhi {
     }
 
     ssbo::~ssbo() {
-        glDeleteBuffers(1, &m_ID);
+        if (m_ID) glDeleteBuffers(1, &m_ID);
     }
 
     void ssbo::create(GLsizeiptr size, const void* data) {
@@ -24,11 +24,11 @@ namespace glrhi {
     }
 
     void ssbo::sendData(GLintptr offset, GLsizeiptr size, const void* data) const {
-        glNamedBufferSubData(m_ID, offset, size, data);
+        if (m_ID) glNamedBufferSubData(m_ID, offset, size, data);
     }
 
     void ssbo::addBindingPoint(GLuint bindingPoint) const {
-        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bindingPoint, m_ID);
+        if (m_ID) glBindBufferBase(GL_SHADER_STORAGE_BUFFER, bindingPoint, m_ID);
     }
 
 }
