@@ -40,6 +40,38 @@ namespace glrhi {
         texture2D() = default;
         ~texture2D();
 
+        texture2D(const glrhi::texture2D&) = delete;
+        glrhi::texture2D& operator=(const glrhi::texture2D&) = delete;
+
+        texture2D(glrhi::texture2D&& other) noexcept {
+            m_ID = other.m_ID;
+            other.m_ID = 0;
+        }
+        glrhi::texture2D& operator=(glrhi::texture2D&& other) {
+            if (this != &other) {
+                if (m_ID) {
+                    // Make handles non resident if they were used
+                    if (m_samplerHandle)
+                        glMakeTextureHandleNonResidentARB(m_samplerHandle);
+
+                    if (m_imageHandle)
+                        glMakeImageHandleNonResidentARB(m_imageHandle);
+
+                    // Delete the texture buffer
+                    glDeleteTextures(1, &m_ID);
+                }
+                m_ID = other.m_ID;
+                m_samplerHandle = other.m_samplerHandle;
+                m_imageHandle = other.m_imageHandle;
+                m_format = other.m_format;
+                m_width = other.m_width;
+                m_height = other.m_height;
+
+                other.m_ID = 0;
+            }
+            return *this;
+        }
+
         /**
          * @brief Construct a new texture2D.
          * 

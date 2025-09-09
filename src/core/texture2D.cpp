@@ -3,7 +3,6 @@
 #include <cmath>
 #include <iostream>
 
-
 namespace glrhi {
 
 	texture2D::texture2D(GLsizei width, GLsizei height, GLenum internalFormat) {
@@ -114,6 +113,8 @@ namespace glrhi {
 	}
 
 	texture2D::~texture2D() {
+		if (!m_ID) return;
+
 		// Make handles non resident if they were used
 		if (m_samplerHandle)
 			glMakeTextureHandleNonResidentARB(m_samplerHandle);
@@ -129,35 +130,28 @@ namespace glrhi {
 									GLenum dataType, 
 									const void* data, 
 									GLint mip) const {
-
+		if (!m_ID) return;
 		glTextureSubImage2D(m_ID, mip, 0, 0, m_width, m_height, dataFormat, dataType, data);
 
 	}
 
 	void texture2D::genMipmaps() const {
-		if (!m_ID)
-			return;
-
+		if (!m_ID) return;
 		glGenerateTextureMipmap(m_ID);
 	}
 
 	void texture2D::bind(GLuint textureUnit) const {
-		if (!m_ID)
-			return;
-
+		if (!m_ID) return;
 		glBindTextureUnit(textureUnit, m_ID);
 	}
 
 	void texture2D::bindImage(GLuint unit, GLint mip) const {
-		if (!m_ID)
-			return;
-
+		if (!m_ID) return;
 		glBindImageTexture(unit, m_ID, mip, GL_FALSE, 0, GL_READ_WRITE, m_format);
 	}
 
 	GLuint64 texture2D::getSamplerHandle() {
-		if (!m_ID)
-			return -1;
+		if (!m_ID) return -1;
 
 		// If sampler handle was not yet cached and made residend,
 		// cache it and make it resident.
@@ -171,8 +165,7 @@ namespace glrhi {
 	}
 
 	GLuint64 texture2D::getImageHandle(GLint mip) {
-		if (!m_ID)
-			return -1;
+		if (!m_ID) return -1;
 
 		// If sampler handle was not yet cached and made residend,
 		// cache it and make it resident.
