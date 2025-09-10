@@ -29,6 +29,7 @@ namespace glrhi {
 
         vao(glrhi::vao&& other) noexcept {
             m_ID = other.m_ID;
+            m_attributeCounter = other.m_attributeCounter;
             other.m_ID = 0;
         }
         glrhi::vao& operator=(glrhi::vao&& other) {

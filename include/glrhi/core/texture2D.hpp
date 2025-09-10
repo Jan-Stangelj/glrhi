@@ -45,6 +45,11 @@ namespace glrhi {
 
         texture2D(glrhi::texture2D&& other) noexcept {
             m_ID = other.m_ID;
+            m_samplerHandle = other.m_samplerHandle;
+            m_imageHandle = other.m_imageHandle;
+            m_format = other.m_format;
+            m_width = other.m_width;
+            m_height = other.m_height;
             other.m_ID = 0;
         }
         glrhi::texture2D& operator=(glrhi::texture2D&& other) {

@@ -25,6 +25,24 @@ namespace glrhi {
         vbo() = default;
         ~vbo();
 
+        vbo(const glrhi::vbo&) = delete;
+        glrhi::vbo& operator=(const glrhi::vbo&) = delete;
+
+        vbo(glrhi::vbo&& other) noexcept {
+            m_ID = other.m_ID;
+            other.m_ID = 0;
+        }
+        glrhi::vbo& operator=(glrhi::vbo&& other) {
+            if (this != &other) {
+                if (m_ID)
+                    glDeleteBuffers(1, &m_ID);
+                m_ID = other.m_ID;
+
+                other.m_ID = 0;
+            }
+            return *this;
+        }
+
         /**
          * @brief Construct a new VBO.
          * 

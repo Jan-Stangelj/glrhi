@@ -7,7 +7,7 @@ namespace glrhi {
 		create(data, size);
 	}
 	vbo::~vbo() {
-		glDeleteBuffers(1, &m_ID);
+		if (m_ID) glDeleteBuffers(1, &m_ID);
 	}
 
 	void vbo::create(const void* data, unsigned int size) {

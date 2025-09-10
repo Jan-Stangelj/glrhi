@@ -30,6 +30,9 @@ namespace glrhi {
 
         fbo(glrhi::fbo&& other) noexcept {
             m_ID = other.m_ID;
+            m_colorTextures = other.m_colorTextures;
+            m_maxColorTextures = other.m_maxColorTextures;
+            m_depthTexture = other.m_depthTexture;
             other.m_ID = 0;
         }
         glrhi::fbo& operator=(glrhi::fbo&& other) {
