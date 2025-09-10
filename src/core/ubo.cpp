@@ -9,7 +9,7 @@ namespace glrhi {
     }
 
     ubo::~ubo() {
-        glDeleteBuffers(1, &m_ID);
+        if (m_ID) glDeleteBuffers(1, &m_ID);
     }
 
     void ubo::create(GLsizeiptr size, const void* data) {
@@ -25,11 +25,11 @@ namespace glrhi {
     }
 
     void ubo::sendData(GLintptr offset, GLsizeiptr size, const void* data) const {
-        glNamedBufferSubData(m_ID, offset, size, data);
+        if (m_ID) glNamedBufferSubData(m_ID, offset, size, data);
     }
 
     void ubo::addBindingPoint(GLuint bindingPoint) const {
-        glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, m_ID);
+        if (m_ID) glBindBufferBase(GL_UNIFORM_BUFFER, bindingPoint, m_ID);
     }
 
 }

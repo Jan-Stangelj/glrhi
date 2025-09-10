@@ -25,6 +25,24 @@ namespace glrhi {
         ubo() = default;
         ~ubo();
 
+        ubo(const glrhi::ubo&) = delete;
+        glrhi::ubo& operator=(const glrhi::ubo&) = delete;
+
+        ubo(glrhi::ubo&& other) noexcept {
+            m_ID = other.m_ID;
+            other.m_ID = 0;
+        }
+        glrhi::ubo& operator=(glrhi::ubo&& other) {
+            if (this != &other) {
+                if (m_ID)
+                    glDeleteBuffers(1, &m_ID);
+                m_ID = other.m_ID;
+
+                other.m_ID = 0;
+            }
+            return *this;
+        }
+
         /**
          * @brief Construct a new UBO.
          * 
