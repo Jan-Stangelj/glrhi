@@ -24,6 +24,25 @@ namespace glrhi {
         vao();
         ~vao();
 
+        vao(const glrhi::vao&) = delete;
+        glrhi::vao& operator=(const glrhi::vao&) = delete;
+
+        vao(glrhi::vao&& other) noexcept {
+            m_ID = other.m_ID;
+            other.m_ID = 0;
+        }
+        glrhi::vao& operator=(glrhi::vao&& other) {
+            if (this != &other) {
+                if (m_ID)
+                    glDeleteVertexArrays(1, &m_ID);
+                m_ID = other.m_ID;
+                m_attributeCounter = other.m_attributeCounter;
+
+                other.m_ID = 0;
+            }
+            return *this;
+        }
+
         /**
          * @brief Adds an attribute to the VAO.
          * 

@@ -7,10 +7,12 @@ namespace glrhi {
     }
 
     vao::~vao() {
-        glDeleteVertexArrays(1, &m_ID);
+        if (m_ID) glDeleteVertexArrays(1, &m_ID);
     }
 
     void vao::addAttribute(GLint size, GLenum type, GLboolean normalized, GLuint pointer) {
+        if (!m_ID) return;
+
         // Activate the vertex attribute
         glEnableVertexArrayAttrib(m_ID, m_attributeCounter);
         glVertexArrayAttribBinding(m_ID, m_attributeCounter, 0);
@@ -21,6 +23,8 @@ namespace glrhi {
     }
 
     void vao::init(const vbo& VBO, const glrhi::ebo& EBO, GLsizei stride) const {
+        if (!m_ID) return;
+
         // Link the VBO to the VAO
         glVertexArrayVertexBuffer(m_ID, 0, VBO.getID(), 0, stride);
 
@@ -29,10 +33,10 @@ namespace glrhi {
     }
 
     void vao::bind() const {
-        glBindVertexArray(m_ID);
+        if (m_ID) glBindVertexArray(m_ID);
     }
 
     void vao::unbind() const {
-        glBindVertexArray(0);
+        if (m_ID) glBindVertexArray(0);
     }
 }
