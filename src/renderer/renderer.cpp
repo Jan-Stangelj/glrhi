@@ -1,13 +1,13 @@
 #include "glrhi/core/ebo.hpp"
 #include <glrhi/renderer.hpp>
 
-#include <glrhi/renderer/shaders.hpp>
+#include <glrhi/renderer/constants.hpp>
 
 namespace glrhi {
     renderer::renderer(unsigned int width, unsigned int height, const char* title)  : m_window(width, height, title), m_gBuffer(width, height) { 
-        m_gBufferShader.createFromCode(glrhi::vertexGbufferCode.data(), glrhi::fragmentGbufferCode.data()); 
-        m_lightingShader.createFromCode(glrhi::lightingShaderCode.data());
-        m_skyboxShader.createFromCode(skyboxVert.data(), skyboxFrag.data());
+        m_gBufferShader.create("../shaders/gbuffer.vert", "../shaders/gbuffer.frag"); 
+        m_lightingShader.create("../shaders/lighting.comp");
+        m_skyboxShader.create("../shaders/skybox.vert", "../shaders/skybox.frag");
         m_width = width; 
         m_height = height; 
 
