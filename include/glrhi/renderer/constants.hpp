@@ -1,9 +1,7 @@
 #pragma once
 
-#include <string_view>
-
 namespace glrhi {
-    constexpr float skyboxVertices[] = {
+    constexpr float cubeVertices[] = {
         // positions          
         -1.0f,  1.0f, -1.0f,
         -1.0f, -1.0f, -1.0f,
@@ -48,7 +46,7 @@ namespace glrhi {
          1.0f, -1.0f,  1.0f
     };
 
-    constexpr unsigned int skyboxIndices[] {
+    constexpr unsigned int cubeIndices[] {
         0, 1, 2,
         3, 4, 5,
         
@@ -66,5 +64,17 @@ namespace glrhi {
 
         30, 31, 32,
         33, 34, 35
+    };
+
+    constexpr float quadVertices[] = {
+        -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, // zgoraj levo
+        1.0f, 1.0f, 0.0f, 1.0f, 1.0f, // zgoraj desno
+        -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, // spodaj levo
+        1.0f, -1.0f, 0.0f, 1.0f, 0.0f // spodaj desno
+    };
+
+    constexpr unsigned int quadIndices[] = {
+        0, 2, 1,
+        1, 2, 3
     };
 }

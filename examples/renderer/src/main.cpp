@@ -32,7 +32,6 @@ int main()
 
         renderer.gBufferPass(scene);
         renderer.lightingPass(scene);
-        renderer.postProcessPass();
         renderer.renderResoult();
     }
 

@@ -1,13 +1,12 @@
 #include "glrhi/core/shader.hpp"
+#include "glrhi/renderer/constants.hpp"
 #include <glrhi/renderer/gbuffer.hpp>
-
-#include <iostream>
 
 namespace glrhi {
     gbuffer::gbuffer(unsigned int width, unsigned int height) {
         m_loadQuad();
         m_initFramebuffer(width, height);
-        m_loadShader();
+        m_resoultShader.create("../shaders/resoult.vert", "../shaders/resoult.frag");
     }
 
     void gbuffer::bind() {
@@ -76,19 +75,7 @@ namespace glrhi {
     }
 
     void gbuffer::m_loadQuad() {
-        float quad[] = {
-            -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, // zgoraj levo
-            1.0f, 1.0f, 0.0f, 1.0f, 1.0f, // zgoraj desno
-            -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, // spodaj levo
-            1.0f, -1.0f, 0.0f, 1.0f, 0.0f // spodaj desno
-        };
-
-        unsigned int quadIndices[] = {
-            0, 2, 1,
-            1, 2, 3
-        };
-
-        m_quadVBO.create(quad, sizeof(quad));
+        m_quadVBO.create(quadVertices, sizeof(quadVertices));
         m_quadEBO.create(quadIndices, sizeof(quadIndices));
 
         m_quadVAO.addAttribute(3, GL_FLOAT, GL_FALSE, 0);
@@ -113,53 +100,5 @@ namespace glrhi {
         m_gBuffer.attachDepthTexture(m_depth);
 
         m_gBuffer.init();
-    }
-
-    void gbuffer::m_loadShader() {
-        const char* vertCode = "#version 460 core\n"
-                                "\n"
-                                "layout(location = 0) in vec3 a_pos;\n"
-                                "layout(location = 1) in vec2 a_texUV;\n"
-                                "\n"
-                                "out vec2 texUV;\n"
-                                "\n"
-                                "void main() {\n"
-                                "\tgl_Position = vec4(a_pos, 1.0);\n"
-                                "\ttexUV = a_texUV;\n"
-                                "}";
-
-        const char* fragCode = "#version 460 core\n"
-                                "\n"
-                                "out vec4 fragColor;\n"
-                                "\n"
-                                "in vec2 texUV;\n"
-                                "\n"
-                                "uniform sampler2D u_resoult;\n"
-                                "\n"
-                                "// ACES Filmic tone mapping function\n"
-                                "vec3 ACESFilm(vec3 x) {\n"
-                                "    const float a = 2.51;\n"
-                                "    const float b = 0.03;\n"
-                                "    const float c = 2.43;\n"
-                                "    const float d = 0.59;\n"
-                                "    const float e = 0.14;\n"
-                                "    return clamp((x * (a * x + b)) / (x * (c * x + d) + e), 0.0, 1.0);\n"
-                                "}\n"
-                                "\n"
-                                "void main() {\n"
-                                "    vec4 tex = texture(u_resoult, texUV);\n"
-                                "    vec3 color = tex.rgb;\n"
-                                "\n"
-                                "    // Apply ACES tone mapping\n"
-                                "    vec3 toneMapped = ACESFilm(color);\n"
-                                "\n"
-                                "    // Gamma correction (sRGB)\n"
-                                "    toneMapped = pow(toneMapped, vec3(1.0 / 2.2));\n"
-                                "\n"
-                                "    fragColor = vec4(toneMapped, 1.0);\n"
-                                "}\n"
-                                "";
-
-        m_resoultShader.createFromCode(vertCode, fragCode);
     }
 }

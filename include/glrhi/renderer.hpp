@@ -25,14 +25,10 @@ namespace glrhi {
         glrhi::camera& getCamera() { return m_camera; }
         glrhi::window& getWindow() { return m_window; }
 
-        void pushPostProcessShader(const std::filesystem::path& computeShader) { m_postProcessShaders.emplace_back(computeShader); }
-        void popPostProcessShader() {m_postProcessShaders.pop_back(); }
-
         bool running() { return !m_window.shouldClose(); }
         void getInput() { m_window.poolEvents(); m_deltaTime = m_deltaTimer.get(); m_deltaTimer.reset();}
         void gBufferPass(const glrhi::scene& scene);
         void lightingPass(const glrhi::scene& scene);
-        void postProcessPass();
         void renderResoult();
 
         double deltaTime() { return m_deltaTime; }
@@ -54,8 +50,6 @@ namespace glrhi {
         glrhi::camera m_camera;
 
         glrhi::timer m_deltaTimer;
-
-        std::vector<glrhi::compute> m_postProcessShaders;
 
         glrhi::vbo m_skyboxVBO;
         glrhi::vao m_skyboxVAO;

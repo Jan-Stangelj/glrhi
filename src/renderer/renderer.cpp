@@ -14,8 +14,8 @@ namespace glrhi {
         glEnable(GL_DEPTH_TEST); 
         glEnable(GL_CULL_FACE);
 
-        m_skyboxVBO.create(skyboxVertices, sizeof(skyboxVertices));
-        m_skyboxEBO.create(skyboxIndices, sizeof(skyboxIndices));
+        m_skyboxVBO.create(cubeVertices, sizeof(cubeVertices));
+        m_skyboxEBO.create(cubeIndices, sizeof(cubeIndices));
 
         m_skyboxVAO.addAttribute(3, GL_FLOAT, GL_FALSE, 0);
         m_skyboxVAO.init(m_skyboxVBO, m_skyboxEBO, sizeof(float) * 3);
@@ -53,14 +53,6 @@ namespace glrhi {
         m_gBuffer.bindTexturesLightingPass(m_lightingShader);
         scene.bindSkybox(m_lightingShader);
         m_lightingShader.dispatch(m_width, m_height, 1);
-    }
-
-    void renderer::postProcessPass() {
-        for (auto& shader : m_postProcessShaders) {
-            
-            m_gBuffer.bindTextures(shader);
-            shader.dispatch(m_width, m_height, 1);
-        }
     }
 
     void renderer::renderResoult() {
