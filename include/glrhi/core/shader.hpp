@@ -14,20 +14,13 @@
 #include <filesystem>
 #include <utility>
 
-namespace glrhi{
+namespace glrhi {
 
     /**
      * @brief Handles the creation and usage of shaders.
      */
-    class shader{
+    class shader {
     public:
-
-        /**
-         * @brief Construct a new shader.
-         * 
-         * @param vertexPath Path to a text file containing the vertex shader code in GLSL.
-         * @param fragmentPath Path to a text file containing the vertex shader code in GLSL.
-         */
         shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath, const std::filesystem::path& geomPath = "");
         shader() = default;
         ~shader();
@@ -50,25 +43,9 @@ namespace glrhi{
             return *this;
         }
 
-        /**
-         * @brief Construct a new shader.
-         * 
-         * @param vertexPath Path to a text file containing the vertex shader code in GLSL.
-         * @param fragmentPath Path to a text file containing the vertex shader code in GLSL.
-         */
         void create(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath, const std::filesystem::path& geomPath = "");
+        void createFromCode(const char* vertexCode, const char* fragmentCode, const char* geomCode = nullptr);
 
-        /**
-         * @brief Construct a new shader from already provided code
-         * 
-         * @param vertexCode C string of the vertex shader code.
-         * @param fragmentCode C string of the fragment shader code.
-         */
-        void createFromCode(const char* vertexCode, const char* fragmentCode, const char* geomCode = std::string("nono").c_str());
-
-        /**
-         * @brief Selects the shader to be used in the subsequent draw calls.
-         */
         void use() const;
 
         void setBool(const char* name, bool value);
@@ -87,19 +64,12 @@ namespace glrhi{
         void setMat3(const char* name, const glm::mat3& mat);
         void setMat4(const char* name, const glm::mat4& mat);
 
-        /**
-         * @brief Sets a texture handle for use with bindless textures.
-         * 
-         * @param name Name of the uniform to set to.
-         * @param handle The texture handle.
-         */
         void setHandle64(const char* name, const GLuint64& handle);
 
     private:
         GLint m_getLocation(const char* name);
 
         GLuint m_ID = 0;
-
         std::unordered_map<std::string_view, GLint> m_cache;
     };
 }

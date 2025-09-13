@@ -58,7 +58,7 @@ int main()
     //glBindTextureUnit(voxelTex, 0);
     //glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
 
-    glrhi::shader voxelization("../shaders/voxelization.vert", "../shaders/voxelization.frag");
+    glrhi::shader voxelization("../shaders/voxelization.vert", "../shaders/voxelization.frag", "../shaders/voxelization.geom");
     glrhi::compute clearVoxels("../shaders/voxelClear.comp");
 
     while (renderer.running()) {
