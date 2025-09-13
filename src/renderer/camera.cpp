@@ -32,7 +32,7 @@ namespace glrhi {
         m_projection = glm::perspective(glm::radians(fov), aspectRatio, near, far);
 
         if (type)
-            m_projection = glm::ortho(-width / 2, width / 2, -height / 2, height / 2);
+            m_projection = glm::ortho(-(width / 2), width / 2, -(height / 2), height / 2, near, far);
 
         glm::mat4 matrices[2] = {m_view, m_projection};
 

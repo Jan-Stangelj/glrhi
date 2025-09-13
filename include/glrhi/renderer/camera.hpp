@@ -54,8 +54,8 @@ namespace glrhi {
          */
         float fov = 60.0f;
 
-        float width = 1.0f;
-        float height = 1.0f;
+        float width = 40.0f;
+        float height = 40.0f;
 
         bool type = 0;
 
