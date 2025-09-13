@@ -31,6 +31,8 @@ uniform sampler2D u_emissionMetallic;
 uniform sampler2D u_position;
 uniform sampler2D u_skybox;
 
+layout(binding = 8) uniform sampler3D voxels;
+
 vec3 calcLight(vec3 albedo, float roughness, float metallic, vec3 normal, vec3 radiance, vec3 lightDir, vec3 fragPos);
 
 void main() {
@@ -52,8 +54,26 @@ void main() {
 	for (int i = 0; i < u_numLights; i++) {
 		light l = inLights[i];
 
-        if (l.type == 0)
+        if (l.type == 0) {
+
+            float dist = 1.5f;
+
+            bool visible = true;
+
+            for (int i = 0; i < 100; i++) {
+                vec3 voxelCoord = (position + normalize(l.direction.xyz) * dist + vec3(20.0)) / 40.0;
+                if (texture(voxels, voxelCoord).rgba != vec4(0.0)) {
+                    visible = false;
+                    break;
+                }
+                dist += 0.1f;
+            }
+
+            if (!visible)
+                continue;
+
             resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * l.strenght, l.direction.xyz, position);
+        }
 
 		vec3 lightDir = l.position.xyz - position;
 		float distance = length(lightDir);

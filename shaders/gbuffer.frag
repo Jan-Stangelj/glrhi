@@ -48,10 +48,6 @@ void main()
     vec4 emissionOut = texture(u_emission, texUV) * hasEmission + emission * (1-hasARM);
 
     g_albedo = albedoOut.xyz;
-    
-    vec3 voxelCoord = (fragPos + vec3(20.0)) / 40.0;
-    voxelCoord = clamp(voxelCoord, 0.0, 1.0); // optional, prevents sampling border
-    g_albedo = texture(voxels, voxelCoord).rgb;
 
     g_normalRoughness = vec4(normal, armOut.g);
     g_emissionMetallic = vec4(emissionOut.xyz, armOut.b);

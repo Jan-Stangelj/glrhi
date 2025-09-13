@@ -50,10 +50,10 @@ int main()
     glTextureParameteri(voxelTex, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
     glTextureParameteri(voxelTex, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
     glTextureParameteri(voxelTex, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
-    float borderColor[] = {1.0f, 0.0f, 0.0f, 1.0f};
+    float borderColor[] = {0.0f, 0.0f, 0.0f, 0.0f};
     glTextureParameterfv(voxelTex, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-    glTextureStorage3D(voxelTex, 1, GL_RGBA16F, 128, 128, 128);
+    glTextureStorage3D(voxelTex, 1, GL_RGBA16F, 64, 64, 64);
 
     //glBindTextureUnit(voxelTex, 0);
     //glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
@@ -65,9 +65,9 @@ int main()
 
         renderer.getInput();
 
-        glViewport(0, 0, 128, 128);
+        glViewport(0, 0, 64, 64);
         glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
-        clearVoxels.dispatch(128, 128, 128);
+        clearVoxels.dispatch(64, 64, 64);
         voxelization.use();
         voxelCam.bind();
         glDisable(GL_CULL_FACE);
