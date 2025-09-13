@@ -1,12 +1,14 @@
 #include "glrhi/core/shader.hpp"
 
+#include <filesystem>
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <string>
 
 namespace glrhi {
     
-    shader::shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath){
+    shader::shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath, const std::filesystem::path& geomPath){
         create(vertexPath, fragmentPath);
     }
 
@@ -14,7 +16,7 @@ namespace glrhi {
         glDeleteProgram(m_ID);
     }
 
-    void shader::create(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath) {
+    void shader::create(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath, const std::filesystem::path& geomPath) {
         if (m_ID) {
             std::cerr << "ERROR::SHADER::SHADER_ALREADY_CREATED\n";
             return;
@@ -23,12 +25,15 @@ namespace glrhi {
         // retrieve the vertex/fragment source code from filePath
         std::string vertexCode;
         std::string fragmentCode;
+        std::string geomCode = "";
         std::ifstream vShaderFile;
         std::ifstream fShaderFile;
+        std::ifstream gShaderFile;
 
         // ensure ifstream objects can throw exceptions:
         vShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
         fShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+        gShaderFile.exceptions (std::ifstream::failbit | std::ifstream::badbit);
 
         try {
             // open files
@@ -47,6 +52,14 @@ namespace glrhi {
             // convert stream into string
             vertexCode = vShaderStream.str();
             fragmentCode = fShaderStream.str();
+
+            if (geomPath != "") {
+                gShaderFile.open(geomPath);
+                std::stringstream gShaderStream;
+                gShaderStream << gShaderFile.rdbuf();
+                gShaderFile.close();
+                geomCode = gShaderStream.str();
+            }
         }
         catch(std::ifstream::failure& e) {
             std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
@@ -55,10 +68,14 @@ namespace glrhi {
         const char* vShaderCode = vertexCode.c_str();
         const char* fShaderCode = fragmentCode.c_str();
 
-        createFromCode(vShaderCode, fShaderCode);
+        if (geomPath != "")
+            createFromCode(vShaderCode, fShaderCode, geomCode.c_str());
+        else
+            createFromCode(vShaderCode, fShaderCode);
+
     }
 
-    void shader::createFromCode(const char* vertexCode, const char* fragmentCode) {
+    void shader::createFromCode(const char* vertexCode, const char* fragmentCode, const char* geomCode) {
         if (m_ID) {
             std::cerr << "ERROR::SHADER::SHADER_ALREADY_CREATED\n";
             return;
@@ -66,9 +83,10 @@ namespace glrhi {
 
         const char* vShaderCode = vertexCode;
         const char* fShaderCode = fragmentCode;
+        const char* gShaderCode = geomCode;
 
         // 2. compile shaders
-        unsigned int vertex, fragment;
+        unsigned int vertex, fragment, geometry;
         int success;
         char infoLog[512];
 
@@ -95,10 +113,27 @@ namespace glrhi {
             glGetShaderInfoLog(fragment, 512, NULL, infoLog);
             std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << "\n";
         }
+        if (std::string(geomCode) != "nono") {
+            // geometry shader
+            geometry = glCreateShader(GL_GEOMETRY_SHADER);
+            glShaderSource(geometry, 1, &gShaderCode, NULL);
+            glCompileShader(geometry);
+
+            // print compile errors
+            glGetShaderiv(geometry, GL_COMPILE_STATUS, &success);
+            if (!success){
+                glGetShaderInfoLog(geometry, 512, NULL, infoLog);
+                std::cout << "ERROR::SHADER::GEOMETRY::COMPILATION_FAILED\n" << infoLog << "\n";
+            }
+        }
 
         m_ID = glCreateProgram();
         glAttachShader(m_ID, vertex);
         glAttachShader(m_ID, fragment);
+
+        if (std::string(geomCode) != "nono")
+            glAttachShader(m_ID, geometry);
+
         glLinkProgram(m_ID);
 
         // print linking errors if any
@@ -112,6 +147,9 @@ namespace glrhi {
         // delete shaders; they’re linked into our program and no longer necessary
         glDeleteShader(vertex);
         glDeleteShader(fragment);
+
+        if (std::string(geomCode) != "nono")
+            glDeleteShader(geometry);
     }
 
     void shader::use() const {

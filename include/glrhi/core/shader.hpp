@@ -8,6 +8,7 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
+#include <string>
 #include <unordered_map>
 #include <string_view>
 #include <filesystem>
@@ -27,7 +28,7 @@ namespace glrhi{
          * @param vertexPath Path to a text file containing the vertex shader code in GLSL.
          * @param fragmentPath Path to a text file containing the vertex shader code in GLSL.
          */
-        shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
+        shader(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath, const std::filesystem::path& geomPath = "");
         shader() = default;
         ~shader();
 
@@ -55,7 +56,7 @@ namespace glrhi{
          * @param vertexPath Path to a text file containing the vertex shader code in GLSL.
          * @param fragmentPath Path to a text file containing the vertex shader code in GLSL.
          */
-        void create(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath);
+        void create(const std::filesystem::path& vertexPath, const std::filesystem::path& fragmentPath, const std::filesystem::path& geomPath = "");
 
         /**
          * @brief Construct a new shader from already provided code
@@ -63,7 +64,7 @@ namespace glrhi{
          * @param vertexCode C string of the vertex shader code.
          * @param fragmentCode C string of the fragment shader code.
          */
-        void createFromCode(const char* vertexCode, const char* fragmentCode);
+        void createFromCode(const char* vertexCode, const char* fragmentCode, const char* geomCode = std::string("nono").c_str());
 
         /**
          * @brief Selects the shader to be used in the subsequent draw calls.
