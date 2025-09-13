@@ -1,4 +1,5 @@
 #include "glm/detail/type_quat.hpp"
+#include "glm/ext/matrix_clip_space.hpp"
 #include "glm/ext/matrix_float4x4.hpp"
 #include "glm/ext/vector_float4.hpp"
 #include <glrhi/renderer/camera.hpp>
@@ -14,6 +15,7 @@ namespace glrhi {
     }
 
     void camera::uploadData() {
+
         glm::vec3 dirRad = glm::radians(direction);
 
         glm::quat qPitch = glm::angleAxis(dirRad.x, glm::vec3(1, 0, 0));
@@ -28,6 +30,9 @@ namespace glrhi {
         m_view = glm::inverse(transform);
 
         m_projection = glm::perspective(glm::radians(fov), aspectRatio, near, far);
+
+        if (type)
+            m_projection = glm::ortho(-width / 2, width / 2, -height / 2, height / 2);
 
         glm::mat4 matrices[2] = {m_view, m_projection};
 
