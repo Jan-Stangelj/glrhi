@@ -26,13 +26,8 @@ namespace glrhi {
         m_skybox.create(path, GL_RGB16F);
         m_hasSkybox = true;
     }
-    void scene::bindSkybox(glrhi::shader& shader) const {
-        m_skybox.bind(4);
-        shader.setInt("u_skybox", 4);
-    }
-    void scene::bindSkybox(glrhi::compute& shader) const {
-        m_skybox.bind(4);
-        shader.setInt("u_skybox", 4);
+    void scene::bindSkybox(unsigned int unit) const {
+        m_skybox.bind(unit);
     }
 
     void scene::drawModels(glrhi::shader& shader) const {

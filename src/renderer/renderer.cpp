@@ -37,7 +37,7 @@ namespace glrhi {
             glDisable(GL_DEPTH_TEST);
 
             m_skyboxShader.use();
-            scene.bindSkybox(m_skyboxShader);
+            scene.bindSkybox(0);
 
             m_skyboxVAO.bind();
             glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, nullptr);
@@ -50,8 +50,14 @@ namespace glrhi {
     void renderer::lightingPass(const glrhi::scene& scene) {
         scene.updateLightBuffer(m_lightingShader);
 
-        m_gBuffer.bindTexturesLightingPass(m_lightingShader);
-        scene.bindSkybox(m_lightingShader);
+        m_gBuffer.albedo.bind(0);
+        m_gBuffer.normalRoughness.bind(1);
+        m_gBuffer.emissionMetallic.bind(2);
+        m_gBuffer.position.bind(3);
+        scene.bindSkybox(4);
+
+        m_gBuffer.resoult.bindImage(0, 0);
+
         m_lightingShader.dispatch(m_width, m_height, 1);
     }
 

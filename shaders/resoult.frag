@@ -4,7 +4,7 @@ out vec4 fragColor;
 
 in vec2 texUV;
 
-uniform sampler2D u_resoult;
+layout(binding = 0) uniform sampler2D u_resoult;
 
 vec3 PBRNeutralToneMapping( vec3 color ) {
   const float startCompression = 0.8 - 0.04;

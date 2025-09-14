@@ -40,36 +40,17 @@ namespace glrhi {
         void unbind();
 
         /**
-         * @brief Binds all the textures in the gbuffer.
-         * 
-         * @param shader the shader to bind them in.
-         *
-         * @details It binds the following sampler2D uniforms:
-         *          u_albedo, u_normalRoughness, u_emissionMetallic, u_position, u_resoult.
-         */
-        void bindTextures(glrhi::shader& shader);
-
-        /**
-         * @brief Binds all the textures in the gbuffer.
-         * 
-         * @param shader the shader to bind them in.
-         *
-         * @details It binds the following sampler2D uniforms:
-         *          u_albedo, u_normalRoughness, u_emissionMetallic, u_position.
-         *          And the following image2D uniforms:
-         *          u_resoult
-         */
-        void bindTextures(glrhi::compute& shader);
-
-        /**
-         * @brief Not meant for end user
-         */
-        void bindTexturesLightingPass(glrhi::compute& shader);
-
-        /**
          * @brief Binds the default framebuffer and renders the contents of the resoult texture to the screen.
          */
         void renderResoult();
+
+        glrhi::texture2D albedo;
+        glrhi::texture2D normalRoughness;
+        glrhi::texture2D emissionMetallic;
+        glrhi::texture2D position;
+        glrhi::texture2D resoult;
+
+        glrhi::texture2D depth;
 
     private:
 
@@ -78,14 +59,6 @@ namespace glrhi {
         glrhi::ebo m_quadEBO;
 
         glrhi::fbo m_gBuffer;
-
-        glrhi::texture2D m_albedo;
-        glrhi::texture2D m_normalRoughness;
-        glrhi::texture2D m_emissionMetallic;
-        glrhi::texture2D m_position;
-        glrhi::texture2D m_resoult;
-
-        glrhi::texture2D m_depth;
 
         glrhi::shader m_resoultShader;
 

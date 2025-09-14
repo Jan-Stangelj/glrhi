@@ -26,8 +26,7 @@ namespace glrhi {
         glrhi::light& getLight(unsigned int id);
 
         void setSkybox(const std::filesystem::path& path);
-        void bindSkybox(glrhi::shader& shader) const;
-        void bindSkybox(glrhi::compute& shader) const;
+        void bindSkybox(unsigned int unit) const;
         bool hasSkybox() const { return m_hasSkybox; };
 
         void drawModels(glrhi::shader& shader) const;

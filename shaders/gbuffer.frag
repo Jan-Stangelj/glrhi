@@ -27,10 +27,10 @@ layout (std140, binding=1) uniform mat {
     float hasEmission;
 };
 
-uniform sampler2D u_albedo;
-uniform sampler2D u_arm;
-uniform sampler2D u_normal;
-uniform sampler2D u_emission;
+layout(binding = 0) uniform sampler2D u_albedo;
+layout(binding = 1) uniform sampler2D u_arm;
+layout(binding = 2) uniform sampler2D u_normal;
+layout(binding = 3) uniform sampler2D u_emission;
 
 layout(binding = 8) uniform sampler3D voxels;
 

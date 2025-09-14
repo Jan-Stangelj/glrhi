@@ -4,7 +4,7 @@ layout(location = 4) out vec3 g_resoult;
 
 in vec3 texCoord;
 
-uniform sampler2D u_skybox;
+layout(binding = 0) uniform sampler2D u_skybox;
 
 // Convert normalized direction vector to equirectangular UV
 vec2 sampleSphericalMap(vec3 v)

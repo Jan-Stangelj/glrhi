@@ -26,12 +26,12 @@ layout (std430, binding = 0) readonly buffer lights {
 uniform int u_numLights;
 
 layout(rgba16f, binding = 0) uniform image2D u_resoult;
-layout(rgba16f, binding = 1) uniform image2D u_albedoInLightingOut;
 
-uniform sampler2D u_normalRoughness;
-uniform sampler2D u_emissionMetallic;
-uniform sampler2D u_position;
-uniform sampler2D u_skybox;
+layout(binding = 0) uniform sampler2D u_albedo;
+layout(binding = 1) uniform sampler2D u_normalRoughness;
+layout(binding = 2)uniform sampler2D u_emissionMetallic;
+layout(binding = 3)uniform sampler2D u_position;
+layout(binding = 4)uniform sampler2D u_skybox;
 
 layout(binding = 8) uniform sampler3D voxels;
 
@@ -46,7 +46,7 @@ void main() {
     vec4 normalRoughness = texture(u_normalRoughness, texUV);
     vec4 emissionMetallic = texture(u_emissionMetallic, texUV);
 
-    vec3 albedo = pow(imageLoad(u_albedoInLightingOut, texelCoord).rgb, vec3(2.2));
+    vec3 albedo = pow(texture(u_albedo, texUV).rgb, vec3(2.2));
     vec3 arm = vec3(1.0, normalRoughness.w, emissionMetallic.w);
     vec3 normal = normalRoughness.rgb;
     vec3 position = texture(u_position, texUV).rgb;
