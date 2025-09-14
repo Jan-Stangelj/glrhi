@@ -2,6 +2,7 @@
 
 #include <glrhi/glrhi.hpp>
 
+#include "glm/fwd.hpp"
 #include "glrhi/core/shader.hpp"
 #include "glrhi/core/ssbo.hpp"
 #include "glrhi/core/texture2D.hpp"
@@ -31,6 +32,10 @@ namespace glrhi {
 
         void drawModels(glrhi::shader& shader) const;
         void updateLightBuffer(glrhi::compute& shader) const;
+
+        glm::vec4 sunDir = glm::vec4(0.5f, 1.0f, 0.5f, 1.0f);
+        glm::vec4 sunColor = glm::vec4(1.0f);
+        float sunStrenght = 5.0f;
 
     private:
 

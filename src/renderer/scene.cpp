@@ -1,9 +1,10 @@
+#include "glm/fwd.hpp"
 #include "glrhi/core/ebo.hpp"
 #include <filesystem>
 #include <glrhi/renderer/scene.hpp>
 
 namespace glrhi {
-    scene::scene() : m_lightBuffer(sizeof(glrhi::light) * 1024) {}
+    scene::scene() : m_lightBuffer(sizeof(glrhi::light) * 65) {}
 
     unsigned int scene::addModel(const std::filesystem::path& path) {
         m_models.emplace_back(path);
@@ -44,7 +45,11 @@ namespace glrhi {
         int numLights = m_lights.size();
         shader.setInt("u_numLights", numLights);
 
-        unsigned int i = 0;
+        m_lightBuffer.sendData(0, sizeof(glm::vec4), &sunDir);
+        m_lightBuffer.sendData(sizeof(glm::vec4), sizeof(glm::vec4), &sunColor);
+        m_lightBuffer.sendData(2*sizeof(glm::vec4), sizeof(float), &sunStrenght);
+
+        unsigned int i = 1;
         for (auto const& light : m_lights) {
             size_t lightSize = sizeof(glrhi::light);
             m_lightBuffer.sendData(lightSize * i, lightSize, &light);

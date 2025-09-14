@@ -19,11 +19,9 @@ int main()
     scene.getModel(helmet).position = glm::vec3(0.0f, 1.5f, 0.0f);
     scene.getModel(helmet).rotation = glm::vec3(90.0f, 0.0f, 0.0f);
 
-    unsigned int sun = scene.addLight();
-    scene.getLight(sun).direction = glm::vec4(0.5f, 1.0f, 0.5f, 1.0f);
-    scene.getLight(sun).color = glm::vec4(1.0f);
-    scene.getLight(sun).strength = 5.0f;
-    scene.getLight(sun).type = glrhi::DIRECTIONAL;
+    scene.sunDir = glm::vec4(0.5f, 1.0f, 0.5f, 1.0f);
+    scene.sunColor = glm::vec4(1.0f);
+    scene.sunStrenght = 5.0f;
 
     scene.setSkybox("../examples/renderer/skybox.hdr");
 
