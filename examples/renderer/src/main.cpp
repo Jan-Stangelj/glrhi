@@ -42,7 +42,6 @@ int main()
     unsigned int voxelTex = 0;
     glCreateTextures(GL_TEXTURE_3D, 1, &voxelTex);
 
-
     glTextureParameteri(voxelTex, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTextureParameteri(voxelTex, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -55,11 +54,7 @@ int main()
 
     glTextureStorage3D(voxelTex, 1, GL_RGBA16F, 64, 64, 64);
 
-    //glBindTextureUnit(voxelTex, 0);
-    //glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
-
     glrhi::shader voxelization("../shaders/voxelization.vert", "../shaders/voxelization.frag", "../shaders/voxelization.geom");
-    glrhi::compute clearVoxels("../shaders/voxelClear.comp");
 
     while (renderer.running()) {
 
@@ -67,7 +62,8 @@ int main()
 
         glViewport(0, 0, 64, 64);
         glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
-        clearVoxels.dispatch(64, 64, 64);
+        float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
+        glClearTexImage(voxelTex, 0, GL_RGBA, GL_FLOAT, color);
         voxelization.use();
         voxelCam.bind();
         glDisable(GL_CULL_FACE);
