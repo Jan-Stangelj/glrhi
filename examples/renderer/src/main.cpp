@@ -1,9 +1,7 @@
-#include "glrhi/core/compute.hpp"
-#include "glrhi/core/ebo.hpp"
+#include "glm/fwd.hpp"
 #include "glrhi/core/shader.hpp"
 #include "glrhi/core/texture2D.hpp"
 #include "glrhi/renderer/camera.hpp"
-#include "glrhi/renderer/lighting.hpp"
 #include <glrhi/renderer.hpp>
 
 int main()
@@ -19,9 +17,9 @@ int main()
     scene.getModel(helmet).position = glm::vec3(0.0f, 1.5f, 0.0f);
     scene.getModel(helmet).rotation = glm::vec3(90.0f, 0.0f, 0.0f);
 
-    scene.sunDir = glm::vec4(0.5f, 1.0f, 0.5f, 1.0f);
+    scene.sunDir = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
     scene.sunColor = glm::vec4(1.0f);
-    scene.sunStrenght = 5.0f;
+    scene.sunStrenght = 10.0f;
 
     scene.setSkybox("../examples/renderer/skybox.hdr");
 
@@ -53,6 +51,9 @@ int main()
     glTextureStorage3D(voxelTex, 1, GL_RGBA16F, 64, 64, 64);
 
     glrhi::shader voxelization("../shaders/voxelization.vert", "../shaders/voxelization.frag", "../shaders/voxelization.geom");
+    glrhi::shader drawVoxels("../shaders/drawVoxels.vert", "../shaders/drawVoxels.frag", "../shaders/drawVoxels.geom");
+
+    renderer.getCamera().position = glm::vec3(0.0f);
 
     while (renderer.running()) {
 
@@ -74,9 +75,21 @@ int main()
         
         glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_TEXTURE_FETCH_BARRIER_BIT);
         glBindTextureUnit(8, voxelTex);
-        renderer.gBufferPass(scene);
-        renderer.lightingPass(scene);
-        renderer.renderResoult();
+        //renderer.gBufferPass(scene);
+        //renderer.lightingPass(scene);
+        //renderer.renderResoult();
+
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        renderer.getCamera().bind();
+        renderer.getCamera().uploadData();
+
+        glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
+        drawVoxels.use();
+        glDrawArrays(GL_POINTS, 0, 64 * 64 * 64);
+
+        renderer.getWindow().swapBuffers();
     }
 
     return 0;
