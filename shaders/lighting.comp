@@ -83,7 +83,7 @@ void main() {
     resoult += emissionMetallic.xyz;
 
     if (position != vec3(0.0)) {
-        imageStore(u_resoult, texelCoord, vec4(resoult, 1.0));
+        imageStore(u_resoult, texelCoord, vec4(albedo, 1.0));
     }
 
 }

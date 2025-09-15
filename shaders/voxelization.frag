@@ -28,8 +28,8 @@ void main()
         discard;
 
     vec4 albedoOut = texture(u_albedo, texUVout) * hasAlbedo + albedo * (1-hasAlbedo);
-    ivec3 voxelCoord = ivec3(floor(clamp((voxelPosout + vec3(20.0))/40.0, 0.0f, 1.0f) * 64.0));
-    voxelCoord = clamp(voxelCoord, 0, 63);
+    ivec3 voxelCoord = ivec3(floor(clamp((voxelPosout + vec3(20.0))/40.0, 0.0f, 1.0f) * 128.0));
+    voxelCoord = clamp(voxelCoord, 0, 127);
     imageStore(voxelOut, voxelCoord, albedoOut);
 
 }

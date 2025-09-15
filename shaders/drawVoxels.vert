@@ -7,7 +7,7 @@ out vec3 voxelPos;
 
 void main()
 {
-    const uint size = 64;
+    const uint size = 128;
     uint idx = gl_VertexID;
 
     uint x = idx % size;

@@ -48,28 +48,27 @@ int main()
     float borderColor[] = {0.0f, 0.0f, 0.0f, 0.0f};
     glTextureParameterfv(voxelTex, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-    glTextureStorage3D(voxelTex, 1, GL_RGBA16F, 64, 64, 64);
+    glTextureStorage3D(voxelTex, 1, GL_RGBA16F, 128, 128, 128);
 
     glrhi::shader voxelization("../shaders/voxelization.vert", "../shaders/voxelization.frag", "../shaders/voxelization.geom");
     glrhi::shader drawVoxels("../shaders/drawVoxels.vert", "../shaders/drawVoxels.frag", "../shaders/drawVoxels.geom");
 
     renderer.getCamera().position = glm::vec3(0.0f);
 
+    glViewport(0, 0, 128, 128);
+    glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
+    float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
+    glClearTexImage(voxelTex, 0, GL_RGBA, GL_FLOAT, color);
+    voxelization.use();
+    voxelCam.bind();
+    glDisable(GL_CULL_FACE);
+    scene.drawModels(voxelization);
+    glEnable(GL_CULL_FACE);
+    glViewport(0, 0, 1280, 720);
+
     while (renderer.running()) {
 
         renderer.getInput();
-
-        glViewport(0, 0, 64, 64);
-        glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
-        float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
-        glClearTexImage(voxelTex, 0, GL_RGBA, GL_FLOAT, color);
-        voxelization.use();
-        voxelCam.bind();
-        glDisable(GL_CULL_FACE);
-        scene.drawModels(voxelization);
-        glEnable(GL_CULL_FACE);
-
-        glViewport(0, 0, 1280, 720);
 
         dbgcam.apply(renderer.getCamera(), renderer.getWindow(), renderer.deltaTime());
         
@@ -87,7 +86,7 @@ int main()
 
         glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
         drawVoxels.use();
-        glDrawArrays(GL_POINTS, 0, 64 * 64 * 64);
+        glDrawArrays(GL_POINTS, 0, 128 * 128 * 128);
 
         renderer.getWindow().swapBuffers();
     }

@@ -15,7 +15,7 @@ layout(std140, binding = 0) uniform cam {
 };
 
 vec3 VoxelToWorld(vec3 pos) {
-    return pos * (40.0 / 64.0) - vec3(20.0);
+    return pos * (40.0 / 128.0) - vec3(20.0);
 }
 
 void main()
@@ -41,7 +41,7 @@ void main()
     );
 
     vec3 center = VoxelToWorld(voxelPos[0]);
-    vec3 extent = vec3(40.0 / 64.0);
+    vec3 extent = vec3(40.0 / 128.0);
 
     vec4 projectedVertices[8];
     for (int i = 0; i < 8; ++i) {
