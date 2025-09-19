@@ -20,12 +20,12 @@ int main()
 
     scene.sunDir = glm::vec4(0.2f, 1.0f, 0.2f, 1.0f);
     scene.sunColor = glm::vec4(1.0f);
-    scene.sunStrenght = 0.0f;
+    scene.sunStrenght = 5.0f;
 
     unsigned int light = scene.addLight();
     scene.getLight(light).color = glm::vec4(1.0f);
     scene.getLight(light).position = glm::vec4(0, 4, 0, 0);
-    scene.getLight(light).strength = 77.0f;
+    scene.getLight(light).strength = 150.0f;
 
     scene.setSkybox("../examples/renderer/skybox.hdr");
 

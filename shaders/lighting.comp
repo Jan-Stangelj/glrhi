@@ -66,25 +66,28 @@ void main() {
     vec3 rayPos = position + normal * voxelSize;
     float visibility = 1.0;
 
-    for (int i = 0; i < maxSteps; i++) {
-        vec3 uvw = (rayPos + voxelGridSize * 0.5) / voxelGridSize;
+    if (dot(normalize(sunDir.xyz), normal) > 0) {
 
-        if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0))))
-            break;
+        for (int i = 0; i < maxSteps; i++) {   
+            vec3 uvw = (rayPos + voxelGridSize * 0.5) / voxelGridSize;
 
-        vec4 voxelSample = texture(voxels, uvw);
+            if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0))))
+                break;
 
-        visibility *= (1.0 - voxelSample.a);
+            vec4 voxelSample = texture(voxels, uvw);
 
-        if (visibility <= 0.1) {
-            visibility = 0.01;
-            break;
+            visibility *= (1.0 - voxelSample.a);
+
+            if (visibility <= 0.01) {
+                visibility = 0.00;
+                break;
+            }
+
+            rayPos += sunDir.xyz * stepSize;
         }
-
-        rayPos += sunDir.xyz * stepSize;
     }
 
-    //resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position) * visibility;
+    resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position) * visibility;
 
     // Point lights
 	for (int i = 0; i < u_numLights; i++) {
@@ -93,8 +96,41 @@ void main() {
 		vec3 lightDir = l.position.xyz - position;
 		float distance = length(lightDir);
 		float attenuation = l.strenght / pow(distance, distance);
+        lightDir = normalize(lightDir);
 
-        resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * attenuation, lightDir, position);
+        // Return if too far
+        if (attenuation < 0.01)
+            continue;
+
+        // Return if facing away
+        if (dot(lightDir, normal) <= 0.0)
+            continue;
+
+        // Shadows
+        int maxSteps    = int(ceil(distance / stepSize));
+
+        vec3 rayPos = position + normal * voxelSize;
+        float visibility = 1.0;
+
+        for (int i = 0; i < maxSteps; i++) {
+            vec3 uvw = (rayPos + voxelGridSize * 0.5) / voxelGridSize;
+
+            if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0))))
+                break;
+
+            vec4 voxelSample = texture(voxels, uvw);
+
+            visibility *= (1.0 - voxelSample.a);
+
+            if (visibility <= 0.1) {
+                visibility = 0.01;
+                break;
+            }
+
+            rayPos += lightDir * stepSize;
+        }
+
+        resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * attenuation, lightDir, position) * visibility;
 	}
 
     resoult += emissionMetallic.xyz;
