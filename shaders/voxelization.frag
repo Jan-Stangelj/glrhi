@@ -1,6 +1,6 @@
 #version 460 core
 
-layout(binding = 0, rgba16f) uniform image3D voxelOut;
+layout(binding = 0, rgba8) uniform image3D voxelOut;
 
 in vec2 texUVout;
 in vec3 voxelPosout;

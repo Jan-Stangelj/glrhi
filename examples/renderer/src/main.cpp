@@ -20,7 +20,7 @@ int main()
 
     scene.sunDir = glm::vec4(0.2f, 1.0f, 0.2f, 1.0f);
     scene.sunColor = glm::vec4(1.0f);
-    scene.sunStrenght = 5.0f;
+    scene.sunStrenght = 15.0f;
 
     unsigned int light = scene.addLight();
     scene.getLight(light).color = glm::vec4(1.0f);
@@ -59,7 +59,7 @@ int main()
     float borderColor[] = {0.0f, 0.0f, 0.0f, 0.0f};
     glTextureParameterfv(voxelTex, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-    glTextureStorage3D(voxelTex, 1, GL_RGBA16F, resolution, resolution, resolution);
+    glTextureStorage3D(voxelTex, 1, GL_RGBA8, resolution, resolution, resolution);
 
     float settings[] = {size, resolution};
     glrhi::ubo voxelSettings(sizeof(float)*2, settings);
@@ -71,9 +71,9 @@ int main()
     renderer.getCamera().position = glm::vec3(0.0f);
 
     glViewport(0, 0, resolution, resolution);
-    glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
+    glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
     float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
-    glClearTexImage(voxelTex, 0, GL_RGBA, GL_FLOAT, color);
+    glClearTexImage(voxelTex, 0, GL_RGBA, GL_BYTE, color);
     voxelization.use();
     voxelCam.bind();
     glDisable(GL_CULL_FACE);
@@ -100,7 +100,7 @@ int main()
         renderer.getCamera().bind();
         renderer.getCamera().uploadData();
 
-        glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
+        glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
         drawVoxels.use();
         glDrawArrays(GL_POINTS, 0, resolution * resolution * resolution);
 

@@ -1,6 +1,6 @@
 #version 460
 
-layout(binding = 0, rgba16f) uniform readonly image3D voxels;
+layout(binding = 0, rgba8) uniform readonly image3D voxels;
 
 layout (std140, binding = 2) uniform voxelSettings {
     float voxelGridSize;
