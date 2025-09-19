@@ -4,7 +4,7 @@
 #include <glrhi/renderer/scene.hpp>
 
 namespace glrhi {
-    scene::scene() : m_lightBuffer(sizeof(glrhi::light) * 65) {}
+    scene::scene() : m_lightBuffer((sizeof(glrhi::light) + 12) * 65) {}
 
     unsigned int scene::addModel(const std::filesystem::path& path) {
         m_models.emplace_back(path);
@@ -46,7 +46,7 @@ namespace glrhi {
 
         unsigned int i = 1;
         for (auto const& light : m_lights) {
-            size_t lightSize = sizeof(glrhi::light);
+            size_t lightSize = sizeof(glrhi::light) + 12;
             m_lightBuffer.sendData(lightSize * i, lightSize, &light);
             i++;
         }

@@ -84,7 +84,7 @@ void main() {
         rayPos += sunDir.xyz * stepSize;
     }
 
-    resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position) * visibility;
+    //resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position) * visibility;
 
     // Point lights
 	for (int i = 0; i < u_numLights; i++) {
