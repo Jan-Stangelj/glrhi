@@ -58,21 +58,33 @@ void main() {
 
     vec3 resoult = vec3(0.0);
 
-    // Sun
-    float dist = 1.5f;
-    bool visible = true;
+    // sun
+    float voxelSize = voxelGridSize / voxelRes;
+    float stepSize  = voxelSize * 0.5;
+    int maxSteps    = int(voxelGridSize / stepSize);
 
-    for (int i = 0; i < 100; i++) {
-        vec3 voxelCoord = (position + normalize(sunDir.xyz) * dist + vec3(voxelGridSize / 2)) / voxelGridSize;
-        if (texture(voxels, voxelCoord).rgba != vec4(0.0)) {
-            visible = false;
+    vec3 rayPos = position + normal * voxelSize;
+    float visibility = 1.0;
+
+    for (int i = 0; i < maxSteps; i++) {
+        vec3 uvw = (rayPos + voxelGridSize * 0.5) / voxelGridSize;
+
+        if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0))))
+            break;
+
+        vec4 voxelSample = texture(voxels, uvw);
+
+        visibility *= (1.0 - voxelSample.a);
+
+        if (visibility <= 0.1) {
+            visibility = 0.01;
             break;
         }
-        dist += 0.1f;
+
+        rayPos += sunDir.xyz * stepSize;
     }
 
-    if (visible)
-        resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position);
+    resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position) * visibility;
 
     // Point lights
 	for (int i = 0; i < u_numLights; i++) {
@@ -88,7 +100,7 @@ void main() {
     resoult += emissionMetallic.xyz;
 
     if (position != vec3(0.0)) {
-        imageStore(u_resoult, texelCoord, vec4(albedo, 1.0));
+        imageStore(u_resoult, texelCoord, vec4(resoult, 1.0));
     }
 
 }

@@ -18,7 +18,7 @@ int main()
     scene.getModel(helmet).position = glm::vec3(0.0f, 1.5f, 0.0f);
     scene.getModel(helmet).rotation = glm::vec3(90.0f, 0.0f, 0.0f);
 
-    scene.sunDir = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
+    scene.sunDir = glm::vec4(0.2f, 1.0f, 0.2f, 1.0f);
     scene.sunColor = glm::vec4(1.0f);
     scene.sunStrenght = 10.0f;
 
@@ -73,6 +73,7 @@ int main()
     voxelCam.bind();
     glDisable(GL_CULL_FACE);
     scene.drawModels(voxelization);
+    glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_TEXTURE_FETCH_BARRIER_BIT);
     glEnable(GL_CULL_FACE);
     glViewport(0, 0, 1280, 720);
     // Voxelization end
@@ -83,13 +84,12 @@ int main()
 
         dbgcam.apply(renderer.getCamera(), renderer.getWindow(), renderer.deltaTime());
         
-        glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_TEXTURE_FETCH_BARRIER_BIT);
         glBindTextureUnit(8, voxelTex);
-        //renderer.gBufferPass(scene);
-        //renderer.lightingPass(scene);
-        //renderer.renderResoult();
+        renderer.gBufferPass(scene);
+        renderer.lightingPass(scene);
+        renderer.renderResoult();
 
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        /*glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         renderer.getCamera().bind();
@@ -99,7 +99,7 @@ int main()
         drawVoxels.use();
         glDrawArrays(GL_POINTS, 0, resolution * resolution * resolution);
 
-        renderer.getWindow().swapBuffers();
+        renderer.getWindow().swapBuffers();*/
     }
 
     return 0;
