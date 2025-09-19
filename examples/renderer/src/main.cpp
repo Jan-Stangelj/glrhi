@@ -1,6 +1,7 @@
 #include "glm/fwd.hpp"
 #include "glrhi/core/shader.hpp"
 #include "glrhi/core/texture2D.hpp"
+#include "glrhi/core/ubo.hpp"
 #include "glrhi/renderer/camera.hpp"
 #include <glrhi/renderer.hpp>
 
@@ -25,14 +26,19 @@ int main()
 
     glrhi::debugCamera dbgcam;
 
+    // Voxel settings
+    float size = 40.0f;
+    float resolution = 256.0f;
+
+    // Voxelization begin
     glrhi::camera voxelCam;
-    voxelCam.position = glm::vec3(0.0f, 10.0f, 0.0f);
+    voxelCam.position = glm::vec3(0.0f, size / 2, 0.0f);
     voxelCam.direction = glm::vec3(-90.0f, 0.0f, 0.0f);
     voxelCam.type = true;
-    voxelCam.near = -20.0f;
-    voxelCam.far = 20.0f;
-    voxelCam.width = 40;
-    voxelCam.height = 40;
+    voxelCam.near = 0.1f;
+    voxelCam.far = size;
+    voxelCam.width = size;
+    voxelCam.height = size;
     voxelCam.uploadData();
 
     unsigned int voxelTex = 0;
@@ -48,14 +54,18 @@ int main()
     float borderColor[] = {0.0f, 0.0f, 0.0f, 0.0f};
     glTextureParameterfv(voxelTex, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-    glTextureStorage3D(voxelTex, 1, GL_RGBA16F, 128, 128, 128);
+    glTextureStorage3D(voxelTex, 1, GL_RGBA16F, resolution, resolution, resolution);
+
+    float settings[] = {size, resolution};
+    glrhi::ubo voxelSettings(sizeof(float)*2, settings);
+    voxelSettings.addBindingPoint(2);
 
     glrhi::shader voxelization("../shaders/voxelization.vert", "../shaders/voxelization.frag", "../shaders/voxelization.geom");
     glrhi::shader drawVoxels("../shaders/drawVoxels.vert", "../shaders/drawVoxels.frag", "../shaders/drawVoxels.geom");
 
     renderer.getCamera().position = glm::vec3(0.0f);
 
-    glViewport(0, 0, 128, 128);
+    glViewport(0, 0, resolution, resolution);
     glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
     float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
     glClearTexImage(voxelTex, 0, GL_RGBA, GL_FLOAT, color);
@@ -65,6 +75,7 @@ int main()
     scene.drawModels(voxelization);
     glEnable(GL_CULL_FACE);
     glViewport(0, 0, 1280, 720);
+    // Voxelization end
 
     while (renderer.running()) {
 
@@ -86,7 +97,7 @@ int main()
 
         glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
         drawVoxels.use();
-        glDrawArrays(GL_POINTS, 0, 128 * 128 * 128);
+        glDrawArrays(GL_POINTS, 0, resolution * resolution * resolution);
 
         renderer.getWindow().swapBuffers();
     }

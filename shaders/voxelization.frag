@@ -17,6 +17,11 @@ layout (std140, binding=1) uniform mat {
     float hasEmission;
 };
 
+layout (std140, binding = 2) uniform voxelSettings {
+    float voxelGridSize;
+    float voxelRes;
+};
+
 uniform sampler2D u_albedo;
 uniform sampler2D u_arm;
 uniform sampler2D u_normal;
@@ -28,8 +33,8 @@ void main()
         discard;
 
     vec4 albedoOut = texture(u_albedo, texUVout) * hasAlbedo + albedo * (1-hasAlbedo);
-    ivec3 voxelCoord = ivec3(floor(clamp((voxelPosout + vec3(20.0))/40.0, 0.0f, 1.0f) * 128.0));
-    voxelCoord = clamp(voxelCoord, 0, 127);
+    ivec3 voxelCoord = ivec3(floor(clamp((voxelPosout + vec3(voxelGridSize / 2))/voxelGridSize, 0.0f, 1.0f) * voxelRes));
+    voxelCoord = clamp(voxelCoord, 0, int(voxelRes - 1));
     imageStore(voxelOut, voxelCoord, albedoOut);
 
 }
