@@ -60,7 +60,7 @@ void main() {
 
     // sun
     float voxelSize = voxelGridSize / voxelRes;
-    float stepSize  = voxelSize * 0.5;
+    float stepSize  = voxelSize;
     int maxSteps    = int(voxelGridSize / stepSize);
 
     vec3 rayPos = position + normal * voxelSize;

@@ -3,6 +3,11 @@
 layout(triangles) in;
 layout(triangle_strip, max_vertices = 3) out;
 
+layout (std140, binding = 2) uniform voxelSettings {
+    float voxelGridSize;
+    float voxelRes;
+};
+
 in vec3 pos[];
 in mat3 TBN[];
 in vec2 texUV[];

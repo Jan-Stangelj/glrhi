@@ -1,8 +1,5 @@
-#include "glm/fwd.hpp"
-#include "glrhi/core/shader.hpp"
-#include "glrhi/core/texture2D.hpp"
-#include "glrhi/core/ubo.hpp"
-#include "glrhi/renderer/camera.hpp"
+#include "glrhi/core/ebo.hpp"
+#include <cstdint>
 #include <glrhi/renderer.hpp>
 
 int main()
@@ -61,12 +58,18 @@ int main()
 
     glTextureStorage3D(voxelTex, 1, GL_RGBA8, resolution, resolution, resolution);
 
+    glrhi::ssbo tempVoxels(sizeof(uint32_t) * 4 * resolution * resolution * resolution);
+    GLuint clearColor = 0;
+    glClearNamedBufferData(tempVoxels.getID(), GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT, &clearColor);
+    tempVoxels.addBindingPoint(0);
+
     float settings[] = {size, resolution};
     glrhi::ubo voxelSettings(sizeof(float)*2, settings);
     voxelSettings.addBindingPoint(2);
 
     glrhi::shader voxelization("../shaders/voxelization.vert", "../shaders/voxelization.frag", "../shaders/voxelization.geom");
     glrhi::shader drawVoxels("../shaders/drawVoxels.vert", "../shaders/drawVoxels.frag", "../shaders/drawVoxels.geom");
+    glrhi::compute convertVoxels("../shaders/convertVoxels.comp");
 
     renderer.getCamera().position = glm::vec3(0.0f);
 
@@ -79,6 +82,7 @@ int main()
     glDisable(GL_CULL_FACE);
     scene.drawModels(voxelization);
     glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_TEXTURE_FETCH_BARRIER_BIT);
+    convertVoxels.dispatch(resolution, resolution, resolution);
     glEnable(GL_CULL_FACE);
     glViewport(0, 0, 1280, 720);
     // Voxelization end

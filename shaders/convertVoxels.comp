@@ -1,0 +1,33 @@
+#version 460 core
+
+layout (local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
+
+layout(binding = 0, rgba8) uniform writeonly image3D voxelsOut;
+
+layout (std140, binding = 2) uniform voxelSettings {
+    float voxelGridSize;
+    float voxelRes;
+};
+
+layout (std430, binding = 0) buffer voxelIn {
+    uint[] voxels;
+};
+
+void main() {
+    ivec3 voxelCoord = ivec3(gl_GlobalInvocationID.xyz);
+
+    uint voxelCoord1D = uint(voxelCoord.x) + uint(voxelCoord.y) * uint(voxelRes) + uint(voxelCoord.z) * uint(voxelRes) * uint(voxelRes);
+    voxelCoord1D *= 4;
+
+    float sampleR = float(voxels[voxelCoord1D]) / 255.0;
+    float sampleG = float(voxels[voxelCoord1D+1]) / 255.0;
+    float sampleB = float(voxels[voxelCoord1D+2]) / 255.0;
+    float divider = float(voxels[voxelCoord1D+3]);
+
+    if (divider<1)
+        return;
+
+    vec3 sampleColor = vec3(sampleR, sampleG, sampleB) / divider;
+
+    imageStore(voxelsOut, voxelCoord, vec4(sampleColor, 1));
+}
