@@ -45,9 +45,15 @@ void main()
 			vec3(0.0, 0.0, 1.0));
 	}
 
+	vec3 trigCenter = vec3(gl_in[0].gl_Position.xyz + gl_in[1].gl_Position.xyz + gl_in[2].gl_Position.xyz) / 3;
+	float halfAPixel = (voxelGridSize / voxelRes) / 2;
+
 	for (int i=0; i < 3; i++)
 	{
-		gl_Position = vec4(gl_in[i].gl_Position.xyz * swizzle_mat, 1.0f);
+		vec3 transformedPos = gl_in[i].gl_Position.xyz * swizzle_mat;
+		vec3 outVec = normalize(gl_in[i].gl_Position.xyz - trigCenter);
+		transformedPos += outVec * halfAPixel;
+		gl_Position = vec4(transformedPos, 1.0);
 
 		voxelPosout = pos[i];	
 		TBNout = TBN[i];
