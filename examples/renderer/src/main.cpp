@@ -1,6 +1,6 @@
-#include "glrhi/core/ebo.hpp"
 #include <cstdint>
 #include <glrhi/renderer.hpp>
+#include <iostream>
 
 int main()
 {
@@ -60,8 +60,6 @@ int main()
 
     glrhi::ssbo tempVoxels(sizeof(uint32_t) * 4 * resolution * resolution * resolution);
     GLuint clearColor = 0;
-    glClearNamedBufferData(tempVoxels.getID(), GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT, &clearColor);
-    tempVoxels.addBindingPoint(0);
 
     float settings[] = {size, resolution};
     glrhi::ubo voxelSettings(sizeof(float)*2, settings);
@@ -71,8 +69,6 @@ int main()
     glrhi::shader drawVoxels("../shaders/drawVoxels.vert", "../shaders/drawVoxels.frag", "../shaders/drawVoxels.geom");
     glrhi::compute convertVoxels("../shaders/convertVoxels.comp");
 
-    renderer.getCamera().position = glm::vec3(0.0f);
-
     glViewport(0, 0, resolution, resolution);
     glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
     float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
@@ -80,11 +76,14 @@ int main()
     voxelization.use();
     voxelCam.bind();
     glDisable(GL_CULL_FACE);
+    glClearNamedBufferData(tempVoxels.getID(), GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT, &clearColor);
+    tempVoxels.addBindingPoint(0);
     scene.drawModels(voxelization);
-    glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_TEXTURE_FETCH_BARRIER_BIT);
-    convertVoxels.dispatch(resolution, resolution, resolution);
+    glMemoryBarrier(GL_ALL_BARRIER_BITS);
+    convertVoxels.dispatch(resolution / 4, resolution / 2, resolution / 4);
     glEnable(GL_CULL_FACE);
     glViewport(0, 0, 1280, 720);
+
     // Voxelization end
 
     while (renderer.running()) {
@@ -92,7 +91,9 @@ int main()
         renderer.getInput();
 
         dbgcam.apply(renderer.getCamera(), renderer.getWindow(), renderer.deltaTime());
-        
+
+        std::cout << renderer.deltaTime() << '\n';
+
         glBindTextureUnit(8, voxelTex);
         renderer.gBufferPass(scene);
         renderer.lightingPass(scene);

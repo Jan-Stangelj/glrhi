@@ -58,7 +58,7 @@ namespace glrhi {
 
         m_gBuffer.resoult.bindImage(0, 0);
 
-        m_lightingShader.dispatch(m_width, m_height, 1);
+        m_lightingShader.dispatch(m_width / 8, m_height / 4, 1);
     }
 
     void renderer::renderResoult() {

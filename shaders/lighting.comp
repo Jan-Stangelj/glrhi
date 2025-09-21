@@ -1,6 +1,6 @@
 #version 460 core
 
-layout (local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
+layout (local_size_x = 8, local_size_y = 4, local_size_z = 1) in;
 
 struct light {
     vec4 position;
@@ -45,8 +45,8 @@ vec3 calcLight(vec3 albedo, float roughness, float metallic, vec3 normal, vec3 r
 void main() {
     vec2 texUV = vec2(0.0);
     ivec2 texelCoord = ivec2(gl_GlobalInvocationID.xy);
-    texUV.x = float(texelCoord.x)/(gl_NumWorkGroups.x);
-    texUV.y = float(texelCoord.y)/(gl_NumWorkGroups.y);
+    texUV.x = float(texelCoord.x)/(gl_NumWorkGroups.x * gl_WorkGroupSize.x);
+    texUV.y = float(texelCoord.y)/(gl_NumWorkGroups.y * gl_WorkGroupSize.y);
 
     vec4 normalRoughness = texture(u_normalRoughness, texUV);
     vec4 emissionMetallic = texture(u_emissionMetallic, texUV);

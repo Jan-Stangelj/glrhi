@@ -12,9 +12,6 @@
 
 #include "utils/timer.hpp"
 
-#include <vector>
-#include <filesystem>
-
 namespace glrhi {
     class renderer {
     public:
