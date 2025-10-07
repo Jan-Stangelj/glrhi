@@ -25,6 +25,7 @@ layout (std430, binding = 0) readonly buffer lights {
     vec4 sunDir;
     vec4 sunColor;
     float sunStrenght;
+    float sunAperture;
 
     light inLights[64];
 };
@@ -63,8 +64,8 @@ void main() {
     float stepSize  = voxelSize;
     int maxSteps    = int(voxelGridSize / stepSize);
 
-    vec3 rayPos = position + normal * voxelSize;
-    float visibility = 1.0;
+    vec3 rayPos = position + normal * voxelSize * 1.5;
+    float occlusion = 0.0f;
 
     if (dot(normalize(sunDir.xyz), normal) > 0) {
 
@@ -74,20 +75,22 @@ void main() {
             if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0))))
                 break;
 
-            vec4 voxelSample = texture(voxels, uvw);
+            float diameter = 2.0 * abs(length(rayPos - position)) * tan(radians(sunAperture) / 2.0);
 
-            visibility *= (1.0 - voxelSample.a);
+            float lod = log2(diameter / voxelSize);
 
-            if (visibility <= 0.01) {
-                visibility = 0.00;
+            vec4 voxelSample = textureLod(voxels, uvw, lod);
+
+            occlusion += (1.0 - occlusion) * voxelSample.a * 2;
+
+            if (occlusion >= 1.0)
                 break;
-            }
 
             rayPos += sunDir.xyz * stepSize;
         }
     }
 
-    resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position) * visibility;
+    resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position) * clamp(1.0 - occlusion, 0.0, 1.0);
 
     // Point lights
 	for (int i = 0; i < u_numLights; i++) {
@@ -98,19 +101,15 @@ void main() {
 		float attenuation = l.strenght / pow(distance, distance);
         lightDir = normalize(lightDir);
 
-        // Return if too far
-        if (attenuation < 0.01)
-            continue;
-
         // Return if facing away
         if (dot(lightDir, normal) <= 0.0)
             continue;
 
         // Shadows
-        int maxSteps    = int(ceil(distance / stepSize));
+        int maxSteps = int(ceil(distance / stepSize));
 
         vec3 rayPos = position + normal * voxelSize;
-        float visibility = 1.0;
+        float occlusion = 0.0;
 
         for (int i = 0; i < maxSteps; i++) {
             vec3 uvw = (rayPos + voxelGridSize * 0.5) / voxelGridSize;
@@ -120,20 +119,20 @@ void main() {
 
             vec4 voxelSample = texture(voxels, uvw);
 
-            visibility *= (1.0 - voxelSample.a);
+            occlusion += voxelSample.a;
 
-            if (visibility <= 0.1) {
-                visibility = 0.01;
+            if (occlusion >= 1.0)
                 break;
-            }
 
             rayPos += lightDir * stepSize;
         }
 
-        resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * attenuation, lightDir, position) * visibility;
+        resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * attenuation, lightDir, position) * clamp(1.0 - occlusion, 0.0, 1.0);
 	}
 
     resoult += emissionMetallic.xyz;
+
+    resoult += albedo * 0.01;
 
     if (position != vec3(0.0)) {
         imageStore(u_resoult, texelCoord, vec4(resoult, 1.0));

@@ -35,6 +35,7 @@ namespace glrhi {
         glm::vec4 sunDir = glm::vec4(0.5f, 1.0f, 0.5f, 1.0f);
         glm::vec4 sunColor = glm::vec4(1.0f);
         float sunStrenght = 5.0f;
+        float sunAperture = 5.0f;
 
     private:
 

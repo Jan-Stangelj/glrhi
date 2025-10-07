@@ -43,6 +43,7 @@ namespace glrhi {
         m_lightBuffer.sendData(0, sizeof(glm::vec4), &sunDir);
         m_lightBuffer.sendData(sizeof(glm::vec4), sizeof(glm::vec4), &sunColor);
         m_lightBuffer.sendData(2*sizeof(glm::vec4), sizeof(float), &sunStrenght);
+        m_lightBuffer.sendData(2*sizeof(glm::vec4) + sizeof(float), sizeof(float), &sunAperture);
 
         unsigned int i = 1;
         for (auto const& light : m_lights) {

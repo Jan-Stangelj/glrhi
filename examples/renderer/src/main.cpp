@@ -1,3 +1,5 @@
+#include "glrhi/core/ebo.hpp"
+#include <cmath>
 #include <cstdint>
 #include <glrhi/renderer.hpp>
 #include <iostream>
@@ -10,19 +12,15 @@ int main()
     unsigned int sponza = scene.addModel("../examples/renderer/sponza/Sponza.gltf");
     scene.getModel(sponza).size = glm::vec3(0.01f);
 
-    unsigned int helmet = scene.addModel("../examples/renderer/helmet/DamagedHelmet.gltf");
-    scene.getModel(helmet).size = glm::vec3(0.5f);
-    scene.getModel(helmet).position = glm::vec3(0.0f, 1.5f, 0.0f);
-    scene.getModel(helmet).rotation = glm::vec3(90.0f, 0.0f, 0.0f);
+    //unsigned int helmet = scene.addModel("../examples/renderer/helmet/DamagedHelmet.gltf");
+    //scene.getModel(helmet).size = glm::vec3(0.5f);
+    //scene.getModel(helmet).position = glm::vec3(0.0f, 1.5f, 0.0f);
+    //scene.getModel(helmet).rotation = glm::vec3(90.0f, 0.0f, 0.0f);
 
     scene.sunDir = glm::vec4(0.2f, 1.0f, 0.2f, 1.0f);
     scene.sunColor = glm::vec4(1.0f);
     scene.sunStrenght = 15.0f;
-
-    unsigned int light = scene.addLight();
-    scene.getLight(light).color = glm::vec4(1.0f);
-    scene.getLight(light).position = glm::vec4(0, 4, 0, 0);
-    scene.getLight(light).strength = 150.0f;
+    scene.sunAperture = 2.5f;
 
     scene.setSkybox("../examples/renderer/skybox.hdr");
 
@@ -46,7 +44,7 @@ int main()
     unsigned int voxelTex = 0;
     glCreateTextures(GL_TEXTURE_3D, 1, &voxelTex);
 
-    glTextureParameteri(voxelTex, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTextureParameteri(voxelTex, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTextureParameteri(voxelTex, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // Texture wrapping options
@@ -56,7 +54,7 @@ int main()
     float borderColor[] = {0.0f, 0.0f, 0.0f, 0.0f};
     glTextureParameterfv(voxelTex, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-    glTextureStorage3D(voxelTex, 1, GL_RGBA8, resolution, resolution, resolution);
+    glTextureStorage3D(voxelTex, log2(resolution), GL_RGBA8, resolution, resolution, resolution);
 
     glrhi::ssbo tempVoxels(sizeof(uint32_t) * 4 * resolution * resolution * resolution);
     GLuint clearColor = 0;
@@ -81,6 +79,7 @@ int main()
     scene.drawModels(voxelization);
     glMemoryBarrier(GL_ALL_BARRIER_BITS);
     convertVoxels.dispatch(resolution / 4, resolution / 2, resolution / 4);
+    glGenerateTextureMipmap(voxelTex);
     glEnable(GL_CULL_FACE);
     glViewport(0, 0, 1280, 720);
 
