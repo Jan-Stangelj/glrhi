@@ -64,7 +64,7 @@ void main() {
     float stepSize  = voxelSize;
     int maxSteps    = int(voxelGridSize / stepSize);
 
-    vec3 rayPos = position + normal * voxelSize * 1.5;
+    vec3 rayPos = position + normal * voxelSize * 1.25 + normalize(sunDir.xyz) * voxelSize * 1.25;
     float occlusion = 0.0f;
 
     if (dot(normalize(sunDir.xyz), normal) > 0) {

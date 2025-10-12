@@ -1,4 +1,5 @@
 #include "glm/fwd.hpp"
+#include "glm/geometric.hpp"
 #include "glrhi/core/ebo.hpp"
 #include <filesystem>
 #include <glrhi/renderer/scene.hpp>
