@@ -28,7 +28,7 @@ int main()
 
     // Voxel settings
     float size = 35.0f;
-    float resolution = 512.0f;
+    float resolution = 256.0f;
 
     // Voxelization begin
     glrhi::camera voxelCam;
@@ -56,7 +56,7 @@ int main()
 
     glTextureStorage3D(voxelTex, log2(resolution), GL_RGBA8, resolution, resolution, resolution);
 
-    glrhi::ssbo tempVoxels(sizeof(uint32_t) * 4 * resolution * resolution * resolution);
+    glrhi::ssbo tempVoxels(sizeof(uint32_t) * resolution * resolution * resolution);
     GLuint clearColor = 0;
 
     float settings[] = {size, resolution};
