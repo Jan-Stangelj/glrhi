@@ -45,7 +45,7 @@ void main()
 
     vec4 albedoOut = texture(u_albedo, texUV) * hasAlbedo + albedo * (1-hasAlbedo);
     vec4 armOut = texture(u_arm, texUV) * hasARM + arm * (1-hasARM);
-    vec4 emissionOut = texture(u_emission, texUV) * hasEmission + emission * (1-hasARM);
+    vec4 emissionOut = texture(u_emission, texUV) * hasEmission + emission * (1-hasEmission);
 
     g_albedo = albedoOut.xyz;
 

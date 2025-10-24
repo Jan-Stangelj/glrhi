@@ -34,6 +34,7 @@ void main() {
     ivec3 voxelCoord = ivec3(gl_GlobalInvocationID.xyz);
 
     uint voxelCoord1D = uint(voxelCoord.x) + uint(voxelCoord.y) * uint(voxelRes) + uint(voxelCoord.z) * uint(voxelRes) * uint(voxelRes);
+    voxelCoord1D *= 2;
 
     imageStore(voxelsOut, voxelCoord, vec4(uintToVec4(voxels[voxelCoord1D])));
 }

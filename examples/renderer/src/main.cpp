@@ -56,7 +56,7 @@ int main()
 
     glTextureStorage3D(voxelTex, log2(resolution), GL_RGBA8, resolution, resolution, resolution);
 
-    glrhi::ssbo tempVoxels(sizeof(uint32_t) * resolution * resolution * resolution);
+    glrhi::ssbo tempVoxels(2 * sizeof(uint32_t) * resolution * resolution * resolution);
     GLuint clearColor = 0;
 
     float settings[] = {size, resolution};

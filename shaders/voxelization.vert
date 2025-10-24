@@ -7,7 +7,7 @@ layout (location = 3) in vec3 a_tangent;
 
 out vec2 texUV;
 out vec3 pos;
-out mat3 TBN;
+out vec3 normal;
 
 layout (std140, binding=0) uniform cam {
     mat4 view;
@@ -23,9 +23,6 @@ void main() {
 
     texUV = vec2(a_texUV.x, a_texUV.y);
 
-    vec3 T = normalize(vec3(u_model * vec4(a_tangent, 0.0)));
-	vec3 N = normalize(vec3(u_model * vec4(a_normal, 0.0)));
-	vec3 B = cross(T, N);
-	TBN = mat3(T, B, N);
+    normal = a_normal;
 
 }

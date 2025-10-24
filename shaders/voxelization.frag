@@ -2,7 +2,7 @@
 
 in vec2 texUVout;
 in vec3 voxelPosout;
-in mat3 TBNout;
+in vec3 normalOut;
 
 layout (std140, binding=1) uniform mat {
     vec4 albedo;
@@ -57,24 +57,42 @@ void main()
     voxelCoord = clamp(voxelCoord, 0, int(voxelRes - 1));
 
     uint voxelCoord1D = uint(voxelCoord.x) + uint(voxelCoord.y) * uint(voxelRes) + uint(voxelCoord.z) * uint(voxelRes) * uint(voxelRes);
+    voxelCoord1D *= 2;
 
 
-    uint newValue = vec4ToUint(albedoOut);
-    uint previousValue = 0;
-    uint currentValue;
+    uint newAlbedo = vec4ToUint(albedoOut);
+    uint newNormal = vec4ToUint(vec4(normalOut, 1.0));
+
+    uint previousAlbedo = 0;
+    uint previousNormal = 0;
+
+    uint currentAlbedo, currentNormal;
     uint num = 0;
 
-    while((currentValue = atomicCompSwap(voxels[voxelCoord1D], previousValue, newValue)) 
-            != previousValue
-            && num < 4)
+
+    while(num < 4)
     {
-        previousValue = currentValue;
-        vec4 currentValueF = uintToVec4(currentValue);
+        currentAlbedo = atomicCompSwap(voxels[voxelCoord1D + 0], previousAlbedo, newAlbedo);
+        currentNormal = atomicCompSwap(voxels[voxelCoord1D + 1], previousNormal, newNormal);
 
-        vec4 avrageColor = (currentValueF + albedoOut) * 0.5;
+        if(currentAlbedo == previousAlbedo && currentNormal == previousNormal)
+            break;
 
-        newValue = vec4ToUint(avrageColor);
+        previousAlbedo = currentAlbedo;
+        previousNormal = currentNormal;
+
+        vec4 albedoF = uintToVec4(currentAlbedo);
+        albedoF.rgb *= albedoF.a;
+        vec4 normalF = uintToVec4(currentNormal);
+
+
+        vec4 avgAlbedo = (albedoF + albedoOut) * 0.5;
+        vec4 avgNormal = (normalF + vec4(normalOut, 1.0)) * 0.5;
+
+        newAlbedo = vec4ToUint(avgAlbedo);
+        newNormal = vec4ToUint(avgNormal);
 
         ++num;
     }
+
 }

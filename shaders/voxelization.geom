@@ -9,9 +9,9 @@ layout (std140, binding = 2) uniform voxelSettings {
 };
 
 in vec3 pos[];
-in mat3 TBN[];
+in vec3 normal[];
 in vec2 texUV[];
-out mat3 TBNout;
+out vec3 normalOut;
 out vec2 texUVout;
 out vec3 voxelPosout; // world coordinates scaled to clip space (-1...1)
 
@@ -56,7 +56,7 @@ void main()
 		gl_Position = vec4(transformedPos, 1.0);
 
 		voxelPosout = pos[i];	
-		TBNout = TBN[i];
+		normalOut = normal[i];
 		texUVout = texUV[i];
 
 		EmitVertex();
