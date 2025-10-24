@@ -19,7 +19,7 @@ int main()
 
     scene.sunDir = glm::vec4(0.35f, 1.0f, 0.35f, 1.0f);
     scene.sunColor = glm::vec4(1.0f);
-    scene.sunStrenght = 10.0f;
+    scene.sunStrenght = 13.0f;
     scene.sunAperture = 5.0f;
 
     scene.setSkybox("../examples/renderer/skybox.hdr");
@@ -28,7 +28,7 @@ int main()
 
     // Voxel settings
     float size = 35.0f;
-    float resolution = 256.0f;
+    float resolution = 512.0f;
 
     // Voxelization begin
     glrhi::camera voxelCam;

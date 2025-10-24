@@ -43,6 +43,37 @@ layout(binding = 8) uniform sampler3D voxels;
 
 vec3 calcLight(vec3 albedo, float roughness, float metallic, vec3 normal, vec3 radiance, vec3 lightDir, vec3 fragPos);
 
+float coneTraceShadow(vec3 startPosition, vec3 direction, float coneAperture, float maxDistance) {
+    direction = normalize(direction);
+
+    float voxelSize = voxelGridSize / voxelRes;
+    
+    float distance = voxelSize;
+    float occlusion = 0.0f;
+
+    float coneIncline = tan(radians(coneAperture) / 2.0);
+
+    while (occlusion < 1.0f && distance <= maxDistance) {
+        vec3 currentPos = startPosition + direction * distance;
+
+        vec3 uvw = (currentPos + voxelGridSize * 0.5) / voxelGridSize;
+
+        if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0))))
+            break;
+
+        float diameter = 2.0 * distance * coneIncline;
+        float lod = log2(diameter / voxelSize);
+
+        vec4 voxelSample = textureLod(voxels, uvw, lod);
+
+        occlusion += (1.0 - occlusion) *  voxelSample.a * 5;
+
+        distance += voxelSize;
+    }
+
+    return clamp(1.0 - occlusion, 0.0, 1.0);
+}
+
 void main() {
     vec2 texUV = vec2(0.0);
     ivec2 texelCoord = ivec2(gl_GlobalInvocationID.xy);
@@ -59,38 +90,12 @@ void main() {
 
     vec3 resoult = vec3(0.0);
 
-    // sun
     float voxelSize = voxelGridSize / voxelRes;
-    float stepSize  = voxelSize;
-    int maxSteps    = int(voxelGridSize / stepSize);
 
-    vec3 rayPos = position + normal * voxelSize * 1.25 + normalize(sunDir.xyz) * voxelSize * 1.25;
-    float occlusion = 0.0f;
-
+    // sun
     if (dot(normalize(sunDir.xyz), normal) > 0) {
-
-        for (int i = 0; i < maxSteps; i++) {   
-            vec3 uvw = (rayPos + voxelGridSize * 0.5) / voxelGridSize;
-
-            if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0))))
-                break;
-
-            float diameter = 2.0 * abs(length(rayPos - position)) * tan(radians(sunAperture) / 2.0);
-
-            float lod = log2(diameter / voxelSize);
-
-            vec4 voxelSample = textureLod(voxels, uvw, lod);
-
-            occlusion += (1.0 - occlusion) *  voxelSample.a * 5;
-
-            if (occlusion >= 1.0)
-                break;
-
-            rayPos += sunDir.xyz * stepSize;
-        }
+        resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position) * coneTraceShadow(position + normal * voxelSize, sunDir.xyz, sunAperture, voxelGridSize);
     }
-
-    resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position) * clamp(1.0 - occlusion, 0.0, 1.0);
 
     // Point lights
 	for (int i = 0; i < u_numLights; i++) {
@@ -105,32 +110,12 @@ void main() {
         if (dot(lightDir, normal) <= 0.0)
             continue;
 
-        // Shadows
-        int maxSteps = int(ceil(distance / stepSize));
-
-        vec3 rayPos = position + normal * voxelSize;
-        float occlusion = 0.0;
-
-        for (int i = 0; i < maxSteps; i++) {
-            vec3 uvw = (rayPos + voxelGridSize * 0.5) / voxelGridSize;
-
-            if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0))))
-                break;
-
-            vec4 voxelSample = texture(voxels, uvw);
-
-            occlusion += voxelSample.a;
-
-            if (occlusion >= 1.0)
-                break;
-
-            rayPos += lightDir * stepSize;
-        }
-
-        resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * attenuation, lightDir, position) * clamp(1.0 - occlusion, 0.0, 1.0);
+        resoult += calcLight(albedo, arm.g, arm.b, normal, l.color.xyz * attenuation, lightDir, position);
 	}
 
     resoult += emissionMetallic.xyz;
+
+    resoult += albedo * 0.005;
 
     if (position != vec3(0.0)) {
         imageStore(u_resoult, texelCoord, vec4(resoult, 1.0));

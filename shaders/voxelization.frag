@@ -52,13 +52,11 @@ void main()
         discard;
 
     vec4 albedoOut = texture(u_albedo, texUVout) * hasAlbedo + albedo * (1-hasAlbedo);
-    albedoOut = vec4(albedoOut.rgb, 1.0);
+
     ivec3 voxelCoord = ivec3(floor(clamp((voxelPosout + vec3(voxelGridSize / 2))/voxelGridSize, 0.0f, 1.0f) * voxelRes));
     voxelCoord = clamp(voxelCoord, 0, int(voxelRes - 1));
 
     uint voxelCoord1D = uint(voxelCoord.x) + uint(voxelCoord.y) * uint(voxelRes) + uint(voxelCoord.z) * uint(voxelRes) * uint(voxelRes);
-
-    voxels[voxelCoord1D] = vec4ToUint(albedoOut);
 
     uint newVal = vec4ToUint(albedoOut);
     uint prevStoredVal = 0;
