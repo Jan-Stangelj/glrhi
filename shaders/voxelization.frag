@@ -43,7 +43,7 @@ uint vec4ToUint(vec4 x) {
         ((uintVec.r << uint(24)) & uint(0xFF000000)) | 
         ((uintVec.g << uint(16)) & uint(0x00FF0000)) | 
         ((uintVec.b << uint(8)) & uint(0x0000FF00)) | 
-        ((uintVec.g << uint(0)) & uint(0x000000FF)));
+        ((uintVec.a << uint(0)) & uint(0x000000FF)));
 }
 
 void main() 
@@ -58,22 +58,23 @@ void main()
 
     uint voxelCoord1D = uint(voxelCoord.x) + uint(voxelCoord.y) * uint(voxelRes) + uint(voxelCoord.z) * uint(voxelRes) * uint(voxelRes);
 
-    uint newVal = vec4ToUint(albedoOut);
-    uint prevStoredVal = 0;
-    uint curStoredVal;
-    uint numIterations = 0;
 
-    while((curStoredVal = atomicCompSwap(voxels[voxelCoord1D], prevStoredVal, newVal)) 
-            != prevStoredVal
-            && numIterations < 255)
+    uint newValue = vec4ToUint(albedoOut);
+    uint previousValue = 0;
+    uint currentValue;
+    uint num = 0;
+
+    while((currentValue = atomicCompSwap(voxels[voxelCoord1D], previousValue, newValue)) 
+            != previousValue
+            && num < 4)
     {
-        prevStoredVal = curStoredVal;
-        vec4 rval = uintToVec4(curStoredVal);
-        rval.rgb = (rval.rgb * rval.a); // Denormalize
-        vec4 curValF = rval + albedoOut;    // Add
-        curValF.rgb /= curValF.a;       // Renormalize
-        newVal = vec4ToUint(curValF);
+        previousValue = currentValue;
+        vec4 currentValueF = uintToVec4(currentValue);
 
-        ++numIterations;
+        vec4 avrageColor = (currentValueF + albedoOut) * 0.5;
+
+        newValue = vec4ToUint(avrageColor);
+
+        ++num;
     }
 }

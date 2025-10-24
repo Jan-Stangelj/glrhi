@@ -66,7 +66,7 @@ float coneTraceShadow(vec3 startPosition, vec3 direction, float coneAperture, fl
 
         vec4 voxelSample = textureLod(voxels, uvw, lod);
 
-        occlusion += (1.0 - occlusion) *  voxelSample.a * 5;
+        occlusion += (1.0 - occlusion) *  voxelSample.a * 2;
 
         distance += voxelSize;
     }
@@ -115,7 +115,7 @@ void main() {
 
     resoult += emissionMetallic.xyz;
 
-    resoult += albedo * 0.005;
+    resoult += albedo * 0.01;
 
     if (position != vec3(0.0)) {
         imageStore(u_resoult, texelCoord, vec4(resoult, 1.0));

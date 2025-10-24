@@ -17,10 +17,10 @@ int main()
     scene.getModel(helmet).position = glm::vec3(0.0f, 1.5f, 0.0f);
     scene.getModel(helmet).rotation = glm::vec3(90.0f, 0.0f, 0.0f);
 
-    scene.sunDir = glm::vec4(0.35f, 1.0f, 0.35f, 1.0f);
+    scene.sunDir = glm::vec4(0.25f, 1.0f, 0.25f, 1.0f);
     scene.sunColor = glm::vec4(1.0f);
-    scene.sunStrenght = 13.0f;
-    scene.sunAperture = 5.0f;
+    scene.sunStrenght = 15.0f;
+    scene.sunAperture = 3.0f;
 
     scene.setSkybox("../examples/renderer/skybox.hdr");
 
@@ -67,22 +67,6 @@ int main()
     glrhi::shader drawVoxels("../shaders/drawVoxels.vert", "../shaders/drawVoxels.frag", "../shaders/drawVoxels.geom");
     glrhi::compute convertVoxels("../shaders/convertVoxels.comp");
 
-    glViewport(0, 0, resolution, resolution);
-    glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
-    float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
-    glClearTexImage(voxelTex, 0, GL_RGBA, GL_BYTE, color);
-    voxelization.use();
-    voxelCam.bind();
-    glDisable(GL_CULL_FACE);
-    glClearNamedBufferData(tempVoxels.getID(), GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT, &clearColor);
-    tempVoxels.addBindingPoint(0);
-    scene.drawModels(voxelization);
-    glMemoryBarrier(GL_ALL_BARRIER_BITS);
-    convertVoxels.dispatch(resolution / 4, resolution / 2, resolution / 4);
-    glGenerateTextureMipmap(voxelTex);
-    glEnable(GL_CULL_FACE);
-    glViewport(0, 0, 1280, 720);
-
     // Voxelization end
 
     while (renderer.running()) {
@@ -93,12 +77,37 @@ int main()
 
         std::cout << renderer.deltaTime() << '\n';
 
-        glBindTextureUnit(8, voxelTex);
-        renderer.gBufferPass(scene);
-        renderer.lightingPass(scene);
-        renderer.renderResoult();
+        glViewport(0, 0, resolution, resolution);
 
-        /*glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+
+        float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
+        glClearTexImage(voxelTex, 0, GL_RGBA, GL_BYTE, color);
+
+        voxelization.use();
+        voxelCam.bind();
+
+        glDisable(GL_CULL_FACE);
+
+        glClearNamedBufferData(tempVoxels.getID(), GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT, &clearColor);
+
+        tempVoxels.addBindingPoint(0);
+        scene.drawModels(voxelization);
+        glMemoryBarrier(GL_ALL_BARRIER_BITS);
+
+        convertVoxels.dispatch(resolution / 4, resolution / 2, resolution / 4);
+
+        glGenerateTextureMipmap(voxelTex);
+
+        glEnable(GL_CULL_FACE);
+        glViewport(0, 0, 1280, 720);
+
+        //glBindTextureUnit(8, voxelTex);
+        //renderer.gBufferPass(scene);
+        //renderer.lightingPass(scene);
+        //renderer.renderResoult();
+
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         renderer.getCamera().bind();
@@ -108,7 +117,7 @@ int main()
         drawVoxels.use();
         glDrawArrays(GL_POINTS, 0, resolution * resolution * resolution);
 
-        renderer.getWindow().swapBuffers();*/
+        renderer.getWindow().swapBuffers();
     }
 
     return 0;
