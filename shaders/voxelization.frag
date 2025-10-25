@@ -90,7 +90,7 @@ void main()
         vec4 avgNormal = (normalF + vec4(normalOut, 1.0)) * 0.5;
 
         newAlbedo = vec4ToUint(avgAlbedo);
-        newNormal = vec4ToUint(normalize(avgNormal));
+        newNormal = vec4ToUint(avgNormal);
 
         ++num;
     }

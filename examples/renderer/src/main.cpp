@@ -41,20 +41,34 @@ int main()
     voxelCam.height = size;
     voxelCam.uploadData();
 
-    unsigned int voxelTex = 0;
-    glCreateTextures(GL_TEXTURE_3D, 1, &voxelTex);
+    unsigned int voxelAlbedoTex = 0;
+    glCreateTextures(GL_TEXTURE_3D, 1, &voxelAlbedoTex);
 
-    glTextureParameteri(voxelTex, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTextureParameteri(voxelTex, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTextureParameteri(voxelAlbedoTex, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTextureParameteri(voxelAlbedoTex, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // Texture wrapping options
-    glTextureParameteri(voxelTex, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-    glTextureParameteri(voxelTex, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-    glTextureParameteri(voxelTex, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
+    glTextureParameteri(voxelAlbedoTex, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTextureParameteri(voxelAlbedoTex, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    glTextureParameteri(voxelAlbedoTex, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
     float borderColor[] = {0.0f, 0.0f, 0.0f, 0.0f};
-    glTextureParameterfv(voxelTex, GL_TEXTURE_BORDER_COLOR, borderColor);
+    glTextureParameterfv(voxelAlbedoTex, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-    glTextureStorage3D(voxelTex, log2(resolution), GL_RGBA8, resolution, resolution, resolution);
+    glTextureStorage3D(voxelAlbedoTex, log2(resolution), GL_RGBA8, resolution, resolution, resolution);
+
+    unsigned int voxelLightingTex = 0;
+    glCreateTextures(GL_TEXTURE_3D, 1, &voxelLightingTex);
+
+    glTextureParameteri(voxelLightingTex, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTextureParameteri(voxelLightingTex, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // Texture wrapping options
+    glTextureParameteri(voxelLightingTex, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTextureParameteri(voxelLightingTex, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    glTextureParameteri(voxelLightingTex, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
+    glTextureParameterfv(voxelLightingTex, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+    glTextureStorage3D(voxelLightingTex, log2(resolution), GL_RGBA8, resolution, resolution, resolution);
 
     glrhi::ssbo tempVoxels(2 * sizeof(uint32_t) * resolution * resolution * resolution);
     GLuint clearColor = 0;
@@ -65,14 +79,18 @@ int main()
 
     glrhi::shader voxelization("../shaders/voxelization.vert", "../shaders/voxelization.frag", "../shaders/voxelization.geom");
     glrhi::shader drawVoxels("../shaders/drawVoxels.vert", "../shaders/drawVoxels.frag", "../shaders/drawVoxels.geom");
+
     glrhi::compute convertVoxels("../shaders/convertVoxels.comp");
+    glrhi::compute injectRadiance("../shaders/injectRadiance.comp");
+
+    scene.updateLightBuffer(injectRadiance);
 
     glViewport(0, 0, resolution, resolution);
 
-    glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+    glBindImageTexture(0, voxelAlbedoTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
 
     float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
-    glClearTexImage(voxelTex, 0, GL_RGBA, GL_BYTE, color);
+    glClearTexImage(voxelAlbedoTex, 0, GL_RGBA, GL_BYTE, color);
 
     voxelization.use();
     voxelCam.bind();
@@ -87,7 +105,13 @@ int main()
 
     convertVoxels.dispatch(resolution / 4, resolution / 2, resolution / 4);
 
-    glGenerateTextureMipmap(voxelTex);
+    glGenerateTextureMipmap(voxelAlbedoTex);
+    glMemoryBarrier(GL_ALL_BARRIER_BITS);
+
+    glBindTextureUnit(8, voxelAlbedoTex);
+    glBindImageTexture(0, voxelLightingTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+    glClearTexImage(voxelLightingTex, 0, GL_RGBA, GL_BYTE, color);
+    injectRadiance.dispatch(resolution / 4, resolution / 2, resolution / 4);
 
     glEnable(GL_CULL_FACE);
     glViewport(0, 0, 1280, 720);
@@ -102,22 +126,22 @@ int main()
 
         std::cout << renderer.deltaTime() << '\n';
 
-        glBindTextureUnit(8, voxelTex);
-        renderer.gBufferPass(scene);
-        renderer.lightingPass(scene);
-        renderer.renderResoult();
+        //glBindTextureUnit(8, voxelAlbedoTex);
+        //renderer.gBufferPass(scene);
+        //renderer.lightingPass(scene);
+        //renderer.renderResoult();
 
-        /*glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         renderer.getCamera().bind();
         renderer.getCamera().uploadData();
 
-        glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+        glBindImageTexture(0, voxelLightingTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
         drawVoxels.use();
         glDrawArrays(GL_POINTS, 0, resolution * resolution * resolution);
 
-        renderer.getWindow().swapBuffers();*/
+        renderer.getWindow().swapBuffers();
     }
 
     return 0;

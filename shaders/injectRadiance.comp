@@ -1,0 +1,70 @@
+#version 460 core
+
+layout (local_size_x = 4, local_size_y = 2, local_size_z = 4) in;
+
+layout(binding = 0, rgba8) uniform writeonly image3D voxelsOut;
+
+layout(binding = 8) uniform sampler3D voxelsAlbedo;
+
+layout (std140, binding = 2) uniform voxelSettings {
+    float voxelGridSize;
+    float voxelRes;
+};
+
+struct light {
+    vec4 position;
+    vec4 color;
+    float strenght;
+};
+
+layout (std430, binding = 0) readonly buffer lights {
+    vec4 sunDir;
+    vec4 sunColor;
+    float sunStrenght;
+    float sunAperture;
+
+    light inLights[64];
+};
+
+layout (std430, binding = 1) buffer voxelIn {
+    uint[] voxelsRaw;
+};
+
+vec4 uintToVec4(uint x) {
+    float r = float((x >> uint(24)) & uint(0x000000FF)) / 255.0;
+    float g = float((x >> uint(16)) & uint(0x000000FF)) / 255.0;
+    float b = float((x >> uint(8)) & uint(0x000000FF)) / 255.0;
+    float a = float((x >> uint(0)) & uint(0x000000FF)) / 255.0;
+    return vec4(r, g, b, a);
+}
+
+uint vec4ToUint(vec4 x) {
+    uvec4 uintVec = uvec4(floor(x * 255.0));
+    return uint(
+        ((uintVec.r << uint(24)) & uint(0xFF000000)) | 
+        ((uintVec.g << uint(16)) & uint(0x00FF0000)) | 
+        ((uintVec.b << uint(8)) & uint(0x0000FF00)) | 
+        ((uintVec.a << uint(0)) & uint(0x000000FF)));
+}
+
+void main() {
+    ivec3 voxelCoord = ivec3(gl_GlobalInvocationID.xyz);
+
+    uint voxelCoord1D = uint(voxelCoord.x) + uint(voxelCoord.y) * uint(voxelRes) + uint(voxelCoord.z) * uint(voxelRes) * uint(voxelRes);
+    voxelCoord1D *= 2;
+
+    float voxelSize = voxelGridSize / voxelRes;
+    vec3 position = vec3((voxelGridSize * -0.5f) + voxelCoord.x * voxelSize + voxelSize * 0.5, (voxelGridSize * -0.5f) + voxelCoord.y * voxelSize + voxelSize * 0.5, (voxelGridSize * -0.5f) + voxelCoord.z * voxelSize + voxelSize * 0.5);
+    vec3 uvw = (position + vec3(voxelGridSize * 0.5f)) / voxelGridSize;
+
+    vec4 albedo = texture(voxelsAlbedo, uvw);
+
+    vec3 normal = normalize(uintToVec4(voxelsRaw[voxelCoord1D + 1]).xyz * 2.0 - 1.0);
+
+    vec4 resoult = vec4(0.0);
+    resoult.a = albedo.a;
+
+    resoult.rgb = albedo.rgb * clamp(dot(normal, sunDir.xyz), 0.1, 1.0);
+
+    imageStore(voxelsOut, voxelCoord, resoult);
+}

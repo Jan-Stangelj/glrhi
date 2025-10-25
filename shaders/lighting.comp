@@ -29,7 +29,6 @@ layout (std430, binding = 0) readonly buffer lights {
 
     light inLights[64];
 };
-uniform int u_numLights;
 
 layout(rgba16f, binding = 0) uniform image2D u_resoult;
 
@@ -98,7 +97,7 @@ void main() {
     }
 
     // Point lights
-	for (int i = 0; i < u_numLights; i++) {
+	for (int i = 0; i < 64; i++) {
 		light l = inLights[i];
 
 		vec3 lightDir = l.position.xyz - position;
@@ -114,8 +113,6 @@ void main() {
 	}
 
     resoult += emissionMetallic.xyz;
-
-    resoult += albedo * 0.01;
 
     if (position != vec3(0.0)) {
         imageStore(u_resoult, texelCoord, vec4(resoult, 1.0));
