@@ -30,6 +30,21 @@ uint vec4ToUint(vec4 x) {
         ((uintVec.a << uint(0)) & uint(0x000000FF)));
 }
 
+vec3 uintToVec3(uint x) {
+    float r = float((x >> uint(21)) & uint(0x000007FF)) / 2048.0;
+    float g = float((x >> uint(10)) & uint(0x000007FF)) / 2048.0;
+    float b = float((x >> uint(0)) & uint(0x000003FF)) / 1024.0;
+    return vec3(r, g, b);
+}
+
+uint vec3ToUint(vec3 x) {
+    uvec3 uintVec = uvec3(floor(x.x * 2048.0), floor(x.y * 2048.0), floor(x.z * 1024.0));
+    return uint(
+        ((uintVec.r << uint(21)) & uint(0xFFE00000)) | 
+        ((uintVec.g << uint(10)) & uint(0x001FFC00)) | 
+        ((uintVec.b << uint(0)) & uint(0x000003FF)));
+}
+
 void main() {
     ivec3 voxelCoord = ivec3(gl_GlobalInvocationID.xyz);
 

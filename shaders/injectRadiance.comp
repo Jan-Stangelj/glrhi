@@ -2,7 +2,7 @@
 
 layout (local_size_x = 4, local_size_y = 2, local_size_z = 4) in;
 
-layout(binding = 0, rgba8) uniform writeonly image3D voxelsOut;
+layout(binding = 0, rgba16f) uniform writeonly image3D voxelsOut;
 
 layout(binding = 8) uniform sampler3D voxelsAlbedo;
 
@@ -47,6 +47,52 @@ uint vec4ToUint(vec4 x) {
         ((uintVec.a << uint(0)) & uint(0x000000FF)));
 }
 
+vec3 uintToVec3(uint x) {
+    float r = float((x >> uint(21)) & uint(0x000007FF)) / 2047.0;
+    float g = float((x >> uint(10)) & uint(0x000007FF)) / 2047.0;
+    float b = float((x >> uint(0)) & uint(0x000003FF)) / 1023.0;
+    return vec3(r, g, b);
+}
+
+uint vec3ToUint(vec3 x) {
+    uvec3 uintVec = uvec3(floor(x.x * 2047.0), floor(x.y * 2047.0), floor(x.z * 1023.0));
+    return uint(
+        ((uintVec.r << uint(21)) & uint(0xFFE00000)) | 
+        ((uintVec.g << uint(10)) & uint(0x001FFC00)) | 
+        ((uintVec.b << uint(0)) & uint(0x000003FF)));
+}
+
+float coneTraceShadow(vec3 startPosition, vec3 direction, float coneAperture, float maxDistance) {
+    direction = normalize(direction);
+
+    float voxelSize = voxelGridSize / voxelRes;
+    
+    float distance = voxelSize;
+    float occlusion = 0.0f;
+
+    float coneIncline = tan(radians(coneAperture) / 2.0);
+
+    while (occlusion < 1.0f && distance <= maxDistance) {
+        vec3 currentPos = startPosition + direction * distance;
+
+        vec3 uvw = (currentPos + voxelGridSize * 0.5) / voxelGridSize;
+
+        if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0))))
+            break;
+
+        float diameter = 2.0 * distance * coneIncline;
+        float lod = log2(diameter / voxelSize);
+
+        vec4 voxelSample = textureLod(voxelsAlbedo, uvw, lod);
+
+        occlusion += (1.0 - occlusion) *  voxelSample.a * 2;
+
+        distance += voxelSize;
+    }
+
+    return clamp(1.0 - occlusion, 0.0, 1.0);
+}
+
 void main() {
     ivec3 voxelCoord = ivec3(gl_GlobalInvocationID.xyz);
 
@@ -57,14 +103,17 @@ void main() {
     vec3 position = vec3((voxelGridSize * -0.5f) + voxelCoord.x * voxelSize + voxelSize * 0.5, (voxelGridSize * -0.5f) + voxelCoord.y * voxelSize + voxelSize * 0.5, (voxelGridSize * -0.5f) + voxelCoord.z * voxelSize + voxelSize * 0.5);
     vec3 uvw = (position + vec3(voxelGridSize * 0.5f)) / voxelGridSize;
 
-    vec4 albedo = texture(voxelsAlbedo, uvw);
+    vec4 albedo = uintToVec4(voxelsRaw[voxelCoord1D]);
 
-    vec3 normal = normalize(uintToVec4(voxelsRaw[voxelCoord1D + 1]).xyz * 2.0 - 1.0);
+    if (albedo.a == 0.0)
+        return;
+
+    vec3 normal = normalize(uintToVec3(voxelsRaw[voxelCoord1D + 1]) * 2.0 - 1.0);
 
     vec4 resoult = vec4(0.0);
-    resoult.a = albedo.a;
+    resoult.a = 1.0;
 
-    resoult.rgb = albedo.rgb * clamp(dot(normal, sunDir.xyz), 0.1, 1.0);
+    resoult.rgb += albedo.rgb * sunColor.rgb * sunStrenght * coneTraceShadow(position + normal * voxelSize, normalize(sunDir.xyz), sunAperture, voxelGridSize);
 
     imageStore(voxelsOut, voxelCoord, resoult);
 }

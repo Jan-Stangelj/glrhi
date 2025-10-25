@@ -46,12 +46,27 @@ uint vec4ToUint(vec4 x) {
         ((uintVec.a << uint(0)) & uint(0x000000FF)));
 }
 
+vec3 uintToVec3(uint x) {
+    float r = float((x >> uint(21)) & uint(0x000007FF)) / 2047.0;
+    float g = float((x >> uint(10)) & uint(0x000007FF)) / 2047.0;
+    float b = float((x >> uint(0)) & uint(0x000003FF)) / 1023.0;
+    return vec3(r, g, b);
+}
+
+uint vec3ToUint(vec3 x) {
+    uvec3 uintVec = uvec3(floor(x.x * 2047.0), floor(x.y * 2047.0), floor(x.z * 1023.0));
+    return uint(
+        ((uintVec.r << uint(21)) & uint(0xFFE00000)) | 
+        ((uintVec.g << uint(10)) & uint(0x001FFC00)) | 
+        ((uintVec.b << uint(0)) & uint(0x000003FF)));
+}
+
 void main() 
 {
-    if (texture(u_albedo, texUVout).a == 0)
-        discard;
-
     vec4 albedoOut = texture(u_albedo, texUVout) * hasAlbedo + albedo * (1-hasAlbedo);
+
+    if (albedoOut.a == 0)
+        discard;
 
     ivec3 voxelCoord = ivec3(floor(clamp((voxelPosout + vec3(voxelGridSize / 2))/voxelGridSize, 0.0f, 1.0f) * voxelRes));
     voxelCoord = clamp(voxelCoord, 0, int(voxelRes - 1));
@@ -61,7 +76,7 @@ void main()
 
 
     uint newAlbedo = vec4ToUint(albedoOut);
-    uint newNormal = vec4ToUint(clamp(vec4(normalOut + vec3(1) * 0.5, 1.0), 0, 1));
+    uint newNormal = vec3ToUint(normalize(normalOut + vec3(1) * 0.5));
 
     uint previousAlbedo = 0;
     uint previousNormal = 0;
@@ -82,15 +97,14 @@ void main()
         previousNormal = currentNormal;
 
         vec4 albedoF = uintToVec4(currentAlbedo);
-        albedoF.rgb *= albedoF.a;
-        vec4 normalF = uintToVec4(currentNormal);
+        vec3 normalF = normalize(uintToVec3(currentNormal));
 
 
         vec4 avgAlbedo = (albedoF + albedoOut) * 0.5;
-        vec4 avgNormal = (normalF + vec4(normalOut, 1.0)) * 0.5;
+        vec3 avgNormal = normalize((normalF + normalOut) * 0.5);
 
         newAlbedo = vec4ToUint(avgAlbedo);
-        newNormal = vec4ToUint(avgNormal);
+        newNormal = vec3ToUint(avgNormal);
 
         ++num;
     }

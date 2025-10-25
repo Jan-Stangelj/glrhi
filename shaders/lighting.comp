@@ -65,12 +65,46 @@ float coneTraceShadow(vec3 startPosition, vec3 direction, float coneAperture, fl
 
         vec4 voxelSample = textureLod(voxels, uvw, lod);
 
-        occlusion += (1.0 - occlusion) *  voxelSample.a * 2;
+        occlusion += (1.0 - occlusion) *  voxelSample.a * 5;
 
         distance += voxelSize;
     }
 
     return clamp(1.0 - occlusion, 0.0, 1.0);
+}
+
+vec3 coneTraceGI(vec3 startPosition, vec3 direction, float coneAperture, float maxDistance) {
+    direction = normalize(direction);
+
+    float voxelSize = voxelGridSize / voxelRes;
+    
+    float distance = voxelSize;
+    float occlusion = 0.0f;
+
+    vec3 resoult = vec3(0.0f);
+
+    float coneIncline = tan(radians(coneAperture) / 2.0);
+
+    while (occlusion < 1.0f && distance <= maxDistance) {
+        vec3 currentPos = startPosition + direction * distance;
+
+        vec3 uvw = (currentPos + voxelGridSize * 0.5) / voxelGridSize;
+
+        if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0))))
+            break;
+
+        float diameter = 2.0 * distance * coneIncline;
+        float lod = log2(diameter / voxelSize);
+
+        vec4 voxelSample = textureLod(voxels, uvw, lod);
+
+        resoult += (1.0 - occlusion) * voxelSample.rgb * voxelSample.a;
+        occlusion += (1.0 - occlusion) *  voxelSample.a * 7;
+
+        distance += max(diameter, voxelSize);
+    }
+
+    return resoult;
 }
 
 void main() {
@@ -93,7 +127,7 @@ void main() {
 
     // sun
     if (dot(normalize(sunDir.xyz), normal) > 0) {
-        resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position) * coneTraceShadow(position + normal * voxelSize, sunDir.xyz, sunAperture, voxelGridSize);
+        resoult += calcLight(albedo, arm.g, arm.b, normal, sunColor.rgb * sunStrenght, sunDir.xyz, position) * coneTraceShadow(position + normal * voxelSize * 1.35, normalize(sunDir.xyz), sunAperture, voxelGridSize);
     }
 
     // Point lights
@@ -113,6 +147,8 @@ void main() {
 	}
 
     resoult += emissionMetallic.xyz;
+
+    resoult += albedo * 3 * coneTraceGI(position + normal * voxelSize, normal, 60, voxelGridSize);
 
     if (position != vec3(0.0)) {
         imageStore(u_resoult, texelCoord, vec4(resoult, 1.0));
