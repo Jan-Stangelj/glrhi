@@ -20,7 +20,7 @@ layout (std140, binding = 2) uniform voxelSettings {
     float voxelRes;
 };
 
-layout (std430, binding = 0) buffer voxelOut {
+layout (std430, binding = 1) buffer voxelOut {
     uint[] voxels;
 };
 
@@ -61,7 +61,7 @@ void main()
 
 
     uint newAlbedo = vec4ToUint(albedoOut);
-    uint newNormal = vec4ToUint(vec4(normalOut, 1.0));
+    uint newNormal = vec4ToUint(clamp(vec4(normalOut + vec3(1) * 0.5, 1.0), 0, 1));
 
     uint previousAlbedo = 0;
     uint previousNormal = 0;
@@ -90,7 +90,7 @@ void main()
         vec4 avgNormal = (normalF + vec4(normalOut, 1.0)) * 0.5;
 
         newAlbedo = vec4ToUint(avgAlbedo);
-        newNormal = vec4ToUint(avgNormal);
+        newNormal = vec4ToUint(normalize(avgNormal));
 
         ++num;
     }

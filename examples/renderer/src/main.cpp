@@ -67,6 +67,31 @@ int main()
     glrhi::shader drawVoxels("../shaders/drawVoxels.vert", "../shaders/drawVoxels.frag", "../shaders/drawVoxels.geom");
     glrhi::compute convertVoxels("../shaders/convertVoxels.comp");
 
+    glViewport(0, 0, resolution, resolution);
+
+    glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+
+    float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
+    glClearTexImage(voxelTex, 0, GL_RGBA, GL_BYTE, color);
+
+    voxelization.use();
+    voxelCam.bind();
+
+    glDisable(GL_CULL_FACE);
+
+    glClearNamedBufferData(tempVoxels.getID(), GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT, &clearColor);
+
+    tempVoxels.addBindingPoint(1);
+    scene.drawModels(voxelization);
+    glMemoryBarrier(GL_ALL_BARRIER_BITS);
+
+    convertVoxels.dispatch(resolution / 4, resolution / 2, resolution / 4);
+
+    glGenerateTextureMipmap(voxelTex);
+
+    glEnable(GL_CULL_FACE);
+    glViewport(0, 0, 1280, 720);
+
     // Voxelization end
 
     while (renderer.running()) {
@@ -77,37 +102,12 @@ int main()
 
         std::cout << renderer.deltaTime() << '\n';
 
-        glViewport(0, 0, resolution, resolution);
+        glBindTextureUnit(8, voxelTex);
+        renderer.gBufferPass(scene);
+        renderer.lightingPass(scene);
+        renderer.renderResoult();
 
-        glBindImageTexture(0, voxelTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
-
-        float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
-        glClearTexImage(voxelTex, 0, GL_RGBA, GL_BYTE, color);
-
-        voxelization.use();
-        voxelCam.bind();
-
-        glDisable(GL_CULL_FACE);
-
-        glClearNamedBufferData(tempVoxels.getID(), GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT, &clearColor);
-
-        tempVoxels.addBindingPoint(0);
-        scene.drawModels(voxelization);
-        glMemoryBarrier(GL_ALL_BARRIER_BITS);
-
-        convertVoxels.dispatch(resolution / 4, resolution / 2, resolution / 4);
-
-        glGenerateTextureMipmap(voxelTex);
-
-        glEnable(GL_CULL_FACE);
-        glViewport(0, 0, 1280, 720);
-
-        //glBindTextureUnit(8, voxelTex);
-        //renderer.gBufferPass(scene);
-        //renderer.lightingPass(scene);
-        //renderer.renderResoult();
-
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        /*glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
         glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         renderer.getCamera().bind();
@@ -117,7 +117,7 @@ int main()
         drawVoxels.use();
         glDrawArrays(GL_POINTS, 0, resolution * resolution * resolution);
 
-        renderer.getWindow().swapBuffers();
+        renderer.getWindow().swapBuffers();*/
     }
 
     return 0;
