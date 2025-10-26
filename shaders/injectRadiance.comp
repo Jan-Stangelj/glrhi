@@ -30,6 +30,12 @@ layout (std430, binding = 1) buffer voxelIn {
     uint[] voxelsRaw;
 };
 
+layout (std140, binding=0) uniform cam {
+    mat4 view;
+    mat4 projection;
+    vec4 camPos;
+};
+
 vec4 uintToVec4(uint x) {
     float r = float((x >> uint(24)) & uint(0x000000FF)) / 255.0;
     float g = float((x >> uint(16)) & uint(0x000000FF)) / 255.0;
@@ -114,6 +120,7 @@ void main() {
     resoult.a = 1.0;
 
     resoult.rgb += albedo.rgb * sunColor.rgb * sunStrenght * coneTraceShadow(position + normal * voxelSize, normalize(sunDir.xyz), sunAperture, voxelGridSize);
+    resoult.rgb *= max(dot(normalize(sunDir.xyz), normalize(camPos.xyz - position)), 0.0);
 
     imageStore(voxelsOut, voxelCoord, resoult);
 }
