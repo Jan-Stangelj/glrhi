@@ -12,7 +12,7 @@ int main()
     unsigned int sponza = scene.addModel("../examples/renderer/sponza/Sponza.gltf");
     scene.getModel(sponza).size = glm::vec3(0.01f);
 
-    scene.sunDir = glm::vec4(0.25f, 1.0f, 0.25f, 1.0f);
+    scene.sunDir = glm::vec4(0.35f, 1.0f, 0.35f, 1.0f);
     scene.sunColor = glm::vec4(1.0f);
     scene.sunStrenght = 25.0f;
     scene.sunAperture = 3.0f;
