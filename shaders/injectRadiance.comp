@@ -115,7 +115,6 @@ void main() {
 
     resoult.rgb += albedo.rgb * sunColor.rgb * sunStrenght * coneTraceShadow(position + normal * voxelSize, normalize(sunDir.xyz), sunAperture, voxelGridSize);
     resoult.rgb *= max(dot(normalize(sunDir.xyz), normal), 0.0);
-    resoult.rgb = abs(normal);
 
     imageStore(voxelsOut, voxelCoord, resoult);
 }
