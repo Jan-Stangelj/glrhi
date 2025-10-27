@@ -26,7 +26,7 @@ int main()
     float size = 35.0f;
     float resolution = 512.0f;
 
-    // Voxelization begin
+    // Voxelization setup begin
     glrhi::camera voxelCam;
     voxelCam.position = glm::vec3(0.0f, size / 2, 0.0f);
     voxelCam.direction = glm::vec3(-90.0f, 0.0f, 0.0f);
@@ -67,7 +67,7 @@ int main()
     glTextureStorage3D(voxelLightingTex, log2(resolution), GL_RGBA16F, resolution, resolution, resolution);
 
     glrhi::ssbo tempVoxels(2 * sizeof(uint32_t) * resolution * resolution * resolution);
-    GLuint clearColor = 0;
+    tempVoxels.addBindingPoint(1);
 
     float settings[] = {size, resolution};
     glrhi::ubo voxelSettings(sizeof(float)*2, settings);
@@ -79,34 +79,31 @@ int main()
     glrhi::compute convertVoxels("../shaders/convertVoxels.comp");
     glrhi::compute injectRadiance("../shaders/injectRadiance.comp");
 
-    scene.updateLightBuffer(injectRadiance);
+    // Voxelization setup end
+
+    // Voxelization begin
 
     glViewport(0, 0, resolution, resolution);
-
-    glBindImageTexture(0, voxelAlbedoTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
+    glDisable(GL_CULL_FACE);
 
     float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
+    GLuint clearColor = 0;
     glClearTexImage(voxelAlbedoTex, 0, GL_RGBA, GL_BYTE, color);
+    glClearTexImage(voxelLightingTex, 0, GL_RGBA, GL_FLOAT, color);
+    glClearNamedBufferData(tempVoxels.getID(), GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT, &clearColor);
 
     voxelization.use();
     voxelCam.bind();
 
-    glDisable(GL_CULL_FACE);
-
-    glClearNamedBufferData(tempVoxels.getID(), GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT, &clearColor);
-
-    tempVoxels.addBindingPoint(1);
     scene.drawModels(voxelization);
-    glMemoryBarrier(GL_ALL_BARRIER_BITS);
 
+    glBindImageTexture(0, voxelAlbedoTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA8);
     convertVoxels.dispatch(resolution / 4, resolution / 2, resolution / 4);
-
     glGenerateTextureMipmap(voxelAlbedoTex);
-    glMemoryBarrier(GL_ALL_BARRIER_BITS);
 
     glBindTextureUnit(8, voxelAlbedoTex);
     glBindImageTexture(0, voxelLightingTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
-    glClearTexImage(voxelLightingTex, 0, GL_RGBA, GL_FLOAT, color);
+    scene.updateLightBuffer(injectRadiance);
     injectRadiance.dispatch(resolution / 4, resolution / 2, resolution / 4);
     glGenerateTextureMipmap(voxelLightingTex);
 
