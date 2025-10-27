@@ -105,7 +105,7 @@ vec3 coneTraceGI(vec3 startPosition, vec3 direction, float coneAperture, float m
         distance += max(diameter, voxelSize);
     }
 
-    return resoult * clamp(1.0 - occlusion, 0, 1);
+    return resoult;
 }
 
 const vec3 diffuseConeDirections[] =
