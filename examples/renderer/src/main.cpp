@@ -50,7 +50,7 @@ int main()
     float borderColor[] = {0.0f, 0.0f, 0.0f, 0.0f};
     glTextureParameterfv(voxelAlbedoTex, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-    glTextureStorage3D(voxelAlbedoTex, log2(resolution), GL_RGBA8, resolution, resolution, resolution);
+    glTextureStorage3D(voxelAlbedoTex, log2(resolution) + 1, GL_RGBA8, resolution, resolution, resolution);
 
     unsigned int voxelLightingTex = 0;
     glCreateTextures(GL_TEXTURE_3D, 1, &voxelLightingTex);
@@ -64,7 +64,7 @@ int main()
     glTextureParameteri(voxelLightingTex, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
     glTextureParameterfv(voxelLightingTex, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-    glTextureStorage3D(voxelLightingTex, log2(resolution), GL_RGBA16F, resolution, resolution, resolution);
+    glTextureStorage3D(voxelLightingTex, log2(resolution) + 1, GL_RGBA16F, resolution, resolution, resolution);
 
     glrhi::ssbo tempVoxels(2 * sizeof(uint32_t) * resolution * resolution * resolution);
     tempVoxels.addBindingPoint(1);
