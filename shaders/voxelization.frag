@@ -76,7 +76,7 @@ void main()
 
 
     uint newAlbedo = vec4ToUint(albedoOut);
-    uint newNormal = vec3ToUint(normalize(normalOut + vec3(1) * 0.5));
+    uint newNormal = vec3ToUint(clamp(normalOut * 0.5 + vec3(0.5), 0, 1));
 
     uint previousAlbedo = 0;
     uint previousNormal = 0;
@@ -97,14 +97,13 @@ void main()
         previousNormal = currentNormal;
 
         vec4 albedoF = uintToVec4(currentAlbedo);
-        vec3 normalF = normalize(uintToVec3(currentNormal));
-
+        vec3 normalF = normalize(uintToVec3(currentNormal) * 2 - vec3(1.0));
 
         vec4 avgAlbedo = (albedoF + albedoOut) * 0.5;
         vec3 avgNormal = normalize((normalF + normalOut) * 0.5);
 
         newAlbedo = vec4ToUint(avgAlbedo);
-        newNormal = vec3ToUint(avgNormal);
+        newNormal = vec3ToUint(avgNormal * 0.5 + vec3(0.5));
 
         ++num;
     }
