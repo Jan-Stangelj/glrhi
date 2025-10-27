@@ -65,7 +65,7 @@ float coneTraceShadow(vec3 startPosition, vec3 direction, float coneAperture, fl
 
         vec4 voxelSample = textureLod(voxels, uvw, lod);
 
-        occlusion += (1.0 - occlusion) *  voxelSample.a * 3;
+        occlusion += (1.0 - occlusion) *  voxelSample.a * 2.25;
 
         distance += voxelSize;
     }
@@ -93,14 +93,14 @@ vec3 coneTraceGI(vec3 startPosition, vec3 direction, float coneAperture, float m
         if (any(lessThan(uvw, vec3(0.0))) || any(greaterThan(uvw, vec3(1.0))))
             break;
 
-        float diameter = 2.0 * distance * coneIncline;
+        float diameter = distance * coneIncline;
         float lod = log2(diameter / voxelSize);
 
         vec4 voxelSample = textureLod(voxels, uvw, lod);
 
-        if (distance > voxelSize)
+        if (distance > voxelSize * 2)
             resoult += (1.0 - occlusion) * voxelSample.rgb * voxelSample.a;
-        occlusion += (1.0 - occlusion) *  voxelSample.a * 3;
+        occlusion += (1.0 - occlusion) *  voxelSample.a * 2;
 
         distance += max(diameter, voxelSize);
     }

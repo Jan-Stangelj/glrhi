@@ -6,7 +6,7 @@
 
 int main()
 {
-    glrhi::renderer renderer(1280, 720, "Renderer example");
+    glrhi::renderer renderer(1920, 1080, "Renderer example");
     glrhi::scene scene;
 
     unsigned int sponza = scene.addModel("../examples/renderer/sponza/Sponza.gltf");
@@ -111,7 +111,7 @@ int main()
     glGenerateTextureMipmap(voxelLightingTex);
 
     glEnable(GL_CULL_FACE);
-    glViewport(0, 0, 1280, 720);
+    glViewport(0, 0, 1920, 1080);
 
     // Voxelization end
 
