@@ -150,7 +150,7 @@ void main() {
         if (cosTheta <= 0)
             continue;
 
-        diffuseTrace += coneTraceGI(position + normal * voxelSize, coneDirection, aperture, voxelGridSize * 0.1) * cosTheta;
+        diffuseTrace += coneTraceGI(position + normal * voxelSize, coneDirection, aperture, voxelGridSize) * cosTheta;
     }
 
     resoult.rgb += diffuseTrace * albedo.rgb;

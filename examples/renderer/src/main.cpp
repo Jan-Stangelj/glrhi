@@ -146,9 +146,9 @@ int main()
         renderer.lightingPass(scene);
         renderer.renderResoult();
 
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        /*glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-        /*glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         renderer.getCamera().bind();
         renderer.getCamera().uploadData();
 
