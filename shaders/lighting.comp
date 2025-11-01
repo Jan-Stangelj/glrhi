@@ -65,7 +65,7 @@ float coneTraceShadow(vec3 startPosition, vec3 direction, float coneAperture, fl
 
         vec4 voxelSample = textureLod(voxels, uvw, lod);
 
-        occlusion += (1.0 - occlusion) *  voxelSample.a * 2.25;
+        occlusion += (1.0 - occlusion) *  voxelSample.a * 2;
 
         distance += voxelSize;
     }
@@ -108,24 +108,40 @@ vec3 coneTraceGI(vec3 startPosition, vec3 direction, float coneAperture, float m
     return resoult;
 }
 
-const vec3 diffuseConeDirections[] =
-{
-    vec3(0.0f, 1.0f, 0.0f),
-    vec3(0.0f, 0.5f, 0.866025f),
-    vec3(0.823639f, 0.5f, 0.267617f),
-    vec3(0.509037f, 0.5f, -0.7006629f),
-    vec3(-0.50937f, 0.5f, -0.7006629f),
-    vec3(-0.823639f, 0.5f, 0.267617f)
-};
 
-const float diffuseConeWeights[] =
-{
-    PI / 4.0f,
-    3.0f * PI / 20.0f,
-    3.0f * PI / 20.0f,
-    3.0f * PI / 20.0f,
-    3.0f * PI / 20.0f,
-    3.0f * PI / 20.0f,
+const vec3 DIFFUSE_CONE_DIRECTIONS[32] = {
+    vec3(0.898904, 0.435512, 0.0479745),
+    vec3(0.898904, -0.435512, -0.0479745),
+    vec3(0.898904, 0.0479745, -0.435512),
+    vec3(0.898904, -0.0479745, 0.435512),
+    vec3(-0.898904, 0.435512, -0.0479745),
+    vec3(-0.898904, -0.435512, 0.0479745),
+    vec3(-0.898904, 0.0479745, 0.435512),
+    vec3(-0.898904, -0.0479745, -0.435512),
+    vec3(0.0479745, 0.898904, 0.435512),
+    vec3(-0.0479745, 0.898904, -0.435512),
+    vec3(-0.435512, 0.898904, 0.0479745),
+    vec3(0.435512, 0.898904, -0.0479745),
+    vec3(-0.0479745, -0.898904, 0.435512),
+    vec3(0.0479745, -0.898904, -0.435512),
+    vec3(0.435512, -0.898904, 0.0479745),
+    vec3(-0.435512, -0.898904, -0.0479745),
+    vec3(0.435512, 0.0479745, 0.898904),
+    vec3(-0.435512, -0.0479745, 0.898904),
+    vec3(0.0479745, -0.435512, 0.898904),
+    vec3(-0.0479745, 0.435512, 0.898904),
+    vec3(0.435512, -0.0479745, -0.898904),
+    vec3(-0.435512, 0.0479745, -0.898904),
+    vec3(0.0479745, 0.435512, -0.898904),
+    vec3(-0.0479745, -0.435512, -0.898904),
+    vec3(0.57735, 0.57735, 0.57735),
+    vec3(0.57735, 0.57735, -0.57735),
+    vec3(0.57735, -0.57735, 0.57735),
+    vec3(0.57735, -0.57735, -0.57735),
+    vec3(-0.57735, 0.57735, 0.57735),
+    vec3(-0.57735, 0.57735, -0.57735),
+    vec3(-0.57735, -0.57735, 0.57735),
+    vec3(-0.57735, -0.57735, -0.57735)
 };
 
 void main() {
@@ -172,22 +188,17 @@ void main() {
     // Diffuse GI
     vec3 diffuseTrace = vec3(0.0f);
 
-    const float aperture = 0.57735f;
-    vec3 guide = vec3(0.0f, 1.0f, 0.0f);
+    const float aperture = 0.628319;
 
-    if (abs(dot(normal,guide)) == 1.0f)
-    {
-        guide = vec3(0.0f, 0.0f, 1.0f);
-    }
+    for (int i = 0; i < 32; ++i) {
+        vec3 coneDirection = DIFFUSE_CONE_DIRECTIONS[i];
 
-    vec3 right = normalize(guide - dot(normal, guide) * normal);
-    vec3 up = cross(right, normal);
+        float cosTheta = dot(normal, coneDirection);
 
-    for (int i = 0; i < 6; ++i) {
-        vec3 coneDirection = normal;
-        coneDirection += diffuseConeDirections[i].x * right + diffuseConeDirections[i].z * up;
-        coneDirection = normalize(coneDirection);
-        diffuseTrace += coneTraceGI(position + normal * voxelSize, coneDirection, aperture, voxelGridSize) * diffuseConeWeights[i];
+        if (cosTheta <= 0)
+            continue;
+
+        diffuseTrace += coneTraceGI(position + normal * voxelSize, coneDirection, aperture, voxelGridSize) * cosTheta;
     }
 
     resoult.rgb += diffuseTrace * albedo;
