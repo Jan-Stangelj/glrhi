@@ -9,4 +9,6 @@ void main()
         discard;
 
     outColor = vec4(fragColor.rgb, 1.0);
+
+    outColor.rgb = pow(outColor.rgb, vec3(1.0 / 2.2));
 }

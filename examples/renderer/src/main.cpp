@@ -52,19 +52,33 @@ int main()
 
     glTextureStorage3D(voxelAlbedoTex, log2(resolution) + 1, GL_RGBA8, resolution, resolution, resolution);
 
-    unsigned int voxelLightingTex = 0;
-    glCreateTextures(GL_TEXTURE_3D, 1, &voxelLightingTex);
+    unsigned int voxelRadianceTex = 0;
+    glCreateTextures(GL_TEXTURE_3D, 1, &voxelRadianceTex);
 
-    glTextureParameteri(voxelLightingTex, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTextureParameteri(voxelLightingTex, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTextureParameteri(voxelRadianceTex, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTextureParameteri(voxelRadianceTex, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     // Texture wrapping options
-    glTextureParameteri(voxelLightingTex, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-    glTextureParameteri(voxelLightingTex, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-    glTextureParameteri(voxelLightingTex, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
-    glTextureParameterfv(voxelLightingTex, GL_TEXTURE_BORDER_COLOR, borderColor);
+    glTextureParameteri(voxelRadianceTex, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTextureParameteri(voxelRadianceTex, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    glTextureParameteri(voxelRadianceTex, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
+    glTextureParameterfv(voxelRadianceTex, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-    glTextureStorage3D(voxelLightingTex, log2(resolution) + 1, GL_RGBA16F, resolution, resolution, resolution);
+    glTextureStorage3D(voxelRadianceTex, log2(resolution) + 1, GL_RGBA16F, resolution, resolution, resolution);
+
+    unsigned int voxelPropagationTex = 0;
+    glCreateTextures(GL_TEXTURE_3D, 1, &voxelPropagationTex);
+
+    glTextureParameteri(voxelPropagationTex, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTextureParameteri(voxelPropagationTex, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    // Texture wrapping options
+    glTextureParameteri(voxelPropagationTex, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+    glTextureParameteri(voxelPropagationTex, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+    glTextureParameteri(voxelPropagationTex, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_BORDER);
+    glTextureParameterfv(voxelPropagationTex, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+    glTextureStorage3D(voxelPropagationTex, log2(resolution) + 1, GL_RGBA16F, resolution, resolution, resolution);
 
     glrhi::ssbo tempVoxels(2 * sizeof(uint32_t) * resolution * resolution * resolution);
     tempVoxels.addBindingPoint(1);
@@ -78,6 +92,7 @@ int main()
 
     glrhi::compute convertVoxels("../shaders/convertVoxels.comp");
     glrhi::compute injectRadiance("../shaders/injectRadiance.comp");
+    glrhi::compute injectPropagation("../shaders/injectPropagation.comp");
 
     // Voxelization setup end
 
@@ -89,7 +104,8 @@ int main()
     float color[] = {0.0f, 0.0f, 0.0f, 0.0f};
     GLuint clearColor = 0;
     glClearTexImage(voxelAlbedoTex, 0, GL_RGBA, GL_BYTE, color);
-    glClearTexImage(voxelLightingTex, 0, GL_RGBA, GL_FLOAT, color);
+    glClearTexImage(voxelRadianceTex, 0, GL_RGBA, GL_FLOAT, color);
+    glClearTexImage(voxelPropagationTex, 0, GL_RGBA, GL_FLOAT, color);
     glClearNamedBufferData(tempVoxels.getID(), GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT, &clearColor);
 
     voxelization.use();
@@ -102,10 +118,15 @@ int main()
     glGenerateTextureMipmap(voxelAlbedoTex);
 
     glBindTextureUnit(8, voxelAlbedoTex);
-    glBindImageTexture(0, voxelLightingTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
+    glBindImageTexture(0, voxelRadianceTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
     scene.updateLightBuffer(injectRadiance);
     injectRadiance.dispatch(resolution / 4, resolution / 2, resolution / 4);
-    glGenerateTextureMipmap(voxelLightingTex);
+    glGenerateTextureMipmap(voxelRadianceTex);
+
+    glBindTextureUnit(8, voxelRadianceTex);
+    glBindImageTexture(0, voxelPropagationTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
+    injectPropagation.dispatch(resolution / 4, resolution / 2, resolution / 4);
+    glGenerateTextureMipmap(voxelPropagationTex);
 
     glEnable(GL_CULL_FACE);
     glViewport(0, 0, 1920, 1080);
@@ -120,18 +141,18 @@ int main()
 
         std::cout << renderer.deltaTime() << '\n';
 
-        glBindTextureUnit(8, voxelLightingTex);
+        glBindTextureUnit(8, voxelPropagationTex);
         renderer.gBufferPass(scene);
         renderer.lightingPass(scene);
         renderer.renderResoult();
 
-        /*glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-        glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        /*glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
         renderer.getCamera().bind();
         renderer.getCamera().uploadData();
 
-        glBindImageTexture(0, voxelLightingTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
+        glBindImageTexture(0, voxelPropagationTex, 0, GL_TRUE, 0, GL_READ_WRITE, GL_RGBA16F);
         drawVoxels.use();
         glDrawArrays(GL_POINTS, 0, resolution * resolution * resolution);*/
 
