@@ -2,7 +2,7 @@
 
 layout (local_size_x = 4, local_size_y = 2, local_size_z = 4) in;
 
-layout(binding = 0, rgba16f) uniform writeonly image3D voxelsOut;
+layout(binding = 0, rgba16f) uniform writeonly image3D voxelsRadiance;
 
 layout(binding = 8) uniform sampler3D voxelsAlbedo;
 
@@ -116,5 +116,5 @@ void main() {
     resoult.rgb += albedo.rgb * sunColor.rgb * sunStrenght * coneTraceShadow(position + normal * voxelSize, normalize(sunDir.xyz), sunAperture, voxelGridSize);
     resoult.rgb *= max(dot(normalize(sunDir.xyz), normal), 0.0);
 
-    imageStore(voxelsOut, voxelCoord, resoult);
+    imageStore(voxelsRadiance, voxelCoord, resoult);
 }

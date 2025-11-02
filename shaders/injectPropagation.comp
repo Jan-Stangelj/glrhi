@@ -2,9 +2,9 @@
 
 layout (local_size_x = 4, local_size_y = 2, local_size_z = 4) in;
 
-layout(binding = 0, rgba16f) uniform writeonly image3D voxelsOut;
+layout(binding = 0, rgba16f) uniform writeonly image3D voxelsPropagation;
 
-layout(binding = 8) uniform sampler3D voxels;
+layout(binding = 8) uniform sampler3D voxelsRadiance;
 
 layout (std140, binding = 2) uniform voxelSettings {
     float voxelGridSize;
@@ -14,6 +14,8 @@ layout (std140, binding = 2) uniform voxelSettings {
 layout (std430, binding = 1) buffer voxelIn {
     uint[] voxelsRaw;
 };
+
+const float PI = 3.14159265359;
 
 vec4 uintToVec4(uint x) {
     float r = float((x >> uint(24)) & uint(0x000000FF)) / 255.0;
@@ -70,11 +72,11 @@ vec3 coneTraceGI(vec3 startPosition, vec3 direction, float coneAperture, float m
         float diameter = distance * coneIncline;
         float lod = log2(diameter / voxelSize);
 
-        vec4 voxelSample = textureLod(voxels, uvw, lod);
+        vec4 voxelSample = textureLod(voxelsRadiance, uvw, lod);
 
         if (distance > voxelSize * 2)
             resoult += (1.0 - occlusion) * voxelSample.rgb * voxelSample.a;
-        occlusion += (1.0 - occlusion) *  voxelSample.a * 2.25;
+        occlusion += (1.0 - occlusion) *  voxelSample.a;
 
         distance += max(diameter, voxelSize);
     }
@@ -135,7 +137,7 @@ void main() {
 
     vec3 normal = normalize(uintToVec3(voxelsRaw[voxelCoord1D + 1]) * 2.0 - 1.0);
 
-    vec4 resoult = texture(voxels, uvw);
+    vec4 resoult = texture(voxelsRadiance, uvw);
 
     // Diffuse GI
     vec3 diffuseTrace = vec3(0.0f);
@@ -147,7 +149,7 @@ void main() {
 
         float cosTheta = dot(normal, coneDirection);
 
-        if (cosTheta <= 0)
+        if (cosTheta < aperture)
             continue;
 
         diffuseTrace += coneTraceGI(position + normal * voxelSize, coneDirection, aperture, voxelGridSize) * cosTheta;
@@ -155,5 +157,5 @@ void main() {
 
     resoult.rgb += diffuseTrace * albedo.rgb;
 
-    imageStore(voxelsOut, voxelCoord, resoult);
+    imageStore(voxelsPropagation, voxelCoord, resoult);
 }

@@ -100,7 +100,7 @@ vec3 coneTraceGI(vec3 startPosition, vec3 direction, float coneAperture, float m
 
         if (distance > voxelSize * 2)
             resoult += (1.0 - occlusion) * voxelSample.rgb * voxelSample.a;
-        occlusion += (1.0 - occlusion) *  voxelSample.a * 2.25;
+        occlusion += (1.0 - occlusion) *  voxelSample.a;
 
         distance += max(diameter, voxelSize);
     }
@@ -195,7 +195,7 @@ void main() {
 
         float cosTheta = dot(normal, coneDirection);
 
-        if (cosTheta <= 0)
+        if (cosTheta < aperture)
             continue;
 
         diffuseTrace += coneTraceGI(position + normal * voxelSize, coneDirection, aperture, voxelGridSize) * cosTheta;
