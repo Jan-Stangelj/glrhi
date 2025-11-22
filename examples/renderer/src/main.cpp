@@ -13,8 +13,8 @@ int main()
     scene.getModel(sponza).size = glm::vec3(0.01f);
 
     scene.sunDir = glm::vec4(0.25f, 1.0f, 0.25f, 1.0f);
-    scene.sunColor = glm::vec4(1.0f, 0.9f, 0.9f, 1.0f);
-    scene.sunStrenght = 15.0f;
+    scene.sunColor = glm::vec4(1.0f, 0.95f, 0.95f, 1.0f);
+    scene.sunStrenght = 20.0f;
     scene.sunAperture = 1.0f;
 
     scene.setSkybox("../examples/renderer/skybox.hdr");
