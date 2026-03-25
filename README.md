@@ -1,8 +1,11 @@
 # glrhi
 
 ## Introduction
-glrhi (Open**GL** **R**endering **H**ardware **I**nterface) is a library aimed
-at abstracting Modern OpenGL 4.6 using modern concepts, like DSA (Direct state acces) to reduce boilerplate at no preformance overhead.
+Glrhi is an experimental rendering library based on OpenGL 4.6 that supports
+real time global illumination using voxel cone tracing.
+
+![Screenshot](resources/screenshot1.png)
+![Screenshot](resources/screenshot2.png)
 
 ## Building
 
