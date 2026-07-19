@@ -99,7 +99,7 @@ vec3 coneTraceGI(vec3 startPosition, vec3 direction, float coneSlope, float maxD
 
         vec4 voxelSample = textureLod(voxels, uvw, lod);
 
-        resoult += (1.0 - occlusion) * voxelSample.rgb * voxelSample.a;
+        resoult += (1.0 - occlusion) * voxelSample.rgb * voxelSample.a * 5.0f;
         occlusion += (1.0 - occlusion) *  voxelSample.a;
 
         distance += max(diameter * 0.5, voxelSize);
@@ -107,7 +107,6 @@ vec3 coneTraceGI(vec3 startPosition, vec3 direction, float coneSlope, float maxD
 
     return resoult;
 }
-
 
 const vec3 DIFFUSE_CONE_DIRECTIONS[32] = {
     vec3(0.898904, 0.435512, 0.0479745),
