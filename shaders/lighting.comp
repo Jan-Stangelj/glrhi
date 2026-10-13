@@ -200,7 +200,7 @@ void main() {
         if (cosTheta < slope)
             continue;
 
-        diffuseTrace += coneTraceGI(position + normal * voxelSize, coneDirection, slope, voxelGridSize) * cosTheta;
+        diffuseTrace += coneTraceGI(position + normal * voxelSize * 2.5, coneDirection, slope, voxelGridSize) * cosTheta;
         sum += cosTheta;
     }
 
